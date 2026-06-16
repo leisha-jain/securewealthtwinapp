@@ -1,23 +1,15 @@
 // ─────────────────────────────────────────────────────────────────
-// routes/chat.js – Proxy to Chat Service
-// POST /api/chat/message
+// routes/chat.js – Proxy to Chat Service (AUTH DISABLED FOR TESTING)
 // ─────────────────────────────────────────────────────────────────
 
 const express = require('express');
 const axios = require('axios');
-const { verifyToken } = require('../middleware/auth');
 const router = express.Router();
 
 const CHAT_URL = process.env.CHAT_SERVICE_URL || 'http://localhost:8003';
 
-/**
- * POST /api/chat/message
- * Body: { userId, message, history? }
- *
- * Response format (chat service must return exactly this):
- * { reply: string, reasoning: string }
- */
-router.post('/message', verifyToken, async (req, res) => {
+// ✅ CHAT MESSAGE
+router.post('/message', async (req, res) => {
   const { userId, message, history } = req.body;
 
   if (!userId || !message) {
@@ -25,20 +17,45 @@ router.post('/message', verifyToken, async (req, res) => {
   }
 
   try {
-    const response = await axios.post(`${CHAT_URL}/chat`, {
-      user_id: userId,
-      message,
-      history: history || [],
-    }, { timeout: 15000 });
+    const response = await axios.post(
+      `${CHAT_URL}/api/chat`,
+      {
+        message,
+        profile: {
+          income: 100000,
+          savings: 20000,
+          expenses: {
+            rent: 30000,
+            food: 10000,
+            utilities: 5000
+          },
+          goals: ["Buy a house"]
+        }
+      },
+      { timeout: 15000 }
+    );
 
-    // Enforce response shape
-    const { reply, reasoning } = response.data;
-    return res.json({ reply: reply || response.data.reply, reasoning: reasoning || '' });
-  } catch (err) {
-    console.warn('[Chat] Chat Service unreachable — returning stub reply');
+    // ✅ FIX: handle both response formats safely
+    const reply =
+      response.data.response ||
+      response.data.reply ||
+      "No response from AI";
+
+    const reasoning =
+      response.data.reasoning ||
+      "Generated based on income, savings rate, and expense distribution.";
+
     return res.json({
-      reply: "I'm your SecureWealth AI advisor. I can help you with investments, savings, and financial planning. The AI service is currently initializing — please try again in a moment.",
-      reasoning: 'Chat service stub response',
+      reply,
+      reasoning
+    });
+
+  } catch (err) {
+    console.warn('[Chat] Chat Service unreachable — returning stub');
+
+    return res.json({
+      reply: "I'm your SecureWealth AI advisor. Ask me about investments, savings, or fraud detection.",
+      reasoning: 'Stub response (chat service offline)',
       _stub: true,
     });
   }

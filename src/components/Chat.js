@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import axios from "axios";
 import { C, Card } from "../utils/helpers";
 import { CHAT_RESPONSES } from "../data/personas";
 
@@ -19,22 +20,41 @@ export default function Chat({ p }) {
     window.speechSynthesis.speak(s);
   };
 
-  const send = useCallback((text) => {
+  // ✅ FIXED SEND FUNCTION (REAL AI)
+  const send = useCallback(async (text) => {
     if (!text.trim()) return;
+
     setMsgs(m => [...m, { role:"user", text }]);
     setInput("");
     setTyping(true);
-    setTimeout(() => {
-      const l = text.toLowerCase();
-      let resp = CHAT_RESPONSES.default;
-      if (l.includes("home")||l.includes("goal")) resp = CHAT_RESPONSES.home;
-      else if (l.includes("sip")||l.includes("market")) resp = CHAT_RESPONSES.sip;
-      else if (l.includes("risk")) resp = CHAT_RESPONSES.risk;
-      else if (l.includes("tax")||l.includes("80c")) resp = CHAT_RESPONSES.tax;
+
+    try {
+      const res = await axios.post(
+        "http://localhost:8000/api/chat/message",
+        {
+          userId: 1,
+          message: text,
+          history: []
+        },
+        {
+          headers: {
+            Authorization: "Bearer testtoken"
+          }
+        }
+      );
+
+      const reply = res.data.reply || "No response from AI";
+
       setTyping(false);
-      setMsgs(m => [...m, { role:"ai", text: resp }]);
-      speak(resp);
-    }, 1200);
+      setMsgs(m => [...m, { role:"ai", text: reply }]);
+      speak(reply);
+
+    } catch (err) {
+      console.error(err);
+      setTyping(false);
+      setMsgs(m => [...m, { role:"ai", text: "Error connecting to AI." }]);
+    }
+
   }, []);
 
   const startListening = () => {
@@ -110,17 +130,11 @@ export default function Chat({ p }) {
             style={{ flex:1, background:C.bg, border:`1px solid ${C.border}`, borderRadius:C.r, padding:"9px 13px", color:C.text, fontSize:13, outline:"none", fontFamily:"inherit" }}/>
           <button onClick={startListening}
             style={{ width:38,height:38,borderRadius:C.r,background:C.bg,border:`1px solid ${C.border}`,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center" }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="4.5" y="1" width="5" height="7" rx="2.5" stroke={C.textSub} strokeWidth="1.2"/>
-              <path d="M2 7a5 5 0 0010 0" stroke={C.textSub} strokeWidth="1.2" strokeLinecap="round"/>
-              <line x1="7" y1="12" x2="7" y2="14" stroke={C.textSub} strokeWidth="1.2" strokeLinecap="round"/>
-            </svg>
+            🎤
           </button>
           <button onClick={()=>send(input)}
             style={{ width:38,height:38,borderRadius:C.r,background:C.ink,border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center" }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M2 12L12 7L2 2V6L9 7L2 8V12Z" fill="white"/>
-            </svg>
+            ➤
           </button>
         </div>
       </Card>

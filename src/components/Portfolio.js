@@ -17,13 +17,13 @@ const Portfolio = () => {
   ]);
 
   const [holdings, setHoldings] = useState([
-    { id: 'GS', name: 'Global Sustain Equities', code: 'GSSE-882-LQ', type: 'Equity ESG', value: '$842,000.00', return: '+18.2%', status: 'OPTIMIZED', statusClass: 'blue' },
-    { id: 'TR', name: 'T.Rowe Price Growth', code: 'TRPG-612-BL', type: 'Growth Tech', value: '$512,450.00', return: '+24.5%', status: 'OVERWEIGHT', statusClass: 'orange' },
-    { id: 'VB', name: 'Vanguard Bond Mkt', code: 'VBMX-001-FI', type: 'Fixed Income', value: '$320,100.00', return: '-2.1%', status: 'STABLE', statusClass: 'gray' },
-    { id: 'PL', name: 'Private Liquidity Pool', code: 'LP-ALPH-99', type: 'Alternative', value: '$808,350.00', return: '+9.4%', status: 'OPTIMIZED', statusClass: 'blue' },
+    { id: 'GS', name: 'Global Sustain Equities', code: 'GSSE-882-LQ', type: 'Equity ESG', value: '₹842,000.00', return: '+18.2%', status: 'OPTIMIZED', statusClass: 'blue' },
+    { id: 'TR', name: 'T.Rowe Price Growth', code: 'TRPG-612-BL', type: 'Growth Tech', value: '₹512,450.00', return: '+24.5%', status: 'OVERWEIGHT', statusClass: 'orange' },
+    { id: 'VB', name: 'Vanguard Bond Mkt', code: 'VBMX-001-FI', type: 'Fixed Income', value: '₹320,100.00', return: '-2.1%', status: 'STABLE', statusClass: 'gray' },
+    { id: 'PL', name: 'Private Liquidity Pool', code: 'LP-ALPH-99', type: 'Alternative', value: '₹808,350.00', return: '+9.4%', status: 'OPTIMIZED', statusClass: 'blue' },
   ]);
 
-  const [totalAssets, setTotalAssets] = useState('$2,482,900.00');
+  const [totalAssets, setTotalAssets] = useState('₹24,482,900.00');
   const [loading, setLoading] = useState(true);
 
   // Risk modal state

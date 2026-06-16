@@ -1,8 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // ✅ added useEffect
 import './Alerts.css';
+import { fraudAPI } from '../services/api';
+import RiskInterceptModal from '../components/RiskInterceptModal';
 
 const Alerts = () => {
   const [isSimulating, setIsSimulating] = useState(false);
+
+  // ✅ MODAL STATE
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
+
+  // ✅ AUTO SIMULATION (STEP 1)
+  useEffect(() => {
+    if (!isSimulating) return;
+
+    const interval = setInterval(() => {
+      const types = ["block", "warn", "allow"];
+      const randomType = types[Math.floor(Math.random() * 3)];
+      triggerFraud(randomType);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [isSimulating]);
+
+  // ✅ TRIGGER FUNCTION
+  const triggerFraud = async (type) => {
+    try {
+      const payload = {
+        user_id: "priya",
+        action_type: "large_transfer",
+        amount: type === "block" ? 200000 : type === "warn" ? 50000 : 5000,
+        device_id: "device_unknown",
+        login_timestamp: new Date().toISOString(),
+        action_timestamp: new Date().toISOString(),
+        otp_attempts: type === "block" ? 4 : 1,
+        retry_count: 0,
+      };
+
+      const res = await fraudAPI.executeAction(payload);
+
+      // ✅ EXTRACT REASONS
+      const reasons = res.data.triggered_signals
+        ? res.data.triggered_signals
+            .filter(signal => signal.triggered)
+            .map(signal => signal.reason)
+        : [];
+
+      // ✅ STEP 3 — WEALTH SUGGESTIONS
+      let extraMessage = "";
+
+      if (res.data.decision === "ALLOW") {
+        extraMessage = "\n\n💡 Suggestion: Consider investing in ELSS for tax savings.";
+      }
+
+      if (res.data.decision === "WARN") {
+        extraMessage = "\n\n⚠️ Suggestion: Try a smaller amount or verify your device.";
+      }
+
+      if (res.data.decision === "BLOCK") {
+        extraMessage = "\n\n🚫 Suggestion: Please verify your identity before proceeding.";
+      }
+
+      // ✅ SHOW MODAL
+      setModalData({
+        decision: res.data.decision,
+        riskScore: res.data.risk_score,
+        message:
+          (reasons.length > 0
+            ? "• " + reasons.join("\n• ")
+            : "AI detected unusual behavior") + extraMessage
+      });
+
+      setIsModalOpen(true);
+
+    } catch (err) {
+      console.error(err);
+      alert("Error connecting to backend");
+    }
+  };
 
   const signalWeights = [
     { label: 'New/untrusted device', weight: '+20', color: 'orange' },
@@ -24,7 +99,18 @@ const Alerts = () => {
 
   return (
     <div className="main-content">
-      {/* Header with Toggle */}
+
+      {/* ✅ MODAL */}
+      <RiskInterceptModal
+        isOpen={isModalOpen}
+        decision={modalData.decision}
+        riskScore={modalData.riskScore}
+        message={modalData.message}
+        onAllow={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
+      />
+
+      {/* Header */}
       <header className="fraud-header">
         <div className="title-block">
           <h1>Fraud intercept</h1>
@@ -43,9 +129,10 @@ const Alerts = () => {
         </div>
       </header>
 
-      {/* Grid Layout */}
+      {/* Grid */}
       <div className="dashboard-grid">
-        {/* Signal Weights Card */}
+
+        {/* Signal Weights */}
         <div className="content-card">
           <h3 className="card-inner-title">Signal weights</h3>
           <div className="signal-list">
@@ -61,7 +148,7 @@ const Alerts = () => {
           </div>
         </div>
 
-        {/* Recent Evaluations Card */}
+        {/* Recent Evaluations */}
         <div className="content-card">
           <h3 className="card-inner-title">Recent evaluations</h3>
           <div className="eval-list">
@@ -78,18 +165,39 @@ const Alerts = () => {
             ))}
           </div>
         </div>
+
       </div>
 
-      {/* Demo Triggers Footer Card */}
+      {/* Demo Triggers */}
       <div className="content-card demo-card">
         <h3 className="card-inner-title">Demo triggers</h3>
         <div className="trigger-buttons">
-          <button className="trigger-btn block">block gate · score 72</button>
-          <button className="trigger-btn warn">warn gate · score 40</button>
-          <button className="trigger-btn allow">allow gate · score 8</button>
+
+          <button 
+            className="trigger-btn block"
+            onClick={() => triggerFraud("block")}
+          >
+            block gate · score 72
+          </button>
+
+          <button 
+            className="trigger-btn warn"
+            onClick={() => triggerFraud("warn")}
+          >
+            warn gate · score 40
+          </button>
+
+          <button 
+            className="trigger-btn allow"
+            onClick={() => triggerFraud("allow")}
+          >
+            allow gate · score 8
+          </button>
+
         </div>
+
         <div className="info-box">
-          Toggle the live simulation switch above to auto-trigger scenarios every 6 seconds — useful for hands-free demos.
+          Toggle the live simulation switch above to auto-trigger scenarios every 6 seconds.
         </div>
       </div>
     </div>

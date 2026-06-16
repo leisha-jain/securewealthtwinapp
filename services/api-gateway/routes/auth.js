@@ -38,14 +38,14 @@ router.post('/login', (req, res) => {
   // ── STUB: accept any password for demo; replace with real DB check ──
   // In production: verify hashed password against DB.
   const DEMO_USERS = {
-    1: { name: 'Arjun Mehta',    email: 'arjun.mehta@demo.com' },
-    2: { name: 'Priya Sharma',   email: 'priya.sharma@demo.com' },
-    3: { name: 'Ravi Kumar',     email: 'ravi.kumar@demo.com' },
-    4: { name: 'Fatima Sheikh',  email: 'fatima.sheikh@demo.com' },
+    1: { name: 'Arjun Mehta', email: 'arjun.mehta@demo.com', password: '1234' },
+    2: { name: 'Priya Sharma', email: 'priya.sharma@demo.com', password: '1234' },
+    3: { name: 'Ravi Kumar', email: 'ravi.kumar@demo.com', password: '1234' },
+    4: { name: 'Fatima Sheikh', email: 'fatima.sheikh@demo.com', password: '1234' },
   };
-
+  
   const user = DEMO_USERS[userId];
-  if (!user) {
+  if (!user || user.password !== password) {
     return res.status(401).json({ error: 'Invalid credentials' });
   }
 

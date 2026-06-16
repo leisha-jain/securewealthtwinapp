@@ -13,12 +13,12 @@ const PILLARS = [
     name: "Estate Acquisition",
     desc: "Down payment for primary residence.",
     progress: 64,
-    min: "$0",
-    max: "$250,000 Target",
+    min: "₹0",
+    max: "₹25,00,000 Target",
     nudge: {
       type: "success",
       label: "Nudge",
-      text: "Increasing monthly allocation by $450 reaches target 4 months earlier.",
+      text: "Increasing monthly allocation by ₹42,205 reaches target 4 months earlier.",
     },
   },
   {
@@ -28,8 +28,8 @@ const PILLARS = [
     name: "Legacy Education",
     desc: "University fund for descendants.",
     progress: 31,
-    min: "$0",
-    max: "$190,000 Target",
+    min: "₹0",
+    max: "₹19,00,000 Target",
     nudge: {
       type: "warn",
       label: "Attention",
@@ -43,8 +43,8 @@ const PILLARS = [
     name: "Liquidity Freedom",
     desc: "Full passive income retirement.",
     progress: 12,
-    min: "$0",
-    max: "$4.9M Target",
+    min: "₹0",
+    max: "₹4.9cr Target",
     nudge: {
       type: "info",
       label: "Momentum",
@@ -194,7 +194,7 @@ useEffect(() => {
 
   const peakFormatted = new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: "INR",
     maximumFractionDigits: 2,
   }).format(peak);
 
@@ -231,7 +231,7 @@ useEffect(() => {
               <div className="sim-control-label">
                 <span className="sim-control-name">Monthly Contribution</span>
                 <span className="sim-control-value">
-                  ${contribution.toLocaleString()}
+                  ₹{contribution.toLocaleString()}
                 </span>
               </div>
               <input

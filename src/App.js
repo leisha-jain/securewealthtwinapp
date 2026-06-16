@@ -198,13 +198,18 @@ export default function App() {
   if (step === "login")
     return (
       <Login
-        onLogin={(username) => {
-          // map username → persona key, default to "priya"
-          const key = ["priya","ramesh","arjun"].includes(username.toLowerCase())
-            ? username.toLowerCase()
-            : "priya";
+        onLogin={(user) => {
+          console.log("Logged in user:", user);
+          // map userId → persona key
+          const map = {
+            1: "arjun",
+            2: "priya",
+            3: "ramesh",
+            4: "priya"
+          };
+          const key = map[user.userId] || "priya";
           setPKey(key);
-          setStep("otp");        // ✅ go to OTP after login
+          setStep("otp");
         }}
         onRegister={() => setStep("register")}
         onNext={() => setStep("register2")}

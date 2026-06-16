@@ -123,7 +123,10 @@ STRICT RULES:
     if not text:
         return {"response": "I'm unable to process that right now. Please try again."}
 
-    return {"response": text[:300]}
+    return {
+        "response": text[:300],
+        "reasoning": "Generated based on income, savings rate, and expense distribution."
+    }
 
 
 @app.post("/api/explain")

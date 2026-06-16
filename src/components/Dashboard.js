@@ -49,6 +49,9 @@ const [chatMessages, setChatMessages] = useState([]);
   const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
   const [profile, setProfile] = useState(null);
   
+  // ✅ ADD THESE TWO LINES HERE
+  const [goals, setGoals] = useState([]);
+  const [newGoal, setNewGoal] = useState("");
 
   // Replace your current decision state with this:
 const [riskModal, setRiskModal] = useState({
@@ -62,50 +65,136 @@ const [pendingAction, setPendingAction] = useState(null);
 
 const sendChat = async () => {
   if (!chatInput.trim()) return;
+
   const msg = chatInput;
   setChatInput('');
   setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
+
   try {
-    const res = await axios.post(`${API_BASE}/api/chat`, { message: msg });
-    setChatMessages(prev => [...prev, { role: 'bot', text: res.data.reply }]);
-  } catch {
-    setChatMessages(prev => [...prev, { role: 'bot', text: "I'm offline right now." }]);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const res = await axios.post(
+      `${API_BASE}/api/chat/message`,
+      {
+        userId: user?.userId || 1,
+        message: msg,
+        history: []
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    );
+
+    setChatMessages(prev => [
+      ...prev,
+      { role: 'bot', text: res.data.reply }
+    ]);
+
+  } catch (err) {
+    console.error(err);
+    setChatMessages(prev => [
+      ...prev,
+      { role: 'bot', text: "AI service unavailable." }
+    ]);
   }
 };
 
 const securityGate = async (actionToRun, metadata) => {
   try {
-    // 1. Call the AI Logic endpoint
-    const res = await axios.post(`${API_BASE}/api/action/execute`, metadata);
-    
-    // 2. Save the action we WANT to do in state
+    const res = await axios.post(
+      `${API_BASE}/api/action/execute`,
+      metadata,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    );
+
+    const reasons = res.data.triggered_signals
+      ?.filter(s => s.triggered)
+      .map(s => s.reason)
+      .join("\n• ");
+
     setPendingAction(() => actionToRun);
 
-    // 3. Open the modal with the API's decision
     setRiskModal({
       isOpen: true,
-      decision: res.data.decision, // 'ALLOW', 'WARN', or 'BLOCK'
-      riskScore: res.data.riskScore,
-      message: res.data.message
+      decision: res.data.decision,
+      riskScore: res.data.risk_score,
+      message: reasons ? "• " + reasons : "No major risk signals detected."
     });
 
   } catch (err) {
-    // Fallback: If API is down, we BLOCK for safety
     setRiskModal({
       isOpen: true,
       decision: 'BLOCK',
+      riskScore: 0,
       message: "Security protocols offline. Wealth actions restricted."
     });
   }
 };
+const handleAddGoal = async () => {
+  if (!newGoal.trim()) {
+    alert("Enter a goal");
+    return;
+  }
 
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  try {
+    const res = await axios.post(
+      `${API_BASE}/api/user/${user.userId}/goals`,
+      {
+        title: newGoal,
+        targetAmount: 100000,
+        deadline: "2026-12-31"
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    );
+
+    setGoals(prev => [...prev, res.data]);
+    setNewGoal("");
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   useEffect(() => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${API_BASE}/api/user/1/profile`);
-      setProfile(res.data);
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (!user) return;
+      const res = await axios.get(`${API_BASE}/api/user/${user.userId}/dashboard`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+      
+      setProfile({
+        name: res.data.user?.name,
+        score: res.data.user?.health_score,
+        velocityData: velocityData, // keep UI same
+        outflowData: outflowData
+      });
+      
+      const goalsRes = await axios.get(
+        `${API_BASE}/api/user/${user.userId}/goals`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
+      );
+      
+      setGoals(goalsRes.data);
     } catch (err) {
       setProfile({
         name: "Priya Sharma",
@@ -146,7 +235,7 @@ const securityGate = async (actionToRun, metadata) => {
 
         <section className="hero-section">
           <div className="hero-text">
-            <h1>Your wealth <em>intelligence</em> <br /> overview for October.</h1>
+            <h1>Your wealth <em>intelligence</em> <br /> overview.</h1>
             <p>Institutional-grade analysis shows a 4.2% efficiency gain in your portfolio allocation compared to last quarter.</p>
           </div>
           
@@ -188,7 +277,7 @@ const securityGate = async (actionToRun, metadata) => {
                   <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fill: '#999'}} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val/1000}k`} />
                   <Tooltip cursor={{fill: 'transparent'}} />
                   <Bar dataKey="amt" radius={[4, 4, 0, 0]}>
-                    {velocityData.map((entry, index) => (
+                    {(profile?.velocityData || velocityData).map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.isCurrent ? '#005f52' : '#ccf2ed'} />
                     ))}
                   </Bar>
@@ -207,7 +296,7 @@ const securityGate = async (actionToRun, metadata) => {
               <ResponsiveContainer width="100%" height={200}>
                 <PieChart>
                   <Pie data={profile?.outflowData || outflowData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
-                    {outflowData.map((entry, index) => (
+                    {(profile?.outflowData || outflowData).map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
@@ -215,7 +304,7 @@ const securityGate = async (actionToRun, metadata) => {
               </ResponsiveContainer>
               <div className="donut-center">
                 <span className="total-label">TOTAL</span>
-                <span className="total-amount">$12,480</span>
+                <span className="total-amount">₹11,70,488</span>
               </div>
             </div>
             <div className="legend">
@@ -270,7 +359,8 @@ const securityGate = async (actionToRun, metadata) => {
             <div className="insight-icon tax"><BookOpen size={18} /></div>
             <span className="insight-tag">TAX INTELLIGENCE</span>
             <h4>Harvesting Opportunity</h4>
-            <p>You have $450 in unrealized losses that could offset Q4 capital gains if liquidated before October 31st.</p>
+            <p>You have ₹42,205
+               in unrealized losses that could offset Q4 capital gains if liquidated before October 31st.</p>
             <button
   className="insight-link-btn"
   onClick={() => securityGate(
@@ -282,6 +372,53 @@ const securityGate = async (actionToRun, metadata) => {
 </button>
           </div>
         </div>
+        {/* ───────────── GOALS SECTION ───────────── */}
+<div className="insight-card">
+  <h3>Your Goals</h3>
+
+  {/* Input Row */}
+  <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+    <input
+      value={newGoal}
+      onChange={(e) => setNewGoal(e.target.value)}
+      placeholder="Add a goal (e.g. Buy House)"
+      style={{
+        flex: 1,
+        padding: 8,
+        borderRadius: 6,
+        border: "1px solid #ccc"
+      }}
+    />
+    <button
+      onClick={handleAddGoal}
+      style={{
+        padding: "8px 12px",
+        background: "#005f52",
+        color: "#fff",
+        border: "none",
+        borderRadius: 6,
+        cursor: "pointer"
+      }}
+    >
+      Add
+    </button>
+  </div>
+
+  {/* Empty State */}
+  {goals.length === 0 && (
+    <p style={{ color: "#888" }}>No goals yet</p>
+  )}
+
+  {/* Goals List */}
+  {goals.map(goal => (
+    <div key={goal.id} style={{ marginBottom: 10 }}>
+      <strong>{goal.title}</strong>
+      <div style={{ fontSize: 12, color: "#666" }}>
+        ₹{goal.targetAmount}
+      </div>
+    </div>
+  ))}
+</div>
       </main>
 
       {/* FLOATING AI COACH POPUP */}
@@ -306,7 +443,7 @@ const securityGate = async (actionToRun, metadata) => {
         
         <div className="chat-popup-body">
   <div className="chat-bubble bot">
-    👋 Hi Priya! I'm your AI Wealth Coach. Ask me anything.
+    👋 Hi {profile?.name || "User"}! I'm your AI Wealth Coach. Ask me anything.
   </div>
   {chatMessages.map((m, i) => (
     <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>

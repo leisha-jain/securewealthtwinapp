@@ -28,16 +28,54 @@ const Login = ({onLogin, onRegister}) => {
     setTimeout(() => setSpinning(false), 400);
   };
 
-  const handleSubmit = (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-  // simple check
-  if (username === "priya" && password === "123") {
-    onLogin(username);   
-  } else {
-    alert("Invalid username or password ❌");
-  }
-};
+    // 🔐 CAPTCHA check
+    if (captchaInput !== captcha.code) {
+      alert("Invalid CAPTCHA ❌");
+      return;
+    }
+  
+    try {
+      const res = await fetch("http://localhost:8000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          userId: Number(username),   // IMPORTANT: userId must be number
+          password: password,
+          deviceId: "web-browser"     // simple device id for demo
+        })
+      });
+  
+      const data = await res.json();
+  
+      console.log("LOGIN RESPONSE:", data);
+
+      if (res.status !== 200) {
+        alert(data.error || "Login failed ❌");
+        return;
+      }
+
+      if (!data.token || !data.user) {
+        alert("Invalid server response ❌");
+        return;
+      }
+  
+      // ✅ SAVE TOKEN + USER
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+  
+      // ✅ CALL APP LOGIN
+      onLogin(data.user);
+  
+    } catch (err) {
+      console.error(err);
+      alert("Server error ❌");
+    }
+  };
 
   return (
     <div className="login-page">
