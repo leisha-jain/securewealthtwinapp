@@ -8,10 +8,12 @@ import {
   AlertTriangle,
   Globe,
   ChevronDown,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { LANGUAGES } from "../utils/languageStrings";
 
-export default function Navbar({ page, setPage, language, onLanguageChange }) {
+export default function Navbar({ page, setPage, language, onLanguageChange, darkMode, onDarkModeToggle }) {
   const [langOpen, setLangOpen] = useState(false);
 
   const navItems = [
@@ -44,6 +46,14 @@ export default function Navbar({ page, setPage, language, onLanguageChange }) {
           ))}
         </div>
       </nav>
+
+      {/* Dark Mode Toggle */}
+      <div className="dark-mode-toggle-wrap">
+        <button className="dark-mode-toggle" onClick={onDarkModeToggle} title={darkMode ? "Light mode" : "Dark mode"}>
+          {darkMode ? <Sun size={16} /> : <Moon size={16} />}
+          <span>{darkMode ? "Light mode" : "Dark mode"}</span>
+        </button>
+      </div>
 
       {/* Language Selector */}
       <div className="lang-selector-wrap">

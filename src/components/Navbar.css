@@ -68,12 +68,35 @@
   border-top: 1px solid #f3f4f6;
 }
 
+/* Dark Mode Toggle */
+.dark-mode-toggle-wrap {
+  padding: 8px 16px;
+}
+
+.dark-mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #374151;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.dark-mode-toggle:hover { background: #f0fdfa; border-color: #ccf2ed; color: #005f52; }
+
 /* Language Selector */
 .lang-selector-wrap {
   position: relative;
   padding: 12px 16px;
   border-top: 1px solid #eef2f2;
-  margin-top: auto;
 }
 
 .lang-selector-btn {
@@ -194,3 +217,20 @@
   background: #1f2937;
   color: #14b8a6;
 }
+
+.dashboard-container.dark .dark-mode-toggle {
+  background: #1f2937;
+  border-color: #374151;
+  color: #9ca3af;
+}
+.dashboard-container.dark .dark-mode-toggle:hover { background: #374151; color: #e5e7eb; }
+
+.dashboard-container.dark .lang-selector-wrap { border-top-color: #1f2937; }
+.dashboard-container.dark .lang-selector-btn { background: #1f2937; border-color: #374151; color: #14b8a6; }
+.dashboard-container.dark .lang-selector-btn:hover { background: #374151; }
+.dashboard-container.dark .lang-dropdown { background: #111827; border-color: #374151; }
+.dashboard-container.dark .lang-option { color: #9ca3af; }
+.dashboard-container.dark .lang-option:hover { background: #1f2937; color: #e5e7eb; }
+.dashboard-container.dark .lang-option.active { background: #1f2937; color: #14b8a6; }
+
+.dashboard-container.dark .sidebar-logo h2 { color: #e5e7eb; }
