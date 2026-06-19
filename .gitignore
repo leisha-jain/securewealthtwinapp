@@ -31,4 +31,5 @@ node_modules/
 *.egg-info/
 dist/
 .venv/
->>>>>>> f833541da63bf48efc1c05af23328e8cf5574ae9
+venv/
+**/venv/
