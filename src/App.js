@@ -178,6 +178,9 @@ export default function App() {
   const [pKey, setPKey] = useState(null);
   const [fraud, setFraud] = useState(null);
   const [cmd, setCmd] = useState(false);
+  const [language, setLanguage] = useState(
+    () => localStorage.getItem("preferred_language") || "en"
+  );
   
 
   const p = PERSONAS[pKey] || PERSONAS["priya"];
@@ -239,21 +242,20 @@ return (
     <Navbar
       page={page}
       setPage={setPage}
+      language={language}
+      onLanguageChange={setLanguage}
     />
 
     {/* ✅ MAIN CONTENT AREA */}
     <div style={{ flex: 1 }}>
 
-      <main style={{ padding: 28, background: "#f0f7f3", minHeight: "100vh" }}>
+      <main style={{ background: "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
 
         {page === "dashboard" && (
-          <Dashboard
-            p={p}
-            onRisk={setFraud}
-          />
+          <Dashboard p={p} onRisk={setFraud} language={language} />
         )}
 
-        {page === "goals" && <Goals p={p} />}
+        {page === "goals" && <Goals p={p} language={language} />}
 
         {page === "networth" && <NetWorth p={p} />}
 
@@ -261,7 +263,7 @@ return (
           <Portfolio p={p} onRisk={setFraud} />
         )}
 
-        {page === "chat" && <Chat p={p} />}
+        {page === "chat" && <Chat p={p} language={language} />}
 
         {page === "alerts" && (
           <Alerts onRisk={setFraud} />

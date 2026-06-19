@@ -4,17 +4,17 @@ import './Dashboard.css';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
 import HealthScoreBadge from '../components/HealthScoreBadge';
-import { 
-  LayoutDashboard, Target, Landmark, PieChart as PieIcon, 
-  AlertTriangle, Settings, LifeBuoy, Moon, Sun, Bell, 
-  ChevronRight, Zap, TrendingUp, BookOpen, Bot, X, Maximize2, Minimize2 
+import {
+  LayoutDashboard, Target, Landmark, PieChart as PieIcon,
+  AlertTriangle, Settings, LifeBuoy, Moon, Sun, Bell,
+  ChevronRight, Zap, TrendingUp, TrendingDown, BookOpen, Bot, X, Maximize2, Minimize2,
+  CheckCircle
 } from 'lucide-react';
-import { 
+import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell 
+  PieChart, Pie, Cell
 } from 'recharts';
 
-// Mock Data for Savings Velocity
 const velocityData = [
   { name: 'Jan', amt: 55000 },
   { name: 'Feb', amt: 65000 },
@@ -26,7 +26,6 @@ const velocityData = [
   { name: 'Aug', amt: 135000, isCurrent: true },
 ];
 
-// Mock Data for Capital Outflow
 const outflowData = [
   { name: 'Housing & Equity', value: 40, color: '#005f52' },
   { name: 'Lifestyle & Tech', value: 25, color: '#14b8a6' },
@@ -34,99 +33,217 @@ const outflowData = [
   { name: 'Other', value: 20, color: '#e5e7eb' },
 ];
 
-const Dashboard = () => {
+const MOCK_TICKER = [
+  { label: 'HDFCBANK', val: '+1.4%', up: true },
+  { label: 'NIFTY 50', val: '22,456', up: true },
+  { label: 'GOLDBEES', val: '+0.9%', up: true },
+  { label: 'RELIANCE', val: '+3.2%', up: true },
+  { label: 'RBI Repo', val: '6.5%', up: false },
+  { label: 'INFY', val: '-0.6%', up: false },
+  { label: 'CPI Inflation', val: '5.8%', up: false },
+  { label: 'TCS', val: '+0.3%', up: true },
+  { label: 'SUNPHARMA', val: '+1.1%', up: true },
+  { label: 'Gold ₹/10g', val: '₹76,450', up: true },
+];
+
+const MOCK_TRENDING = [
+  { symbol: 'RELIANCE', name: 'Reliance Industries', change_pct: 3.2, sector: 'Energy', inPortfolio: true },
+  { symbol: 'GOLDBEES', name: 'Gold BeES ETF', change_pct: 0.9, sector: 'Gold', inPortfolio: true },
+  { symbol: 'HDFCBANK', name: 'HDFC Bank', change_pct: 1.4, sector: 'Banking', inPortfolio: false },
+  { symbol: 'TCS', name: 'Tata Consultancy', change_pct: 0.3, sector: 'Tech', inPortfolio: false },
+  { symbol: 'INFY', name: 'Infosys', change_pct: -0.6, sector: 'Tech', inPortfolio: false },
+];
+
+const MOCK_NUDGES = [
+  'Gold up 13% — consider booking ₹20,000 profit this week.',
+  'You have ₹48,000 unused 80C space before March 31.',
+  'You overspent ₹3,200 on dining this month — review budget.',
+];
+
+// Skeleton loading card
+function SkeletonCard() {
+  return (
+    <div className="skeleton-card">
+      <div className="skeleton-line w60" />
+      <div className="skeleton-line w100" />
+      <div className="skeleton-line w80" />
+    </div>
+  );
+}
+
+// Toast notification
+function Toast({ message, onDone }) {
+  useEffect(() => {
+    const t = setTimeout(onDone, 3000);
+    return () => clearTimeout(t);
+  }, []);
+  return (
+    <div className="toast-notification">
+      <CheckCircle size={16} color="#059669" />
+      {message}
+    </div>
+  );
+}
+
+// Market news ticker
+function NewsTicker({ items }) {
+  return (
+    <div className="ticker-wrap">
+      <div className="ticker">
+        {[...items, ...items].map((item, i) => (
+          <span key={i} className="ticker-item">
+            <span className="ticker-label">{item.label}</span>
+            <span className={`ticker-val ${item.up ? 'up' : 'down'}`}>{item.val}</span>
+            <span className="ticker-sep">·</span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Trending stocks panel
+function TrendingStocks({ stocks }) {
+  return (
+    <div className="trending-panel">
+      <h4 className="trending-title">
+        <TrendingUp size={15} /> Trending Stocks
+      </h4>
+      {stocks.map((s) => (
+        <div key={s.symbol} className="trending-row">
+          <div className="trending-left">
+            <span className="trending-symbol">{s.symbol}</span>
+            <span className="trending-name">{s.name}</span>
+          </div>
+          <div className="trending-right">
+            <span className={`trending-change ${s.change_pct >= 0 ? 'up' : 'down'}`}>
+              {s.change_pct >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
+              {s.change_pct > 0 ? '+' : ''}{s.change_pct}%
+            </span>
+            {s.inPortfolio && <span className="portfolio-badge">In portfolio</span>}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const Dashboard = ({ language = 'en' }) => {
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
-  
+
   const [chatInput, setChatInput] = useState('');
-const [chatMessages, setChatMessages] = useState([]);
-
-  const [loading, setLoading] = useState(true);
-
+  const [chatMessages, setChatMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [profile, setProfile] = useState({
+    name: "Priya Sharma",
+    score: 72,
+    velocityData,
+    outflowData,
+  });
+  const [toast, setToast] = useState(null);
+  const [nudges, setNudges] = useState(MOCK_NUDGES);
+  const [trendingStocks] = useState(MOCK_TRENDING);
+  const [tickerItems] = useState(MOCK_TICKER);
+  const [scoreAnimated, setScoreAnimated] = useState(0);
+
+  const [riskModal, setRiskModal] = useState({
+    isOpen: false, decision: null, riskScore: 0, message: ""
+  });
+  const [pendingAction, setPendingAction] = useState(null);
 
   const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
-  const [profile, setProfile] = useState(null);
-  
 
-  // Replace your current decision state with this:
-const [riskModal, setRiskModal] = useState({
-  isOpen: false,
-  decision: null, // 'ALLOW', 'WARN', 'BLOCK'
-  riskScore: 0,
-  message: ""
-});
-
-const [pendingAction, setPendingAction] = useState(null);
-
-const sendChat = async () => {
-  if (!chatInput.trim()) return;
-  const msg = chatInput;
-  setChatInput('');
-  setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
-  try {
-    const res = await axios.post(`${API_BASE}/api/chat`, { message: msg });
-    setChatMessages(prev => [...prev, { role: 'bot', text: res.data.reply }]);
-  } catch {
-    setChatMessages(prev => [...prev, { role: 'bot', text: "I'm offline right now." }]);
-  }
-};
-
-const securityGate = async (actionToRun, metadata) => {
-  try {
-    // 1. Call the AI Logic endpoint
-    const res = await axios.post(`${API_BASE}/api/action/execute`, metadata);
-    
-    // 2. Save the action we WANT to do in state
-    setPendingAction(() => actionToRun);
-
-    // 3. Open the modal with the API's decision
-    setRiskModal({
-      isOpen: true,
-      decision: res.data.decision, // 'ALLOW', 'WARN', or 'BLOCK'
-      riskScore: res.data.riskScore,
-      message: res.data.message
-    });
-
-  } catch (err) {
-    // Fallback: If API is down, we BLOCK for safety
-    setRiskModal({
-      isOpen: true,
-      decision: 'BLOCK',
-      message: "Security protocols offline. Wealth actions restricted."
-    });
-  }
-};
-
-
-  useEffect(() => {
-  const fetchData = async () => {
-    setLoading(true);
+  const sendChat = async () => {
+    if (!chatInput.trim()) return;
+    const msg = chatInput;
+    setChatInput('');
+    setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
     try {
-      const res = await axios.get(`${API_BASE}/api/user/1/profile`);
-      setProfile(res.data);
-    } catch (err) {
-      setProfile({
-        name: "Priya Sharma",
-        score: 72,
-        velocityData: velocityData,
-        outflowData: outflowData
-      });
-    } finally {
-      setLoading(false);
+      const res = await axios.post(`${API_BASE}/api/chat`, { message: msg, language });
+      setChatMessages(prev => [...prev, { role: 'bot', text: res.data.reply }]);
+    } catch {
+      setChatMessages(prev => [...prev, { role: 'bot', text: "I'm offline right now." }]);
     }
   };
-  fetchData();
-}, []);
 
-  if (loading) return <div className="loading-screen">Loading...</div>;
+  const securityGate = async (actionToRun, metadata) => {
+    try {
+      const res = await axios.post(`${API_BASE}/api/action/execute`, metadata);
+      setPendingAction(() => actionToRun);
+      setRiskModal({
+        isOpen: true,
+        decision: res.data.decision,
+        riskScore: res.data.riskScore,
+        message: res.data.message
+      });
+    } catch {
+      setRiskModal({
+        isOpen: true,
+        decision: 'BLOCK',
+        message: "Security protocols offline. Wealth actions restricted."
+      });
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get(`${API_BASE}/api/user/1/profile`);
+        setProfile(res.data);
+      } catch {
+        setProfile({ name: "Priya Sharma", score: 72, velocityData, outflowData });
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Animate health score counter from 0 to actual value
+  useEffect(() => {
+    if (!loading && profile?.score) {
+      let current = 0;
+      const target = profile.score;
+      const step = Math.ceil(target / 30);
+      const t = setInterval(() => {
+        current = Math.min(current + step, target);
+        setScoreAnimated(current);
+        if (current >= target) clearInterval(t);
+      }, 40);
+      return () => clearInterval(t);
+    }
+  }, [loading, profile?.score]);
+
+  if (loading) {
+    return (
+      <div className="app-container">
+        <main className="main-content">
+          <div className="skeleton-header" />
+          <div className="charts-grid">
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+          <div className="insights-grid">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
-    <div className={`app-container ${darkMode ? "dark" : ""}`}>
-      
-      {/* MAIN CONTENT */}
-      <main className="main-content">
+    <div style={{ width: '100%', boxSizing: 'border-box' }}>
+      {toast && <Toast message={toast} onDone={() => setToast(null)} />}
+
+      {/* Market News Ticker */}
+      <NewsTicker items={tickerItems} />
+
+      <div style={{ padding: '24px 32px', width: '100%', boxSizing: 'border-box' }}>
         <header className="top-header">
           <div className="user-profile">
             <img src="https://i.pravatar.cc/150?u=priya" alt="Priya" className="avatar" />
@@ -136,155 +253,162 @@ const securityGate = async (actionToRun, metadata) => {
             </div>
           </div>
           <div className="header-actions">
-            
             <div className="notification-bell">
-               <Bell size={20} className="header-icon" />
-               <span className="bell-dot"></span>
+              <Bell size={20} className="header-icon" />
+              <span className="bell-dot"></span>
             </div>
           </div>
         </header>
+
+        {/* AI Nudge Cards */}
+        <div className="nudge-strip">
+          {nudges.map((n, i) => (
+            <div key={i} className={`nudge-chip nudge-color-${i}`}>
+              <Zap size={13} />
+              {n}
+            </div>
+          ))}
+        </div>
 
         <section className="hero-section">
           <div className="hero-text">
             <h1>Your wealth <em>intelligence</em> <br /> overview for October.</h1>
             <p>Institutional-grade analysis shows a 4.2% efficiency gain in your portfolio allocation compared to last quarter.</p>
           </div>
-          
-          
-            <div className="health-score-card">
-  {/* The new component handles the ring, color, and number automatically */}
-  <HealthScoreBadge score={profile?.score || 0} />
-  
-  <div className="score-details-right">
-    <span className="label-tiny">HEALTH SCORE</span>
-    <div className="score-trend">
-      <TrendingUp size={14} /> +5.2% from Sept
-    </div>
-  </div>
-</div>
-            
-          
+
+          <div className="health-score-card">
+            <HealthScoreBadge score={scoreAnimated} />
+            <div className="score-details-right">
+              <span className="label-tiny">HEALTH SCORE</span>
+              <div className="score-trend">
+                <TrendingUp size={14} /> +5.2% from Sept
+              </div>
+            </div>
+          </div>
         </section>
 
-        <div className="charts-grid">
-          {/* Savings Velocity Bar Chart */}
-          <div className="chart-card velocity-chart">
-            <div className="chart-header">
-              <div>
-                <h3>Savings Velocity</h3>
-                <p>Cumulative liquid growth over 12 months</p>
-              </div>
-              <div className="time-filters">
-                <span>1M</span>
-                <span className="active">6M</span>
-                <span>1Y</span>
-              </div>
-            </div>
-            <div className="chart-container">
-              <ResponsiveContainer width="100%" height={250}>
-                <BarChart data={profile?.velocityData || velocityData}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
-                  <XAxis dataKey="name" hide />
-                  <YAxis axisLine={false} tickLine={false} tick={{fontSize: 10, fill: '#999'}} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val/1000}k`} />
-                  <Tooltip cursor={{fill: 'transparent'}} />
-                  <Bar dataKey="amt" radius={[4, 4, 0, 0]}>
-                    {velocityData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.isCurrent ? '#005f52' : '#ccf2ed'} />
-                    ))}
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
-          {/* Capital Outflow Donut Chart */}
-          <div className="chart-card outflow-chart">
-            <div className="chart-header">
-              <h3>Capital Outflow</h3>
-              <p>Allocation by priority sector</p>
-            </div>
-            <div className="donut-wrapper">
-              <ResponsiveContainer width="100%" height={200}>
-                <PieChart>
-                  <Pie data={profile?.outflowData || outflowData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
-                    {outflowData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="donut-center">
-                <span className="total-label">TOTAL</span>
-                <span className="total-amount">$12,480</span>
-              </div>
-            </div>
-            <div className="legend">
-              {outflowData.slice(0, 3).map((item) => (
-                <div className="legend-item" key={item.name}>
-                  <span className="dot" style={{ backgroundColor: item.color }}></span>
-                  <span className="name">{item.name}</span>
-                  <span className="value">{item.value}%</span>
+        <div className="dashboard-main-grid">
+          <div className="charts-and-insights">
+            <div className="charts-grid">
+              <div className="chart-card velocity-chart">
+                <div className="chart-header">
+                  <div>
+                    <h3>Savings Velocity</h3>
+                    <p>Cumulative liquid growth over 12 months</p>
+                  </div>
+                  <div className="time-filters">
+                    <span>1M</span>
+                    <span className="active">6M</span>
+                    <span>1Y</span>
+                  </div>
                 </div>
-              ))}
+                <div className="chart-container">
+                  <ResponsiveContainer width="100%" height={250}>
+                    <BarChart data={profile?.velocityData || velocityData}>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
+                      <XAxis dataKey="name" hide />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#999' }} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val / 1000}k`} />
+                      <Tooltip cursor={{ fill: 'transparent' }} />
+                      <Bar dataKey="amt" radius={[4, 4, 0, 0]}>
+                        {velocityData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.isCurrent ? '#005f52' : '#ccf2ed'} />
+                        ))}
+                      </Bar>
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+
+              <div className="chart-card outflow-chart">
+                <div className="chart-header">
+                  <h3>Capital Outflow</h3>
+                  <p>Allocation by priority sector</p>
+                </div>
+                <div className="donut-wrapper">
+                  <ResponsiveContainer width="100%" height={200}>
+                    <PieChart>
+                      <Pie data={profile?.outflowData || outflowData} innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="value">
+                        {outflowData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="donut-center">
+                    <span className="total-label">TOTAL</span>
+                    <span className="total-amount">$12,480</span>
+                  </div>
+                </div>
+                <div className="legend">
+                  {outflowData.slice(0, 3).map((item) => (
+                    <div className="legend-item" key={item.name}>
+                      <span className="dot" style={{ backgroundColor: item.color }}></span>
+                      <span className="name">{item.name}</span>
+                      <span className="value">{item.value}%</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="insights-grid">
+              <div className="insight-card">
+                <div className="insight-icon tip"><Zap size={18} /></div>
+                <span className="insight-tag">OPTIMIZATION TIP</span>
+                <h4>Emergency Buffer Alert</h4>
+                <p>Based on your recent outflow, we recommend moving $1,200 to your High-Yield Ledger to maintain 6-month liquidity.</p>
+                <ExplainCard recommendationId="opt_emergency_buffer_001" />
+                <button
+                  className="insight-link-btn"
+                  onClick={() => securityGate(
+                    () => setToast('SIP started successfully'),
+                    { actionType: 'REBALANCE', amount: 1200 }
+                  )}
+                >
+                  Execute Optimization <ChevronRight size={16} />
+                </button>
+              </div>
+
+              <div className="insight-card">
+                <div className="insight-icon strategy"><TrendingUp size={18} /></div>
+                <span className="insight-tag">INVESTMENT STRATEGY</span>
+                <h4>Sector Rotation Imminent</h4>
+                <p>Tech allocation is hitting resistance levels. Historical twins are pivoting 4% to Emerging Markets this week.</p>
+                <button
+                  className="insight-link-btn"
+                  onClick={() => securityGate(
+                    () => setToast('Sector rotation initiated!'),
+                    { actionType: 'REBALANCE', amount: 5000 }
+                  )}
+                >
+                  Review Analysis <ChevronRight size={16} />
+                </button>
+              </div>
+
+              <div className="insight-card">
+                <div className="insight-icon tax"><BookOpen size={18} /></div>
+                <span className="insight-tag">TAX INTELLIGENCE</span>
+                <h4>Harvesting Opportunity</h4>
+                <p>You have $450 in unrealized losses that could offset Q4 capital gains if liquidated before October 31st.</p>
+                <button
+                  className="insight-link-btn"
+                  onClick={() => securityGate(
+                    () => setToast('Tax harvest simulated!'),
+                    { actionType: 'LIQUIDATE', amount: 450 }
+                  )}
+                >
+                  Simulate Impact <ChevronRight size={16} />
+                </button>
+              </div>
             </div>
           </div>
+
+          {/* Trending Stocks Side Panel */}
+          <TrendingStocks stocks={trendingStocks} />
         </div>
+      </div>
 
-        <div className="insights-grid">
-          <div className="insight-card">
-            <div className="insight-icon tip"><Zap size={18} /></div>
-            <span className="insight-tag">OPTIMIZATION TIP</span>
-            <h4>Emergency Buffer Alert</h4>
-            <p>Based on your recent outflow, we recommend moving $1,200 to your High-Yield Ledger to maintain 6-month liquidity.</p>
-            
-            <ExplainCard recommendationId="opt_emergency_buffer_001" />
-            
-            <button 
-  className="insight-link-btn" 
-  onClick={() => securityGate(
-    () => alert("Optimization Executed!"), // The real logic
-    { actionType: 'REBALANCE', amount: 1200 } // Data for the AI
-  )}
->
-  Execute Optimization <ChevronRight size={16} />
-</button>
-          </div>
-
-          <div className="insight-card">
-            <div className="insight-icon strategy"><TrendingUp size={18} /></div>
-            <span className="insight-tag">INVESTMENT STRATEGY</span>
-            <h4>Sector Rotation Imminent</h4>
-            <p>Tech allocation is hitting resistance levels. Historical twins are pivoting 4% to Emerging Markets this week.</p>
-            <button
-  className="insight-link-btn"
-  onClick={() => securityGate(
-    () => alert("Sector rotation initiated!"),
-    { actionType: 'REBALANCE', amount: 5000 }
-  )}
->
-  Review Analysis <ChevronRight size={16} />
-</button>
-          </div>
-
-          <div className="insight-card">
-            <div className="insight-icon tax"><BookOpen size={18} /></div>
-            <span className="insight-tag">TAX INTELLIGENCE</span>
-            <h4>Harvesting Opportunity</h4>
-            <p>You have $450 in unrealized losses that could offset Q4 capital gains if liquidated before October 31st.</p>
-            <button
-  className="insight-link-btn"
-  onClick={() => securityGate(
-    () => alert("Tax harvest simulated!"),
-    { actionType: 'LIQUIDATE', amount: 450 }
-  )}
->
-  Simulate Impact <ChevronRight size={16} />
-</button>
-          </div>
-        </div>
-      </main>
-
-      {/* FLOATING AI COACH POPUP */}
+      {/* Floating AI Chat */}
       <div className={`chat-popup ${chatOpen ? 'open' : ''} ${isFullScreen ? 'fullscreen' : ''}`}>
         <div className="chat-popup-header">
           <div className="chat-popup-title">
@@ -298,36 +422,35 @@ const securityGate = async (actionToRun, metadata) => {
             <button className="chat-action-btn" onClick={toggleFullScreen} title="Toggle Fullscreen">
               {isFullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
             </button>
-            <button className="chat-close-btn" onClick={() => {setChatOpen(false); setIsFullScreen(false);}}>
+            <button className="chat-close-btn" onClick={() => { setChatOpen(false); setIsFullScreen(false); }}>
               <X size={16} />
             </button>
           </div>
         </div>
-        
+
         <div className="chat-popup-body">
-  <div className="chat-bubble bot">
-    👋 Hi Priya! I'm your AI Wealth Coach. Ask me anything.
-  </div>
-  {chatMessages.map((m, i) => (
-    <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>
-  ))}
-</div>
-        
+          <div className="chat-bubble bot">
+            Hi Priya! I'm your AI Wealth Coach. Ask me anything.
+          </div>
+          {chatMessages.map((m, i) => (
+            <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>
+          ))}
+        </div>
+
         <div className="chat-popup-input">
-  <input
-    type="text"
-    placeholder="Ask your AI coach..."
-    value={chatInput}
-    onChange={e => setChatInput(e.target.value)}
-    onKeyDown={e => e.key === 'Enter' && sendChat()}
-  />
-  <button className="chat-send-btn" onClick={sendChat}>
-    <ChevronRight size={18} />
-  </button>
-</div>
+          <input
+            type="text"
+            placeholder="Ask your AI coach..."
+            value={chatInput}
+            onChange={e => setChatInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && sendChat()}
+          />
+          <button className="chat-send-btn" onClick={sendChat}>
+            <ChevronRight size={18} />
+          </button>
+        </div>
       </div>
 
-      {/* FLOATING ROBOT BUTTON */}
       {!isFullScreen && (
         <button
           className={`floating-chat-btn ${chatOpen ? 'active' : ''}`}
@@ -338,29 +461,25 @@ const securityGate = async (actionToRun, metadata) => {
           {!chatOpen && <span className="chat-badge">1</span>}
         </button>
       )}
-      
-      {/* Replace your previous RiskInterceptModal call at the bottom */}
-<RiskInterceptModal
+
+      <RiskInterceptModal
         isOpen={riskModal.isOpen}
         decision={riskModal.decision}
         riskScore={riskModal.riskScore}
         message={riskModal.message}
+        language={language}
         onCancel={() => {
           setRiskModal({ ...riskModal, isOpen: false });
           setPendingAction(null);
         }}
         onAllow={() => {
-          // This only runs if the user clicks "Proceed" in ALLOW or WARN states
-          if (pendingAction) pendingAction(); 
+          if (pendingAction) pendingAction();
           setRiskModal({ ...riskModal, isOpen: false });
           setPendingAction(null);
         }}
       />
     </div>
-
-    
   );
-  
 };
 
 export default Dashboard;
