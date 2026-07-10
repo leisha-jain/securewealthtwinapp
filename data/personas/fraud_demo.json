@@ -4,7 +4,9 @@
   "age": 34,
   "monthly_income": 90000,
   "risk_profile": "moderate",
-  "trusted_devices": ["device_old_laptop"],
+  "trusted_devices": [
+    "device_old_laptop"
+  ],
   "typical_avg_transaction": 45000,
   "behavioral_flags": {
     "is_trusted_device": false,
@@ -28,14 +30,46 @@
     "expected_decision": "BLOCK"
   },
   "transactions": [
-    { "date": "2025-01-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-01-10", "category": "groceries", "amount": 5000 },
-    { "date": "2025-01-15", "category": "shopping", "amount": 8000 },
-    { "date": "2025-02-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-02-10", "category": "groceries", "amount": 4800 },
-    { "date": "2025-03-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-03-12", "category": "groceries", "amount": 5200 },
-    { "date": "2025-03-20", "category": "shopping", "amount": 7500 }
+    {
+      "date": "2025-01-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-01-10",
+      "category": "groceries",
+      "amount": 5000
+    },
+    {
+      "date": "2025-01-15",
+      "category": "shopping",
+      "amount": 8000
+    },
+    {
+      "date": "2025-02-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-02-10",
+      "category": "groceries",
+      "amount": 4800
+    },
+    {
+      "date": "2025-03-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-03-12",
+      "category": "groceries",
+      "amount": 5200
+    },
+    {
+      "date": "2025-03-20",
+      "category": "shopping",
+      "amount": 7500
+    }
   ],
   "portfolio": {
     "holdings": [],
@@ -45,8 +79,28 @@
   },
   "assets": [],
   "accounts": [
-    { "bank": "SBI", "account_type": "Savings", "balance": 180000 }
+    {
+      "bank": "SBI",
+      "account_type": "Savings",
+      "balance": 180000
+    }
   ],
   "liabilities": 0,
-  "goals": []
+  "goals": [],
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "note": "honeypot_asset_do_not_display",
+      "folio": "DECOY-FOLIO-008"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup"
 }

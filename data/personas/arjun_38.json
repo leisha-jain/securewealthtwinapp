@@ -4,60 +4,267 @@
   "age": 38,
   "monthly_income": 180000,
   "risk_profile": "aggressive",
-  "trusted_devices": ["device_iphone_arjun", "device_macbook_arjun"],
+  "trusted_devices": [
+    "device_iphone_arjun",
+    "device_macbook_arjun"
+  ],
   "typical_avg_transaction": 20000,
   "transactions": [
-    { "date": "2025-01-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-01-05", "category": "groceries", "amount": 9200 },
-    { "date": "2025-01-08", "category": "investment", "amount": 50000 },
-    { "date": "2025-01-12", "category": "dining", "amount": 8400 },
-    { "date": "2025-01-18", "category": "shopping", "amount": 22000 },
-    { "date": "2025-02-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-02-06", "category": "groceries", "amount": 8800 },
-    { "date": "2025-02-10", "category": "investment", "amount": 50000 },
-    { "date": "2025-02-15", "category": "dining", "amount": 9100 },
-    { "date": "2025-02-20", "category": "investment_sell", "amount": 80000 },
-    { "date": "2025-03-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-03-07", "category": "groceries", "amount": 9500 },
-    { "date": "2025-03-12", "category": "investment_sell", "amount": 120000 },
-    { "date": "2025-03-15", "category": "dining", "amount": 7800 },
-    { "date": "2025-03-20", "category": "shopping", "amount": 18000 },
-    { "date": "2025-04-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-04-07", "category": "groceries", "amount": 8900 },
-    { "date": "2025-04-10", "category": "investment", "amount": 30000 },
-    { "date": "2025-04-18", "category": "dining", "amount": 8200 },
-    { "date": "2025-05-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-05-08", "category": "groceries", "amount": 9100 },
-    { "date": "2025-05-12", "category": "investment", "amount": 30000 },
-    { "date": "2025-05-20", "category": "dining", "amount": 7600 },
-    { "date": "2025-05-25", "category": "shopping", "amount": 15000 },
-    { "date": "2025-06-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-06-07", "category": "groceries", "amount": 9300 },
-    { "date": "2025-06-10", "category": "investment", "amount": 30000 },
-    { "date": "2025-06-18", "category": "dining", "amount": 8900 },
-    { "date": "2025-07-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-07-08", "category": "groceries", "amount": 8700 },
-    { "date": "2025-07-12", "category": "investment_sell", "amount": 95000 },
-    { "date": "2025-07-18", "category": "dining", "amount": 9200 },
-    { "date": "2025-07-25", "category": "shopping", "amount": 28000 },
-    { "date": "2025-08-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-08-07", "category": "groceries", "amount": 9000 },
-    { "date": "2025-08-15", "category": "dining", "amount": 7900 },
-    { "date": "2025-09-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-09-08", "category": "groceries", "amount": 9400 },
-    { "date": "2025-09-12", "category": "investment", "amount": 25000 },
-    { "date": "2025-09-20", "category": "dining", "amount": 8600 },
-    { "date": "2025-10-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-10-07", "category": "groceries", "amount": 8800 },
-    { "date": "2025-10-15", "category": "investment", "amount": 25000 },
-    { "date": "2025-10-22", "category": "shopping", "amount": 32000 },
-    { "date": "2025-11-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-11-08", "category": "groceries", "amount": 9100 },
-    { "date": "2025-11-15", "category": "investment", "amount": 25000 },
-    { "date": "2025-11-20", "category": "dining", "amount": 8300 },
-    { "date": "2025-12-03", "category": "rent", "amount": 35000 },
-    { "date": "2025-12-08", "category": "groceries", "amount": 9600 },
-    { "date": "2025-12-20", "category": "shopping", "amount": 45000 }
+    {
+      "date": "2025-01-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-01-05",
+      "category": "groceries",
+      "amount": 9200
+    },
+    {
+      "date": "2025-01-08",
+      "category": "investment",
+      "amount": 50000
+    },
+    {
+      "date": "2025-01-12",
+      "category": "dining",
+      "amount": 8400
+    },
+    {
+      "date": "2025-01-18",
+      "category": "shopping",
+      "amount": 22000
+    },
+    {
+      "date": "2025-02-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-02-06",
+      "category": "groceries",
+      "amount": 8800
+    },
+    {
+      "date": "2025-02-10",
+      "category": "investment",
+      "amount": 50000
+    },
+    {
+      "date": "2025-02-15",
+      "category": "dining",
+      "amount": 9100
+    },
+    {
+      "date": "2025-02-20",
+      "category": "investment_sell",
+      "amount": 80000
+    },
+    {
+      "date": "2025-03-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-03-07",
+      "category": "groceries",
+      "amount": 9500
+    },
+    {
+      "date": "2025-03-12",
+      "category": "investment_sell",
+      "amount": 120000
+    },
+    {
+      "date": "2025-03-15",
+      "category": "dining",
+      "amount": 7800
+    },
+    {
+      "date": "2025-03-20",
+      "category": "shopping",
+      "amount": 18000
+    },
+    {
+      "date": "2025-04-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-04-07",
+      "category": "groceries",
+      "amount": 8900
+    },
+    {
+      "date": "2025-04-10",
+      "category": "investment",
+      "amount": 30000
+    },
+    {
+      "date": "2025-04-18",
+      "category": "dining",
+      "amount": 8200
+    },
+    {
+      "date": "2025-05-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-05-08",
+      "category": "groceries",
+      "amount": 9100
+    },
+    {
+      "date": "2025-05-12",
+      "category": "investment",
+      "amount": 30000
+    },
+    {
+      "date": "2025-05-20",
+      "category": "dining",
+      "amount": 7600
+    },
+    {
+      "date": "2025-05-25",
+      "category": "shopping",
+      "amount": 15000
+    },
+    {
+      "date": "2025-06-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-06-07",
+      "category": "groceries",
+      "amount": 9300
+    },
+    {
+      "date": "2025-06-10",
+      "category": "investment",
+      "amount": 30000
+    },
+    {
+      "date": "2025-06-18",
+      "category": "dining",
+      "amount": 8900
+    },
+    {
+      "date": "2025-07-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-07-08",
+      "category": "groceries",
+      "amount": 8700
+    },
+    {
+      "date": "2025-07-12",
+      "category": "investment_sell",
+      "amount": 95000
+    },
+    {
+      "date": "2025-07-18",
+      "category": "dining",
+      "amount": 9200
+    },
+    {
+      "date": "2025-07-25",
+      "category": "shopping",
+      "amount": 28000
+    },
+    {
+      "date": "2025-08-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-08-07",
+      "category": "groceries",
+      "amount": 9000
+    },
+    {
+      "date": "2025-08-15",
+      "category": "dining",
+      "amount": 7900
+    },
+    {
+      "date": "2025-09-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-09-08",
+      "category": "groceries",
+      "amount": 9400
+    },
+    {
+      "date": "2025-09-12",
+      "category": "investment",
+      "amount": 25000
+    },
+    {
+      "date": "2025-09-20",
+      "category": "dining",
+      "amount": 8600
+    },
+    {
+      "date": "2025-10-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-10-07",
+      "category": "groceries",
+      "amount": 8800
+    },
+    {
+      "date": "2025-10-15",
+      "category": "investment",
+      "amount": 25000
+    },
+    {
+      "date": "2025-10-22",
+      "category": "shopping",
+      "amount": 32000
+    },
+    {
+      "date": "2025-11-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-11-08",
+      "category": "groceries",
+      "amount": 9100
+    },
+    {
+      "date": "2025-11-15",
+      "category": "investment",
+      "amount": 25000
+    },
+    {
+      "date": "2025-11-20",
+      "category": "dining",
+      "amount": 8300
+    },
+    {
+      "date": "2025-12-03",
+      "category": "rent",
+      "amount": 35000
+    },
+    {
+      "date": "2025-12-08",
+      "category": "groceries",
+      "amount": 9600
+    },
+    {
+      "date": "2025-12-20",
+      "category": "shopping",
+      "amount": 45000
+    }
   ],
   "portfolio": {
     "holdings": [
@@ -89,17 +296,41 @@
     "total_invested": 1800000,
     "total_current_value": 1385000,
     "sips": [
-      { "fund": "Nippon Small Cap", "amount": 20000, "active": true },
-      { "fund": "Axis Midcap Fund", "amount": 10000, "active": true }
+      {
+        "fund": "Nippon Small Cap",
+        "amount": 20000,
+        "active": true
+      },
+      {
+        "fund": "Axis Midcap Fund",
+        "amount": 10000,
+        "active": true
+      }
     ]
   },
   "assets": [
-    { "type": "property", "description": "1BHK Mumbai", "value": 8500000 },
-    { "type": "vehicle", "description": "BMW 3 Series 2022", "value": 3200000 }
+    {
+      "type": "property",
+      "description": "1BHK Mumbai",
+      "value": 8500000
+    },
+    {
+      "type": "vehicle",
+      "description": "BMW 3 Series 2022",
+      "value": 3200000
+    }
   ],
   "accounts": [
-    { "bank": "Zerodha", "account_type": "Trading", "balance": 245000 },
-    { "bank": "Axis", "account_type": "Savings", "balance": 98000 }
+    {
+      "bank": "Zerodha",
+      "account_type": "Trading",
+      "balance": 245000
+    },
+    {
+      "bank": "Axis",
+      "account_type": "Savings",
+      "balance": 98000
+    }
   ],
   "liabilities": 0,
   "goals": [
@@ -115,5 +346,21 @@
       "saved_so_far": 1385000,
       "deadline": "2027-01-01"
     }
-  ]
+  ],
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "note": "honeypot_asset_do_not_display",
+      "folio": "DECOY-FOLIO-007"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup"
 }

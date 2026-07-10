@@ -4,75 +4,342 @@
   "age": 42,
   "monthly_income_avg": 250000,
   "risk_profile": "moderate",
-  "trusted_devices": ["device_ipad_kiran", "device_laptop_kiran"],
+  "trusted_devices": [
+    "device_ipad_kiran",
+    "device_laptop_kiran"
+  ],
   "typical_avg_transaction": 45000,
   "transactions": [
-    { "date": "2025-01-03", "category": "vendor_payment", "amount": 85000 },
-    { "date": "2025-01-07", "category": "staff_salary", "amount": 120000 },
-    { "date": "2025-01-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-01-15", "category": "business_income", "amount": 320000 },
-    { "date": "2025-01-20", "category": "utilities", "amount": 8500 },
-    { "date": "2025-01-25", "category": "personal_expense", "amount": 25000 },
-    { "date": "2025-02-03", "category": "vendor_payment", "amount": 92000 },
-    { "date": "2025-02-07", "category": "staff_salary", "amount": 120000 },
-    { "date": "2025-02-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-02-18", "category": "business_income", "amount": 180000 },
-    { "date": "2025-02-25", "category": "personal_expense", "amount": 22000 },
-    { "date": "2025-03-03", "category": "vendor_payment", "amount": 78000 },
-    { "date": "2025-03-07", "category": "staff_salary", "amount": 120000 },
-    { "date": "2025-03-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-03-15", "category": "business_income", "amount": 410000 },
-    { "date": "2025-03-20", "category": "utilities", "amount": 9200 },
-    { "date": "2025-03-28", "category": "personal_expense", "amount": 35000 },
-    { "date": "2025-04-03", "category": "vendor_payment", "amount": 95000 },
-    { "date": "2025-04-07", "category": "staff_salary", "amount": 120000 },
-    { "date": "2025-04-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-04-18", "category": "business_income", "amount": 150000 },
-    { "date": "2025-04-25", "category": "personal_expense", "amount": 18000 },
-    { "date": "2025-05-03", "category": "vendor_payment", "amount": 88000 },
-    { "date": "2025-05-07", "category": "staff_salary", "amount": 120000 },
-    { "date": "2025-05-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-05-15", "category": "business_income", "amount": 290000 },
-    { "date": "2025-05-22", "category": "utilities", "amount": 7800 },
-    { "date": "2025-05-28", "category": "personal_expense", "amount": 28000 },
-    { "date": "2025-06-03", "category": "vendor_payment", "amount": 102000 },
-    { "date": "2025-06-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-06-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-06-15", "category": "business_income", "amount": 480000 },
-    { "date": "2025-06-25", "category": "personal_expense", "amount": 42000 },
-    { "date": "2025-07-03", "category": "vendor_payment", "amount": 76000 },
-    { "date": "2025-07-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-07-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-07-18", "category": "business_income", "amount": 120000 },
-    { "date": "2025-07-25", "category": "personal_expense", "amount": 19000 },
-    { "date": "2025-08-03", "category": "vendor_payment", "amount": 89000 },
-    { "date": "2025-08-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-08-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-08-15", "category": "business_income", "amount": 350000 },
-    { "date": "2025-08-22", "category": "utilities", "amount": 8900 },
-    { "date": "2025-08-28", "category": "personal_expense", "amount": 31000 },
-    { "date": "2025-09-03", "category": "vendor_payment", "amount": 94000 },
-    { "date": "2025-09-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-09-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-09-18", "category": "business_income", "amount": 220000 },
-    { "date": "2025-09-25", "category": "personal_expense", "amount": 24000 },
-    { "date": "2025-10-03", "category": "vendor_payment", "amount": 98000 },
-    { "date": "2025-10-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-10-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-10-15", "category": "business_income", "amount": 390000 },
-    { "date": "2025-10-22", "category": "utilities", "amount": 9100 },
-    { "date": "2025-10-28", "category": "personal_expense", "amount": 38000 },
-    { "date": "2025-11-03", "category": "vendor_payment", "amount": 87000 },
-    { "date": "2025-11-07", "category": "staff_salary", "amount": 135000 },
-    { "date": "2025-11-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-11-18", "category": "business_income", "amount": 160000 },
-    { "date": "2025-11-25", "category": "personal_expense", "amount": 21000 },
-    { "date": "2025-12-03", "category": "vendor_payment", "amount": 115000 },
-    { "date": "2025-12-07", "category": "staff_salary", "amount": 150000 },
-    { "date": "2025-12-10", "category": "rent_office", "amount": 40000 },
-    { "date": "2025-12-15", "category": "business_income", "amount": 520000 },
-    { "date": "2025-12-22", "category": "utilities", "amount": 10200 },
-    { "date": "2025-12-28", "category": "personal_expense", "amount": 55000 }
+    {
+      "date": "2025-01-03",
+      "category": "vendor_payment",
+      "amount": 85000
+    },
+    {
+      "date": "2025-01-07",
+      "category": "staff_salary",
+      "amount": 120000
+    },
+    {
+      "date": "2025-01-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-01-15",
+      "category": "business_income",
+      "amount": 320000
+    },
+    {
+      "date": "2025-01-20",
+      "category": "utilities",
+      "amount": 8500
+    },
+    {
+      "date": "2025-01-25",
+      "category": "personal_expense",
+      "amount": 25000
+    },
+    {
+      "date": "2025-02-03",
+      "category": "vendor_payment",
+      "amount": 92000
+    },
+    {
+      "date": "2025-02-07",
+      "category": "staff_salary",
+      "amount": 120000
+    },
+    {
+      "date": "2025-02-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-02-18",
+      "category": "business_income",
+      "amount": 180000
+    },
+    {
+      "date": "2025-02-25",
+      "category": "personal_expense",
+      "amount": 22000
+    },
+    {
+      "date": "2025-03-03",
+      "category": "vendor_payment",
+      "amount": 78000
+    },
+    {
+      "date": "2025-03-07",
+      "category": "staff_salary",
+      "amount": 120000
+    },
+    {
+      "date": "2025-03-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-03-15",
+      "category": "business_income",
+      "amount": 410000
+    },
+    {
+      "date": "2025-03-20",
+      "category": "utilities",
+      "amount": 9200
+    },
+    {
+      "date": "2025-03-28",
+      "category": "personal_expense",
+      "amount": 35000
+    },
+    {
+      "date": "2025-04-03",
+      "category": "vendor_payment",
+      "amount": 95000
+    },
+    {
+      "date": "2025-04-07",
+      "category": "staff_salary",
+      "amount": 120000
+    },
+    {
+      "date": "2025-04-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-04-18",
+      "category": "business_income",
+      "amount": 150000
+    },
+    {
+      "date": "2025-04-25",
+      "category": "personal_expense",
+      "amount": 18000
+    },
+    {
+      "date": "2025-05-03",
+      "category": "vendor_payment",
+      "amount": 88000
+    },
+    {
+      "date": "2025-05-07",
+      "category": "staff_salary",
+      "amount": 120000
+    },
+    {
+      "date": "2025-05-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-05-15",
+      "category": "business_income",
+      "amount": 290000
+    },
+    {
+      "date": "2025-05-22",
+      "category": "utilities",
+      "amount": 7800
+    },
+    {
+      "date": "2025-05-28",
+      "category": "personal_expense",
+      "amount": 28000
+    },
+    {
+      "date": "2025-06-03",
+      "category": "vendor_payment",
+      "amount": 102000
+    },
+    {
+      "date": "2025-06-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-06-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-06-15",
+      "category": "business_income",
+      "amount": 480000
+    },
+    {
+      "date": "2025-06-25",
+      "category": "personal_expense",
+      "amount": 42000
+    },
+    {
+      "date": "2025-07-03",
+      "category": "vendor_payment",
+      "amount": 76000
+    },
+    {
+      "date": "2025-07-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-07-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-07-18",
+      "category": "business_income",
+      "amount": 120000
+    },
+    {
+      "date": "2025-07-25",
+      "category": "personal_expense",
+      "amount": 19000
+    },
+    {
+      "date": "2025-08-03",
+      "category": "vendor_payment",
+      "amount": 89000
+    },
+    {
+      "date": "2025-08-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-08-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-08-15",
+      "category": "business_income",
+      "amount": 350000
+    },
+    {
+      "date": "2025-08-22",
+      "category": "utilities",
+      "amount": 8900
+    },
+    {
+      "date": "2025-08-28",
+      "category": "personal_expense",
+      "amount": 31000
+    },
+    {
+      "date": "2025-09-03",
+      "category": "vendor_payment",
+      "amount": 94000
+    },
+    {
+      "date": "2025-09-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-09-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-09-18",
+      "category": "business_income",
+      "amount": 220000
+    },
+    {
+      "date": "2025-09-25",
+      "category": "personal_expense",
+      "amount": 24000
+    },
+    {
+      "date": "2025-10-03",
+      "category": "vendor_payment",
+      "amount": 98000
+    },
+    {
+      "date": "2025-10-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-10-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-10-15",
+      "category": "business_income",
+      "amount": 390000
+    },
+    {
+      "date": "2025-10-22",
+      "category": "utilities",
+      "amount": 9100
+    },
+    {
+      "date": "2025-10-28",
+      "category": "personal_expense",
+      "amount": 38000
+    },
+    {
+      "date": "2025-11-03",
+      "category": "vendor_payment",
+      "amount": 87000
+    },
+    {
+      "date": "2025-11-07",
+      "category": "staff_salary",
+      "amount": 135000
+    },
+    {
+      "date": "2025-11-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-11-18",
+      "category": "business_income",
+      "amount": 160000
+    },
+    {
+      "date": "2025-11-25",
+      "category": "personal_expense",
+      "amount": 21000
+    },
+    {
+      "date": "2025-12-03",
+      "category": "vendor_payment",
+      "amount": 115000
+    },
+    {
+      "date": "2025-12-07",
+      "category": "staff_salary",
+      "amount": 150000
+    },
+    {
+      "date": "2025-12-10",
+      "category": "rent_office",
+      "amount": 40000
+    },
+    {
+      "date": "2025-12-15",
+      "category": "business_income",
+      "amount": 520000
+    },
+    {
+      "date": "2025-12-22",
+      "category": "utilities",
+      "amount": 10200
+    },
+    {
+      "date": "2025-12-28",
+      "category": "personal_expense",
+      "amount": 55000
+    }
   ],
   "portfolio": {
     "holdings": [
@@ -90,13 +357,33 @@
     "sips": []
   },
   "assets": [
-    { "type": "property", "description": "Office Space Pune", "value": 7500000 },
-    { "type": "property", "description": "Residential Flat Pune", "value": 5500000 },
-    { "type": "vehicle", "description": "Toyota Innova 2023", "value": 1800000 }
+    {
+      "type": "property",
+      "description": "Office Space Pune",
+      "value": 7500000
+    },
+    {
+      "type": "property",
+      "description": "Residential Flat Pune",
+      "value": 5500000
+    },
+    {
+      "type": "vehicle",
+      "description": "Toyota Innova 2023",
+      "value": 1800000
+    }
   ],
   "accounts": [
-    { "bank": "SBI", "account_type": "Current", "balance": 820000 },
-    { "bank": "HDFC", "account_type": "OD", "balance": -200000 }
+    {
+      "bank": "SBI",
+      "account_type": "Current",
+      "balance": 820000
+    },
+    {
+      "bank": "HDFC",
+      "account_type": "OD",
+      "balance": -200000
+    }
   ],
   "liabilities": 200000,
   "goals": [
@@ -112,5 +399,21 @@
       "saved_so_far": 1062000,
       "deadline": "2031-06-30"
     }
-  ]
+  ],
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "note": "honeypot_asset_do_not_display",
+      "folio": "DECOY-FOLIO-009"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup"
 }

@@ -4,59 +4,262 @@
   "age": 45,
   "monthly_income": 120000,
   "risk_profile": "conservative",
-  "trusted_devices": ["device_samsung_ramesh", "device_laptop_ramesh"],
+  "trusted_devices": [
+    "device_samsung_ramesh",
+    "device_laptop_ramesh"
+  ],
   "typical_avg_transaction": 12000,
   "transactions": [
-    { "date": "2025-01-03", "category": "groceries", "amount": 8200 },
-    { "date": "2025-01-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-01-08", "category": "utilities", "amount": 3100 },
-    { "date": "2025-01-12", "category": "transport", "amount": 4200 },
-    { "date": "2025-01-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-02-03", "category": "groceries", "amount": 7900 },
-    { "date": "2025-02-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-02-08", "category": "utilities", "amount": 2900 },
-    { "date": "2025-02-15", "category": "transport", "amount": 3800 },
-    { "date": "2025-03-03", "category": "groceries", "amount": 8400 },
-    { "date": "2025-03-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-03-08", "category": "utilities", "amount": 3200 },
-    { "date": "2025-03-12", "category": "transport", "amount": 4100 },
-    { "date": "2025-03-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-04-03", "category": "groceries", "amount": 8100 },
-    { "date": "2025-04-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-04-08", "category": "utilities", "amount": 2800 },
-    { "date": "2025-05-03", "category": "groceries", "amount": 7800 },
-    { "date": "2025-05-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-05-08", "category": "utilities", "amount": 3300 },
-    { "date": "2025-05-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-06-03", "category": "groceries", "amount": 8600 },
-    { "date": "2025-06-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-06-08", "category": "utilities", "amount": 3000 },
-    { "date": "2025-06-12", "category": "transport", "amount": 3900 },
-    { "date": "2025-07-03", "category": "groceries", "amount": 8300 },
-    { "date": "2025-07-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-07-08", "category": "utilities", "amount": 2700 },
-    { "date": "2025-07-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-08-03", "category": "groceries", "amount": 7700 },
-    { "date": "2025-08-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-08-08", "category": "utilities", "amount": 3100 },
-    { "date": "2025-08-12", "category": "transport", "amount": 4300 },
-    { "date": "2025-09-03", "category": "groceries", "amount": 8500 },
-    { "date": "2025-09-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-09-08", "category": "utilities", "amount": 2900 },
-    { "date": "2025-09-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-10-03", "category": "groceries", "amount": 8000 },
-    { "date": "2025-10-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-10-08", "category": "utilities", "amount": 3200 },
-    { "date": "2025-10-12", "category": "transport", "amount": 4000 },
-    { "date": "2025-11-03", "category": "groceries", "amount": 8200 },
-    { "date": "2025-11-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-11-08", "category": "utilities", "amount": 3000 },
-    { "date": "2025-11-20", "category": "insurance", "amount": 6500 },
-    { "date": "2025-12-03", "category": "groceries", "amount": 9100 },
-    { "date": "2025-12-05", "category": "rent", "amount": 25000 },
-    { "date": "2025-12-08", "category": "utilities", "amount": 3400 },
-    { "date": "2025-12-12", "category": "transport", "amount": 4500 },
-    { "date": "2025-12-25", "category": "shopping", "amount": 12000 }
+    {
+      "date": "2025-01-03",
+      "category": "groceries",
+      "amount": 8200
+    },
+    {
+      "date": "2025-01-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-01-08",
+      "category": "utilities",
+      "amount": 3100
+    },
+    {
+      "date": "2025-01-12",
+      "category": "transport",
+      "amount": 4200
+    },
+    {
+      "date": "2025-01-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-02-03",
+      "category": "groceries",
+      "amount": 7900
+    },
+    {
+      "date": "2025-02-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-02-08",
+      "category": "utilities",
+      "amount": 2900
+    },
+    {
+      "date": "2025-02-15",
+      "category": "transport",
+      "amount": 3800
+    },
+    {
+      "date": "2025-03-03",
+      "category": "groceries",
+      "amount": 8400
+    },
+    {
+      "date": "2025-03-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-03-08",
+      "category": "utilities",
+      "amount": 3200
+    },
+    {
+      "date": "2025-03-12",
+      "category": "transport",
+      "amount": 4100
+    },
+    {
+      "date": "2025-03-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-04-03",
+      "category": "groceries",
+      "amount": 8100
+    },
+    {
+      "date": "2025-04-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-04-08",
+      "category": "utilities",
+      "amount": 2800
+    },
+    {
+      "date": "2025-05-03",
+      "category": "groceries",
+      "amount": 7800
+    },
+    {
+      "date": "2025-05-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-05-08",
+      "category": "utilities",
+      "amount": 3300
+    },
+    {
+      "date": "2025-05-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-06-03",
+      "category": "groceries",
+      "amount": 8600
+    },
+    {
+      "date": "2025-06-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-06-08",
+      "category": "utilities",
+      "amount": 3000
+    },
+    {
+      "date": "2025-06-12",
+      "category": "transport",
+      "amount": 3900
+    },
+    {
+      "date": "2025-07-03",
+      "category": "groceries",
+      "amount": 8300
+    },
+    {
+      "date": "2025-07-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-07-08",
+      "category": "utilities",
+      "amount": 2700
+    },
+    {
+      "date": "2025-07-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-08-03",
+      "category": "groceries",
+      "amount": 7700
+    },
+    {
+      "date": "2025-08-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-08-08",
+      "category": "utilities",
+      "amount": 3100
+    },
+    {
+      "date": "2025-08-12",
+      "category": "transport",
+      "amount": 4300
+    },
+    {
+      "date": "2025-09-03",
+      "category": "groceries",
+      "amount": 8500
+    },
+    {
+      "date": "2025-09-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-09-08",
+      "category": "utilities",
+      "amount": 2900
+    },
+    {
+      "date": "2025-09-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-10-03",
+      "category": "groceries",
+      "amount": 8000
+    },
+    {
+      "date": "2025-10-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-10-08",
+      "category": "utilities",
+      "amount": 3200
+    },
+    {
+      "date": "2025-10-12",
+      "category": "transport",
+      "amount": 4000
+    },
+    {
+      "date": "2025-11-03",
+      "category": "groceries",
+      "amount": 8200
+    },
+    {
+      "date": "2025-11-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-11-08",
+      "category": "utilities",
+      "amount": 3000
+    },
+    {
+      "date": "2025-11-20",
+      "category": "insurance",
+      "amount": 6500
+    },
+    {
+      "date": "2025-12-03",
+      "category": "groceries",
+      "amount": 9100
+    },
+    {
+      "date": "2025-12-05",
+      "category": "rent",
+      "amount": 25000
+    },
+    {
+      "date": "2025-12-08",
+      "category": "utilities",
+      "amount": 3400
+    },
+    {
+      "date": "2025-12-12",
+      "category": "transport",
+      "amount": 4500
+    },
+    {
+      "date": "2025-12-25",
+      "category": "shopping",
+      "amount": 12000
+    }
   ],
   "portfolio": {
     "holdings": [
@@ -90,13 +293,33 @@
     "sips": []
   },
   "assets": [
-    { "type": "property", "description": "2BHK Chennai", "value": 4500000 },
-    { "type": "gold", "quantity_grams": 50, "value": 350000 },
-    { "type": "vehicle", "description": "Honda City 2019", "value": 480000 }
+    {
+      "type": "property",
+      "description": "2BHK Chennai",
+      "value": 4500000
+    },
+    {
+      "type": "gold",
+      "quantity_grams": 50,
+      "value": 350000
+    },
+    {
+      "type": "vehicle",
+      "description": "Honda City 2019",
+      "value": 480000
+    }
   ],
   "accounts": [
-    { "bank": "SBI", "account_type": "Savings", "balance": 380000 },
-    { "bank": "Post Office", "account_type": "RD", "balance": 120000 }
+    {
+      "bank": "SBI",
+      "account_type": "Savings",
+      "balance": 380000
+    },
+    {
+      "bank": "Post Office",
+      "account_type": "RD",
+      "balance": 120000
+    }
   ],
   "liabilities": 0,
   "goals": [
@@ -112,5 +335,21 @@
       "saved_so_far": 500000,
       "deadline": "2030-06-30"
     }
-  ]
+  ],
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "note": "honeypot_asset_do_not_display",
+      "folio": "DECOY-FOLIO-011"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup"
 }
