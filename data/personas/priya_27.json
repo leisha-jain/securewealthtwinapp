@@ -2,88 +2,4700 @@
   "user_id": "priya_27",
   "name": "Priya Sharma",
   "age": 27,
-  "monthly_income": 85000,
-  "risk_profile": "aggressive",
-  "trusted_devices": ["device_iphone_priya"],
-  "typical_avg_transaction": 6000,
-  "transactions": [
-    { "date": "2025-01-03", "category": "food", "amount": 4200 },
-    { "date": "2025-01-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-01-08", "category": "entertainment", "amount": 3100 },
-    { "date": "2025-01-12", "category": "shopping", "amount": 5400 },
-    { "date": "2025-01-15", "category": "food", "amount": 3800 },
-    { "date": "2025-01-20", "category": "transport", "amount": 1200 },
-    { "date": "2025-02-03", "category": "food", "amount": 5100 },
-    { "date": "2025-02-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-02-10", "category": "shopping", "amount": 7200 },
-    { "date": "2025-02-14", "category": "entertainment", "amount": 4500 },
-    { "date": "2025-02-18", "category": "subscriptions", "amount": 1300 },
-    { "date": "2025-03-03", "category": "food", "amount": 6200 },
-    { "date": "2025-03-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-03-11", "category": "shopping", "amount": 4100 },
-    { "date": "2025-03-19", "category": "transport", "amount": 900 },
-    { "date": "2025-03-25", "category": "entertainment", "amount": 2800 },
-    { "date": "2025-04-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-04-07", "category": "food", "amount": 4900 },
-    { "date": "2025-04-13", "category": "subscriptions", "amount": 1300 },
-    { "date": "2025-04-21", "category": "shopping", "amount": 6800 },
-    { "date": "2025-05-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-05-08", "category": "food", "amount": 5500 },
-    { "date": "2025-05-16", "category": "entertainment", "amount": 3200 },
-    { "date": "2025-05-22", "category": "transport", "amount": 1100 },
-    { "date": "2025-06-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-06-09", "category": "food", "amount": 4700 },
-    { "date": "2025-06-15", "category": "shopping", "amount": 9100 },
-    { "date": "2025-06-28", "category": "subscriptions", "amount": 1300 },
-    { "date": "2025-07-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-07-07", "category": "food", "amount": 5800 },
-    { "date": "2025-07-14", "category": "entertainment", "amount": 2600 },
-    { "date": "2025-07-20", "category": "transport", "amount": 800 },
-    { "date": "2025-08-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-08-09", "category": "food", "amount": 6100 },
-    { "date": "2025-08-17", "category": "shopping", "amount": 5300 },
-    { "date": "2025-08-25", "category": "subscriptions", "amount": 1300 },
-    { "date": "2025-09-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-09-10", "category": "food", "amount": 4400 },
-    { "date": "2025-09-18", "category": "entertainment", "amount": 3700 },
-    { "date": "2025-10-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-10-08", "category": "food", "amount": 5200 },
-    { "date": "2025-10-15", "category": "shopping", "amount": 8400 },
-    { "date": "2025-10-28", "category": "subscriptions", "amount": 1300 },
-    { "date": "2025-11-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-11-11", "category": "food", "amount": 4800 },
-    { "date": "2025-11-19", "category": "entertainment", "amount": 5100 },
-    { "date": "2025-12-05", "category": "rent", "amount": 18000 },
-    { "date": "2025-12-10", "category": "food", "amount": 6300 },
-    { "date": "2025-12-20", "category": "shopping", "amount": 11200 },
-    { "date": "2025-12-28", "category": "subscriptions", "amount": 1300 }
-  ],
-  "portfolio": {
-    "holdings": [],
-    "total_invested": 0,
-    "total_current_value": 0,
-    "sips": []
+  "gender": "female",
+  "city": "Bengaluru",
+  "occupation": "Software Engineer",
+  "employer": "Infosys Ltd",
+  "financial_profile": {
+    "monthly_income": 95000,
+    "monthly_expenses": 52000,
+    "savings_rate": 45.3,
+    "risk_tolerance": 7,
+    "equity_allocation": 60,
+    "debt_allocation": 20,
+    "gold_allocation": 10,
+    "fd_allocation": 10,
+    "total_portfolio_value": 380000,
+    "monthly_sip_amount": 15000,
+    "num_goals": 3,
+    "debt_to_income_ratio": 0.0,
+    "emergency_fund_months": 4,
+    "years_to_retirement": 33,
+    "net_worth": 520000
   },
-  "assets": [
-    { "type": "gold", "quantity_grams": 20, "value": 140000 }
-  ],
-  "accounts": [
-    { "bank": "ICICI", "account_type": "Savings", "balance": 42000 },
-    { "bank": "Paytm", "account_type": "Wallet", "balance": 8500 }
-  ],
-  "liabilities": 0,
+  "portfolio": {
+    "equity": [
+      {
+        "symbol": "TCS",
+        "units": 5,
+        "buy_price": 3450.0,
+        "current_price": 3820.1,
+        "value": 19100.5
+      },
+      {
+        "symbol": "HDFCBANK",
+        "units": 8,
+        "buy_price": 1520.0,
+        "current_price": 1648.35,
+        "value": 13186.8
+      },
+      {
+        "symbol": "INFY",
+        "units": 12,
+        "buy_price": 1380.0,
+        "current_price": 1412.6,
+        "value": 16951.2
+      }
+    ],
+    "mutual_funds": [
+      {
+        "name": "Axis Bluechip Fund",
+        "folio": "AXF-2024-0112",
+        "units": 420.5,
+        "nav": 52.4,
+        "invested": 18000,
+        "current_value": 22034.2,
+        "type": "equity"
+      },
+      {
+        "name": "Mirae Asset Emerging Bluechip",
+        "folio": "MAE-2023-0887",
+        "units": 310.2,
+        "nav": 87.6,
+        "invested": 24000,
+        "current_value": 27173.52,
+        "type": "equity"
+      },
+      {
+        "name": "ICICI Pru Balanced Advantage",
+        "folio": "ICB-2024-0543",
+        "units": 560.0,
+        "nav": 42.1,
+        "invested": 20000,
+        "current_value": 23576.0,
+        "type": "hybrid"
+      }
+    ],
+    "gold": [
+      {
+        "name": "Nippon India Gold BeES ETF",
+        "symbol": "GOLDBEES",
+        "units": 150,
+        "buy_price": 48.3,
+        "current_price": 57.84,
+        "value": 8676.0
+      }
+    ],
+    "fd": [
+      {
+        "bank": "SBI",
+        "principal": 50000,
+        "interest_rate": 7.1,
+        "maturity_date": "2027-06-15",
+        "maturity_value": 57050,
+        "type": "cumulative"
+      }
+    ],
+    "cash_savings": 35000
+  },
   "goals": [
     {
-      "name": "Emergency Fund",
-      "target_amount": 300000,
-      "saved_so_far": 42000,
-      "deadline": "2026-12-31"
+      "goal_id": "g1",
+      "name": "Buy a Car",
+      "goal_amount": 800000,
+      "goal_saved": 160000,
+      "target_date": "2028-12-31",
+      "monthly_contribution": 15000,
+      "priority": "high"
     },
     {
-      "name": "First Investment",
-      "target_amount": 100000,
-      "saved_so_far": 0,
-      "deadline": "2026-06-30"
+      "goal_id": "g2",
+      "name": "International Vacation",
+      "goal_amount": 200000,
+      "goal_saved": 80000,
+      "target_date": "2026-12-31",
+      "monthly_contribution": 8000,
+      "priority": "medium"
+    },
+    {
+      "goal_id": "g3",
+      "name": "Emergency Fund (6 months)",
+      "goal_amount": 570000,
+      "goal_saved": 380000,
+      "target_date": "2027-03-31",
+      "monthly_contribution": 5000,
+      "priority": "high"
     }
-  ]
+  ],
+  "bank_accounts": [
+    {
+      "account": "XXXX4821",
+      "bank": "HDFC Bank",
+      "type": "savings",
+      "balance": 85000
+    },
+    {
+      "account": "XXXX7134",
+      "bank": "SBI",
+      "type": "savings",
+      "balance": 35000
+    }
+  ],
+  "linked_cards": [
+    {
+      "card": "XXXX5512",
+      "type": "credit",
+      "bank": "HDFC Bank",
+      "limit": 200000,
+      "outstanding": 18400
+    }
+  ],
+  "insurance": [
+    {
+      "type": "term_life",
+      "provider": "LIC",
+      "sum_assured": 5000000,
+      "annual_premium": 12500
+    },
+    {
+      "type": "health",
+      "provider": "Star Health",
+      "coverage": 500000,
+      "annual_premium": 8200
+    }
+  ],
+  "tax_profile": {
+    "pan": "ABCPS1234A",
+    "regime": "new",
+    "taxable_income": 1140000,
+    "tax_paid": 134000,
+    "section_80c_used": 150000,
+    "section_80d_used": 8200
+  },
+  "spending_categories": {
+    "rent": 22000,
+    "groceries": 6500,
+    "dining": 4200,
+    "transport": 3800,
+    "shopping": 7500,
+    "entertainment": 2500,
+    "utilities": 2800,
+    "health": 1200,
+    "subscriptions": 1500
+  },
+  "session_metadata": {
+    "last_login": "2026-04-20T09:15:00",
+    "device_id": "DEV-PRI-8847",
+    "preferred_language": "en",
+    "mfa_enabled": true,
+    "account_status": "active",
+    "kyc_status": "verified"
+  },
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "folio": "DECOY-FOLIO-001",
+      "note": "honeypot_asset_do_not_display"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup",
+  "transactions": [
+    {
+      "txn_id": "TXN-PRI-202504-0007",
+      "date": "2025-04-01",
+      "category": "dining",
+      "amount": 1116.9,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0008",
+      "date": "2025-04-01",
+      "category": "shopping",
+      "amount": 1093.56,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0010",
+      "date": "2025-04-01",
+      "category": "shopping",
+      "amount": 1276.06,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-SAL",
+      "date": "2025-04-01",
+      "category": "income",
+      "amount": 94641.4,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0040",
+      "date": "2025-04-02",
+      "category": "rent",
+      "amount": 26174.05,
+      "type": "debit",
+      "description": "Monthly Rent Transfer",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0016",
+      "date": "2025-04-03",
+      "category": "transport",
+      "amount": 606.9,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0021",
+      "date": "2025-04-03",
+      "category": "transport",
+      "amount": 599.22,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0029",
+      "date": "2025-04-03",
+      "category": "utilities",
+      "amount": 764.05,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0013",
+      "date": "2025-04-04",
+      "category": "shopping",
+      "amount": 903.01,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0026",
+      "date": "2025-04-04",
+      "category": "entertainment",
+      "amount": 496.22,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0038",
+      "date": "2025-04-05",
+      "category": "subscriptions",
+      "amount": 826.68,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-SIP",
+      "date": "2025-04-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0031",
+      "date": "2025-04-06",
+      "category": "health",
+      "amount": 182.27,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0014",
+      "date": "2025-04-07",
+      "category": "shopping",
+      "amount": 920.96,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0032",
+      "date": "2025-04-07",
+      "category": "health",
+      "amount": 158.71,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0003",
+      "date": "2025-04-08",
+      "category": "groceries",
+      "amount": 2463.54,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0027",
+      "date": "2025-04-08",
+      "category": "entertainment",
+      "amount": 486.53,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0009",
+      "date": "2025-04-09",
+      "category": "shopping",
+      "amount": 1084.04,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0025",
+      "date": "2025-04-11",
+      "category": "entertainment",
+      "amount": 440.82,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0015",
+      "date": "2025-04-12",
+      "category": "transport",
+      "amount": 489.1,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0002",
+      "date": "2025-04-14",
+      "category": "groceries",
+      "amount": 2395.76,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0017",
+      "date": "2025-04-15",
+      "category": "transport",
+      "amount": 642.59,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0022",
+      "date": "2025-04-16",
+      "category": "entertainment",
+      "amount": 396.19,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0028",
+      "date": "2025-04-16",
+      "category": "utilities",
+      "amount": 1078.02,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0004",
+      "date": "2025-04-17",
+      "category": "dining",
+      "amount": 843.84,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0039",
+      "date": "2025-04-17",
+      "category": "subscriptions",
+      "amount": 817.25,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0037",
+      "date": "2025-04-18",
+      "category": "health",
+      "amount": 183.57,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0035",
+      "date": "2025-04-19",
+      "category": "health",
+      "amount": 157.66,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0005",
+      "date": "2025-04-20",
+      "category": "dining",
+      "amount": 996.74,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0006",
+      "date": "2025-04-20",
+      "category": "dining",
+      "amount": 1120.04,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0001",
+      "date": "2025-04-22",
+      "category": "groceries",
+      "amount": 2552.5,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0011",
+      "date": "2025-04-22",
+      "category": "shopping",
+      "amount": 1205.64,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0018",
+      "date": "2025-04-23",
+      "category": "transport",
+      "amount": 487.1,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0023",
+      "date": "2025-04-23",
+      "category": "entertainment",
+      "amount": 439.46,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0019",
+      "date": "2025-04-27",
+      "category": "transport",
+      "amount": 499.42,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0033",
+      "date": "2025-04-27",
+      "category": "health",
+      "amount": 147.03,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0020",
+      "date": "2025-04-28",
+      "category": "transport",
+      "amount": 451.79,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0024",
+      "date": "2025-04-28",
+      "category": "entertainment",
+      "amount": 347.11,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0036",
+      "date": "2025-04-28",
+      "category": "health",
+      "amount": 176.0,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0030",
+      "date": "2025-04-29",
+      "category": "utilities",
+      "amount": 1092.22,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0012",
+      "date": "2025-04-30",
+      "category": "shopping",
+      "amount": 1202.64,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202504-0034",
+      "date": "2025-04-30",
+      "category": "health",
+      "amount": 193.43,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0011",
+      "date": "2025-05-01",
+      "category": "shopping",
+      "amount": 1579.91,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0015",
+      "date": "2025-05-01",
+      "category": "transport",
+      "amount": 610.04,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-SAL",
+      "date": "2025-05-01",
+      "category": "income",
+      "amount": 97666.25,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0013",
+      "date": "2025-05-03",
+      "category": "shopping",
+      "amount": 1576.67,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0016",
+      "date": "2025-05-03",
+      "category": "transport",
+      "amount": 596.32,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0019",
+      "date": "2025-05-03",
+      "category": "transport",
+      "amount": 604.91,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0028",
+      "date": "2025-05-04",
+      "category": "utilities",
+      "amount": 819.67,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0009",
+      "date": "2025-05-05",
+      "category": "dining",
+      "amount": 582.97,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0023",
+      "date": "2025-05-05",
+      "category": "entertainment",
+      "amount": 324.06,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-SIP",
+      "date": "2025-05-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0035",
+      "date": "2025-05-06",
+      "category": "subscriptions",
+      "amount": 1487.41,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0020",
+      "date": "2025-05-08",
+      "category": "entertainment",
+      "amount": 415.03,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0022",
+      "date": "2025-05-09",
+      "category": "entertainment",
+      "amount": 309.93,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0024",
+      "date": "2025-05-09",
+      "category": "entertainment",
+      "amount": 309.6,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0018",
+      "date": "2025-05-10",
+      "category": "transport",
+      "amount": 604.26,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0036",
+      "date": "2025-05-10",
+      "category": "rent",
+      "amount": 26124.78,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0010",
+      "date": "2025-05-11",
+      "category": "shopping",
+      "amount": 2054.74,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0017",
+      "date": "2025-05-11",
+      "category": "transport",
+      "amount": 658.17,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0004",
+      "date": "2025-05-12",
+      "category": "dining",
+      "amount": 697.37,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0002",
+      "date": "2025-05-13",
+      "category": "groceries",
+      "amount": 2560.88,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0030",
+      "date": "2025-05-13",
+      "category": "health",
+      "amount": 272.79,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0005",
+      "date": "2025-05-14",
+      "category": "dining",
+      "amount": 823.52,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0031",
+      "date": "2025-05-15",
+      "category": "health",
+      "amount": 274.77,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0014",
+      "date": "2025-05-18",
+      "category": "transport",
+      "amount": 620.37,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0007",
+      "date": "2025-05-20",
+      "category": "dining",
+      "amount": 583.99,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0027",
+      "date": "2025-05-20",
+      "category": "utilities",
+      "amount": 980.01,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0033",
+      "date": "2025-05-20",
+      "category": "health",
+      "amount": 254.5,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0034",
+      "date": "2025-05-20",
+      "category": "health",
+      "amount": 220.84,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0003",
+      "date": "2025-05-21",
+      "category": "groceries",
+      "amount": 2016.19,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0006",
+      "date": "2025-05-22",
+      "category": "dining",
+      "amount": 750.31,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0021",
+      "date": "2025-05-22",
+      "category": "entertainment",
+      "amount": 360.16,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0008",
+      "date": "2025-05-23",
+      "category": "dining",
+      "amount": 783.46,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0001",
+      "date": "2025-05-25",
+      "category": "groceries",
+      "amount": 2028.51,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0012",
+      "date": "2025-05-25",
+      "category": "shopping",
+      "amount": 1833.55,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0025",
+      "date": "2025-05-26",
+      "category": "entertainment",
+      "amount": 328.54,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0032",
+      "date": "2025-05-27",
+      "category": "health",
+      "amount": 233.34,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0026",
+      "date": "2025-05-31",
+      "category": "entertainment",
+      "amount": 337.3,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202505-0029",
+      "date": "2025-05-31",
+      "category": "utilities",
+      "amount": 860.41,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0022",
+      "date": "2025-06-01",
+      "category": "entertainment",
+      "amount": 405.08,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-SAL",
+      "date": "2025-06-01",
+      "category": "income",
+      "amount": 92278.74,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0012",
+      "date": "2025-06-03",
+      "category": "shopping",
+      "amount": 1952.35,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0011",
+      "date": "2025-06-05",
+      "category": "dining",
+      "amount": 540.64,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0027",
+      "date": "2025-06-05",
+      "category": "utilities",
+      "amount": 1004.43,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-SIP",
+      "date": "2025-06-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0004",
+      "date": "2025-06-06",
+      "category": "groceries",
+      "amount": 1948.22,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0019",
+      "date": "2025-06-06",
+      "category": "transport",
+      "amount": 1350.11,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0003",
+      "date": "2025-06-07",
+      "category": "groceries",
+      "amount": 1905.84,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0006",
+      "date": "2025-06-07",
+      "category": "dining",
+      "amount": 706.31,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0018",
+      "date": "2025-06-08",
+      "category": "transport",
+      "amount": 1068.75,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0001",
+      "date": "2025-06-09",
+      "category": "groceries",
+      "amount": 1511.83,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0010",
+      "date": "2025-06-10",
+      "category": "dining",
+      "amount": 513.4,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0021",
+      "date": "2025-06-11",
+      "category": "entertainment",
+      "amount": 494.47,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0031",
+      "date": "2025-06-11",
+      "category": "health",
+      "amount": 375.73,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0034",
+      "date": "2025-06-11",
+      "category": "subscriptions",
+      "amount": 809.03,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0002",
+      "date": "2025-06-12",
+      "category": "groceries",
+      "amount": 1810.81,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0016",
+      "date": "2025-06-12",
+      "category": "shopping",
+      "amount": 1953.5,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0025",
+      "date": "2025-06-15",
+      "category": "entertainment",
+      "amount": 429.21,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0033",
+      "date": "2025-06-15",
+      "category": "subscriptions",
+      "amount": 742.85,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0013",
+      "date": "2025-06-16",
+      "category": "shopping",
+      "amount": 2093.49,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0028",
+      "date": "2025-06-16",
+      "category": "utilities",
+      "amount": 1119.14,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0014",
+      "date": "2025-06-17",
+      "category": "shopping",
+      "amount": 1680.56,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0023",
+      "date": "2025-06-17",
+      "category": "entertainment",
+      "amount": 376.46,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0032",
+      "date": "2025-06-17",
+      "category": "health",
+      "amount": 445.48,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0015",
+      "date": "2025-06-18",
+      "category": "shopping",
+      "amount": 1884.2,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0017",
+      "date": "2025-06-18",
+      "category": "shopping",
+      "amount": 2026.85,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0020",
+      "date": "2025-06-19",
+      "category": "transport",
+      "amount": 1323.76,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0024",
+      "date": "2025-06-19",
+      "category": "entertainment",
+      "amount": 419.8,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0009",
+      "date": "2025-06-22",
+      "category": "dining",
+      "amount": 670.81,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0005",
+      "date": "2025-06-24",
+      "category": "dining",
+      "amount": 486.46,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0030",
+      "date": "2025-06-24",
+      "category": "health",
+      "amount": 453.01,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0026",
+      "date": "2025-06-25",
+      "category": "entertainment",
+      "amount": 398.52,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0035",
+      "date": "2025-06-26",
+      "category": "rent",
+      "amount": 20242.32,
+      "type": "debit",
+      "description": "Monthly Rent Transfer",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0007",
+      "date": "2025-06-27",
+      "category": "dining",
+      "amount": 671.44,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0008",
+      "date": "2025-06-28",
+      "category": "dining",
+      "amount": 496.6,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202506-0029",
+      "date": "2025-06-30",
+      "category": "utilities",
+      "amount": 856.96,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0009",
+      "date": "2025-07-01",
+      "category": "dining",
+      "amount": 1020.41,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-SAL",
+      "date": "2025-07-01",
+      "category": "income",
+      "amount": 94935.59,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0011",
+      "date": "2025-07-03",
+      "category": "shopping",
+      "amount": 2106.55,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0017",
+      "date": "2025-07-04",
+      "category": "transport",
+      "amount": 606.11,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0022",
+      "date": "2025-07-04",
+      "category": "entertainment",
+      "amount": 447.71,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0023",
+      "date": "2025-07-05",
+      "category": "entertainment",
+      "amount": 474.66,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0028",
+      "date": "2025-07-05",
+      "category": "health",
+      "amount": 298.76,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-SIP",
+      "date": "2025-07-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0025",
+      "date": "2025-07-06",
+      "category": "utilities",
+      "amount": 889.92,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0027",
+      "date": "2025-07-06",
+      "category": "utilities",
+      "amount": 1094.13,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0031",
+      "date": "2025-07-07",
+      "category": "health",
+      "amount": 298.15,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0013",
+      "date": "2025-07-11",
+      "category": "shopping",
+      "amount": 1640.22,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0021",
+      "date": "2025-07-11",
+      "category": "entertainment",
+      "amount": 534.42,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0030",
+      "date": "2025-07-12",
+      "category": "health",
+      "amount": 246.43,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0005",
+      "date": "2025-07-13",
+      "category": "groceries",
+      "amount": 1160.56,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0016",
+      "date": "2025-07-13",
+      "category": "transport",
+      "amount": 586.06,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0004",
+      "date": "2025-07-14",
+      "category": "groceries",
+      "amount": 1212.11,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0008",
+      "date": "2025-07-15",
+      "category": "dining",
+      "amount": 1210.9,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0018",
+      "date": "2025-07-15",
+      "category": "transport",
+      "amount": 595.84,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0029",
+      "date": "2025-07-15",
+      "category": "health",
+      "amount": 277.75,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0032",
+      "date": "2025-07-17",
+      "category": "subscriptions",
+      "amount": 889.15,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0003",
+      "date": "2025-07-18",
+      "category": "groceries",
+      "amount": 1308.32,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0020",
+      "date": "2025-07-19",
+      "category": "entertainment",
+      "amount": 583.74,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0024",
+      "date": "2025-07-20",
+      "category": "entertainment",
+      "amount": 477.69,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0001",
+      "date": "2025-07-22",
+      "category": "groceries",
+      "amount": 1376.94,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0006",
+      "date": "2025-07-22",
+      "category": "dining",
+      "amount": 918.28,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0014",
+      "date": "2025-07-22",
+      "category": "transport",
+      "amount": 535.54,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0019",
+      "date": "2025-07-22",
+      "category": "transport",
+      "amount": 550.37,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0033",
+      "date": "2025-07-22",
+      "category": "subscriptions",
+      "amount": 748.49,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0026",
+      "date": "2025-07-23",
+      "category": "utilities",
+      "amount": 983.92,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0002",
+      "date": "2025-07-24",
+      "category": "groceries",
+      "amount": 1125.46,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0007",
+      "date": "2025-07-24",
+      "category": "dining",
+      "amount": 1006.14,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0010",
+      "date": "2025-07-25",
+      "category": "shopping",
+      "amount": 1654.34,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0034",
+      "date": "2025-07-27",
+      "category": "rent",
+      "amount": 21257.55,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0012",
+      "date": "2025-07-28",
+      "category": "shopping",
+      "amount": 1576.31,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202507-0015",
+      "date": "2025-07-31",
+      "category": "transport",
+      "amount": 630.67,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-SAL",
+      "date": "2025-08-01",
+      "category": "income",
+      "amount": 97668.33,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0002",
+      "date": "2025-08-02",
+      "category": "groceries",
+      "amount": 1924.46,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0008",
+      "date": "2025-08-02",
+      "category": "dining",
+      "amount": 790.33,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0014",
+      "date": "2025-08-04",
+      "category": "shopping",
+      "amount": 1219.53,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-SIP",
+      "date": "2025-08-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0021",
+      "date": "2025-08-06",
+      "category": "transport",
+      "amount": 563.89,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0015",
+      "date": "2025-08-07",
+      "category": "shopping",
+      "amount": 1405.94,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0006",
+      "date": "2025-08-09",
+      "category": "dining",
+      "amount": 720.36,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0003",
+      "date": "2025-08-10",
+      "category": "groceries",
+      "amount": 1928.2,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0011",
+      "date": "2025-08-10",
+      "category": "shopping",
+      "amount": 1375.67,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0022",
+      "date": "2025-08-10",
+      "category": "transport",
+      "amount": 646.87,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0007",
+      "date": "2025-08-12",
+      "category": "dining",
+      "amount": 712.07,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0039",
+      "date": "2025-08-12",
+      "category": "subscriptions",
+      "amount": 532.83,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0032",
+      "date": "2025-08-13",
+      "category": "health",
+      "amount": 210.23,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0040",
+      "date": "2025-08-13",
+      "category": "rent",
+      "amount": 24601.97,
+      "type": "debit",
+      "description": "Monthly Rent Transfer",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0017",
+      "date": "2025-08-14",
+      "category": "transport",
+      "amount": 566.8,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0012",
+      "date": "2025-08-15",
+      "category": "shopping",
+      "amount": 1499.66,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0038",
+      "date": "2025-08-15",
+      "category": "subscriptions",
+      "amount": 418.63,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0036",
+      "date": "2025-08-16",
+      "category": "health",
+      "amount": 196.38,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0005",
+      "date": "2025-08-17",
+      "category": "dining",
+      "amount": 698.69,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0034",
+      "date": "2025-08-17",
+      "category": "health",
+      "amount": 167.45,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0009",
+      "date": "2025-08-18",
+      "category": "dining",
+      "amount": 761.31,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0020",
+      "date": "2025-08-18",
+      "category": "transport",
+      "amount": 558.07,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0031",
+      "date": "2025-08-21",
+      "category": "health",
+      "amount": 171.37,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0024",
+      "date": "2025-08-22",
+      "category": "entertainment",
+      "amount": 426.5,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0030",
+      "date": "2025-08-22",
+      "category": "utilities",
+      "amount": 3092.85,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0029",
+      "date": "2025-08-23",
+      "category": "entertainment",
+      "amount": 321.38,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0004",
+      "date": "2025-08-25",
+      "category": "dining",
+      "amount": 718.38,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0037",
+      "date": "2025-08-25",
+      "category": "subscriptions",
+      "amount": 400.49,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0001",
+      "date": "2025-08-26",
+      "category": "groceries",
+      "amount": 2223.34,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0018",
+      "date": "2025-08-26",
+      "category": "transport",
+      "amount": 568.08,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0019",
+      "date": "2025-08-26",
+      "category": "transport",
+      "amount": 610.94,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0033",
+      "date": "2025-08-26",
+      "category": "health",
+      "amount": 166.04,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0010",
+      "date": "2025-08-27",
+      "category": "shopping",
+      "amount": 1051.21,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0013",
+      "date": "2025-08-27",
+      "category": "shopping",
+      "amount": 1174.29,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0016",
+      "date": "2025-08-28",
+      "category": "transport",
+      "amount": 583.93,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0023",
+      "date": "2025-08-28",
+      "category": "entertainment",
+      "amount": 323.91,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0027",
+      "date": "2025-08-28",
+      "category": "entertainment",
+      "amount": 427.5,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0028",
+      "date": "2025-08-28",
+      "category": "entertainment",
+      "amount": 303.84,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0026",
+      "date": "2025-08-30",
+      "category": "entertainment",
+      "amount": 397.96,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0035",
+      "date": "2025-08-30",
+      "category": "health",
+      "amount": 182.26,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202508-0025",
+      "date": "2025-08-31",
+      "category": "entertainment",
+      "amount": 299.32,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0006",
+      "date": "2025-09-01",
+      "category": "dining",
+      "amount": 1588.55,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0019",
+      "date": "2025-09-01",
+      "category": "entertainment",
+      "amount": 893.33,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-SAL",
+      "date": "2025-09-01",
+      "category": "income",
+      "amount": 95661.63,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0016",
+      "date": "2025-09-03",
+      "category": "transport",
+      "amount": 923.11,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0022",
+      "date": "2025-09-03",
+      "category": "utilities",
+      "amount": 1248.21,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0025",
+      "date": "2025-09-05",
+      "category": "health",
+      "amount": 440.51,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0029",
+      "date": "2025-09-05",
+      "category": "rent",
+      "amount": 23127.1,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-SIP",
+      "date": "2025-09-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0007",
+      "date": "2025-09-06",
+      "category": "dining",
+      "amount": 1640.48,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0017",
+      "date": "2025-09-07",
+      "category": "transport",
+      "amount": 796.17,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0018",
+      "date": "2025-09-08",
+      "category": "entertainment",
+      "amount": 710.9,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0010",
+      "date": "2025-09-10",
+      "category": "shopping",
+      "amount": 1441.07,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0001",
+      "date": "2025-09-11",
+      "category": "groceries",
+      "amount": 1621.56,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0012",
+      "date": "2025-09-12",
+      "category": "shopping",
+      "amount": 1046.67,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0023",
+      "date": "2025-09-12",
+      "category": "health",
+      "amount": 336.51,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0008",
+      "date": "2025-09-14",
+      "category": "shopping",
+      "amount": 1000.34,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0021",
+      "date": "2025-09-16",
+      "category": "utilities",
+      "amount": 1508.66,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0026",
+      "date": "2025-09-17",
+      "category": "subscriptions",
+      "amount": 428.57,
+      "type": "debit",
+      "description": "Canva Pro",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0002",
+      "date": "2025-09-18",
+      "category": "groceries",
+      "amount": 1484.34,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0005",
+      "date": "2025-09-21",
+      "category": "dining",
+      "amount": 1145.73,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0014",
+      "date": "2025-09-21",
+      "category": "transport",
+      "amount": 779.68,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0027",
+      "date": "2025-09-21",
+      "category": "subscriptions",
+      "amount": 401.69,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0013",
+      "date": "2025-09-22",
+      "category": "shopping",
+      "amount": 1041.21,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0028",
+      "date": "2025-09-24",
+      "category": "subscriptions",
+      "amount": 488.02,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0015",
+      "date": "2025-09-25",
+      "category": "transport",
+      "amount": 1035.88,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0024",
+      "date": "2025-09-25",
+      "category": "health",
+      "amount": 341.94,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0020",
+      "date": "2025-09-27",
+      "category": "entertainment",
+      "amount": 898.53,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0003",
+      "date": "2025-09-28",
+      "category": "groceries",
+      "amount": 1384.89,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0004",
+      "date": "2025-09-29",
+      "category": "groceries",
+      "amount": 1812.4,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0011",
+      "date": "2025-09-29",
+      "category": "shopping",
+      "amount": 1437.21,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202509-0009",
+      "date": "2025-09-30",
+      "category": "shopping",
+      "amount": 1497.85,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0015",
+      "date": "2025-10-01",
+      "category": "shopping",
+      "amount": 2022.11,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-SAL",
+      "date": "2025-10-01",
+      "category": "income",
+      "amount": 92830.83,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0021",
+      "date": "2025-10-02",
+      "category": "transport",
+      "amount": 1146.17,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0001",
+      "date": "2025-10-03",
+      "category": "groceries",
+      "amount": 1239.32,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0005",
+      "date": "2025-10-03",
+      "category": "groceries",
+      "amount": 986.69,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0014",
+      "date": "2025-10-03",
+      "category": "shopping",
+      "amount": 1846.66,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0020",
+      "date": "2025-10-03",
+      "category": "transport",
+      "amount": 1021.79,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0002",
+      "date": "2025-10-04",
+      "category": "groceries",
+      "amount": 927.34,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0013",
+      "date": "2025-10-04",
+      "category": "dining",
+      "amount": 598.77,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0004",
+      "date": "2025-10-05",
+      "category": "groceries",
+      "amount": 1002.95,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0016",
+      "date": "2025-10-05",
+      "category": "shopping",
+      "amount": 2053.75,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-SIP",
+      "date": "2025-10-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0009",
+      "date": "2025-10-07",
+      "category": "dining",
+      "amount": 690.2,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0010",
+      "date": "2025-10-07",
+      "category": "dining",
+      "amount": 625.66,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0030",
+      "date": "2025-10-08",
+      "category": "health",
+      "amount": 472.55,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0026",
+      "date": "2025-10-09",
+      "category": "entertainment",
+      "amount": 523.21,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0003",
+      "date": "2025-10-12",
+      "category": "groceries",
+      "amount": 1183.0,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0022",
+      "date": "2025-10-13",
+      "category": "transport",
+      "amount": 1494.0,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0028",
+      "date": "2025-10-13",
+      "category": "utilities",
+      "amount": 2840.76,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0029",
+      "date": "2025-10-14",
+      "category": "health",
+      "amount": 369.63,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0023",
+      "date": "2025-10-17",
+      "category": "entertainment",
+      "amount": 525.71,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0027",
+      "date": "2025-10-17",
+      "category": "entertainment",
+      "amount": 461.98,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0025",
+      "date": "2025-10-18",
+      "category": "entertainment",
+      "amount": 416.49,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0017",
+      "date": "2025-10-19",
+      "category": "shopping",
+      "amount": 2002.57,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0006",
+      "date": "2025-10-20",
+      "category": "groceries",
+      "amount": 1106.47,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0032",
+      "date": "2025-10-20",
+      "category": "subscriptions",
+      "amount": 1472.02,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0011",
+      "date": "2025-10-21",
+      "category": "dining",
+      "amount": 574.02,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0018",
+      "date": "2025-10-22",
+      "category": "shopping",
+      "amount": 1655.79,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0024",
+      "date": "2025-10-23",
+      "category": "entertainment",
+      "amount": 483.09,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0033",
+      "date": "2025-10-24",
+      "category": "rent",
+      "amount": 20321.75,
+      "type": "debit",
+      "description": "Monthly Rent Transfer",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0012",
+      "date": "2025-10-26",
+      "category": "dining",
+      "amount": 668.11,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0008",
+      "date": "2025-10-28",
+      "category": "dining",
+      "amount": 486.44,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0031",
+      "date": "2025-10-30",
+      "category": "health",
+      "amount": 359.12,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0007",
+      "date": "2025-10-31",
+      "category": "dining",
+      "amount": 548.38,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202510-0019",
+      "date": "2025-10-31",
+      "category": "shopping",
+      "amount": 1933.91,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0014",
+      "date": "2025-11-01",
+      "category": "shopping",
+      "amount": 1644.47,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-SAL",
+      "date": "2025-11-01",
+      "category": "income",
+      "amount": 92286.29,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0023",
+      "date": "2025-11-02",
+      "category": "entertainment",
+      "amount": 381.9,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0005",
+      "date": "2025-11-04",
+      "category": "dining",
+      "amount": 918.27,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0013",
+      "date": "2025-11-04",
+      "category": "shopping",
+      "amount": 1604.47,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0022",
+      "date": "2025-11-04",
+      "category": "entertainment",
+      "amount": 367.36,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0004",
+      "date": "2025-11-05",
+      "category": "groceries",
+      "amount": 1408.53,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0016",
+      "date": "2025-11-05",
+      "category": "transport",
+      "amount": 1207.38,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-SIP",
+      "date": "2025-11-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0001",
+      "date": "2025-11-06",
+      "category": "groceries",
+      "amount": 1755.97,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0011",
+      "date": "2025-11-06",
+      "category": "shopping",
+      "amount": 1300.13,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0019",
+      "date": "2025-11-08",
+      "category": "entertainment",
+      "amount": 379.39,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0028",
+      "date": "2025-11-10",
+      "category": "health",
+      "amount": 227.42,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0006",
+      "date": "2025-11-11",
+      "category": "dining",
+      "amount": 974.37,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0030",
+      "date": "2025-11-12",
+      "category": "health",
+      "amount": 215.29,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0009",
+      "date": "2025-11-15",
+      "category": "dining",
+      "amount": 697.9,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0025",
+      "date": "2025-11-15",
+      "category": "utilities",
+      "amount": 1158.6,
+      "type": "debit",
+      "description": "Piped Gas",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0027",
+      "date": "2025-11-15",
+      "category": "health",
+      "amount": 200.29,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0015",
+      "date": "2025-11-16",
+      "category": "transport",
+      "amount": 1137.24,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0002",
+      "date": "2025-11-17",
+      "category": "groceries",
+      "amount": 1919.46,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0007",
+      "date": "2025-11-17",
+      "category": "dining",
+      "amount": 816.25,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0024",
+      "date": "2025-11-17",
+      "category": "entertainment",
+      "amount": 317.6,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0032",
+      "date": "2025-11-18",
+      "category": "subscriptions",
+      "amount": 1639.48,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0008",
+      "date": "2025-11-19",
+      "category": "dining",
+      "amount": 760.35,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0018",
+      "date": "2025-11-23",
+      "category": "entertainment",
+      "amount": 400.45,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0003",
+      "date": "2025-11-24",
+      "category": "groceries",
+      "amount": 1808.94,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0029",
+      "date": "2025-11-24",
+      "category": "health",
+      "amount": 267.31,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0031",
+      "date": "2025-11-25",
+      "category": "health",
+      "amount": 285.3,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0021",
+      "date": "2025-11-27",
+      "category": "entertainment",
+      "amount": 331.42,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0010",
+      "date": "2025-11-28",
+      "category": "shopping",
+      "amount": 1233.26,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0017",
+      "date": "2025-11-28",
+      "category": "transport",
+      "amount": 1485.12,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0026",
+      "date": "2025-11-28",
+      "category": "utilities",
+      "amount": 1278.09,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0012",
+      "date": "2025-11-29",
+      "category": "shopping",
+      "amount": 1664.0,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0020",
+      "date": "2025-11-30",
+      "category": "entertainment",
+      "amount": 321.18,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202511-0033",
+      "date": "2025-11-30",
+      "category": "rent",
+      "amount": 18924.98,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-SAL",
+      "date": "2025-12-01",
+      "category": "income",
+      "amount": 96061.83,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0011",
+      "date": "2025-12-03",
+      "category": "dining",
+      "amount": 999.45,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0020",
+      "date": "2025-12-04",
+      "category": "transport",
+      "amount": 1403.54,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0034",
+      "date": "2025-12-04",
+      "category": "health",
+      "amount": 167.58,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0035",
+      "date": "2025-12-04",
+      "category": "health",
+      "amount": 223.5,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0007",
+      "date": "2025-12-05",
+      "category": "groceries",
+      "amount": 1104.09,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0012",
+      "date": "2025-12-05",
+      "category": "dining",
+      "amount": 704.11,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0019",
+      "date": "2025-12-05",
+      "category": "transport",
+      "amount": 1491.4,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0028",
+      "date": "2025-12-05",
+      "category": "utilities",
+      "amount": 1066.45,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-SIP",
+      "date": "2025-12-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0025",
+      "date": "2025-12-06",
+      "category": "entertainment",
+      "amount": 423.98,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0031",
+      "date": "2025-12-06",
+      "category": "health",
+      "amount": 180.81,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0023",
+      "date": "2025-12-07",
+      "category": "entertainment",
+      "amount": 592.93,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0027",
+      "date": "2025-12-07",
+      "category": "utilities",
+      "amount": 971.9,
+      "type": "debit",
+      "description": "Piped Gas",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0036",
+      "date": "2025-12-08",
+      "category": "subscriptions",
+      "amount": 1698.22,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0015",
+      "date": "2025-12-09",
+      "category": "shopping",
+      "amount": 1118.39,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0018",
+      "date": "2025-12-09",
+      "category": "shopping",
+      "amount": 1159.03,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0024",
+      "date": "2025-12-09",
+      "category": "entertainment",
+      "amount": 461.66,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0010",
+      "date": "2025-12-12",
+      "category": "dining",
+      "amount": 907.48,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0037",
+      "date": "2025-12-13",
+      "category": "rent",
+      "amount": 19343.57,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0021",
+      "date": "2025-12-15",
+      "category": "transport",
+      "amount": 1066.87,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0005",
+      "date": "2025-12-17",
+      "category": "groceries",
+      "amount": 781.47,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0009",
+      "date": "2025-12-17",
+      "category": "dining",
+      "amount": 973.49,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0022",
+      "date": "2025-12-18",
+      "category": "entertainment",
+      "amount": 481.3,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0033",
+      "date": "2025-12-18",
+      "category": "health",
+      "amount": 204.48,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0013",
+      "date": "2025-12-19",
+      "category": "shopping",
+      "amount": 1037.42,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0003",
+      "date": "2025-12-22",
+      "category": "groceries",
+      "amount": 743.4,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0030",
+      "date": "2025-12-22",
+      "category": "health",
+      "amount": 201.08,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0004",
+      "date": "2025-12-24",
+      "category": "groceries",
+      "amount": 1058.2,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0017",
+      "date": "2025-12-24",
+      "category": "shopping",
+      "amount": 1350.36,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0016",
+      "date": "2025-12-26",
+      "category": "shopping",
+      "amount": 1157.5,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0001",
+      "date": "2025-12-27",
+      "category": "groceries",
+      "amount": 871.53,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0026",
+      "date": "2025-12-27",
+      "category": "entertainment",
+      "amount": 537.21,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0032",
+      "date": "2025-12-28",
+      "category": "health",
+      "amount": 236.17,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0008",
+      "date": "2025-12-30",
+      "category": "dining",
+      "amount": 703.26,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0002",
+      "date": "2025-12-31",
+      "category": "groceries",
+      "amount": 1068.67,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0006",
+      "date": "2025-12-31",
+      "category": "groceries",
+      "amount": 898.79,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0014",
+      "date": "2025-12-31",
+      "category": "shopping",
+      "amount": 1217.49,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202512-0029",
+      "date": "2025-12-31",
+      "category": "utilities",
+      "amount": 1012.17,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0034",
+      "date": "2026-01-01",
+      "category": "health",
+      "amount": 279.74,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-SAL",
+      "date": "2026-01-01",
+      "category": "income",
+      "amount": 95579.48,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0006",
+      "date": "2026-01-02",
+      "category": "dining",
+      "amount": 1235.76,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0039",
+      "date": "2026-01-02",
+      "category": "rent",
+      "amount": 17934.08,
+      "type": "debit",
+      "description": "Monthly Rent Transfer",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0002",
+      "date": "2026-01-03",
+      "category": "groceries",
+      "amount": 1798.32,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0014",
+      "date": "2026-01-03",
+      "category": "transport",
+      "amount": 538.3,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0005",
+      "date": "2026-01-04",
+      "category": "dining",
+      "amount": 1179.73,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0011",
+      "date": "2026-01-05",
+      "category": "shopping",
+      "amount": 1223.01,
+      "type": "debit",
+      "description": "Amazon Purchase",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-SIP",
+      "date": "2026-01-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0026",
+      "date": "2026-01-06",
+      "category": "entertainment",
+      "amount": 428.52,
+      "type": "debit",
+      "description": "Netflix Subscription",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0038",
+      "date": "2026-01-06",
+      "category": "subscriptions",
+      "amount": 508.42,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0027",
+      "date": "2026-01-08",
+      "category": "entertainment",
+      "amount": 321.12,
+      "type": "debit",
+      "description": "PVR Cinemas",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0001",
+      "date": "2026-01-09",
+      "category": "groceries",
+      "amount": 2238.01,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0010",
+      "date": "2026-01-09",
+      "category": "shopping",
+      "amount": 1454.15,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0021",
+      "date": "2026-01-09",
+      "category": "entertainment",
+      "amount": 331.66,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0009",
+      "date": "2026-01-12",
+      "category": "shopping",
+      "amount": 1213.33,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0020",
+      "date": "2026-01-12",
+      "category": "transport",
+      "amount": 603.97,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0008",
+      "date": "2026-01-13",
+      "category": "shopping",
+      "amount": 1248.06,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0018",
+      "date": "2026-01-13",
+      "category": "transport",
+      "amount": 606.88,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0007",
+      "date": "2026-01-14",
+      "category": "dining",
+      "amount": 1228.14,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0015",
+      "date": "2026-01-14",
+      "category": "transport",
+      "amount": 517.45,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0003",
+      "date": "2026-01-15",
+      "category": "groceries",
+      "amount": 2515.5,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0013",
+      "date": "2026-01-16",
+      "category": "shopping",
+      "amount": 1323.64,
+      "type": "debit",
+      "description": "Nykaa Purchase",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0019",
+      "date": "2026-01-16",
+      "category": "transport",
+      "amount": 589.19,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0032",
+      "date": "2026-01-19",
+      "category": "health",
+      "amount": 208.91,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0012",
+      "date": "2026-01-20",
+      "category": "shopping",
+      "amount": 1307.05,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0022",
+      "date": "2026-01-20",
+      "category": "entertainment",
+      "amount": 289.44,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0033",
+      "date": "2026-01-23",
+      "category": "health",
+      "amount": 269.4,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0025",
+      "date": "2026-01-25",
+      "category": "entertainment",
+      "amount": 361.35,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0016",
+      "date": "2026-01-26",
+      "category": "transport",
+      "amount": 573.83,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0017",
+      "date": "2026-01-26",
+      "category": "transport",
+      "amount": 488.39,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0023",
+      "date": "2026-01-26",
+      "category": "entertainment",
+      "amount": 289.9,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0024",
+      "date": "2026-01-26",
+      "category": "entertainment",
+      "amount": 325.85,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0030",
+      "date": "2026-01-26",
+      "category": "utilities",
+      "amount": 961.59,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0037",
+      "date": "2026-01-26",
+      "category": "subscriptions",
+      "amount": 567.34,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0004",
+      "date": "2026-01-28",
+      "category": "dining",
+      "amount": 878.63,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0031",
+      "date": "2026-01-28",
+      "category": "health",
+      "amount": 281.78,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0028",
+      "date": "2026-01-30",
+      "category": "utilities",
+      "amount": 1051.41,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0029",
+      "date": "2026-01-31",
+      "category": "utilities",
+      "amount": 767.54,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0035",
+      "date": "2026-01-31",
+      "category": "health",
+      "amount": 259.25,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202601-0036",
+      "date": "2026-01-31",
+      "category": "subscriptions",
+      "amount": 428.42,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0001",
+      "date": "2026-02-01",
+      "category": "groceries",
+      "amount": 2189.59,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-SAL",
+      "date": "2026-02-01",
+      "category": "income",
+      "amount": 94152.02,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0029",
+      "date": "2026-02-02",
+      "category": "subscriptions",
+      "amount": 544.08,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0007",
+      "date": "2026-02-03",
+      "category": "dining",
+      "amount": 794.6,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0004",
+      "date": "2026-02-05",
+      "category": "dining",
+      "amount": 692.01,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0005",
+      "date": "2026-02-05",
+      "category": "dining",
+      "amount": 908.78,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-SIP",
+      "date": "2026-02-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0010",
+      "date": "2026-02-06",
+      "category": "shopping",
+      "amount": 1281.87,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0017",
+      "date": "2026-02-06",
+      "category": "transport",
+      "amount": 871.92,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0024",
+      "date": "2026-02-06",
+      "category": "utilities",
+      "amount": 1670.13,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0002",
+      "date": "2026-02-07",
+      "category": "groceries",
+      "amount": 2528.84,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0027",
+      "date": "2026-02-07",
+      "category": "health",
+      "amount": 321.82,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0021",
+      "date": "2026-02-08",
+      "category": "entertainment",
+      "amount": 989.18,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0023",
+      "date": "2026-02-08",
+      "category": "utilities",
+      "amount": 1537.39,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0028",
+      "date": "2026-02-09",
+      "category": "subscriptions",
+      "amount": 413.56,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0009",
+      "date": "2026-02-10",
+      "category": "shopping",
+      "amount": 1260.62,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0020",
+      "date": "2026-02-11",
+      "category": "entertainment",
+      "amount": 727.36,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0026",
+      "date": "2026-02-11",
+      "category": "health",
+      "amount": 436.69,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0030",
+      "date": "2026-02-14",
+      "category": "subscriptions",
+      "amount": 487.64,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0022",
+      "date": "2026-02-16",
+      "category": "entertainment",
+      "amount": 855.18,
+      "type": "debit",
+      "description": "BookMyShow Tickets",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0031",
+      "date": "2026-02-16",
+      "category": "rent",
+      "amount": 25384.06,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0006",
+      "date": "2026-02-17",
+      "category": "dining",
+      "amount": 709.27,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0013",
+      "date": "2026-02-18",
+      "category": "shopping",
+      "amount": 1304.52,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0014",
+      "date": "2026-02-20",
+      "category": "shopping",
+      "amount": 1733.76,
+      "type": "debit",
+      "description": "Lifestyle Store",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0012",
+      "date": "2026-02-21",
+      "category": "shopping",
+      "amount": 1776.4,
+      "type": "debit",
+      "description": "Myntra Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0008",
+      "date": "2026-02-22",
+      "category": "dining",
+      "amount": 908.72,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0015",
+      "date": "2026-02-22",
+      "category": "shopping",
+      "amount": 1414.1,
+      "type": "debit",
+      "description": "Meesho Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0025",
+      "date": "2026-02-22",
+      "category": "health",
+      "amount": 451.47,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0003",
+      "date": "2026-02-23",
+      "category": "groceries",
+      "amount": 1846.42,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0018",
+      "date": "2026-02-23",
+      "category": "transport",
+      "amount": 760.68,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0016",
+      "date": "2026-02-24",
+      "category": "transport",
+      "amount": 903.79,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0019",
+      "date": "2026-02-25",
+      "category": "transport",
+      "amount": 908.81,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202602-0011",
+      "date": "2026-02-26",
+      "category": "shopping",
+      "amount": 1769.22,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0021",
+      "date": "2026-03-01",
+      "category": "transport",
+      "amount": 477.64,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-SAL",
+      "date": "2026-03-01",
+      "category": "income",
+      "amount": 93853.46,
+      "type": "credit",
+      "description": "Salary Credit - Young software engineer, regul",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0016",
+      "date": "2026-03-02",
+      "category": "transport",
+      "amount": 485.87,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0033",
+      "date": "2026-03-02",
+      "category": "subscriptions",
+      "amount": 445.5,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0006",
+      "date": "2026-03-03",
+      "category": "groceries",
+      "amount": 1279.05,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0022",
+      "date": "2026-03-03",
+      "category": "entertainment",
+      "amount": 659.55,
+      "type": "debit",
+      "description": "Hotstar Premium",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-SIP",
+      "date": "2026-03-05",
+      "category": "sip_investment",
+      "amount": 15000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0003",
+      "date": "2026-03-06",
+      "category": "groceries",
+      "amount": 1164.44,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0007",
+      "date": "2026-03-06",
+      "category": "dining",
+      "amount": 1212.93,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0036",
+      "date": "2026-03-08",
+      "category": "rent",
+      "amount": 22639.89,
+      "type": "debit",
+      "description": "Rent Payment - NEFT",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0028",
+      "date": "2026-03-09",
+      "category": "health",
+      "amount": 234.22,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0015",
+      "date": "2026-03-10",
+      "category": "transport",
+      "amount": 491.89,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0019",
+      "date": "2026-03-10",
+      "category": "transport",
+      "amount": 527.14,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0023",
+      "date": "2026-03-10",
+      "category": "entertainment",
+      "amount": 710.94,
+      "type": "debit",
+      "description": "Gaming Credits",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0005",
+      "date": "2026-03-11",
+      "category": "groceries",
+      "amount": 994.46,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0012",
+      "date": "2026-03-11",
+      "category": "shopping",
+      "amount": 1540.17,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0018",
+      "date": "2026-03-12",
+      "category": "transport",
+      "amount": 467.64,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0010",
+      "date": "2026-03-14",
+      "category": "dining",
+      "amount": 1135.89,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0011",
+      "date": "2026-03-14",
+      "category": "shopping",
+      "amount": 1955.49,
+      "type": "debit",
+      "description": "Flipkart Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0013",
+      "date": "2026-03-14",
+      "category": "shopping",
+      "amount": 2230.8,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0032",
+      "date": "2026-03-14",
+      "category": "health",
+      "amount": 269.59,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0034",
+      "date": "2026-03-14",
+      "category": "subscriptions",
+      "amount": 563.68,
+      "type": "debit",
+      "description": "Canva Pro",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0027",
+      "date": "2026-03-15",
+      "category": "utilities",
+      "amount": 1326.86,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0001",
+      "date": "2026-03-16",
+      "category": "groceries",
+      "amount": 910.62,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0024",
+      "date": "2026-03-16",
+      "category": "entertainment",
+      "amount": 599.37,
+      "type": "debit",
+      "description": "Amazon Prime",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0029",
+      "date": "2026-03-19",
+      "category": "health",
+      "amount": 272.36,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0009",
+      "date": "2026-03-20",
+      "category": "dining",
+      "amount": 981.94,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0020",
+      "date": "2026-03-20",
+      "category": "transport",
+      "amount": 578.04,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0002",
+      "date": "2026-03-21",
+      "category": "groceries",
+      "amount": 1241.09,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0025",
+      "date": "2026-03-21",
+      "category": "entertainment",
+      "amount": 566.25,
+      "type": "debit",
+      "description": "Spotify Premium",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0031",
+      "date": "2026-03-22",
+      "category": "health",
+      "amount": 201.28,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0030",
+      "date": "2026-03-23",
+      "category": "health",
+      "amount": 206.51,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0017",
+      "date": "2026-03-27",
+      "category": "transport",
+      "amount": 558.44,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0004",
+      "date": "2026-03-28",
+      "category": "groceries",
+      "amount": 898.61,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0026",
+      "date": "2026-03-29",
+      "category": "utilities",
+      "amount": 1223.53,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0014",
+      "date": "2026-03-30",
+      "category": "shopping",
+      "amount": 1915.58,
+      "type": "debit",
+      "description": "H&M Store",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0035",
+      "date": "2026-03-30",
+      "category": "subscriptions",
+      "amount": 537.41,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-PRI-202603-0008",
+      "date": "2026-03-31",
+      "category": "dining",
+      "amount": 871.5,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 3,
+      "year": 2026
+    }
+  ],
+  "transaction_metadata": {
+    "total_count": 447,
+    "period": "Apr 2025 – Mar 2026",
+    "anomaly_months": {
+      "3": [
+        "shopping",
+        1.4
+      ],
+      "7": [
+        "shopping",
+        1.4
+      ],
+      "11": [
+        "shopping",
+        1.4
+      ]
+    },
+    "generated_by": "generate_transactions.py"
+  }
 }

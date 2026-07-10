@@ -1,0 +1,208 @@
+{
+  "snapshot_date": "2026-04-20",
+  "snapshot_id": "mkt-snap-20260420",
+  "market_scenario": "high_inflation",
+
+  "macro_indicators": {
+    "nifty_50_current": 22340.5,
+    "nifty_ytd_return": -3.2,
+    "sensex_current": 73850.0,
+    "sensex_ytd_return": -2.9,
+    "gold_price_per_10g": 73400,
+    "gold_ytd_return": 13.7,
+    "silver_ytd_return": 8.4,
+    "best_fd_rate": 7.75,
+    "cpi_inflation": 6.8,
+    "rbi_repo_rate": 6.5,
+    "usd_inr": 83.62,
+    "crude_oil_brent": 91.4,
+    "india_vix": 14.2
+  },
+
+  "trending_stocks": [
+    {
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank Ltd",
+      "change_pct": 2.1,
+      "current_price": 1648.35,
+      "volume": "high",
+      "sector": "Banking",
+      "52w_high": 1794.0,
+      "52w_low": 1363.55,
+      "market_cap_cr": 1250000,
+      "pe_ratio": 18.4
+    },
+    {
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "change_pct": -1.4,
+      "current_price": 3820.10,
+      "volume": "medium",
+      "sector": "Technology",
+      "52w_high": 4592.25,
+      "52w_low": 3311.0,
+      "market_cap_cr": 1390000,
+      "pe_ratio": 27.1
+    },
+    {
+      "symbol": "INFY",
+      "name": "Infosys Ltd",
+      "change_pct": -2.1,
+      "current_price": 1412.60,
+      "volume": "high",
+      "sector": "Technology",
+      "52w_high": 1953.90,
+      "52w_low": 1308.45,
+      "market_cap_cr": 588000,
+      "pe_ratio": 23.8
+    },
+    {
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "change_pct": 3.2,
+      "current_price": 2934.75,
+      "volume": "high",
+      "sector": "Energy",
+      "52w_high": 3217.90,
+      "52w_low": 2220.30,
+      "market_cap_cr": 1980000,
+      "pe_ratio": 29.6
+    },
+    {
+      "symbol": "SUNPHARMA",
+      "name": "Sun Pharmaceutical Industries",
+      "change_pct": 1.8,
+      "current_price": 1618.40,
+      "volume": "medium",
+      "sector": "Pharma",
+      "52w_high": 1960.35,
+      "52w_low": 1196.00,
+      "market_cap_cr": 388000,
+      "pe_ratio": 34.2
+    },
+    {
+      "symbol": "GOLDBEES",
+      "name": "Nippon India Gold BeES ETF",
+      "change_pct": 0.9,
+      "current_price": 57.84,
+      "volume": "high",
+      "sector": "Gold",
+      "52w_high": 59.12,
+      "52w_low": 45.10,
+      "market_cap_cr": 9800,
+      "pe_ratio": null
+    },
+    {
+      "symbol": "ICICIBANK",
+      "name": "ICICI Bank Ltd",
+      "change_pct": 1.5,
+      "current_price": 1098.20,
+      "volume": "high",
+      "sector": "Banking",
+      "52w_high": 1322.60,
+      "52w_low": 895.05,
+      "market_cap_cr": 769000,
+      "pe_ratio": 17.2
+    },
+    {
+      "symbol": "KOTAKBANK",
+      "name": "Kotak Mahindra Bank",
+      "change_pct": -0.6,
+      "current_price": 1742.80,
+      "volume": "low",
+      "sector": "Banking",
+      "52w_high": 2063.95,
+      "52w_low": 1543.85,
+      "market_cap_cr": 346000,
+      "pe_ratio": 21.0
+    }
+  ],
+
+  "market_news": [
+    {
+      "id": "news-001",
+      "headline": "RBI holds repo rate at 6.5% for sixth consecutive meeting — FD rates remain attractive",
+      "detail": "The Monetary Policy Committee voted 5-1 to keep the repo rate unchanged, signalling rates will stay elevated through Q3 2026.",
+      "impact": "positive_fd",
+      "impact_magnitude": "high",
+      "timestamp": "2026-04-20T09:00:00",
+      "source": "RBI Press Release"
+    },
+    {
+      "id": "news-002",
+      "headline": "Gold surges 13.7% YTD — SEBI cautions retail investors on leveraged gold ETF buying",
+      "detail": "Gold prices hit a multi-year high driven by global central bank buying and geopolitical uncertainty. Analysts suggest 5-10% portfolio allocation is prudent.",
+      "impact": "positive_gold",
+      "impact_magnitude": "high",
+      "timestamp": "2026-04-19T14:30:00",
+      "source": "SEBI Advisory"
+    },
+    {
+      "id": "news-003",
+      "headline": "Nifty 50 slips 3.2% YTD amid FII outflows — SIP investors advised to stay the course",
+      "detail": "Foreign Institutional Investors pulled out Rs.18,400 crore in March. AMFI data shows retail SIP inflows hit a record Rs.24,800 crore, partially offsetting the sell-off.",
+      "impact": "negative_equity",
+      "impact_magnitude": "medium",
+      "timestamp": "2026-04-18T16:00:00",
+      "source": "NSE Market Update"
+    },
+    {
+      "id": "news-004",
+      "headline": "CPI inflation rises to 6.8% — above RBI comfort band for third consecutive month",
+      "detail": "Food inflation, led by vegetable and cereal prices, is the primary driver. RBI Governor signals vigilance but rules out rate hike as growth remains a priority.",
+      "impact": "watch",
+      "impact_magnitude": "high",
+      "timestamp": "2026-04-17T12:00:00",
+      "source": "Ministry of Statistics"
+    },
+    {
+      "id": "news-005",
+      "headline": "SEBI approves new T+0 settlement for top 50 stocks — faster fund availability for investors",
+      "detail": "Same-day settlement will initially be available for 50 large-cap stocks. This significantly reduces counterparty risk in equity markets.",
+      "impact": "neutral",
+      "impact_magnitude": "low",
+      "timestamp": "2026-04-16T10:30:00",
+      "source": "SEBI Circular"
+    },
+    {
+      "id": "news-006",
+      "headline": "SBI raises 5-year FD rate to 7.75% — highest among PSBs; HDFC Bank matches at 7.70%",
+      "detail": "Multiple banks have revised FD rates upward following robust deposit demand. Debt fund investors may consider switching to bank FDs for superior risk-adjusted returns.",
+      "impact": "positive_fd",
+      "impact_magnitude": "medium",
+      "timestamp": "2026-04-15T09:00:00",
+      "source": "Banking Industry Update"
+    }
+  ],
+
+  "market_alerts": [
+    "Nifty -3.2% YTD — SIP averaging opportunity",
+    "Gold +13.7% — consider booking partial profits",
+    "FD rates at 7.75% — highest in 4 years",
+    "CPI 6.8% — inflation above RBI comfort zone",
+    "RBI repo rate hold at 6.5% — 6th consecutive pause",
+    "RELIANCE +3.2% — energy sector outperforming",
+    "FII outflows: Rs.18,400 Cr in March"
+  ],
+
+  "sector_performance": {
+    "Banking": 1.8,
+    "Technology": -2.3,
+    "Energy": 4.1,
+    "Pharma": 2.6,
+    "FMCG": 0.4,
+    "Auto": -1.2,
+    "Realty": 5.8,
+    "Metal": 3.3,
+    "Gold": 13.7
+  },
+
+  "mutual_fund_categories": {
+    "Large_Cap": { "1y_return": -2.1, "recommendation": "accumulate_on_dips" },
+    "Mid_Cap":   { "1y_return": 4.3,  "recommendation": "hold" },
+    "Small_Cap": { "1y_return": 6.7,  "recommendation": "reduce_overweight" },
+    "Debt":      { "1y_return": 7.2,  "recommendation": "increase_allocation" },
+    "Gold_Fund": { "1y_return": 13.7, "recommendation": "partial_profit_booking" },
+    "Hybrid":    { "1y_return": 2.8,  "recommendation": "hold" }
+  }
+}
