@@ -18,6 +18,22 @@ body, html, #root {
   width: 100%;
   align-items: center;
   justify-content: center;
-
   min-height: 100vh;
+}
+
+@keyframes fadeInPage {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Global button hover polish */
+button { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+button:hover:not(:disabled) { transform: translateY(-1px); }
+button:active:not(:disabled) { transform: translateY(0); }
+
+/* Global responsive layout */
+@media (max-width: 768px) {
+  div[style*="display: flex"] > div[style*="flex: 1"] {
+    padding-bottom: 70px;
+  }
 }

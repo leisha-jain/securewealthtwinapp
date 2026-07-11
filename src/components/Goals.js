@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import "./Goals.css";
 import axios from 'axios';
 import RiskInterceptModal from '../components/RiskInterceptModal';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine
+} from 'recharts';
 
 const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
@@ -132,8 +135,106 @@ function BarChart({ optimistic, standard, activeYear }) {
   );
 }
 
-export default function Goals() {
- const [goals, setGoals] = useState(PILLARS); // PILLARS as fallback
+// Savings simulator helper
+function buildProjectionData(goalAmount, goalSaved, sipAmount, annualReturn) {
+  const monthlyReturn = annualReturn / 100 / 12;
+  const data = [];
+  let balance = goalSaved;
+  for (let m = 0; m <= 120; m++) {
+    balance = balance * (1 + monthlyReturn) + sipAmount;
+    data.push({ month: m, balance: Math.round(balance) });
+    if (balance >= goalAmount) break;
+  }
+  return data;
+}
+
+function SavingsSimulator() {
+  const GOAL_AMOUNT = 800000;
+  const GOAL_SAVED = 150000;
+  const BASE_SIP = 5000;
+
+  const [sipBoost, setSipBoost] = useState(0);
+  const [annualReturn, setAnnualReturn] = useState(8);
+
+  const totalSip = BASE_SIP + sipBoost;
+  const dataBase = buildProjectionData(GOAL_AMOUNT, GOAL_SAVED, BASE_SIP, annualReturn);
+  const dataNew  = buildProjectionData(GOAL_AMOUNT, GOAL_SAVED, totalSip, annualReturn);
+
+  const baseMonths = dataBase.length - 1;
+  const newMonths  = dataNew.length - 1;
+  const saved      = baseMonths - newMonths;
+
+  const maxMonths = Math.max(dataBase.length, dataNew.length);
+  const merged = Array.from({ length: maxMonths }, (_, i) => ({
+    month: i,
+    base:  dataBase[i]?.balance ?? null,
+    boost: dataNew[i]?.balance  ?? null,
+  }));
+
+  return (
+    <div className="savings-simulator">
+      <h3 className="sim-title">Goal Savings Simulator — Buy a Car</h3>
+      <p className="sim-subtitle">Target: ₹8,00,000 · Saved so far: ₹1,50,000</p>
+
+      <div className="sim-sliders">
+        <div className="sim-slider-group">
+          <div className="sim-slider-label">
+            <span>Extra monthly SIP</span>
+            <span className="sim-slider-val">+₹{sipBoost.toLocaleString('en-IN')}/mo</span>
+          </div>
+          <input
+            type="range" min={0} max={15000} step={500} value={sipBoost}
+            onChange={(e) => setSipBoost(Number(e.target.value))}
+            className="sim-range"
+          />
+        </div>
+
+        <div className="sim-slider-group">
+          <div className="sim-slider-label">
+            <span>Expected annual return</span>
+            <span className="sim-slider-val">{annualReturn}%</span>
+          </div>
+          <input
+            type="range" min={6} max={15} step={0.5} value={annualReturn}
+            onChange={(e) => setAnnualReturn(Number(e.target.value))}
+            className="sim-range"
+          />
+        </div>
+      </div>
+
+      {sipBoost > 0 && (
+        <div className="sim-insight">
+          Save ₹{sipBoost.toLocaleString('en-IN')} more per month → reach goal{' '}
+          <strong>{saved > 0 ? `${saved} months earlier` : 'on same timeline'}</strong>
+        </div>
+      )}
+
+      <div className="sim-chart">
+        <ResponsiveContainer width="100%" height={220}>
+          <LineChart data={merged} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
+            <XAxis dataKey="month" tick={{ fontSize: 10 }} label={{ value: 'Months', position: 'insideBottom', offset: -2, fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} tickFormatter={(v) => `₹${(v / 100000).toFixed(1)}L`} />
+            <Tooltip formatter={(v) => `₹${v?.toLocaleString('en-IN')}`} labelFormatter={(l) => `Month ${l}`} />
+            <ReferenceLine y={GOAL_AMOUNT} stroke="#005f52" strokeDasharray="4 4" label={{ value: 'Goal', fill: '#005f52', fontSize: 10 }} />
+            <Line type="monotone" dataKey="base"  stroke="#ccf2ed" strokeWidth={2} dot={false} name="Current SIP" />
+            <Line type="monotone" dataKey="boost" stroke="#005f52" strokeWidth={2} dot={false} name="Boosted SIP" />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="sim-legend">
+        <span className="sim-legend-item base">─ Current SIP (₹{BASE_SIP.toLocaleString('en-IN')}/mo) → {baseMonths} months</span>
+        {sipBoost > 0 && (
+          <span className="sim-legend-item boost">─ Boosted SIP (₹{totalSip.toLocaleString('en-IN')}/mo) → {newMonths} months</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export default function Goals({ language = 'en' }) {
+ const [goals, setGoals] = useState(PILLARS);
 const [contribution, setContribution] = useState(4500);
 const [yield_, setYield] = useState(7.2);
 const [riskIdx, setRiskIdx] = useState(1);
@@ -320,21 +421,25 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      {/* Savings Simulator */}
+      <SavingsSimulator />
+
       <RiskInterceptModal
-  isOpen={riskModal.isOpen}
-  decision={riskModal.decision}
-  riskScore={riskModal.riskScore}
-  message={riskModal.message}
-  onCancel={() => {
-    setRiskModal({ ...riskModal, isOpen: false });
-    setPendingAction(null);
-  }}
-  onAllow={() => {
-    if (pendingAction) pendingAction();
-    setRiskModal({ ...riskModal, isOpen: false });
-    setPendingAction(null);
-  }}
-/>
+        isOpen={riskModal.isOpen}
+        decision={riskModal.decision}
+        riskScore={riskModal.riskScore}
+        message={riskModal.message}
+        language={language}
+        onCancel={() => {
+          setRiskModal({ ...riskModal, isOpen: false });
+          setPendingAction(null);
+        }}
+        onAllow={() => {
+          if (pendingAction) pendingAction();
+          setRiskModal({ ...riskModal, isOpen: false });
+          setPendingAction(null);
+        }}
+      />
     </div>
   );
 }
