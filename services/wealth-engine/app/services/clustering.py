@@ -77,7 +77,7 @@ def extract_features(data: dict) -> list:
             
     bank = 0.0
     for acc in data.get("accounts", []):
-        if acc.get("bank") and acc.get("type") != "honeypot_account":
+        if acc.get("bank") and acc.get("account_type") != "honeypot_account":
             bank += float(acc.get("balance", 0))
             
     wallet = 0.0

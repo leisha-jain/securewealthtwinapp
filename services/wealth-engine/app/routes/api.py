@@ -55,7 +55,7 @@ def market_aware_recommend(profile: UserProfile):
 @router.post("/recommend/archetype")
 def archetype(profile: UserProfile):
     # Pass model_dump() directly to clustering service
-    return get_user_archetype(profile.model_dump())
+    return get_user_archetype(profile.dict())
 
 
 @router.post("/recommend/goal-projection")
