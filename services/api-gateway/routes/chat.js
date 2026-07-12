@@ -4,12 +4,14 @@
 
 const express = require('express');
 const axios = require('axios');
+const { verifyToken } = require('../middleware/auth');
+const { proxyHeaders } = require('../utils/proxy');
 const router = express.Router();
 
 const CHAT_URL = process.env.CHAT_SERVICE_URL || 'http://localhost:8003';
 
 // ✅ CHAT MESSAGE
-router.post('/message', async (req, res) => {
+router.post('/message', verifyToken, async (req, res) => {
   const { userId, message, history } = req.body;
 
   if (!userId || !message) {
@@ -32,7 +34,10 @@ router.post('/message', async (req, res) => {
           goals: ["Buy a house"]
         }
       },
-      { timeout: 15000 }
+      { 
+        headers: proxyHeaders(req),
+        timeout: 15000 
+      }
     );
 
     // ✅ FIX: handle both response formats safely

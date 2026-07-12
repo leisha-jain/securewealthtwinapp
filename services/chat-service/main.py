@@ -95,6 +95,11 @@ def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 200):
 
 
 # ------------------ ROUTES ------------------
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 @app.get("/")
 def home():
     return {"message": "SecureWealth Chat Service Running", "port": 8003}

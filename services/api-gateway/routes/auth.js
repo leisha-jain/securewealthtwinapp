@@ -5,7 +5,18 @@
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const rateLimit = require('express-rate-limit');
 const router = express.Router();
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5,
+  message: { error: 'Too many attempts. Please try again in 15 minutes.' },
+  handler: (req, res, next, options) => {
+    console.warn(`[Rate Limit Exceeded] IP: ${req.ip} tried to access login endpoint ${req.originalUrl}`);
+    res.status(429).json(options.message);
+  }
+});
 
 const JWT_SECRET = process.env.JWT_SECRET || 'changeme';
 const JWT_EXPIRES_IN = '24h';
@@ -28,7 +39,7 @@ const trustedDevices = {
  * If the device is not in the user's trusted set, isTrustedDevice=false
  * is embedded in the token payload → Fraud Engine adds +20 risk points.
  */
-router.post('/login', (req, res) => {
+router.post('/login', loginLimiter, (req, res) => {
   const { userId, password, deviceId } = req.body;
 
   if (!userId || !password || !deviceId) {
