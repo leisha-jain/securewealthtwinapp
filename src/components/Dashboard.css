@@ -1177,3 +1177,93 @@ button:hover { transition: transform 0.15s, box-shadow 0.15s; }
   .main-content { padding: 24px 28px; }
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── MARKET NEWS ─────────────────────────────────────────────── */
+.market-news-section {
+  background: #fff;
+  border: 1px solid #e5eeec;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.market-news-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+
+.market-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.news-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.news-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.news-category-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #005f52;
+  background: #e6f4f1;
+  border-radius: 6px;
+  padding: 3px 8px;
+  width: 52px;
+  text-align: center;
+}
+
+.news-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-headline {
+  font-size: 13px;
+  color: #1f2937;
+  margin: 0 0 3px 0;
+  line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.news-time {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.news-tag {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .news-headline {
+    white-space: normal;
+  }
+  .news-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

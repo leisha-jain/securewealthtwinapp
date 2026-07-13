@@ -13,7 +13,9 @@ Expected: all tests print PASS. No errors.
 from signals     import (signal_new_device, signal_fast_action,
                           signal_amount_anomaly, signal_otp_retry,
                           signal_first_investment, signal_retry_loop,
-                          signal_night_large_txn)
+                          signal_night_large_txn, signal_velocity_abuse,
+                          signal_geographic_anomaly)
+from honeypot    import signal_honeypot, detect_fake_endpoint
 from risk_scorer import compute_risk_score
 from user_store  import get_user_history
 
@@ -133,6 +135,42 @@ r = signal_night_large_txn(
 )
 check("does NOT fire for small night amount", r["triggered"] is False)
 
+print()
+print("── Signal 8: Honeypot (Cyber Deception) ──")
+r = signal_honeypot({"trap_field": "bot-was-here"}, {})
+check("fires when trap_field is populated", r["triggered"] is True)
+check("score is 40",                        r["score"] == 40)
+
+r = signal_honeypot({"target_account": "XXXX9999"}, {})
+check("fires on transfer to shadow account", r["triggered"] is True)
+
+r = signal_honeypot({"action_type": "DECOY_MIDCAP_FUND_001"}, {})
+check("fires on decoy investment access",    r["triggered"] is True)
+
+r = signal_honeypot({"action_type": "start_sip", "amount": 5000}, {})
+check("does NOT fire on legitimate action",  r["triggered"] is False)
+
+hit, _ = detect_fake_endpoint("/api/admin/users")
+check("fake admin endpoint is a honeypot",   hit is True)
+hit, _ = detect_fake_endpoint("/api/risk/evaluate")
+check("real endpoint is NOT a honeypot",     hit is False)
+
+print()
+print("── Signal 9: Velocity Abuse ──")
+r = signal_velocity_abuse({}, {"velocity_abuse": True})
+check("fires when velocity flag set", r["triggered"] is True)
+check("score is 15",                  r["score"] == 15)
+r = signal_velocity_abuse({}, {"velocity_abuse": False})
+check("does NOT fire when velocity normal", r["triggered"] is False)
+
+print()
+print("── Signal 10: Geographic / Device Anomaly ──")
+r = signal_geographic_anomaly({}, {"device_changed": True})
+check("fires when device changed mid-session", r["triggered"] is True)
+check("score is 20",                           r["score"] == 20)
+r = signal_geographic_anomaly({}, {"device_changed": False})
+check("does NOT fire when device consistent",  r["triggered"] is False)
+
 
 # ── Full Scenario Tests ───────────────────────────────────────────
 
@@ -210,6 +248,40 @@ payload = {
 result = compute_risk_score(payload, arjun_history)
 print(f"  Score: {result['risk_score']}  |  Decision: {result['decision']}")
 check("Arjun normal rebalance → ALLOW", result["decision"] == "ALLOW")
+
+print()
+print("── Scenario 5: Honeypot probe → must BLOCK immediately ──")
+# Priya's OWN trusted device + normal amount would normally ALLOW, but a
+# trap_field turns it into an instant BLOCK with no cooling-off.
+priya_history = get_user_history("priya_27")
+payload = {
+    "user_id":          "priya_27",
+    "action_type":      "view_portfolio",
+    "amount":           5_000,
+    "device_id":        "device_priya_phone",   # trusted — would be ALLOW
+    "trap_field":       "1",                     # honeypot!
+}
+result = compute_risk_score(payload, priya_history)
+print(f"  Score: {result['risk_score']}  |  Decision: {result['decision']}")
+check("Honeypot forces BLOCK",        result["decision"] == "BLOCK")
+check("Honeypot flag is set",         result.get("honeypot") is True)
+check("Never WARN on honeypot",       result["decision"] != "WARN")
+
+print()
+print("── Scenario 6: Session pre-penalty (continuous auth) ──")
+# With the accumulator over threshold, an otherwise-clean action gets +15.
+clean_payload = {
+    "user_id":          "arjun_38",
+    "action_type":      "rebalance_portfolio",
+    "amount":           40_000,
+    "device_id":        "device_arjun_phone",
+    "login_timestamp":  "2026-04-20T11:00:00",
+    "action_timestamp": "2026-04-20T11:08:00",
+}
+base = compute_risk_score(clean_payload, dict(arjun_history))
+penalised = compute_risk_score(clean_payload, {**arjun_history, "session_prepenalty": True})
+print(f"  Base: {base['risk_score']}  |  Pre-penalised: {penalised['risk_score']}")
+check("Pre-penalty adds +15", penalised["risk_score"] == base["risk_score"] + 15)
 
 
 print()

@@ -15,16 +15,24 @@ Run locally:
   uvicorn api:app --reload --port 8002
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from typing import Optional
+from datetime import datetime, timezone
+import os
 import time
 
 from risk_scorer import compute_risk_score
 from user_store  import (get_user_history, update_trusted_device,
-                          record_action_type, update_avg_amount, list_users)
-from audit_log   import record as audit_record, get_history, get_all_history
+                          record_action_type, update_avg_amount, list_users,
+                          update_velocity, check_velocity,
+                          register_session_device, session_prepenalty,
+                          accumulate_session_risk, reset_session)
+from audit_log   import (record as audit_record, record_honeypot,
+                          get_history, get_all_history)
+from honeypot    import HONEYPOT_PATHS, detect_fake_endpoint
 
 # ─────────────────────────────────────────────────────────────────
 app = FastAPI(
@@ -39,6 +47,36 @@ app.add_middleware(
     allow_methods  = ["*"],
     allow_headers  = ["*"],
 )
+
+
+# ─────────────────────────────────────────────────────────────────
+# ZERO-TRUST INTER-SERVICE AUTHENTICATION
+# -----------------------------------------------------------------
+# "Never trust, always verify" — even for calls that originate inside
+# our own network. Every request must carry the shared X-Internal-Token
+# header (injected by Member 4's gateway). Without it → 401.
+#
+# Exemptions:
+#   * /health and /            — liveness probes must stay open
+#   * CORS pre-flight OPTIONS   — carries no custom headers by design
+#   * the honeypot decoy paths  — those are MEANT to be reachable by an
+#     attacker so we can trap and log them (they return 403 themselves)
+# ─────────────────────────────────────────────────────────────────
+INTERNAL_SECRET = os.getenv("INTERNAL_SECRET", "swt-2026")
+
+_ZERO_TRUST_EXEMPT = {"/health", "/"} | HONEYPOT_PATHS
+
+
+@app.middleware("http")
+async def zero_trust(request: Request, call_next):
+    path = request.url.path
+    if request.method != "OPTIONS" and path not in _ZERO_TRUST_EXEMPT:
+        if request.headers.get("X-Internal-Token") != INTERNAL_SECRET:
+            return JSONResponse(
+                {"error": "Unauthorized — missing or invalid internal token"},
+                status_code=401,
+            )
+    return await call_next(request)
 
 
 # ─────────────────────────────────────────────────────────────────
@@ -68,6 +106,16 @@ class EvaluateRequest(BaseModel):
     # Retry
     retry_count:       int   = Field(0,     example=0)
 
+    # ── Honeypot deception fields (Signal 8) ──────────────────────
+    # These are traps. Legitimate UIs never populate them; only an
+    # attacker probing the API will. Any value here = instant BLOCK.
+    trap_field:        str   = Field("",    example="",
+                                     description="Hidden trap field — bots fill this in")
+    target_account:    str   = Field("",    example="",
+                                     description="Destination account — XXXX9999 is a shadow decoy")
+    target_fund:       str   = Field("",    example="",
+                                     description="Target fund — DECOY_MIDCAP_FUND_001 is a decoy")
+
 
 class TrustDeviceRequest(BaseModel):
     user_id:   str = Field(..., example="priya_27")
@@ -92,6 +140,7 @@ class EvaluateResponse(BaseModel):
     risk_score:        int
     risk_level:        str          # LOW / MEDIUM / HIGH
     decision:          str          # ALLOW / WARN / BLOCK
+    honeypot:          bool          # True → cyber-deception layer fired
     triggered_signals: list[SignalResult]
     all_signals:       list[SignalResult]
     message:           str
@@ -136,22 +185,38 @@ def evaluate(req: EvaluateRequest):
     t_start = time.perf_counter()
 
     # 1. Get user history
-    history = get_user_history(req.user_id)
-    if history is None:
+    stored = get_user_history(req.user_id)
+    if stored is None:
         # Unknown user — treat as high risk
-        history = {
+        stored = {
             "trusted_devices":        [],
             "avg_transaction_amount": 0,
             "past_action_types":      [],
         }
 
-    # 2. Build payload dict for signal functions
+    # Work on a shallow copy so the transient per-request flags we inject
+    # below (velocity, device change, session pre-penalty) never leak into
+    # the persistent behavioural baseline.
+    history = dict(stored)
+
+    # 2. Velocity + session state (Signals 9 & 10 + continuous auth)
+    now = datetime.now(timezone.utc)
+    update_velocity(req.user_id, now)
+    history["velocity_abuse"]     = check_velocity(req.user_id)
+    history["device_changed"]     = register_session_device(req.user_id, req.device_id)
+    history["session_prepenalty"] = session_prepenalty(req.user_id)
+
+    # 3. Build payload dict for signal functions
     payload = req.model_dump()
 
-    # 3. Score
+    # 4. Score
     result = compute_risk_score(payload, history)
 
-    # 4. Audit
+    # Feed this decision back into the session risk accumulator so the
+    # NEXT action in the session is judged in light of this one.
+    accumulate_session_risk(req.user_id, result["decision"])
+
+    # 4b. Audit
     audit_entry = audit_record(
         user_id           = req.user_id,
         action_type       = req.action_type,
@@ -171,6 +236,7 @@ def evaluate(req: EvaluateRequest):
         risk_score        = result["risk_score"],
         risk_level        = result["risk_level"],
         decision          = result["decision"],
+        honeypot          = result.get("honeypot", False),
         triggered_signals = result["triggered_signals"],
         all_signals       = result["all_signals"],
         message           = result["message"],
@@ -219,3 +285,64 @@ def trust_device(req: TrustDeviceRequest):
         "message":        f"Device {req.device_id} is now trusted for {req.user_id}",
         "trusted_devices": get_user_history(req.user_id)["trusted_devices"],
     }
+
+
+@app.get("/api/risk/velocity/{user_id}")
+def velocity(user_id: str):
+    """
+    Report whether a user is currently exceeding the velocity threshold
+    (5+ actions in 10 minutes). Member 4's gateway proxies this.
+    """
+    return {"user_id": user_id, "velocity_abuse": check_velocity(user_id)}
+
+
+@app.post("/api/risk/logout")
+def logout(req: TrustDeviceRequest):
+    """
+    Clear session state (device pin, risk accumulator, velocity window).
+    Called when a user logs out so the next login starts a clean session.
+    """
+    reset_session(req.user_id)
+    return {"message": f"Session reset for {req.user_id}"}
+
+
+# ─────────────────────────────────────────────────────────────────
+# HONEYPOT DECOY ENDPOINTS (Honeypot 3 — Fake API Endpoints)
+# -----------------------------------------------------------------
+# These routes look like juicy targets — admin user dumps, debug data,
+# internal transfers — but no legitimate client ever calls them. Any
+# request that reaches one is, by definition, an attacker probing the
+# API. We log a CRITICAL HONEYPOT_TRIGGERED audit event and return 403.
+#
+# They are exempt from the zero-trust middleware on purpose: we WANT an
+# attacker (who has no internal token) to be able to reach and trip them.
+# ─────────────────────────────────────────────────────────────────
+
+def _trip_honeypot(request: Request):
+    path = request.url.path
+    _, detail = detect_fake_endpoint(path)
+    attacker = request.client.host if request.client else "unknown"
+    record_honeypot(
+        user_id = f"probe@{attacker}",
+        source  = path,
+        detail  = detail or f"Probe of decoy endpoint {path}",
+    )
+    return JSONResponse(
+        {"error": "Forbidden", "detail": "This access has been logged."},
+        status_code=403,
+    )
+
+
+@app.api_route("/api/admin/users", methods=["GET", "POST"])
+def honeypot_admin_users(request: Request):
+    return _trip_honeypot(request)
+
+
+@app.api_route("/api/debug/dump", methods=["GET", "POST"])
+def honeypot_debug_dump(request: Request):
+    return _trip_honeypot(request)
+
+
+@app.api_route("/api/internal/transfer", methods=["GET", "POST"])
+def honeypot_internal_transfer(request: Request):
+    return _trip_honeypot(request)

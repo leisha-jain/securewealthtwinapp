@@ -40,6 +40,13 @@ USER_MESSAGES = {
               "or visit your nearest branch with a valid ID.",
 }
 
+# Shown when the cyber-deception layer fires — this is an attack, not a
+# confused customer, so the message is blunt and there is no cooling-off.
+HONEYPOT_MESSAGE = (
+    "This session has been terminated. An automated attack probe accessed "
+    "a decoy asset. This event has been logged and flagged to security."
+)
+
 
 def compute_risk_score(payload: dict, history: dict) -> dict:
     """
@@ -68,6 +75,7 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
     all_results      = []
     triggered        = []
     total_score      = 0
+    honeypot_hit     = False
 
     for signal_fn in ALL_SIGNALS:
         result = signal_fn(payload, history)
@@ -75,9 +83,31 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
         if result["triggered"]:
             triggered.append(result)
             total_score += result["score"]
+            if result["signal"] == "honeypot":
+                honeypot_hit = True
+
+    # Continuous-auth tightening: if this session has already crossed the
+    # risk threshold, every new action starts pre-penalised (see user_store).
+    if history.get("session_prepenalty"):
+        total_score += 15
 
     # Cap at 100
     total_score = min(total_score, 100)
+
+    # ── Honeypot override ──────────────────────────────────────────
+    # A decoy asset was touched. This is an attacker, full stop. Force
+    # an immediate BLOCK regardless of the numeric score — no cooling-off,
+    # no override, no WARN.
+    if honeypot_hit:
+        return {
+            "risk_score":        max(total_score, 100),
+            "risk_level":        "HIGH",
+            "decision":          "BLOCK",
+            "triggered_signals": triggered,
+            "all_signals":       all_results,
+            "message":           HONEYPOT_MESSAGE,
+            "honeypot":          True,
+        }
 
     # Determine risk level
     if total_score <= THRESHOLDS["LOW"][1]:
@@ -97,4 +127,5 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
         "triggered_signals": triggered,
         "all_signals":       all_results,
         "message":           message,
+        "honeypot":          False,
     }

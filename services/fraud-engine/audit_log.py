@@ -17,6 +17,20 @@ _LOG: dict[str, list] = {}
 
 MAX_ENTRIES_PER_USER = 50  # keep last 50 entries per user
 
+# Map a decision to an audit severity. HONEYPOT_TRIGGERED is its own
+# special event type and always CRITICAL — it means an active attack
+# probe touched one of our decoy assets.
+_SEVERITY = {
+    "ALLOW":              "INFO",
+    "WARN":               "WARNING",
+    "BLOCK":              "CRITICAL",
+    "HONEYPOT_TRIGGERED": "CRITICAL",
+}
+
+
+def _severity_for(decision: str) -> str:
+    return _SEVERITY.get(decision, "INFO")
+
 
 def record(
     user_id:          str,
@@ -39,6 +53,7 @@ def record(
         "risk_score":        risk_score,
         "risk_level":        risk_level,
         "decision":          decision,
+        "severity":          _severity_for(decision),
         "triggered_signals": [s["signal"] for s in triggered_signals],
         "signal_reasons":    [s["reason"]  for s in triggered_signals],
     }
@@ -51,6 +66,35 @@ def record(
     # Trim to max
     if len(_LOG[user_id]) > MAX_ENTRIES_PER_USER:
         _LOG[user_id] = _LOG[user_id][:MAX_ENTRIES_PER_USER]
+
+    return entry
+
+
+def record_honeypot(user_id: str, source: str, detail: str) -> dict:
+    """
+    Write a special HONEYPOT_TRIGGERED audit entry (severity CRITICAL).
+
+    Used when an attacker probe hits a decoy endpoint or a decoy asset.
+    `source` is where the probe landed (e.g. the endpoint path);
+    `detail` is a human-readable description for the audit UI.
+    """
+    entry = {
+        "timestamp":         datetime.now(timezone.utc).isoformat(),
+        "user_id":           user_id or "unknown_attacker",
+        "action_type":       source,
+        "amount":            0,
+        "risk_score":        100,
+        "risk_level":        "HIGH",
+        "decision":          "HONEYPOT_TRIGGERED",
+        "severity":          "CRITICAL",
+        "triggered_signals": ["honeypot"],
+        "signal_reasons":    [detail],
+    }
+
+    key = user_id or "unknown_attacker"
+    _LOG.setdefault(key, []).insert(0, entry)
+    if len(_LOG[key]) > MAX_ENTRIES_PER_USER:
+        _LOG[key] = _LOG[key][:MAX_ENTRIES_PER_USER]
 
     return entry
 

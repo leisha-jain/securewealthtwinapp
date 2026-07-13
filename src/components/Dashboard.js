@@ -35,6 +35,51 @@ const outflowData = [
   { name: 'Other', value: 20, color: '#e5e7eb' },
 ];
 
+const MOCK_NEWS = [
+  {
+    category: "MARKET",
+    headline: "Nifty 50 hits all-time high as FII inflows surge ₹12,400 Cr this week",
+    time: "2h ago",
+    impact: "positive",
+    tag: "Bullish",
+  },
+  {
+    category: "RBI",
+    headline: "RBI keeps repo rate at 6.5% for 7th consecutive meeting — EMIs unchanged",
+    time: "5h ago",
+    impact: "neutral",
+    tag: "Neutral",
+  },
+  {
+    category: "GOLD",
+    headline: "Gold surges to ₹76,450/10g on global uncertainty — analysts target ₹82,000",
+    time: "8h ago",
+    impact: "positive",
+    tag: "Watch",
+  },
+  {
+    category: "TAX",
+    headline: "SEBI tightens F&O rules: new margin requirements from Nov 1 — review your positions",
+    time: "1d ago",
+    impact: "negative",
+    tag: "Action needed",
+  },
+  {
+    category: "SIP",
+    headline: "Mutual fund SIP inflows cross ₹21,000 Cr milestone for third straight month",
+    time: "1d ago",
+    impact: "positive",
+    tag: "Bullish",
+  },
+  {
+    category: "BUDGET",
+    headline: "Finance Ministry hints at higher 80C limit in upcoming Union Budget 2026",
+    time: "2d ago",
+    impact: "positive",
+    tag: "Opportunity",
+  },
+];
+
 const MOCK_TICKER = [
   { label: 'HDFCBANK', val: '+1.4%', up: true },
   { label: 'NIFTY 50', val: '22,456', up: true },
@@ -98,6 +143,33 @@ function NewsTicker({ items }) {
             <span className={`ticker-val ${item.up ? 'up' : 'down'}`}>{item.val}</span>
             <span className="ticker-sep">·</span>
           </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Market News section
+function MarketNews({ news }) {
+  const impactColor = { positive: '#059669', negative: '#dc2626', neutral: '#d97706' };
+  const tagBg = { positive: '#d1fae5', negative: '#fee2e2', neutral: '#fef3c7' };
+  return (
+    <div className="market-news-section">
+      <h4 className="market-news-title">
+        <BookOpen size={15} /> Market News &amp; Alerts
+      </h4>
+      <div className="market-news-list">
+        {news.map((item, i) => (
+          <div key={i} className="news-row">
+            <div className="news-category-badge">{item.category}</div>
+            <div className="news-body">
+              <p className="news-headline">{item.headline}</p>
+              <span className="news-time">{item.time}</span>
+            </div>
+            <span className="news-tag" style={{ background: tagBg[item.impact], color: impactColor[item.impact] }}>
+              {item.tag}
+            </span>
+          </div>
         ))}
       </div>
     </div>
@@ -375,6 +447,8 @@ const Dashboard = ({ language = 'en' }) => {
                 </div>
               </div>
             </div>
+
+            <MarketNews news={MOCK_NEWS} />
 
             <div className="insights-grid">
               <div className="insight-card">

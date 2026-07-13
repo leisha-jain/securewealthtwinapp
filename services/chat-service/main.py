@@ -1,5 +1,6 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 import os, json, requests
@@ -19,6 +20,21 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ── Zero-Trust inter-service authentication ────────────────────────────────────
+# Every request must carry the shared X-Internal-Token header injected by the
+# API gateway. "Never trust, always verify" — even inside our own network.
+# /health and / stay open for liveness probes; OPTIONS pre-flights are exempt.
+INTERNAL_SECRET = os.getenv("INTERNAL_SECRET", "swt-2026")
+_ZERO_TRUST_EXEMPT = {"/health", "/"}
+
+
+@app.middleware("http")
+async def zero_trust(request: Request, call_next):
+    if request.method != "OPTIONS" and request.url.path not in _ZERO_TRUST_EXEMPT:
+        if request.headers.get("X-Internal-Token") != INTERNAL_SECRET:
+            return JSONResponse({"error": "Unauthorized"}, status_code=401)
+    return await call_next(request)
 
 # ── 8-Language system prompt prefixes ──────────────────────────────────────────
 LANG_PREFIXES = {
