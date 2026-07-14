@@ -27,6 +27,10 @@ LINKED_ACCOUNTS = {
     ]
 }
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 @app.get("/aggregator/{user_id}")
 def get_linked_accounts(user_id: str):
     accounts = LINKED_ACCOUNTS.get(user_id, [])
