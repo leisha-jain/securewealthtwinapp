@@ -1,3 +1,21 @@
+import { useState, useEffect } from "react";
+
+export function useCountUp(target, duration = 900) {
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    if (!target) return;
+    let current = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      setValue(Math.round(current));
+      if (current >= target) clearInterval(timer);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [target, duration]);
+  return value;
+}
+
 export const C = {
   bg:           "#f5f4f0",
   surface:      "#ffffff",

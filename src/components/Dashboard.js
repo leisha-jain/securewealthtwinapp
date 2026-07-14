@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './Dashboard.css';
+import { useCountUp } from '../utils/helpers';
+import { CHAT_RESPONSES } from '../data/personas';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
 import HealthScoreBadge from '../components/HealthScoreBadge';
@@ -31,6 +33,51 @@ const outflowData = [
   { name: 'Lifestyle & Tech', value: 25, color: '#14b8a6' },
   { name: 'Risk Management', value: 15, color: '#f59e0b' },
   { name: 'Other', value: 20, color: '#e5e7eb' },
+];
+
+const MOCK_NEWS = [
+  {
+    category: "MARKET",
+    headline: "Nifty 50 hits all-time high as FII inflows surge ₹12,400 Cr this week",
+    time: "2h ago",
+    impact: "positive",
+    tag: "Bullish",
+  },
+  {
+    category: "RBI",
+    headline: "RBI keeps repo rate at 6.5% for 7th consecutive meeting — EMIs unchanged",
+    time: "5h ago",
+    impact: "neutral",
+    tag: "Neutral",
+  },
+  {
+    category: "GOLD",
+    headline: "Gold surges to ₹76,450/10g on global uncertainty — analysts target ₹82,000",
+    time: "8h ago",
+    impact: "positive",
+    tag: "Watch",
+  },
+  {
+    category: "TAX",
+    headline: "SEBI tightens F&O rules: new margin requirements from Nov 1 — review your positions",
+    time: "1d ago",
+    impact: "negative",
+    tag: "Action needed",
+  },
+  {
+    category: "SIP",
+    headline: "Mutual fund SIP inflows cross ₹21,000 Cr milestone for third straight month",
+    time: "1d ago",
+    impact: "positive",
+    tag: "Bullish",
+  },
+  {
+    category: "BUDGET",
+    headline: "Finance Ministry hints at higher 80C limit in upcoming Union Budget 2026",
+    time: "2d ago",
+    impact: "positive",
+    tag: "Opportunity",
+  },
 ];
 
 const MOCK_TICKER = [
@@ -102,6 +149,33 @@ function NewsTicker({ items }) {
   );
 }
 
+// Market News section
+function MarketNews({ news }) {
+  const impactColor = { positive: '#059669', negative: '#dc2626', neutral: '#d97706' };
+  const tagBg = { positive: '#d1fae5', negative: '#fee2e2', neutral: '#fef3c7' };
+  return (
+    <div className="market-news-section">
+      <h4 className="market-news-title">
+        <BookOpen size={15} /> Market News &amp; Alerts
+      </h4>
+      <div className="market-news-list">
+        {news.map((item, i) => (
+          <div key={i} className="news-row">
+            <div className="news-category-badge">{item.category}</div>
+            <div className="news-body">
+              <p className="news-headline">{item.headline}</p>
+              <span className="news-time">{item.time}</span>
+            </div>
+            <span className="news-tag" style={{ background: tagBg[item.impact], color: impactColor[item.impact] }}>
+              {item.tag}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // Trending stocks panel
 function TrendingStocks({ stocks }) {
   return (
@@ -130,6 +204,7 @@ function TrendingStocks({ stocks }) {
 
 const Dashboard = ({ language = 'en' }) => {
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
+  const CHAT_BASE = process.env.REACT_APP_CHAT_URL || "http://localhost:8003";
 
   const [chatInput, setChatInput] = useState('');
   const [chatMessages, setChatMessages] = useState([]);
@@ -151,6 +226,7 @@ const Dashboard = ({ language = 'en' }) => {
   const [trendingStocks] = useState(MOCK_TRENDING);
   const [tickerItems] = useState(MOCK_TICKER);
   const [scoreAnimated, setScoreAnimated] = useState(0);
+  const animatedTotal = useCountUp(12480, 1200);
 
   const [riskModal, setRiskModal] = useState({
     isOpen: false,
@@ -163,6 +239,15 @@ const Dashboard = ({ language = 'en' }) => {
 
   const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
+  const getLocalReply = (text) => {
+    const l = text.toLowerCase();
+    if (l.includes("home") || l.includes("goal")) return CHAT_RESPONSES.home;
+    if (l.includes("sip") || l.includes("market")) return CHAT_RESPONSES.sip;
+    if (l.includes("risk")) return CHAT_RESPONSES.risk;
+    if (l.includes("tax") || l.includes("80c")) return CHAT_RESPONSES.tax;
+    return CHAT_RESPONSES.default;
+  };
+
   const sendChat = async () => {
     if (!chatInput.trim()) return;
 
@@ -171,33 +256,12 @@ const Dashboard = ({ language = 'en' }) => {
     setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
 
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-
-      const res = await axios.post(
-        `${API_BASE}/api/chat/message`,
-        {
-          userId: user?.userId || 1,
-          message: msg,
-          history: []
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          }
-        }
-      );
-
-      setChatMessages(prev => [
-        ...prev,
-        { role: 'bot', text: res.data.reply }
-      ]);
-
-    } catch (err) {
-      console.error(err);
-      setChatMessages(prev => [
-        ...prev,
-        { role: 'bot', text: "AI service unavailable." }
-      ]);
+      const res = await axios.post(`${CHAT_BASE}/api/chat`, { message: msg, language });
+      const reply = res.data.reply || res.data.response || getLocalReply(msg);
+      setChatMessages(prev => [...prev, { role: 'bot', text: reply }]);
+    } catch {
+      // Backend not running — use local keyword-matched responses
+      setChatMessages(prev => [...prev, { role: 'bot', text: getLocalReply(msg) }]);
     }
   };
 
@@ -415,13 +479,23 @@ const Dashboard = ({ language = 'en' }) => {
                 <div className="chart-container">
                   <ResponsiveContainer width="100%" height={250}>
                     <BarChart data={profile?.velocityData || velocityData}>
+                      <defs>
+                        <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#14b8a6" stopOpacity={0.9} />
+                          <stop offset="100%" stopColor="#ccf2ed" stopOpacity={0.4} />
+                        </linearGradient>
+                        <linearGradient id="barGradientActive" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#005f52" stopOpacity={1} />
+                          <stop offset="100%" stopColor="#14b8a6" stopOpacity={0.8} />
+                        </linearGradient>
+                      </defs>
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                       <XAxis dataKey="name" hide />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#999' }} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val / 1000}k`} />
-                      <Tooltip cursor={{ fill: 'transparent' }} />
-                      <Bar dataKey="amt" radius={[4, 4, 0, 0]}>
+                      <Tooltip cursor={{ fill: 'rgba(0,95,82,0.05)' }} />
+                      <Bar dataKey="amt" radius={[6, 6, 0, 0]}>
                         {(profile?.velocityData || velocityData).map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={entry.isCurrent ? '#005f52' : '#ccf2ed'} />
+                          <Cell key={`cell-${index}`} fill={entry.isCurrent ? 'url(#barGradientActive)' : 'url(#barGradient)'} />
                         ))}
                       </Bar>
                     </BarChart>
@@ -447,7 +521,7 @@ const Dashboard = ({ language = 'en' }) => {
                   </ResponsiveContainer>
                   <div className="donut-center">
                     <span className="total-label">TOTAL</span>
-                    <span className="total-amount">₹11,70,488</span>
+                    <span className="total-amount">₹{animatedTotal.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
                 <div className="legend">
@@ -461,6 +535,8 @@ const Dashboard = ({ language = 'en' }) => {
                 </div>
               </div>
             </div>
+
+            <MarketNews news={MOCK_NEWS} />
 
             <div className="insights-grid">
               <div className="insight-card">

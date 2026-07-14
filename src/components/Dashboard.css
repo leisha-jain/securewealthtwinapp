@@ -677,16 +677,38 @@ body {
 
 /* Chat */
 .dashboard-container.dark .chat-popup {
-  background: #111827;
+  background: #1e2330;
+  border: 1px solid #2a3045;
 }
 
 .dashboard-container.dark .chat-popup-body {
-  background: #0f172a;
+  background: #141824;
 }
 
 .dashboard-container.dark .chat-bubble.bot {
-  background: #1f2937;
-  border: none;
+  background: #252d3d;
+  color: #e2e8f0;
+  border: 1px solid #2a3045;
+}
+
+.dashboard-container.dark .chat-bubble.user {
+  background: #005f52;
+  color: #ffffff;
+}
+
+.dashboard-container.dark .chat-popup-input {
+  background: #1e2330;
+  border-top-color: #2a3045;
+}
+
+.dashboard-container.dark .chat-popup-input input {
+  background: #141824;
+  color: #e2e8f0;
+  border-color: #2a3045;
+}
+
+.dashboard-container.dark .chat-popup-input input::placeholder {
+  color: #64748b;
 }
 
 /* Inputs */
@@ -695,6 +717,33 @@ body {
   color: #e5e7eb;
   border: 1px solid #374151;
 }
+
+/* Trending panel */
+.dashboard-container.dark .trending-panel {
+  background: #111827;
+  border-color: #1f2937;
+}
+.dashboard-container.dark .trending-title { color: #9ca3af; }
+.dashboard-container.dark .trending-symbol { color: #e5e7eb; }
+.dashboard-container.dark .trending-row { border-bottom-color: #1f2937; }
+.dashboard-container.dark .portfolio-badge { background: #1f2937; color: #14b8a6; border-color: #374151; }
+
+/* Ticker */
+.dashboard-container.dark .ticker-wrap { background: #111827; border-bottom-color: #1f2937; }
+.dashboard-container.dark .ticker-label { color: #9ca3af; }
+
+/* Nudge chips */
+.dashboard-container.dark .nudge-color-0 { background: #052e16; color: #6ee7b7; border-color: #064e3b; }
+.dashboard-container.dark .nudge-color-1 { background: #1c1a00; color: #fcd34d; border-color: #374151; }
+.dashboard-container.dark .nudge-color-2 { background: #0c1a2e; color: #93c5fd; border-color: #1e3a5f; }
+
+/* Hero text */
+.dashboard-container.dark .hero-text h1 { color: #e5e7eb; }
+.dashboard-container.dark .hero-text em { color: #2dd4bf; }
+.dashboard-container.dark .user-name { color: #e5e7eb; }
+.dashboard-container.dark .total-amount { color: #e5e7eb; }
+.dashboard-container.dark .insight-card h4 { color: #e5e7eb; }
+.dashboard-container.dark .chart-header h3 { color: #e5e7eb; }
 
 /* Add to existing CSS */
 
@@ -761,7 +810,15 @@ body {
 
 /* Ensure content stays centered and clean in dark mode fullscreen */
 .dashboard-container.dark .chat-popup.fullscreen .chat-popup-input {
-  background: #111827;
+  background: #1e2330;
+}
+
+/* chat bubble user style (base) */
+.chat-bubble.user {
+  background: #005f52;
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
 }
 
 /* Adjustment for the floating button when chat is fullscreen */
@@ -1119,4 +1176,94 @@ button:hover { transition: transform 0.15s, box-shadow 0.15s; }
 @media (max-width: 1024px) {
   .main-content { padding: 24px 28px; }
   .insights-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── MARKET NEWS ─────────────────────────────────────────────── */
+.market-news-section {
+  background: #fff;
+  border: 1px solid #e5eeec;
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.market-news-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 16px 0;
+}
+
+.market-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.news-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.news-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.news-category-badge {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #005f52;
+  background: #e6f4f1;
+  border-radius: 6px;
+  padding: 3px 8px;
+  width: 52px;
+  text-align: center;
+}
+
+.news-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-headline {
+  font-size: 13px;
+  color: #1f2937;
+  margin: 0 0 3px 0;
+  line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.news-time {
+  font-size: 11px;
+  color: #9ca3af;
+}
+
+.news-tag {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .news-headline {
+    white-space: normal;
+  }
+  .news-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 }

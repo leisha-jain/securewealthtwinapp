@@ -10,6 +10,8 @@ YOU own this file. Add / tune signals here.
 
 from datetime import datetime
 
+from honeypot import signal_honeypot   # Signal 8 — runs first (see ALL_SIGNALS)
+
 
 # ─────────────────────────────────────────────────────────────────
 # SIGNAL 1 — New / Untrusted Device
@@ -169,10 +171,59 @@ def signal_night_large_txn(payload: dict, history: dict) -> dict:
 
 
 # ─────────────────────────────────────────────────────────────────
+# SIGNAL 9 — Velocity Abuse (pattern across many transactions)
+# Score: +15
+# Logic: Single-transaction signals miss slow-burn / rapid-fire fraud.
+#        If the user fired 5+ wealth actions inside a 10-minute window,
+#        that is bot-like velocity — someone spraying transactions
+#        hoping one slips through.
+#
+#        The window check itself lives in user_store.check_velocity();
+#        api.py evaluates it and injects the boolean as `velocity_abuse`
+#        so this signal stays pure and unit-testable.
+# ─────────────────────────────────────────────────────────────────
+def signal_velocity_abuse(payload: dict, history: dict) -> dict:
+    triggered = bool(history.get("velocity_abuse", False))
+
+    return {
+        "signal":    "velocity_abuse",
+        "triggered": triggered,
+        "score":     15 if triggered else 0,
+        "reason":    "5+ wealth actions within 10 minutes (automated velocity)"
+                     if triggered else "Action velocity is normal",
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
+# SIGNAL 10 — Geographic / Device Anomaly (mid-session)
+# Score: +20
+# Logic: If the device_id changes part-way through an active session,
+#        the session may have been hijacked or replayed from another
+#        machine. api.py compares the current device against the one
+#        the session started on and injects `device_changed`.
+# ─────────────────────────────────────────────────────────────────
+def signal_geographic_anomaly(payload: dict, history: dict) -> dict:
+    triggered = bool(history.get("device_changed", False))
+
+    return {
+        "signal":    "geographic_anomaly",
+        "triggered": triggered,
+        "score":     20 if triggered else 0,
+        "reason":    "Device changed mid-session — possible session hijack"
+                     if triggered else "Session device is consistent",
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
 # MASTER LIST — every signal the engine evaluates
 # To add a new signal: write the function above, add it here.
+#
+# signal_honeypot is Signal 8 and is listed FIRST on purpose: a
+# honeypot hit is an instant BLOCK, so it should be evaluated before
+# anything else spends cycles.
 # ─────────────────────────────────────────────────────────────────
 ALL_SIGNALS = [
+    signal_honeypot,          # Signal 8 — cyber deception (runs first)
     signal_new_device,
     signal_fast_action,
     signal_amount_anomaly,
@@ -180,4 +231,6 @@ ALL_SIGNALS = [
     signal_first_investment,
     signal_retry_loop,
     signal_night_large_txn,
+    signal_velocity_abuse,    # Signal 9
+    signal_geographic_anomaly, # Signal 10
 ]

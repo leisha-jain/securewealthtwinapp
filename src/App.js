@@ -181,9 +181,18 @@ export default function App() {
   const [language, setLanguage] = useState(
     () => localStorage.getItem("preferred_language") || "en"
   );
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("dark_mode") === "true"
+  );
   
 
   const p = PERSONAS[pKey] || PERSONAS["priya"];
+
+  const toggleDark = () => setDarkMode(d => {
+    const next = !d;
+    localStorage.setItem("dark_mode", next);
+    return next;
+  });
 
   useEffect(() => {
     const h = (e) => {
@@ -241,7 +250,7 @@ if (step === "register3") {
 
   // In the main app return, replace the old layout with:
 return (
-  <div style={{ display: "flex", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+  <div className={`dashboard-container${darkMode ? " dark" : ""}`} style={{ display: "flex", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
 
     {/* ✅ SIDEBAR (GLOBAL FOR ALL PAGES) */}
     <Navbar
@@ -249,12 +258,14 @@ return (
       setPage={setPage}
       language={language}
       onLanguageChange={setLanguage}
+      darkMode={darkMode}
+      onDarkModeToggle={toggleDark}
     />
 
     {/* ✅ MAIN CONTENT AREA */}
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
 
-      <main style={{ background: "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
+      <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
 
         {page === "dashboard" && (
           <Dashboard p={p} onRisk={setFraud} language={language} />
