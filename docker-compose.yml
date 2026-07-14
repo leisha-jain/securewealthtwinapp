@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./services/api-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - PORT=8000
+      - WEALTH_ENGINE_URL=http://wealth-engine:8001
+      - FRAUD_ENGINE_URL=http://fraud-engine:8002
+      - CHAT_SERVICE_URL=http://chat-service:8003
+      - AGGREGATOR_URL=http://mock-aggregator:8004
+      - INTERNAL_SECRET=swt-2026
+      - JWT_SECRET=changeme
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_FROM_NUMBER=${TWILIO_FROM_NUMBER}
+    depends_on:
+      - wealth-engine
+      - fraud-engine
+      - chat-service
+      - mock-aggregator
+
+  wealth-engine:
+    build: ./services/wealth-engine
+    ports:
+      - "8001:8001"
+    environment:
+      - INTERNAL_SECRET=swt-2026
+    volumes:
+      - ./data:/app/data
+
+  fraud-engine:
+    build: ./services/fraud-engine
+    ports:
+      - "8002:8002"
+    environment:
+      - INTERNAL_SECRET=swt-2026
+    volumes:
+      - ./data:/app/data
+
+  chat-service:
+    build: ./services/chat-service
+    ports:
+      - "8003:8003"
+    environment:
+      - INTERNAL_SECRET=swt-2026
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+    volumes:
+      - ./data:/app/data
+
+  mock-aggregator:
+    build: ./data
+    ports:
+      - "8004:8004"
+    environment:
+      - INTERNAL_SECRET=swt-2026
+    volumes:
+      - ./data:/app/data

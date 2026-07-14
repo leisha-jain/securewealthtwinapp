@@ -75,8 +75,33 @@ _DEFAULT_USERS: dict = {
     },
 }
 
-# Live in-memory store (starts as a deep copy of defaults)
-_STORE: dict = deepcopy(_DEFAULT_USERS)
+import json
+from pathlib import Path
+
+# Live in-memory store linked to persistent file
+_DB_PATH = Path(__file__).resolve().parent.parent.parent / "data" / "fraud_db.json"
+
+def _load_store() -> dict:
+    if not _DB_PATH.exists():
+        _DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_DB_PATH, "w", encoding="utf-8") as f:
+            json.dump(_DEFAULT_USERS, f, indent=4)
+        return deepcopy(_DEFAULT_USERS)
+    try:
+        with open(_DB_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"[Fraud DB] Failed to read store, falling back to defaults: {e}")
+        return deepcopy(_DEFAULT_USERS)
+
+def _save_store(store_data: dict) -> None:
+    try:
+        with open(_DB_PATH, "w", encoding="utf-8") as f:
+            json.dump(store_data, f, indent=4)
+    except Exception as e:
+        print(f"[Fraud DB] Failed to write store: {e}")
+
+_STORE: dict = _load_store()
 
 
 def get_user_history(user_id: str) -> Optional[dict]:
@@ -93,6 +118,7 @@ def update_trusted_device(user_id: str, device_id: str) -> None:
     user = _STORE.get(user_id)
     if user and device_id not in user["trusted_devices"]:
         user["trusted_devices"].append(device_id)
+        _save_store(_STORE)
 
 
 def record_action_type(user_id: str, action_type: str) -> None:
@@ -103,6 +129,7 @@ def record_action_type(user_id: str, action_type: str) -> None:
     user = _STORE.get(user_id)
     if user and action_type not in user["past_action_types"]:
         user["past_action_types"].append(action_type)
+        _save_store(_STORE)
 
 
 def update_avg_amount(user_id: str, new_amount: float) -> None:
@@ -114,6 +141,7 @@ def update_avg_amount(user_id: str, new_amount: float) -> None:
     if user:
         old_avg = user["avg_transaction_amount"]
         user["avg_transaction_amount"] = round(0.8 * old_avg + 0.2 * new_amount)
+        _save_store(_STORE)
 
 
 def list_users() -> list:

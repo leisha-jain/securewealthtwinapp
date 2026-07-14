@@ -82,13 +82,26 @@ export default function OTP({ onVerify }) {
   };
 
   /* ─── Confirm ─────────────────────────────────────────── */
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (!isComplete || status === "verifying") return;
     setStatus("verifying");
 
-    setTimeout(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      const userId = user.userId;
       const code = values.join("");
-      if (code !== "000000") {
+
+      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+      const res = await fetch(`${API_URL}/api/auth/verify-otp`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ userId, code })
+      });
+
+      const data = await res.json();
+      if (res.status === 200 && data.success) {
         setStatus("success");
         clearInterval(timerRef.current);
         setTimeout(() => onVerify?.(), 1500);
@@ -100,7 +113,15 @@ export default function OTP({ onVerify }) {
           inputRefs.current[0]?.focus();
         }, 600);
       }
-    }, 1200);
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setValues(Array(OTP_LENGTH).fill(""));
+      setTimeout(() => {
+        setStatus("idle");
+        inputRefs.current[0]?.focus();
+      }, 600);
+    }
   };
 
   /* ─── Resend ──────────────────────────────────────────── */

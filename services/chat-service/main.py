@@ -8,6 +8,12 @@ from typing import Optional
 
 load_dotenv()
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+if not OPENROUTER_API_KEY:
+    print("\n" + "="*80)
+    print("[WARNING] OPENROUTER_API_KEY is not configured in the environment (.env file).")
+    print("The chat service will run, but it will fallback to keyword-based local responses.")
+    print("To enable full Llama 3 AI capabilities, get an API key from https://openrouter.ai/")
+    print("="*80 + "\n")
 MODEL = "meta-llama/llama-3.3-70b-instruct"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 

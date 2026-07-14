@@ -42,3 +42,7 @@ Thumbs.db
 # Docker
 *.env
 docker-compose.override.yml
+
+# Database files
+data/db.json
+data/fraud_db.json
