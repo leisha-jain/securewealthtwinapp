@@ -3,7 +3,7 @@
 // Entry point: all frontend requests flow through here.
 // ─────────────────────────────────────────────────────────────────
 
-require('dotenv').config();
+require('dotenv').config({ path: require('path').resolve(__dirname, '../../.env') });
 const express = require('express');
 const cors = require('cors');
 const authRouter = require('./routes/auth');
