@@ -4,59 +4,261 @@
   "age": 33,
   "monthly_income_avg": 65000,
   "risk_profile": "moderate",
-  "trusted_devices": ["device_iphone_neha"],
+  "trusted_devices": [
+    "device_iphone_neha"
+  ],
   "typical_avg_transaction": 8000,
   "transactions": [
-    { "date": "2025-01-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-01-08", "category": "groceries", "amount": 5200 },
-    { "date": "2025-01-12", "category": "business_expense", "amount": 15000 },
-    { "date": "2025-01-18", "category": "transport", "amount": 2100 },
-    { "date": "2025-01-25", "category": "income", "amount": 40000 },
-    { "date": "2025-02-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-02-10", "category": "groceries", "amount": 4800 },
-    { "date": "2025-02-20", "category": "income", "amount": 110000 },
-    { "date": "2025-02-22", "category": "shopping", "amount": 12000 },
-    { "date": "2025-02-25", "category": "business_expense", "amount": 18000 },
-    { "date": "2025-03-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-03-08", "category": "groceries", "amount": 5500 },
-    { "date": "2025-03-15", "category": "income", "amount": 25000 },
-    { "date": "2025-03-20", "category": "transport", "amount": 1800 },
-    { "date": "2025-04-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-04-10", "category": "groceries", "amount": 4900 },
-    { "date": "2025-04-18", "category": "income", "amount": 95000 },
-    { "date": "2025-04-22", "category": "business_expense", "amount": 22000 },
-    { "date": "2025-05-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-05-09", "category": "groceries", "amount": 5100 },
-    { "date": "2025-05-20", "category": "income", "amount": 30000 },
-    { "date": "2025-05-25", "category": "transport", "amount": 2400 },
-    { "date": "2025-06-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-06-12", "category": "groceries", "amount": 5300 },
-    { "date": "2025-06-15", "category": "income", "amount": 120000 },
-    { "date": "2025-06-20", "category": "shopping", "amount": 18000 },
-    { "date": "2025-06-25", "category": "business_expense", "amount": 25000 },
-    { "date": "2025-07-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-07-08", "category": "groceries", "amount": 4700 },
-    { "date": "2025-07-20", "category": "income", "amount": 20000 },
-    { "date": "2025-08-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-08-10", "category": "groceries", "amount": 5000 },
-    { "date": "2025-08-18", "category": "income", "amount": 85000 },
-    { "date": "2025-08-22", "category": "business_expense", "amount": 19000 },
-    { "date": "2025-09-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-09-09", "category": "groceries", "amount": 5400 },
-    { "date": "2025-09-15", "category": "income", "amount": 45000 },
-    { "date": "2025-09-25", "category": "transport", "amount": 2200 },
-    { "date": "2025-10-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-10-10", "category": "groceries", "amount": 5100 },
-    { "date": "2025-10-18", "category": "income", "amount": 100000 },
-    { "date": "2025-10-25", "category": "business_expense", "amount": 21000 },
-    { "date": "2025-11-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-11-09", "category": "groceries", "amount": 4900 },
-    { "date": "2025-11-20", "category": "income", "amount": 35000 },
-    { "date": "2025-12-05", "category": "rent", "amount": 20000 },
-    { "date": "2025-12-10", "category": "groceries", "amount": 5800 },
-    { "date": "2025-12-15", "category": "income", "amount": 75000 },
-    { "date": "2025-12-22", "category": "shopping", "amount": 14000 },
-    { "date": "2025-12-28", "category": "business_expense", "amount": 16000 }
+    {
+      "date": "2025-01-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-01-08",
+      "category": "groceries",
+      "amount": 5200
+    },
+    {
+      "date": "2025-01-12",
+      "category": "business_expense",
+      "amount": 15000
+    },
+    {
+      "date": "2025-01-18",
+      "category": "transport",
+      "amount": 2100
+    },
+    {
+      "date": "2025-01-25",
+      "category": "income",
+      "amount": 40000
+    },
+    {
+      "date": "2025-02-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-02-10",
+      "category": "groceries",
+      "amount": 4800
+    },
+    {
+      "date": "2025-02-20",
+      "category": "income",
+      "amount": 110000
+    },
+    {
+      "date": "2025-02-22",
+      "category": "shopping",
+      "amount": 12000
+    },
+    {
+      "date": "2025-02-25",
+      "category": "business_expense",
+      "amount": 18000
+    },
+    {
+      "date": "2025-03-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-03-08",
+      "category": "groceries",
+      "amount": 5500
+    },
+    {
+      "date": "2025-03-15",
+      "category": "income",
+      "amount": 25000
+    },
+    {
+      "date": "2025-03-20",
+      "category": "transport",
+      "amount": 1800
+    },
+    {
+      "date": "2025-04-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-04-10",
+      "category": "groceries",
+      "amount": 4900
+    },
+    {
+      "date": "2025-04-18",
+      "category": "income",
+      "amount": 95000
+    },
+    {
+      "date": "2025-04-22",
+      "category": "business_expense",
+      "amount": 22000
+    },
+    {
+      "date": "2025-05-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-05-09",
+      "category": "groceries",
+      "amount": 5100
+    },
+    {
+      "date": "2025-05-20",
+      "category": "income",
+      "amount": 30000
+    },
+    {
+      "date": "2025-05-25",
+      "category": "transport",
+      "amount": 2400
+    },
+    {
+      "date": "2025-06-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-06-12",
+      "category": "groceries",
+      "amount": 5300
+    },
+    {
+      "date": "2025-06-15",
+      "category": "income",
+      "amount": 120000
+    },
+    {
+      "date": "2025-06-20",
+      "category": "shopping",
+      "amount": 18000
+    },
+    {
+      "date": "2025-06-25",
+      "category": "business_expense",
+      "amount": 25000
+    },
+    {
+      "date": "2025-07-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-07-08",
+      "category": "groceries",
+      "amount": 4700
+    },
+    {
+      "date": "2025-07-20",
+      "category": "income",
+      "amount": 20000
+    },
+    {
+      "date": "2025-08-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-08-10",
+      "category": "groceries",
+      "amount": 5000
+    },
+    {
+      "date": "2025-08-18",
+      "category": "income",
+      "amount": 85000
+    },
+    {
+      "date": "2025-08-22",
+      "category": "business_expense",
+      "amount": 19000
+    },
+    {
+      "date": "2025-09-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-09-09",
+      "category": "groceries",
+      "amount": 5400
+    },
+    {
+      "date": "2025-09-15",
+      "category": "income",
+      "amount": 45000
+    },
+    {
+      "date": "2025-09-25",
+      "category": "transport",
+      "amount": 2200
+    },
+    {
+      "date": "2025-10-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-10-10",
+      "category": "groceries",
+      "amount": 5100
+    },
+    {
+      "date": "2025-10-18",
+      "category": "income",
+      "amount": 100000
+    },
+    {
+      "date": "2025-10-25",
+      "category": "business_expense",
+      "amount": 21000
+    },
+    {
+      "date": "2025-11-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-11-09",
+      "category": "groceries",
+      "amount": 4900
+    },
+    {
+      "date": "2025-11-20",
+      "category": "income",
+      "amount": 35000
+    },
+    {
+      "date": "2025-12-05",
+      "category": "rent",
+      "amount": 20000
+    },
+    {
+      "date": "2025-12-10",
+      "category": "groceries",
+      "amount": 5800
+    },
+    {
+      "date": "2025-12-15",
+      "category": "income",
+      "amount": 75000
+    },
+    {
+      "date": "2025-12-22",
+      "category": "shopping",
+      "amount": 14000
+    },
+    {
+      "date": "2025-12-28",
+      "category": "business_expense",
+      "amount": 16000
+    }
   ],
   "portfolio": {
     "holdings": [
@@ -72,16 +274,36 @@
     "total_invested": 120000,
     "total_current_value": 134000,
     "sips": [
-      { "fund": "HDFC Balanced Advantage", "amount": 5000, "active": true }
+      {
+        "fund": "HDFC Balanced Advantage",
+        "amount": 5000,
+        "active": true
+      }
     ]
   },
   "assets": [
-    { "type": "gold", "quantity_grams": 30, "value": 210000 },
-    { "type": "vehicle", "description": "Activa 2021", "value": 65000 }
+    {
+      "type": "gold",
+      "quantity_grams": 30,
+      "value": 210000
+    },
+    {
+      "type": "vehicle",
+      "description": "Activa 2021",
+      "value": 65000
+    }
   ],
   "accounts": [
-    { "bank": "Kotak", "account_type": "Savings", "balance": 67000 },
-    { "bank": "ICICI", "account_type": "OD Account", "balance": -85000 }
+    {
+      "bank": "Kotak",
+      "account_type": "Savings",
+      "balance": 67000
+    },
+    {
+      "bank": "ICICI",
+      "account_type": "OD Account",
+      "balance": -85000
+    }
   ],
   "liabilities": 85000,
   "health_insurance": false,
@@ -98,5 +320,21 @@
       "saved_so_far": 0,
       "deadline": "2025-12-31"
     }
-  ]
+  ],
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "note": "honeypot_asset_do_not_display",
+      "folio": "DECOY-FOLIO-010"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup"
 }

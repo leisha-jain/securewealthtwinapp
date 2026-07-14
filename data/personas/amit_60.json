@@ -1,0 +1,4802 @@
+{
+  "user_id": "amit_60",
+  "name": "Amit Banerjee",
+  "age": 60,
+  "gender": "male",
+  "city": "Kolkata",
+  "occupation": "Retired IAS Officer",
+  "employer": "Government of India (Retired)",
+  "financial_profile": {
+    "monthly_income": 95000,
+    "monthly_expenses": 65000,
+    "savings_rate": 31.6,
+    "risk_tolerance": 2,
+    "equity_allocation": 15,
+    "debt_allocation": 55,
+    "gold_allocation": 15,
+    "fd_allocation": 15,
+    "total_portfolio_value": 12500000,
+    "monthly_sip_amount": 10000,
+    "num_goals": 2,
+    "debt_to_income_ratio": 0.0,
+    "emergency_fund_months": 24,
+    "years_to_retirement": 0,
+    "net_worth": 28000000
+  },
+  "portfolio": {
+    "equity": [
+      {
+        "symbol": "HDFCBANK",
+        "units": 200,
+        "buy_price": 1100.0,
+        "current_price": 1648.35,
+        "value": 329670
+      },
+      {
+        "symbol": "ICICIBANK",
+        "units": 150,
+        "buy_price": 700.0,
+        "current_price": 1098.2,
+        "value": 164730
+      }
+    ],
+    "mutual_funds": [
+      {
+        "name": "SBI Short Duration Fund",
+        "folio": "SBI-2018-6612",
+        "units": 4200,
+        "nav": 62.3,
+        "invested": 220000,
+        "current_value": 261660,
+        "type": "debt"
+      },
+      {
+        "name": "HDFC Corporate Bond Fund",
+        "folio": "HDF-2020-9934",
+        "units": 6800,
+        "nav": 85.4,
+        "invested": 500000,
+        "current_value": 580720,
+        "type": "debt"
+      },
+      {
+        "name": "Axis Liquid Fund",
+        "folio": "AXL-2022-2241",
+        "units": 12000,
+        "nav": 28.9,
+        "invested": 300000,
+        "current_value": 346800,
+        "type": "liquid"
+      }
+    ],
+    "gold": [
+      {
+        "name": "Sovereign Gold Bond 2022-23",
+        "units": 50,
+        "buy_price": 5611,
+        "current_value": 367000,
+        "type": "sgb"
+      },
+      {
+        "type": "physical",
+        "description": "Jewellery and coins 200g",
+        "current_value": 1468000
+      }
+    ],
+    "fd": [
+      {
+        "bank": "SBI",
+        "principal": 2000000,
+        "interest_rate": 7.5,
+        "maturity_date": "2028-04-20",
+        "maturity_value": 2480000,
+        "type": "cumulative"
+      },
+      {
+        "bank": "Post Office",
+        "principal": 1500000,
+        "interest_rate": 7.5,
+        "maturity_date": "2029-04-20",
+        "maturity_value": 1912500,
+        "type": "scss"
+      },
+      {
+        "bank": "HDFC Bank",
+        "principal": 1000000,
+        "interest_rate": 7.4,
+        "maturity_date": "2027-09-15",
+        "maturity_value": 1222000,
+        "type": "senior_citizen_fd"
+      }
+    ],
+    "real_estate": [
+      {
+        "type": "residential_house",
+        "location": "Salt Lake, Kolkata",
+        "current_value": 15000000,
+        "loan_outstanding": 0
+      },
+      {
+        "type": "commercial_plot",
+        "location": "New Town, Kolkata",
+        "current_value": 5000000,
+        "loan_outstanding": 0
+      }
+    ],
+    "pension": {
+      "type": "government_pension",
+      "monthly_pension": 72000,
+      "commuted_amount_received": 4200000
+    },
+    "cash_savings": 400000
+  },
+  "goals": [
+    {
+      "goal_id": "g1",
+      "name": "Medical Emergency Fund",
+      "goal_amount": 2000000,
+      "goal_saved": 1600000,
+      "target_date": "2026-12-31",
+      "monthly_contribution": 10000,
+      "priority": "high"
+    },
+    {
+      "goal_id": "g2",
+      "name": "Children's Wedding",
+      "goal_amount": 5000000,
+      "goal_saved": 3500000,
+      "target_date": "2028-11-30",
+      "monthly_contribution": 0,
+      "priority": "medium"
+    }
+  ],
+  "bank_accounts": [
+    {
+      "account": "XXXX6600",
+      "bank": "SBI",
+      "type": "pension",
+      "balance": 650000
+    },
+    {
+      "account": "XXXX9121",
+      "bank": "HDFC Bank",
+      "type": "savings",
+      "balance": 250000
+    }
+  ],
+  "linked_cards": [
+    {
+      "card": "XXXX2240",
+      "type": "debit",
+      "bank": "SBI",
+      "limit": 100000,
+      "outstanding": 0
+    }
+  ],
+  "insurance": [
+    {
+      "type": "health",
+      "provider": "National Insurance",
+      "coverage": 1500000,
+      "annual_premium": 38000
+    },
+    {
+      "type": "life",
+      "provider": "LIC",
+      "sum_assured": 5000000,
+      "status": "matured",
+      "maturity_value": 2800000
+    }
+  ],
+  "tax_profile": {
+    "pan": "CDXAB5566B",
+    "regime": "old",
+    "taxable_income": 1140000,
+    "tax_paid": 90000,
+    "section_80c_used": 150000,
+    "section_80d_used": 38000,
+    "section_80ttb_used": 50000
+  },
+  "spending_categories": {
+    "groceries": 12000,
+    "utilities": 8000,
+    "health": 15000,
+    "dining": 5000,
+    "transport": 6000,
+    "domestic_help": 8000,
+    "subscriptions": 2000,
+    "religious": 5000,
+    "travel": 4000
+  },
+  "session_metadata": {
+    "last_login": "2026-04-18T10:00:00",
+    "device_id": "DEV-AMT-1190",
+    "preferred_language": "bn",
+    "mfa_enabled": true,
+    "account_status": "active",
+    "kyc_status": "verified"
+  },
+  "honeypot_assets": [
+    {
+      "name": "DECOY_MIDCAP_FUND_001",
+      "type": "fake_sip",
+      "monthly_amount": 0,
+      "folio": "DECOY-FOLIO-003",
+      "note": "honeypot_asset_do_not_display"
+    },
+    {
+      "account": "XXXX9999",
+      "bank": "SHADOW_BANK",
+      "type": "honeypot_account",
+      "note": "honeypot_asset_do_not_display"
+    }
+  ],
+  "trap_field_label": "_csrf_token_backup",
+  "transactions": [
+    {
+      "txn_id": "TXN-AMI-202504-SAL",
+      "date": "2025-04-01",
+      "category": "income",
+      "amount": 96396.44,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0004",
+      "date": "2025-04-02",
+      "category": "utilities",
+      "amount": 8289.58,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0014",
+      "date": "2025-04-02",
+      "category": "transport",
+      "amount": 1086.97,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0028",
+      "date": "2025-04-02",
+      "category": "travel",
+      "amount": 509.5,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0029",
+      "date": "2025-04-03",
+      "category": "travel",
+      "amount": 548.84,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0015",
+      "date": "2025-04-04",
+      "category": "transport",
+      "amount": 1180.52,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0033",
+      "date": "2025-04-05",
+      "category": "travel",
+      "amount": 489.8,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-SIP",
+      "date": "2025-04-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0006",
+      "date": "2025-04-07",
+      "category": "health",
+      "amount": 4053.07,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0011",
+      "date": "2025-04-07",
+      "category": "dining",
+      "amount": 1138.94,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0019",
+      "date": "2025-04-08",
+      "category": "domestic_help",
+      "amount": 2182.21,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0001",
+      "date": "2025-04-09",
+      "category": "groceries",
+      "amount": 3240.02,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0008",
+      "date": "2025-04-09",
+      "category": "dining",
+      "amount": 1224.6,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0016",
+      "date": "2025-04-10",
+      "category": "transport",
+      "amount": 997.82,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0027",
+      "date": "2025-04-11",
+      "category": "travel",
+      "amount": 507.34,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0013",
+      "date": "2025-04-12",
+      "category": "transport",
+      "amount": 1132.31,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0022",
+      "date": "2025-04-12",
+      "category": "religious",
+      "amount": 720.88,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0012",
+      "date": "2025-04-13",
+      "category": "transport",
+      "amount": 1009.06,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0026",
+      "date": "2025-04-13",
+      "category": "religious",
+      "amount": 721.13,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0010",
+      "date": "2025-04-14",
+      "category": "dining",
+      "amount": 1079.83,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0031",
+      "date": "2025-04-16",
+      "category": "travel",
+      "amount": 505.74,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0005",
+      "date": "2025-04-17",
+      "category": "health",
+      "amount": 4437.28,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0007",
+      "date": "2025-04-18",
+      "category": "health",
+      "amount": 5299.77,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0030",
+      "date": "2025-04-19",
+      "category": "travel",
+      "amount": 665.86,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0024",
+      "date": "2025-04-20",
+      "category": "religious",
+      "amount": 882.68,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0021",
+      "date": "2025-04-21",
+      "category": "religious",
+      "amount": 759.32,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0032",
+      "date": "2025-04-21",
+      "category": "travel",
+      "amount": 659.36,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0018",
+      "date": "2025-04-23",
+      "category": "domestic_help",
+      "amount": 2749.18,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0023",
+      "date": "2025-04-23",
+      "category": "religious",
+      "amount": 890.06,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0002",
+      "date": "2025-04-24",
+      "category": "groceries",
+      "amount": 3557.14,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0025",
+      "date": "2025-04-24",
+      "category": "religious",
+      "amount": 723.71,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0009",
+      "date": "2025-04-25",
+      "category": "dining",
+      "amount": 1434.65,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0017",
+      "date": "2025-04-28",
+      "category": "domestic_help",
+      "amount": 2793.09,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0020",
+      "date": "2025-04-28",
+      "category": "subscriptions",
+      "amount": 2284.25,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202504-0003",
+      "date": "2025-04-29",
+      "category": "groceries",
+      "amount": 4282.72,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 4,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0013",
+      "date": "2025-05-01",
+      "category": "health",
+      "amount": 1849.85,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0032",
+      "date": "2025-05-01",
+      "category": "religious",
+      "amount": 1032.01,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-SAL",
+      "date": "2025-05-01",
+      "category": "income",
+      "amount": 96752.73,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0023",
+      "date": "2025-05-03",
+      "category": "transport",
+      "amount": 1414.54,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0024",
+      "date": "2025-05-03",
+      "category": "transport",
+      "amount": 1193.28,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0036",
+      "date": "2025-05-03",
+      "category": "travel",
+      "amount": 653.63,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0010",
+      "date": "2025-05-04",
+      "category": "utilities",
+      "amount": 2858.97,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0021",
+      "date": "2025-05-04",
+      "category": "dining",
+      "amount": 1244.3,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0003",
+      "date": "2025-05-05",
+      "category": "groceries",
+      "amount": 1521.82,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0005",
+      "date": "2025-05-05",
+      "category": "groceries",
+      "amount": 1961.9,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0025",
+      "date": "2025-05-05",
+      "category": "transport",
+      "amount": 1215.7,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0038",
+      "date": "2025-05-05",
+      "category": "travel",
+      "amount": 506.11,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-SIP",
+      "date": "2025-05-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0018",
+      "date": "2025-05-06",
+      "category": "dining",
+      "amount": 1186.96,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0022",
+      "date": "2025-05-08",
+      "category": "transport",
+      "amount": 1074.94,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0031",
+      "date": "2025-05-08",
+      "category": "religious",
+      "amount": 1225.74,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0033",
+      "date": "2025-05-08",
+      "category": "travel",
+      "amount": 509.74,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0039",
+      "date": "2025-05-08",
+      "category": "travel",
+      "amount": 588.85,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0014",
+      "date": "2025-05-09",
+      "category": "health",
+      "amount": 2465.02,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0012",
+      "date": "2025-05-10",
+      "category": "health",
+      "amount": 2005.86,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0016",
+      "date": "2025-05-10",
+      "category": "health",
+      "amount": 2460.44,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0002",
+      "date": "2025-05-13",
+      "category": "groceries",
+      "amount": 1987.08,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0007",
+      "date": "2025-05-13",
+      "category": "groceries",
+      "amount": 1780.39,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0029",
+      "date": "2025-05-13",
+      "category": "religious",
+      "amount": 1356.47,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0030",
+      "date": "2025-05-15",
+      "category": "religious",
+      "amount": 1324.94,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0008",
+      "date": "2025-05-17",
+      "category": "utilities",
+      "amount": 3195.86,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0015",
+      "date": "2025-05-17",
+      "category": "health",
+      "amount": 2367.4,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0001",
+      "date": "2025-05-19",
+      "category": "groceries",
+      "amount": 1551.59,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0017",
+      "date": "2025-05-20",
+      "category": "health",
+      "amount": 2261.96,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0020",
+      "date": "2025-05-20",
+      "category": "dining",
+      "amount": 1459.25,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0034",
+      "date": "2025-05-21",
+      "category": "travel",
+      "amount": 473.37,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0006",
+      "date": "2025-05-22",
+      "category": "groceries",
+      "amount": 1481.13,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0037",
+      "date": "2025-05-22",
+      "category": "travel",
+      "amount": 511.54,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0004",
+      "date": "2025-05-25",
+      "category": "groceries",
+      "amount": 1709.84,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0011",
+      "date": "2025-05-25",
+      "category": "health",
+      "amount": 2357.9,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0028",
+      "date": "2025-05-25",
+      "category": "subscriptions",
+      "amount": 2343.13,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0009",
+      "date": "2025-05-28",
+      "category": "utilities",
+      "amount": 3169.15,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0027",
+      "date": "2025-05-28",
+      "category": "domestic_help",
+      "amount": 7248.18,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0035",
+      "date": "2025-05-29",
+      "category": "travel",
+      "amount": 509.47,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0019",
+      "date": "2025-05-30",
+      "category": "dining",
+      "amount": 1476.75,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202505-0026",
+      "date": "2025-05-31",
+      "category": "transport",
+      "amount": 1276.68,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 5,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-SAL",
+      "date": "2025-06-01",
+      "category": "income",
+      "amount": 95371.79,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0003",
+      "date": "2025-06-02",
+      "category": "groceries",
+      "amount": 3436.6,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0010",
+      "date": "2025-06-02",
+      "category": "dining",
+      "amount": 1700.22,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0024",
+      "date": "2025-06-03",
+      "category": "travel",
+      "amount": 827.41,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-SIP",
+      "date": "2025-06-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0006",
+      "date": "2025-06-07",
+      "category": "health",
+      "amount": 4497.31,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0008",
+      "date": "2025-06-08",
+      "category": "health",
+      "amount": 4557.09,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0018",
+      "date": "2025-06-10",
+      "category": "religious",
+      "amount": 718.27,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0005",
+      "date": "2025-06-11",
+      "category": "utilities",
+      "amount": 7688.39,
+      "type": "debit",
+      "description": "Piped Gas",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0014",
+      "date": "2025-06-13",
+      "category": "transport",
+      "amount": 1771.0,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0015",
+      "date": "2025-06-13",
+      "category": "domestic_help",
+      "amount": 7612.71,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0002",
+      "date": "2025-06-14",
+      "category": "groceries",
+      "amount": 2825.16,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0007",
+      "date": "2025-06-14",
+      "category": "health",
+      "amount": 4897.23,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0027",
+      "date": "2025-06-14",
+      "category": "travel",
+      "amount": 1047.75,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0013",
+      "date": "2025-06-16",
+      "category": "transport",
+      "amount": 1733.05,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0023",
+      "date": "2025-06-17",
+      "category": "religious",
+      "amount": 719.14,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0017",
+      "date": "2025-06-18",
+      "category": "subscriptions",
+      "amount": 1198.17,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0019",
+      "date": "2025-06-19",
+      "category": "religious",
+      "amount": 989.57,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0021",
+      "date": "2025-06-19",
+      "category": "religious",
+      "amount": 685.72,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0026",
+      "date": "2025-06-20",
+      "category": "travel",
+      "amount": 898.49,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0004",
+      "date": "2025-06-21",
+      "category": "groceries",
+      "amount": 3184.15,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0001",
+      "date": "2025-06-22",
+      "category": "groceries",
+      "amount": 2513.19,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0016",
+      "date": "2025-06-23",
+      "category": "subscriptions",
+      "amount": 914.1,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0020",
+      "date": "2025-06-24",
+      "category": "religious",
+      "amount": 847.4,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0011",
+      "date": "2025-06-27",
+      "category": "dining",
+      "amount": 1999.52,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0009",
+      "date": "2025-06-28",
+      "category": "dining",
+      "amount": 1628.75,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0012",
+      "date": "2025-06-28",
+      "category": "transport",
+      "amount": 2341.09,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0022",
+      "date": "2025-06-28",
+      "category": "religious",
+      "amount": 834.28,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202506-0025",
+      "date": "2025-06-29",
+      "category": "travel",
+      "amount": 961.51,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 6,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0005",
+      "date": "2025-07-01",
+      "category": "groceries",
+      "amount": 2818.3,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0021",
+      "date": "2025-07-01",
+      "category": "transport",
+      "amount": 1821.34,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0034",
+      "date": "2025-07-01",
+      "category": "travel",
+      "amount": 658.61,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-SAL",
+      "date": "2025-07-01",
+      "category": "income",
+      "amount": 94330.49,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0027",
+      "date": "2025-07-02",
+      "category": "religious",
+      "amount": 1214.89,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0024",
+      "date": "2025-07-03",
+      "category": "subscriptions",
+      "amount": 535.91,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0006",
+      "date": "2025-07-04",
+      "category": "utilities",
+      "amount": 3198.35,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0015",
+      "date": "2025-07-04",
+      "category": "dining",
+      "amount": 604.41,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0030",
+      "date": "2025-07-04",
+      "category": "religious",
+      "amount": 1124.76,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0014",
+      "date": "2025-07-05",
+      "category": "dining",
+      "amount": 839.69,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-SIP",
+      "date": "2025-07-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0009",
+      "date": "2025-07-06",
+      "category": "health",
+      "amount": 3554.29,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0001",
+      "date": "2025-07-07",
+      "category": "groceries",
+      "amount": 2817.32,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0029",
+      "date": "2025-07-07",
+      "category": "religious",
+      "amount": 1449.46,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0002",
+      "date": "2025-07-08",
+      "category": "groceries",
+      "amount": 2607.54,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0016",
+      "date": "2025-07-09",
+      "category": "dining",
+      "amount": 729.49,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0004",
+      "date": "2025-07-11",
+      "category": "groceries",
+      "amount": 2208.0,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0035",
+      "date": "2025-07-11",
+      "category": "travel",
+      "amount": 625.5,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0008",
+      "date": "2025-07-12",
+      "category": "utilities",
+      "amount": 2274.62,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0020",
+      "date": "2025-07-14",
+      "category": "transport",
+      "amount": 1673.84,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0031",
+      "date": "2025-07-14",
+      "category": "travel",
+      "amount": 659.23,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0019",
+      "date": "2025-07-16",
+      "category": "dining",
+      "amount": 646.85,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0007",
+      "date": "2025-07-17",
+      "category": "utilities",
+      "amount": 2706.81,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0023",
+      "date": "2025-07-18",
+      "category": "domestic_help",
+      "amount": 8771.94,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0025",
+      "date": "2025-07-18",
+      "category": "subscriptions",
+      "amount": 774.38,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0026",
+      "date": "2025-07-19",
+      "category": "subscriptions",
+      "amount": 755.89,
+      "type": "debit",
+      "description": "Canva Pro",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0018",
+      "date": "2025-07-21",
+      "category": "dining",
+      "amount": 629.6,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0022",
+      "date": "2025-07-21",
+      "category": "transport",
+      "amount": 2216.9,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0003",
+      "date": "2025-07-22",
+      "category": "groceries",
+      "amount": 2299.95,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0012",
+      "date": "2025-07-22",
+      "category": "health",
+      "amount": 3793.41,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0013",
+      "date": "2025-07-22",
+      "category": "dining",
+      "amount": 656.97,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0010",
+      "date": "2025-07-23",
+      "category": "health",
+      "amount": 4250.62,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0017",
+      "date": "2025-07-23",
+      "category": "dining",
+      "amount": 744.24,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0011",
+      "date": "2025-07-26",
+      "category": "health",
+      "amount": 3917.52,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0033",
+      "date": "2025-07-26",
+      "category": "travel",
+      "amount": 654.77,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0037",
+      "date": "2025-07-26",
+      "category": "travel",
+      "amount": 518.13,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0036",
+      "date": "2025-07-28",
+      "category": "travel",
+      "amount": 640.51,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0028",
+      "date": "2025-07-30",
+      "category": "religious",
+      "amount": 1182.33,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202507-0032",
+      "date": "2025-07-30",
+      "category": "travel",
+      "amount": 628.45,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 7,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0026",
+      "date": "2025-08-01",
+      "category": "religious",
+      "amount": 1273.97,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-SAL",
+      "date": "2025-08-01",
+      "category": "income",
+      "amount": 92989.92,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0009",
+      "date": "2025-08-04",
+      "category": "health",
+      "amount": 2939.24,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0023",
+      "date": "2025-08-05",
+      "category": "subscriptions",
+      "amount": 612.17,
+      "type": "debit",
+      "description": "iCloud Storage",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-SIP",
+      "date": "2025-08-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0014",
+      "date": "2025-08-07",
+      "category": "transport",
+      "amount": 1159.8,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0018",
+      "date": "2025-08-07",
+      "category": "transport",
+      "amount": 1094.82,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0029",
+      "date": "2025-08-07",
+      "category": "travel",
+      "amount": 651.24,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0001",
+      "date": "2025-08-08",
+      "category": "groceries",
+      "amount": 4573.75,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0034",
+      "date": "2025-08-08",
+      "category": "travel",
+      "amount": 712.75,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0006",
+      "date": "2025-08-09",
+      "category": "health",
+      "amount": 2966.89,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0021",
+      "date": "2025-08-10",
+      "category": "domestic_help",
+      "amount": 4351.61,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0025",
+      "date": "2025-08-10",
+      "category": "religious",
+      "amount": 1307.76,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0031",
+      "date": "2025-08-10",
+      "category": "travel",
+      "amount": 709.03,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0012",
+      "date": "2025-08-11",
+      "category": "dining",
+      "amount": 1819.03,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0028",
+      "date": "2025-08-11",
+      "category": "religious",
+      "amount": 1303.33,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0007",
+      "date": "2025-08-13",
+      "category": "health",
+      "amount": 2641.48,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0022",
+      "date": "2025-08-13",
+      "category": "subscriptions",
+      "amount": 642.24,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0011",
+      "date": "2025-08-14",
+      "category": "dining",
+      "amount": 1405.6,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0015",
+      "date": "2025-08-14",
+      "category": "transport",
+      "amount": 817.75,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0027",
+      "date": "2025-08-14",
+      "category": "religious",
+      "amount": 1143.46,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0002",
+      "date": "2025-08-15",
+      "category": "groceries",
+      "amount": 4506.54,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0013",
+      "date": "2025-08-17",
+      "category": "dining",
+      "amount": 1737.47,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0008",
+      "date": "2025-08-18",
+      "category": "health",
+      "amount": 2981.15,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0032",
+      "date": "2025-08-20",
+      "category": "travel",
+      "amount": 710.36,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0004",
+      "date": "2025-08-22",
+      "category": "utilities",
+      "amount": 7113.36,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0020",
+      "date": "2025-08-22",
+      "category": "domestic_help",
+      "amount": 4197.05,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0003",
+      "date": "2025-08-26",
+      "category": "groceries",
+      "amount": 3688.31,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0016",
+      "date": "2025-08-26",
+      "category": "transport",
+      "amount": 1007.97,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0005",
+      "date": "2025-08-28",
+      "category": "health",
+      "amount": 2328.26,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0030",
+      "date": "2025-08-29",
+      "category": "travel",
+      "amount": 659.52,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0010",
+      "date": "2025-08-31",
+      "category": "health",
+      "amount": 2178.57,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0017",
+      "date": "2025-08-31",
+      "category": "transport",
+      "amount": 1074.74,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0019",
+      "date": "2025-08-31",
+      "category": "transport",
+      "amount": 972.52,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0024",
+      "date": "2025-08-31",
+      "category": "subscriptions",
+      "amount": 645.45,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202508-0033",
+      "date": "2025-08-31",
+      "category": "travel",
+      "amount": 558.24,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 8,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0029",
+      "date": "2025-09-01",
+      "category": "travel",
+      "amount": 1269.54,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-SAL",
+      "date": "2025-09-01",
+      "category": "income",
+      "amount": 95217.86,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0002",
+      "date": "2025-09-03",
+      "category": "groceries",
+      "amount": 4559.58,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0024",
+      "date": "2025-09-03",
+      "category": "religious",
+      "amount": 1353.21,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0007",
+      "date": "2025-09-04",
+      "category": "health",
+      "amount": 4986.08,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-SIP",
+      "date": "2025-09-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0008",
+      "date": "2025-09-06",
+      "category": "health",
+      "amount": 4365.26,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0016",
+      "date": "2025-09-06",
+      "category": "transport",
+      "amount": 838.6,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0026",
+      "date": "2025-09-07",
+      "category": "religious",
+      "amount": 1207.89,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0010",
+      "date": "2025-09-08",
+      "category": "health",
+      "amount": 3690.39,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0020",
+      "date": "2025-09-08",
+      "category": "transport",
+      "amount": 851.86,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0021",
+      "date": "2025-09-10",
+      "category": "domestic_help",
+      "amount": 3323.97,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0022",
+      "date": "2025-09-11",
+      "category": "domestic_help",
+      "amount": 3634.74,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0004",
+      "date": "2025-09-13",
+      "category": "utilities",
+      "amount": 8698.71,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0023",
+      "date": "2025-09-13",
+      "category": "subscriptions",
+      "amount": 1720.66,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0030",
+      "date": "2025-09-13",
+      "category": "travel",
+      "amount": 1225.93,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0017",
+      "date": "2025-09-15",
+      "category": "transport",
+      "amount": 981.08,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0001",
+      "date": "2025-09-16",
+      "category": "groceries",
+      "amount": 3591.75,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0009",
+      "date": "2025-09-17",
+      "category": "health",
+      "amount": 5324.34,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0012",
+      "date": "2025-09-18",
+      "category": "dining",
+      "amount": 1778.39,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0025",
+      "date": "2025-09-18",
+      "category": "religious",
+      "amount": 1203.8,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0003",
+      "date": "2025-09-21",
+      "category": "groceries",
+      "amount": 3863.11,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0005",
+      "date": "2025-09-21",
+      "category": "health",
+      "amount": 4039.17,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0006",
+      "date": "2025-09-25",
+      "category": "health",
+      "amount": 3609.98,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0013",
+      "date": "2025-09-25",
+      "category": "dining",
+      "amount": 1544.87,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0019",
+      "date": "2025-09-25",
+      "category": "transport",
+      "amount": 780.79,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0027",
+      "date": "2025-09-25",
+      "category": "religious",
+      "amount": 1194.74,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0028",
+      "date": "2025-09-25",
+      "category": "travel",
+      "amount": 1523.59,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0011",
+      "date": "2025-09-26",
+      "category": "dining",
+      "amount": 1637.64,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0018",
+      "date": "2025-09-27",
+      "category": "transport",
+      "amount": 943.47,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0014",
+      "date": "2025-09-29",
+      "category": "transport",
+      "amount": 965.15,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202509-0015",
+      "date": "2025-09-30",
+      "category": "transport",
+      "amount": 832.03,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 9,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-SAL",
+      "date": "2025-10-01",
+      "category": "income",
+      "amount": 96332.63,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0017",
+      "date": "2025-10-02",
+      "category": "dining",
+      "amount": 1182.91,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0008",
+      "date": "2025-10-03",
+      "category": "utilities",
+      "amount": 2840.53,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0014",
+      "date": "2025-10-03",
+      "category": "health",
+      "amount": 2702.73,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0016",
+      "date": "2025-10-03",
+      "category": "dining",
+      "amount": 889.69,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0025",
+      "date": "2025-10-04",
+      "category": "domestic_help",
+      "amount": 3162.37,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-SIP",
+      "date": "2025-10-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0021",
+      "date": "2025-10-07",
+      "category": "transport",
+      "amount": 2051.18,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0027",
+      "date": "2025-10-07",
+      "category": "subscriptions",
+      "amount": 1176.59,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0018",
+      "date": "2025-10-08",
+      "category": "dining",
+      "amount": 812.41,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0002",
+      "date": "2025-10-09",
+      "category": "groceries",
+      "amount": 1706.21,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0010",
+      "date": "2025-10-09",
+      "category": "utilities",
+      "amount": 2327.18,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0011",
+      "date": "2025-10-11",
+      "category": "health",
+      "amount": 2653.99,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0003",
+      "date": "2025-10-13",
+      "category": "groceries",
+      "amount": 1704.44,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0007",
+      "date": "2025-10-13",
+      "category": "groceries",
+      "amount": 1389.92,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0012",
+      "date": "2025-10-13",
+      "category": "health",
+      "amount": 3313.48,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0032",
+      "date": "2025-10-14",
+      "category": "religious",
+      "amount": 1173.6,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0034",
+      "date": "2025-10-14",
+      "category": "travel",
+      "amount": 644.05,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0037",
+      "date": "2025-10-14",
+      "category": "travel",
+      "amount": 866.34,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0020",
+      "date": "2025-10-16",
+      "category": "dining",
+      "amount": 895.42,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0015",
+      "date": "2025-10-18",
+      "category": "health",
+      "amount": 2423.26,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0026",
+      "date": "2025-10-19",
+      "category": "domestic_help",
+      "amount": 3124.15,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0031",
+      "date": "2025-10-19",
+      "category": "religious",
+      "amount": 1398.11,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0006",
+      "date": "2025-10-20",
+      "category": "groceries",
+      "amount": 2001.97,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0019",
+      "date": "2025-10-20",
+      "category": "dining",
+      "amount": 1135.69,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0023",
+      "date": "2025-10-20",
+      "category": "transport",
+      "amount": 1734.23,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0030",
+      "date": "2025-10-20",
+      "category": "religious",
+      "amount": 1425.15,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0033",
+      "date": "2025-10-21",
+      "category": "travel",
+      "amount": 662.07,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0022",
+      "date": "2025-10-25",
+      "category": "transport",
+      "amount": 2159.57,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0029",
+      "date": "2025-10-25",
+      "category": "religious",
+      "amount": 1050.95,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0004",
+      "date": "2025-10-26",
+      "category": "groceries",
+      "amount": 1830.08,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0005",
+      "date": "2025-10-27",
+      "category": "groceries",
+      "amount": 1868.01,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0013",
+      "date": "2025-10-27",
+      "category": "health",
+      "amount": 3302.41,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0024",
+      "date": "2025-10-27",
+      "category": "domestic_help",
+      "amount": 2255.5,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0028",
+      "date": "2025-10-27",
+      "category": "subscriptions",
+      "amount": 1036.84,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0036",
+      "date": "2025-10-27",
+      "category": "travel",
+      "amount": 843.39,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0009",
+      "date": "2025-10-28",
+      "category": "utilities",
+      "amount": 2590.52,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0001",
+      "date": "2025-10-29",
+      "category": "groceries",
+      "amount": 1919.91,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202510-0035",
+      "date": "2025-10-31",
+      "category": "travel",
+      "amount": 673.77,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 10,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0031",
+      "date": "2025-11-01",
+      "category": "travel",
+      "amount": 560.69,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-SAL",
+      "date": "2025-11-01",
+      "category": "income",
+      "amount": 93014.84,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0029",
+      "date": "2025-11-02",
+      "category": "religious",
+      "amount": 708.86,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0033",
+      "date": "2025-11-02",
+      "category": "travel",
+      "amount": 624.19,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0016",
+      "date": "2025-11-03",
+      "category": "dining",
+      "amount": 1396.47,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0022",
+      "date": "2025-11-04",
+      "category": "domestic_help",
+      "amount": 3602.25,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0026",
+      "date": "2025-11-04",
+      "category": "religious",
+      "amount": 865.6,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-SIP",
+      "date": "2025-11-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0012",
+      "date": "2025-11-07",
+      "category": "health",
+      "amount": 2516.63,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0024",
+      "date": "2025-11-07",
+      "category": "subscriptions",
+      "amount": 874.06,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0004",
+      "date": "2025-11-08",
+      "category": "groceries",
+      "amount": 2229.41,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0017",
+      "date": "2025-11-08",
+      "category": "transport",
+      "amount": 1442.64,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0005",
+      "date": "2025-11-09",
+      "category": "groceries",
+      "amount": 2817.24,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0009",
+      "date": "2025-11-09",
+      "category": "health",
+      "amount": 2354.82,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0021",
+      "date": "2025-11-09",
+      "category": "domestic_help",
+      "amount": 4324.57,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0018",
+      "date": "2025-11-12",
+      "category": "transport",
+      "amount": 1598.38,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0019",
+      "date": "2025-11-12",
+      "category": "transport",
+      "amount": 1532.08,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0027",
+      "date": "2025-11-12",
+      "category": "religious",
+      "amount": 765.42,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0035",
+      "date": "2025-11-13",
+      "category": "travel",
+      "amount": 752.56,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0002",
+      "date": "2025-11-15",
+      "category": "groceries",
+      "amount": 2663.66,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0007",
+      "date": "2025-11-16",
+      "category": "health",
+      "amount": 2336.4,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0008",
+      "date": "2025-11-16",
+      "category": "health",
+      "amount": 2325.01,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0013",
+      "date": "2025-11-16",
+      "category": "dining",
+      "amount": 1360.04,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0015",
+      "date": "2025-11-16",
+      "category": "dining",
+      "amount": 1322.95,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0032",
+      "date": "2025-11-16",
+      "category": "travel",
+      "amount": 609.16,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0034",
+      "date": "2025-11-16",
+      "category": "travel",
+      "amount": 784.28,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0011",
+      "date": "2025-11-18",
+      "category": "health",
+      "amount": 2880.11,
+      "type": "debit",
+      "description": "Apollo Pharmacy",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0020",
+      "date": "2025-11-18",
+      "category": "transport",
+      "amount": 1797.98,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0023",
+      "date": "2025-11-18",
+      "category": "subscriptions",
+      "amount": 847.82,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0003",
+      "date": "2025-11-19",
+      "category": "groceries",
+      "amount": 2712.71,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0006",
+      "date": "2025-11-19",
+      "category": "utilities",
+      "amount": 8801.52,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0025",
+      "date": "2025-11-19",
+      "category": "religious",
+      "amount": 758.83,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0010",
+      "date": "2025-11-20",
+      "category": "health",
+      "amount": 2279.66,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0036",
+      "date": "2025-11-21",
+      "category": "travel",
+      "amount": 553.09,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0014",
+      "date": "2025-11-23",
+      "category": "dining",
+      "amount": 1379.08,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0028",
+      "date": "2025-11-23",
+      "category": "religious",
+      "amount": 767.42,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0030",
+      "date": "2025-11-23",
+      "category": "religious",
+      "amount": 851.12,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202511-0001",
+      "date": "2025-11-30",
+      "category": "groceries",
+      "amount": 2511.28,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 11,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0011",
+      "date": "2025-12-01",
+      "category": "health",
+      "amount": 1778.63,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0029",
+      "date": "2025-12-01",
+      "category": "domestic_help",
+      "amount": 2759.6,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-SAL",
+      "date": "2025-12-01",
+      "category": "income",
+      "amount": 95714.83,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0007",
+      "date": "2025-12-02",
+      "category": "groceries",
+      "amount": 1761.35,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0001",
+      "date": "2025-12-03",
+      "category": "groceries",
+      "amount": 2022.26,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0020",
+      "date": "2025-12-03",
+      "category": "dining",
+      "amount": 1413.32,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-SIP",
+      "date": "2025-12-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0043",
+      "date": "2025-12-07",
+      "category": "travel",
+      "amount": 772.24,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0010",
+      "date": "2025-12-08",
+      "category": "utilities",
+      "amount": 2219.93,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0013",
+      "date": "2025-12-08",
+      "category": "health",
+      "amount": 1963.94,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0028",
+      "date": "2025-12-08",
+      "category": "transport",
+      "amount": 694.58,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0009",
+      "date": "2025-12-09",
+      "category": "utilities",
+      "amount": 2800.55,
+      "type": "debit",
+      "description": "Mobile Recharge",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0024",
+      "date": "2025-12-09",
+      "category": "transport",
+      "amount": 823.72,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0021",
+      "date": "2025-12-10",
+      "category": "dining",
+      "amount": 1082.96,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0023",
+      "date": "2025-12-10",
+      "category": "transport",
+      "amount": 846.41,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0034",
+      "date": "2025-12-11",
+      "category": "religious",
+      "amount": 782.65,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0039",
+      "date": "2025-12-11",
+      "category": "religious",
+      "amount": 818.28,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0006",
+      "date": "2025-12-14",
+      "category": "groceries",
+      "amount": 1961.26,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0005",
+      "date": "2025-12-15",
+      "category": "groceries",
+      "amount": 1680.35,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0022",
+      "date": "2025-12-15",
+      "category": "transport",
+      "amount": 1001.55,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0025",
+      "date": "2025-12-15",
+      "category": "transport",
+      "amount": 870.85,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0033",
+      "date": "2025-12-16",
+      "category": "subscriptions",
+      "amount": 1053.91,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0004",
+      "date": "2025-12-17",
+      "category": "groceries",
+      "amount": 1526.19,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0018",
+      "date": "2025-12-18",
+      "category": "dining",
+      "amount": 1212.57,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0038",
+      "date": "2025-12-18",
+      "category": "religious",
+      "amount": 937.86,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0042",
+      "date": "2025-12-18",
+      "category": "travel",
+      "amount": 850.45,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0032",
+      "date": "2025-12-19",
+      "category": "subscriptions",
+      "amount": 872.6,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0012",
+      "date": "2025-12-20",
+      "category": "health",
+      "amount": 2100.43,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0027",
+      "date": "2025-12-20",
+      "category": "transport",
+      "amount": 937.55,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0031",
+      "date": "2025-12-21",
+      "category": "domestic_help",
+      "amount": 2635.2,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0015",
+      "date": "2025-12-22",
+      "category": "health",
+      "amount": 2103.46,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0017",
+      "date": "2025-12-22",
+      "category": "health",
+      "amount": 2250.05,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0014",
+      "date": "2025-12-23",
+      "category": "health",
+      "amount": 2320.25,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0036",
+      "date": "2025-12-23",
+      "category": "religious",
+      "amount": 776.6,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0002",
+      "date": "2025-12-25",
+      "category": "groceries",
+      "amount": 1452.65,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0008",
+      "date": "2025-12-25",
+      "category": "utilities",
+      "amount": 2239.18,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0030",
+      "date": "2025-12-25",
+      "category": "domestic_help",
+      "amount": 2748.0,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0040",
+      "date": "2025-12-25",
+      "category": "travel",
+      "amount": 677.09,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0044",
+      "date": "2025-12-25",
+      "category": "travel",
+      "amount": 755.77,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0003",
+      "date": "2025-12-26",
+      "category": "groceries",
+      "amount": 1787.19,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0016",
+      "date": "2025-12-26",
+      "category": "health",
+      "amount": 2506.21,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0041",
+      "date": "2025-12-27",
+      "category": "travel",
+      "amount": 916.77,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0035",
+      "date": "2025-12-28",
+      "category": "religious",
+      "amount": 890.04,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0026",
+      "date": "2025-12-29",
+      "category": "transport",
+      "amount": 890.76,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0019",
+      "date": "2025-12-30",
+      "category": "dining",
+      "amount": 1323.82,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202512-0037",
+      "date": "2025-12-31",
+      "category": "religious",
+      "amount": 762.74,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 12,
+      "year": 2025
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0003",
+      "date": "2026-01-01",
+      "category": "groceries",
+      "amount": 3975.54,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0005",
+      "date": "2026-01-01",
+      "category": "utilities",
+      "amount": 2464.8,
+      "type": "debit",
+      "description": "Internet Bill - Airtel",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0016",
+      "date": "2026-01-01",
+      "category": "transport",
+      "amount": 777.32,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-SAL",
+      "date": "2026-01-01",
+      "category": "income",
+      "amount": 94316.05,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0007",
+      "date": "2026-01-04",
+      "category": "health",
+      "amount": 4922.9,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0011",
+      "date": "2026-01-05",
+      "category": "dining",
+      "amount": 818.93,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0013",
+      "date": "2026-01-05",
+      "category": "dining",
+      "amount": 915.43,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0031",
+      "date": "2026-01-05",
+      "category": "religious",
+      "amount": 1007.67,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-SIP",
+      "date": "2026-01-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0006",
+      "date": "2026-01-08",
+      "category": "utilities",
+      "amount": 2568.52,
+      "type": "debit",
+      "description": "Piped Gas",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0015",
+      "date": "2026-01-11",
+      "category": "dining",
+      "amount": 951.47,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0020",
+      "date": "2026-01-11",
+      "category": "transport",
+      "amount": 851.77,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0021",
+      "date": "2026-01-13",
+      "category": "transport",
+      "amount": 947.27,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0023",
+      "date": "2026-01-13",
+      "category": "domestic_help",
+      "amount": 2388.06,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0024",
+      "date": "2026-01-14",
+      "category": "domestic_help",
+      "amount": 3046.41,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0002",
+      "date": "2026-01-15",
+      "category": "groceries",
+      "amount": 4684.28,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0019",
+      "date": "2026-01-15",
+      "category": "transport",
+      "amount": 982.38,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0008",
+      "date": "2026-01-16",
+      "category": "health",
+      "amount": 5664.29,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0010",
+      "date": "2026-01-16",
+      "category": "dining",
+      "amount": 944.91,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0025",
+      "date": "2026-01-16",
+      "category": "domestic_help",
+      "amount": 2472.72,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0027",
+      "date": "2026-01-16",
+      "category": "subscriptions",
+      "amount": 1192.33,
+      "type": "debit",
+      "description": "LinkedIn Premium",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0001",
+      "date": "2026-01-18",
+      "category": "groceries",
+      "amount": 3525.69,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0028",
+      "date": "2026-01-19",
+      "category": "religious",
+      "amount": 1251.15,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0012",
+      "date": "2026-01-20",
+      "category": "dining",
+      "amount": 730.2,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0018",
+      "date": "2026-01-22",
+      "category": "transport",
+      "amount": 884.55,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0004",
+      "date": "2026-01-23",
+      "category": "utilities",
+      "amount": 2985.93,
+      "type": "debit",
+      "description": "Water Bill",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0009",
+      "date": "2026-01-23",
+      "category": "health",
+      "amount": 4583.72,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0033",
+      "date": "2026-01-23",
+      "category": "travel",
+      "amount": 935.42,
+      "type": "debit",
+      "description": "Airbnb Stay",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0014",
+      "date": "2026-01-25",
+      "category": "dining",
+      "amount": 689.94,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0026",
+      "date": "2026-01-26",
+      "category": "subscriptions",
+      "amount": 1195.37,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0032",
+      "date": "2026-01-26",
+      "category": "travel",
+      "amount": 829.93,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0017",
+      "date": "2026-01-27",
+      "category": "transport",
+      "amount": 934.65,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0022",
+      "date": "2026-01-28",
+      "category": "transport",
+      "amount": 1005.55,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0029",
+      "date": "2026-01-28",
+      "category": "religious",
+      "amount": 1434.85,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0034",
+      "date": "2026-01-28",
+      "category": "travel",
+      "amount": 1059.93,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0035",
+      "date": "2026-01-28",
+      "category": "travel",
+      "amount": 1140.94,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202601-0030",
+      "date": "2026-01-30",
+      "category": "religious",
+      "amount": 1049.86,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 1,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0016",
+      "date": "2026-02-01",
+      "category": "dining",
+      "amount": 751.78,
+      "type": "debit",
+      "description": "Barbeque Nation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-SAL",
+      "date": "2026-02-01",
+      "category": "income",
+      "amount": 92903.31,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0002",
+      "date": "2026-02-02",
+      "category": "groceries",
+      "amount": 2757.49,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0018",
+      "date": "2026-02-03",
+      "category": "dining",
+      "amount": 848.87,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0005",
+      "date": "2026-02-04",
+      "category": "groceries",
+      "amount": 2006.76,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0006",
+      "date": "2026-02-04",
+      "category": "utilities",
+      "amount": 2884.15,
+      "type": "debit",
+      "description": "Internet Bill - Jio",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0014",
+      "date": "2026-02-05",
+      "category": "dining",
+      "amount": 970.94,
+      "type": "debit",
+      "description": "Zomato Delivery",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-SIP",
+      "date": "2026-02-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0011",
+      "date": "2026-02-06",
+      "category": "health",
+      "amount": 3218.16,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0036",
+      "date": "2026-02-06",
+      "category": "travel",
+      "amount": 1465.32,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0004",
+      "date": "2026-02-08",
+      "category": "groceries",
+      "amount": 2804.09,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0022",
+      "date": "2026-02-08",
+      "category": "transport",
+      "amount": 993.28,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0028",
+      "date": "2026-02-08",
+      "category": "subscriptions",
+      "amount": 1110.3,
+      "type": "debit",
+      "description": "Canva Pro",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0029",
+      "date": "2026-02-08",
+      "category": "subscriptions",
+      "amount": 1120.77,
+      "type": "debit",
+      "description": "Notion Pro",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0015",
+      "date": "2026-02-09",
+      "category": "dining",
+      "amount": 820.38,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0007",
+      "date": "2026-02-10",
+      "category": "utilities",
+      "amount": 2310.79,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0017",
+      "date": "2026-02-10",
+      "category": "dining",
+      "amount": 821.75,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0024",
+      "date": "2026-02-10",
+      "category": "transport",
+      "amount": 1197.08,
+      "type": "debit",
+      "description": "Ola Ride",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0035",
+      "date": "2026-02-10",
+      "category": "travel",
+      "amount": 1114.74,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0021",
+      "date": "2026-02-13",
+      "category": "transport",
+      "amount": 920.85,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0009",
+      "date": "2026-02-14",
+      "category": "health",
+      "amount": 2830.16,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0010",
+      "date": "2026-02-14",
+      "category": "health",
+      "amount": 2693.04,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0020",
+      "date": "2026-02-15",
+      "category": "transport",
+      "amount": 1076.13,
+      "type": "debit",
+      "description": "BMTC Pass Renewal",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0019",
+      "date": "2026-02-19",
+      "category": "dining",
+      "amount": 981.75,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0023",
+      "date": "2026-02-19",
+      "category": "transport",
+      "amount": 1028.77,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0012",
+      "date": "2026-02-20",
+      "category": "health",
+      "amount": 2610.08,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0003",
+      "date": "2026-02-21",
+      "category": "groceries",
+      "amount": 1985.68,
+      "type": "debit",
+      "description": "Local Kirana",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0032",
+      "date": "2026-02-21",
+      "category": "religious",
+      "amount": 1314.12,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0013",
+      "date": "2026-02-22",
+      "category": "health",
+      "amount": 2859.05,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0025",
+      "date": "2026-02-22",
+      "category": "transport",
+      "amount": 1191.18,
+      "type": "debit",
+      "description": "Petrol Pump",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0030",
+      "date": "2026-02-22",
+      "category": "religious",
+      "amount": 1310.45,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0031",
+      "date": "2026-02-22",
+      "category": "religious",
+      "amount": 1383.74,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0027",
+      "date": "2026-02-24",
+      "category": "domestic_help",
+      "amount": 4656.99,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0034",
+      "date": "2026-02-24",
+      "category": "travel",
+      "amount": 1375.77,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0001",
+      "date": "2026-02-25",
+      "category": "groceries",
+      "amount": 2521.73,
+      "type": "debit",
+      "description": "Reliance Fresh",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0008",
+      "date": "2026-02-26",
+      "category": "utilities",
+      "amount": 2182.39,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0033",
+      "date": "2026-02-26",
+      "category": "religious",
+      "amount": 1019.71,
+      "type": "debit",
+      "description": "Puja Samagri - Amazon",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202602-0026",
+      "date": "2026-02-28",
+      "category": "domestic_help",
+      "amount": 3212.96,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 2,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0010",
+      "date": "2026-03-01",
+      "category": "utilities",
+      "amount": 2976.73,
+      "type": "debit",
+      "description": "Gas Cylinder",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0035",
+      "date": "2026-03-01",
+      "category": "religious",
+      "amount": 1731.43,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-SAL",
+      "date": "2026-03-01",
+      "category": "income",
+      "amount": 95506.46,
+      "type": "credit",
+      "description": "Salary Credit - Retired officer, low velocity,",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0030",
+      "date": "2026-03-04",
+      "category": "transport",
+      "amount": 979.01,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0042",
+      "date": "2026-03-04",
+      "category": "travel",
+      "amount": 639.66,
+      "type": "debit",
+      "description": "MakeMyTrip Flight",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0019",
+      "date": "2026-03-05",
+      "category": "dining",
+      "amount": 802.77,
+      "type": "debit",
+      "description": "Swiggy Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0039",
+      "date": "2026-03-05",
+      "category": "travel",
+      "amount": 532.24,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-SIP",
+      "date": "2026-03-05",
+      "category": "sip_investment",
+      "amount": 10000,
+      "type": "debit",
+      "description": "SIP Auto-Debit",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0038",
+      "date": "2026-03-07",
+      "category": "travel",
+      "amount": 504.49,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0014",
+      "date": "2026-03-08",
+      "category": "health",
+      "amount": 2891.45,
+      "type": "debit",
+      "description": "Lab Test - Thyrocare",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0021",
+      "date": "2026-03-08",
+      "category": "dining",
+      "amount": 705.37,
+      "type": "debit",
+      "description": "Domino's Pizza",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0036",
+      "date": "2026-03-08",
+      "category": "religious",
+      "amount": 1857.86,
+      "type": "debit",
+      "description": "Temple Donation",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0002",
+      "date": "2026-03-09",
+      "category": "groceries",
+      "amount": 1715.52,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0012",
+      "date": "2026-03-09",
+      "category": "health",
+      "amount": 3770.07,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0032",
+      "date": "2026-03-09",
+      "category": "domestic_help",
+      "amount": 3296.88,
+      "type": "debit",
+      "description": "Maid Salary Transfer",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0018",
+      "date": "2026-03-10",
+      "category": "dining",
+      "amount": 969.8,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0020",
+      "date": "2026-03-10",
+      "category": "dining",
+      "amount": 982.09,
+      "type": "debit",
+      "description": "McDonald's",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0001",
+      "date": "2026-03-12",
+      "category": "groceries",
+      "amount": 1972.43,
+      "type": "debit",
+      "description": "Swiggy Instamart",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0009",
+      "date": "2026-03-12",
+      "category": "utilities",
+      "amount": 2991.56,
+      "type": "debit",
+      "description": "Electricity Bill",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0011",
+      "date": "2026-03-12",
+      "category": "health",
+      "amount": 2912.35,
+      "type": "debit",
+      "description": "Gym Membership",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0028",
+      "date": "2026-03-12",
+      "category": "transport",
+      "amount": 696.93,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0043",
+      "date": "2026-03-12",
+      "category": "travel",
+      "amount": 487.27,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0008",
+      "date": "2026-03-13",
+      "category": "utilities",
+      "amount": 2905.83,
+      "type": "debit",
+      "description": "Piped Gas",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0025",
+      "date": "2026-03-14",
+      "category": "transport",
+      "amount": 738.69,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0006",
+      "date": "2026-03-15",
+      "category": "groceries",
+      "amount": 1922.9,
+      "type": "debit",
+      "description": "BigBasket Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0022",
+      "date": "2026-03-15",
+      "category": "dining",
+      "amount": 711.89,
+      "type": "debit",
+      "description": "Cafe Coffee Day",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0026",
+      "date": "2026-03-16",
+      "category": "transport",
+      "amount": 719.66,
+      "type": "debit",
+      "description": "FastTag Recharge",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0041",
+      "date": "2026-03-18",
+      "category": "travel",
+      "amount": 682.86,
+      "type": "debit",
+      "description": "Hotel Booking - OYO",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0016",
+      "date": "2026-03-20",
+      "category": "health",
+      "amount": 3192.69,
+      "type": "debit",
+      "description": "Medplus Order",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0013",
+      "date": "2026-03-21",
+      "category": "health",
+      "amount": 3265.41,
+      "type": "debit",
+      "description": "Doctor Consultation - Practo",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0017",
+      "date": "2026-03-21",
+      "category": "health",
+      "amount": 3631.07,
+      "type": "debit",
+      "description": "Eyecare - Lenskart",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0031",
+      "date": "2026-03-21",
+      "category": "domestic_help",
+      "amount": 4071.15,
+      "type": "debit",
+      "description": "Cook Salary Transfer",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0034",
+      "date": "2026-03-21",
+      "category": "religious",
+      "amount": 1775.18,
+      "type": "debit",
+      "description": "Mandir Trust Donation",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0023",
+      "date": "2026-03-24",
+      "category": "dining",
+      "amount": 890.16,
+      "type": "debit",
+      "description": "Restaurant - Dine In",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0024",
+      "date": "2026-03-24",
+      "category": "transport",
+      "amount": 829.41,
+      "type": "debit",
+      "description": "Rapido Bike",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0033",
+      "date": "2026-03-27",
+      "category": "subscriptions",
+      "amount": 2359.21,
+      "type": "debit",
+      "description": "Adobe Creative Cloud",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0037",
+      "date": "2026-03-27",
+      "category": "travel",
+      "amount": 504.05,
+      "type": "debit",
+      "description": "Car Rental - Zoomcar",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0005",
+      "date": "2026-03-28",
+      "category": "groceries",
+      "amount": 1573.81,
+      "type": "debit",
+      "description": "D-Mart Purchase",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0040",
+      "date": "2026-03-28",
+      "category": "travel",
+      "amount": 457.79,
+      "type": "debit",
+      "description": "IRCTC Booking",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0015",
+      "date": "2026-03-29",
+      "category": "health",
+      "amount": 2777.18,
+      "type": "debit",
+      "description": "Yoga Class Fees",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0003",
+      "date": "2026-03-30",
+      "category": "groceries",
+      "amount": 1484.26,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0004",
+      "date": "2026-03-31",
+      "category": "groceries",
+      "amount": 2018.87,
+      "type": "debit",
+      "description": "Nature's Basket",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0007",
+      "date": "2026-03-31",
+      "category": "groceries",
+      "amount": 1467.95,
+      "type": "debit",
+      "description": "Zepto Delivery",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0027",
+      "date": "2026-03-31",
+      "category": "transport",
+      "amount": 825.64,
+      "type": "debit",
+      "description": "Metro Card Recharge",
+      "month": 3,
+      "year": 2026
+    },
+    {
+      "txn_id": "TXN-AMI-202603-0029",
+      "date": "2026-03-31",
+      "category": "transport",
+      "amount": 837.73,
+      "type": "debit",
+      "description": "Uber Ride",
+      "month": 3,
+      "year": 2026
+    }
+  ],
+  "transaction_metadata": {
+    "total_count": 455,
+    "period": "Apr 2025 – Mar 2026",
+    "anomaly_months": {
+      "6": [
+        "health",
+        1.8
+      ],
+      "12": [
+        "health",
+        1.6
+      ]
+    },
+    "generated_by": "generate_transactions.py"
+  }
+}
