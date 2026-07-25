@@ -27,7 +27,8 @@ _DEFAULT_USERS: dict = {
         "trusted_devices":        ["device_priya_phone", "device_priya_laptop"],
         "avg_transaction_amount": 12_000,
         "past_action_types":      ["view_portfolio", "view_goals"],
-        # starts with no SIPs — so first_investment will fire
+        "typical_payday":         1,
+        "registered_carrier":     "Airtel",
     },
 
     "ramesh_45": {
@@ -36,6 +37,8 @@ _DEFAULT_USERS: dict = {
         "trusted_devices":        ["device_ramesh_desktop"],
         "avg_transaction_amount": 35_000,
         "past_action_types":      ["start_sip", "renew_fd", "view_portfolio"],
+        "typical_payday":         1,
+        "registered_carrier":     "Jio",
     },
 
     "neha_33": {
@@ -44,6 +47,8 @@ _DEFAULT_USERS: dict = {
         "trusted_devices":        ["device_neha_phone"],
         "avg_transaction_amount": 18_000,
         "past_action_types":      ["view_portfolio", "buy_gold"],
+        "typical_payday":         5,
+        "registered_carrier":     "Vi",
     },
 
     "arjun_38": {
@@ -53,6 +58,8 @@ _DEFAULT_USERS: dict = {
         "avg_transaction_amount": 50_000,
         "past_action_types":      ["start_sip", "rebalance_portfolio",
                                    "buy_equity", "book_gold_profits"],
+        "typical_payday":         1,
+        "registered_carrier":     "Jio",
     },
 
     "kiran_sme": {
@@ -61,6 +68,8 @@ _DEFAULT_USERS: dict = {
         "trusted_devices":        ["device_kiran_office"],
         "avg_transaction_amount": 80_000,
         "past_action_types":      ["surplus_fd", "view_cashflow"],
+        "typical_payday":         None,
+        "registered_carrier":     "Airtel",
     },
 
     # ── Special demo persona: designed to BLOCK ───────────────────
@@ -72,6 +81,8 @@ _DEFAULT_USERS: dict = {
         "trusted_devices":        ["device_known"],   # new_device will NOT be known
         "avg_transaction_amount": 5_000,              # amount_anomaly fires hard
         "past_action_types":      [],                  # first_investment fires
+        "typical_payday":         1,
+        "registered_carrier":     "Jio",
     },
 }
 

@@ -13,10 +13,12 @@ const instance = axios.create({
 // 🔐 Attach JWT token
 instance.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
+  const lang = localStorage.getItem("preferred_language") || "en";
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  config.headers["Accept-Language"] = lang;
 
   return config;
 });
@@ -114,6 +116,10 @@ export const transactionAPI = {
 export const fraudAPI = {
   executeAction: (payload) =>
     instance.post(`/api/action/execute`, payload),
+  getRiskHistory: (userId) =>
+    instance.get(`/api/risk/history/${userId}`),
+  getGlobalRiskHistory: () =>
+    instance.get(`/api/risk/history/all`),
 };
 
 /* ============================================================

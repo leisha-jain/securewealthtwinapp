@@ -11,17 +11,17 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
-import { LANGUAGES } from "../utils/languageStrings";
+import { LANGUAGES, t } from "../utils/languageStrings";
 
 export default function Navbar({ page, setPage, language, onLanguageChange, darkMode, onDarkModeToggle }) {
   const [langOpen, setLangOpen] = useState(false);
 
   const navItems = [
-    { id: "dashboard", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
-    { id: "goals", label: "Goals", icon: <Target size={20} /> },
-    { id: "networth", label: "Net Worth", icon: <Landmark size={20} /> },
-    { id: "portfolio", label: "Portfolio", icon: <PieIcon size={20} /> },
-    { id: "alerts", label: "Alerts & Risk", icon: <AlertTriangle size={20} /> },
+    { id: "dashboard", label: t(language, 'dashboard'), icon: <LayoutDashboard size={20} /> },
+    { id: "goals", label: t(language, 'goals'), icon: <Target size={20} /> },
+    { id: "networth", label: t(language, 'net_worth'), icon: <Landmark size={20} /> },
+    { id: "portfolio", label: t(language, 'portfolio'), icon: <PieIcon size={20} /> },
+    { id: "alerts", label: t(language, 'alerts_risk'), icon: <AlertTriangle size={20} /> },
   ];
 
   const currentLang = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];

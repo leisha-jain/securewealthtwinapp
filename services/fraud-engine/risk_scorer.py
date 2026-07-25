@@ -49,33 +49,59 @@ HONEYPOT_MESSAGE = (
 
 
 def compute_risk_score(payload: dict, history: dict) -> dict:
-    """
-    Run every signal function and aggregate the results.
+    # ── Honeypot early check ──────────────────────────────────────────
+    honeypot_hit = False
+    from signals import signal_honeypot
+    hp_res = signal_honeypot(payload, history)
+    if hp_res["triggered"]:
+        honeypot_hit = True
 
-    Parameters
-    ----------
-    payload : dict
-        The incoming action request from the API.
-        Contains fields like amount, device_id, timestamps, etc.
+    if honeypot_hit:
+        return {
+            "risk_score":        100,
+            "risk_level":        "HIGH",
+            "decision":          "BLOCK",
+            "triggered_signals": [hp_res],
+            "all_signals":       [hp_res],
+            "message":           HONEYPOT_MESSAGE,
+            "honeypot":          True,
+        }
 
-    history : dict
-        The user's stored behavioural baseline.
-        Contains fields like avg_transaction_amount, trusted_devices, etc.
+    # Auto-approve non-financial or low-amount actions
+    action_type = payload.get("actionType", payload.get("action_type", ""))
+    amount = float(payload.get("amount", 0))
+    high_risk_actions = {"TRANSFER", "LIQUIDATE", "REBALANCE", "START_SIP", "WITHDRAW"}
 
-    Returns
-    -------
-    dict with keys:
-        risk_score        : int  (0-100, capped)
-        risk_level        : str  (LOW / MEDIUM / HIGH)
-        decision          : str  (ALLOW / WARN / BLOCK)
-        triggered_signals : list of dicts (only the signals that fired)
-        all_signals       : list of dicts (all signals evaluated)
-        message           : str  (user-facing explanation)
-    """
+    # Normalize action type to uppercase and match common formats (e.g. start_sip -> START_SIP, large_transfer -> TRANSFER)
+    action_type_upper = action_type.upper()
+    normalized_action = ""
+    if "SIP" in action_type_upper:
+        normalized_action = "START_SIP"
+    elif "TRANSFER" in action_type_upper:
+        normalized_action = "TRANSFER"
+    elif "REBALANCE" in action_type_upper:
+        normalized_action = "REBALANCE"
+    elif "LIQUIDATE" in action_type_upper:
+        normalized_action = "LIQUIDATE"
+    elif "WITHDRAW" in action_type_upper:
+        normalized_action = "WITHDRAW"
+    else:
+        normalized_action = action_type_upper
+
+    if normalized_action not in high_risk_actions or (amount > 0 and amount < 5000):
+        return {
+            "risk_score":        0,
+            "risk_level":        "LOW",
+            "decision":          "ALLOW",
+            "triggered_signals": [],
+            "all_signals":       [],
+            "message":           "Approved automatically: low risk action.",
+            "honeypot":          False,
+        }
+
     all_results      = []
     triggered        = []
     total_score      = 0
-    honeypot_hit     = False
 
     for signal_fn in ALL_SIGNALS:
         result = signal_fn(payload, history)
@@ -83,8 +109,34 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
         if result["triggered"]:
             triggered.append(result)
             total_score += result["score"]
-            if result["signal"] == "honeypot":
-                honeypot_hit = True
+
+    # ── Feature 1: Salary Day Dynamic Weight Escalation ───────────────
+    payday_triggered = False
+    for res in all_results:
+        if res["signal"] == "payday_window" and res["triggered"]:
+            payday_triggered = True
+
+    if payday_triggered:
+        # Increase amount_anomaly score from +25 to +35 if it fired
+        for res in triggered:
+            if res["signal"] == "amount_anomaly":
+                res["score"] = 35
+                res["reason"] += " (Payday window escalation: +10 risk weight)"
+        # Recalculate base total_score
+        total_score = sum(r["score"] for r in triggered)
+
+    # ── Feature 8: Seasonal Fraud Calendar Multiplier ─────────────────
+    seasonal_modifier = 1.0
+    for res in all_results:
+        if res["signal"] == "seasonal_calendar" and res["triggered"]:
+            seasonal_modifier = res.get("modifier", 1.0)
+
+    if seasonal_modifier > 1.0:
+        total_score = int(round(total_score * seasonal_modifier))
+
+    # ── Feature 5: Emotion-Aware Transaction Delay ──────────────────
+    if payload.get("emotional_context") == "post_loss_view":
+        total_score += 8
 
     # Continuous-auth tightening: if this session has already crossed the
     # risk threshold, every new action starts pre-penalised (see user_store).
@@ -109,8 +161,12 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
             "honeypot":          True,
         }
 
+    # ── Feature 1: Salary Day Threshold Shift ───────────────────────
+    # Drop the WARN threshold from 31 to 25 during payday window
+    warn_min = 25 if payday_triggered else THRESHOLDS["MEDIUM"][0]
+
     # Determine risk level
-    if total_score <= THRESHOLDS["LOW"][1]:
+    if total_score < warn_min:
         risk_level = "LOW"
     elif total_score <= THRESHOLDS["MEDIUM"][1]:
         risk_level = "MEDIUM"
@@ -119,6 +175,17 @@ def compute_risk_score(payload: dict, history: dict) -> dict:
 
     decision = DECISION_MAP[risk_level]
     message  = USER_MESSAGES[decision]
+
+    # ── Feature 10: Night Lock (Transaction Lullaby) ────────────────
+    if payload.get("night_lock_active", False) and decision == "ALLOW":
+        decision = "WARN"
+        total_score = max(total_score, 35)
+        risk_level = "MEDIUM"
+        message = "This action is flagged because your Night Lock (Silent Hours Protection) is currently enabled."
+
+    # Append seasonal warning message if seasonal is triggered
+    if seasonal_modifier > 1.0 and decision == "WARN":
+        message += " Flagged due to elevated seasonal fraud calendar activity in India."
 
     return {
         "risk_score":        total_score,

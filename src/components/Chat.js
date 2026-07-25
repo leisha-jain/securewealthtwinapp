@@ -1,8 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { C, Card } from "../utils/helpers";
-import { CHAT_RESPONSES } from "../data/personas";
-import axios from "axios";
 
 const API_BASE = process.env.REACT_APP_CHAT_URL || process.env.REACT_APP_API_URL || "http://localhost:8003";
 const DEMO_MODE = process.env.REACT_APP_DEMO_MODE === "true";
@@ -44,57 +42,70 @@ export default function Chat({ p, language = "en" }) {
   const send = useCallback(
     async (text) => {
       if (!text.trim()) return;
-      setMsgs((m) => [...m, { role: "user", text }]);
+
+      const newMsg = { role: "user", text };
+      setMsgs((m) => [...m, newMsg]);
       setInput("");
       setTyping(true);
 
-      // Demo mode or API down — use local fallback
-      if (DEMO_MODE || apiDown) {
-        setTimeout(() => {
-          const l = text.toLowerCase();
-          let resp = CHAT_RESPONSES.default;
-          if (l.includes("home") || l.includes("goal")) resp = CHAT_RESPONSES.home;
-          else if (l.includes("sip") || l.includes("market")) resp = CHAT_RESPONSES.sip;
-          else if (l.includes("risk")) resp = CHAT_RESPONSES.risk;
-          else if (l.includes("tax") || l.includes("80c")) resp = CHAT_RESPONSES.tax;
-          setTyping(false);
-          setMsgs((m) => [...m, { role: "ai", text: resp }]);
-          speak(resp);
-        }, 1000);
-        return;
-      }
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      const sessionAssets = JSON.parse(localStorage.getItem('swt_assets') || '[]');
+      const sessionLiabilities = JSON.parse(localStorage.getItem('swt_liabilities') || '[]');
+      const sessionGoals = JSON.parse(localStorage.getItem('swt_goals') || '[]');
 
-      // Try live API
+      const mergedProfile = {
+        ...user,
+        assets: sessionAssets,
+        liabilities: sessionLiabilities,
+        goals: sessionGoals,
+      };
+
+      const history = msgs.slice(-10).map(m => ({
+        role: m.role === 'user' ? 'user' : 'assistant',
+        content: m.text
+      }));
+
       try {
-        const res = await axios.post(`${API_BASE}/api/chat`, {
+        const token = localStorage.getItem('token');
+        const res = await axios.post('http://localhost:8000/api/chat/message', {
+          userId: user.userId || 'demo-user',
           message: text,
+          history,
           language,
-          profile: {
-            income: p?.income || 80000,
-            savings: p?.savings || 20000,
-            expenses: p?.expenses || {},
-            goals: p?.goals || [],
+          profile: mergedProfile,
+          user_profile: mergedProfile,
+          sessionUpdates: {
+            assets: sessionAssets,
+            liabilities: sessionLiabilities,
+            goals: sessionGoals
           },
+          userAdditions: {
+            assets: sessionAssets,
+            liabilities: sessionLiabilities,
+            goals: sessionGoals
+          }
+        }, {
+          headers: { Authorization: `Bearer ${token}` }
         });
         setTyping(false);
-        const reply = res.data.response || res.data.reply || "No response.";
+        const reply = res.data.reply || res.data.response || "No response.";
         setMsgs((m) => [...m, { role: "ai", text: reply }]);
         speak(reply);
-      } catch {
-        // API failed — show fallback
-        setApiDown(true);
+      } catch (err) {
+        console.warn("[Chat API Failed]:", err.message);
         setTyping(false);
-        const fallback = `${FALLBACK_MSG}\n\n• ${FALLBACK_TIPS.join("\n• ")}`;
-        setMsgs((m) => [...m, { role: "ai", text: fallback, isFallback: true }]);
+        const errMsg = `Error: ${err.response?.data?.error || err.message}`;
+        setMsgs((m) => [...m, { role: "ai", text: errMsg }]);
+        speak(errMsg);
       }
     },
-    [language, p, apiDown]
+    [language, msgs]
   );
 
   const startListening = () => {
     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SR) {
-      alert("Speech not supported");
+      window.dispatchEvent(new CustomEvent('swt_api_error', { detail: 'Speech Recognition not supported in this browser.' }));
       return;
     }
     const r = new SR();

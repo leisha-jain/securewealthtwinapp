@@ -6,6 +6,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const rateLimit = require('express-rate-limit');
+const axios = require('axios');
+const { verifyToken } = require('../middleware/auth');
 const router = express.Router();
 
 const loginLimiter = rateLimit({
@@ -161,6 +163,135 @@ async function sendTwilioSms(to, messageBody) {
  */
 router.post('/logout', (req, res) => {
   res.json({ message: 'Logged out. Please discard your token.' });
+});
+
+// ── Feature 10: Night Lock (Transaction Lullaby) ─────────────────
+router.post('/settings/night-lock', verifyToken, (req, res) => {
+  const { enabled, start, end } = req.body;
+  const db = readDb();
+  const user = db.users[req.user.userId];
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  user.night_lock_enabled = enabled;
+  user.night_lock_start = start;
+  user.night_lock_end = end;
+  writeDb(db);
+  res.json({ success: true, user });
+});
+
+// ── Feature 12: Nominee & Grief-Aware Mode ────────────────────────
+router.post('/settings/nominee', verifyToken, (req, res) => {
+  const { name, phone, relation, isEmergencyHeir } = req.body;
+  const db = readDb();
+  const user = db.users[req.user.userId];
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  user.nominee = { name, phone, relation, isEmergencyHeir: !!isEmergencyHeir };
+  writeDb(db);
+  res.json({ success: true, user });
+});
+
+router.post('/settings/emergency-mode', verifyToken, (req, res) => {
+  const { isEmergencyHeir } = req.body;
+  const db = readDb();
+  const user = db.users[req.user.userId];
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  if (!user.nominee) user.nominee = {};
+  user.nominee.isEmergencyHeir = !!isEmergencyHeir;
+  writeDb(db);
+  res.json({ success: true, user });
+});
+
+// ── User Profile getter ───────────────────────────────────────────
+router.get('/profile', verifyToken, (req, res) => {
+  const db = readDb();
+  const user = db.users[req.user.userId];
+  if (!user) return res.status(404).json({ error: 'User not found' });
+  res.json({ user });
+});
+
+// ── Feature 3: Sleep On It Button ─────────────────────────────────
+router.post('/sleep-on-it', verifyToken, (req, res) => {
+  const { action } = req.body;
+  const db = readDb();
+  if (!db.sleepOnIt[req.user.userId]) {
+    db.sleepOnIt[req.user.userId] = [];
+  }
+  db.sleepOnIt[req.user.userId].push({
+    ...action,
+    timestamp: Date.now()
+  });
+  writeDb(db);
+  res.json({ success: true });
+});
+
+router.get('/sleep-on-it', verifyToken, (req, res) => {
+  const db = readDb();
+  const list = db.sleepOnIt[req.user.userId] || [];
+  res.json({ list });
+});
+
+// ── Feature 4: Trusted Second Pair of Eyes ───────────────────────
+router.post('/ask-trusted', verifyToken, (req, res) => {
+  const { amount, action_type, target } = req.body;
+  const db = readDb();
+  const user = db.users[req.user.userId];
+  if (!user || !user.nominee || !user.nominee.phone) {
+    return res.status(400).json({ error: 'No trusted nominee registered' });
+  }
+
+  // Generate unique approval token
+  const token = Math.random().toString(36).substring(2, 15);
+  db.pendingApprovals[token] = {
+    userId: req.user.userId,
+    amount,
+    action_type,
+    target,
+    status: 'pending',
+    expiresAt: Date.now() + 5 * 60 * 1000
+  };
+  writeDb(db);
+
+  const baseUrl = `http://localhost:${process.env.PORT || 8000}/api/auth`;
+  const yesLink = `${baseUrl}/approve/${token}`;
+  const noLink = `${baseUrl}/reject/${token}`;
+  const body = `[Second Pair of Eyes] ${user.name} wants to perform ${action_type} of ₹${Number(amount).toLocaleString()} to ${target || 'target'}. Confirm? YES: ${yesLink} | NO: ${noLink}`;
+
+  sendTwilioSms(user.nominee.phone, body);
+
+  res.json({ success: true, token });
+});
+
+router.get('/pending-approvals/:token', (req, res) => {
+  const { token } = req.params;
+  const db = readDb();
+  const txn = db.pendingApprovals[token];
+  if (!txn) {
+    return res.status(404).json({ error: 'Transaction expired or not found' });
+  }
+  res.json({ status: txn.status });
+});
+
+router.get('/approve/:token', (req, res) => {
+  const { token } = req.params;
+  const db = readDb();
+  const txn = db.pendingApprovals[token];
+  if (!txn) {
+    return res.status(404).send('<html><body style="font-family:sans-serif; text-align:center; padding: 50px;"><h1>Link Invalid or Expired</h1></body></html>');
+  }
+  txn.status = 'approved';
+  writeDb(db);
+  res.send('<html><body style="font-family:sans-serif; text-align:center; padding: 50px; background:#f0fcf4; color:#1e4620;"><h1>✔️ Transaction Approved Successfully!</h1><p>The transaction will proceed now. You can close this window.</p></body></html>');
+});
+
+router.get('/reject/:token', (req, res) => {
+  const { token } = req.params;
+  const db = readDb();
+  const txn = db.pendingApprovals[token];
+  if (!txn) {
+    return res.status(404).send('<html><body style="font-family:sans-serif; text-align:center; padding: 50px;"><h1>Link Invalid or Expired</h1></body></html>');
+  }
+  txn.status = 'rejected';
+  writeDb(db);
+  res.send('<html><body style="font-family:sans-serif; text-align:center; padding: 50px; background:#fdf2f2; color:#7a2020;"><h1>❌ Transaction Blocked!</h1><p>You have successfully blocked this transaction for security. You can close this window.</p></body></html>');
 });
 
 module.exports = router;

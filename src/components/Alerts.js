@@ -157,7 +157,7 @@ export default function Alerts() {
 
     } catch (err) {
       console.error(err);
-      alert("Error connecting to backend");
+      window.dispatchEvent(new CustomEvent('swt_api_error', { detail: 'Error connecting to backend' }));
     }
   };
 

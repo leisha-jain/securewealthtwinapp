@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { PERSONAS, FRAUD_SCENARIOS } from "./data/personas";
+import { PERSONAS, FRAUD_SCENARIOS, MARKET } from "./data/personas";
 import { C } from "./utils/helpers";
 import Navbar from "./components/Navbar";
+import Toast from "./components/Toast";
 import Dashboard from "./components/Dashboard";
 import Goals from "./components/Goals";
 import NetWorth from "./components/Networth";
@@ -13,26 +14,43 @@ import OTP from "./pages/OTP";
 import Register1 from "./pages/Register1";
 import Register2 from "./pages/Register2";
 import Register3 from "./pages/Register3";
-// Add to top-level imports:
+import axios from 'axios';
 import { Dot } from "./utils/helpers";
 
+// Configure global axios interceptor for emotional context and last action caching
+axios.interceptors.request.use((config) => {
+  if (config.url && config.url.includes('/api/action/execute')) {
+    localStorage.setItem('last_action_payload', JSON.stringify(config.data || {}));
+
+    const lastLoss = localStorage.getItem('last_loss_view_timestamp');
+    if (lastLoss) {
+      const elapsed = (Date.now() - Number(lastLoss)) / 1000;
+      if (elapsed < 90) {
+        if (!config.data) config.data = {};
+        config.data.emotional_context = "post_loss_view";
+      }
+    }
+  }
+  return config;
+}, (err) => Promise.reject(err));
+
 // ─── PULSE STRIP ──────────────────────────────────────────────────────────────
-import { MARKET } from "./data/personas";
+
 
 function PulseStrip() {
   const [tick, setTick] = useState(0);
   useEffect(() => { const t = setInterval(() => setTick(x => x + 1), 3000); return () => clearInterval(t); }, []);
   const items = [
-    { label:"Gold",      val:`₹${(MARKET.gold + (tick%3)*12).toLocaleString("en-IN")}/10g`, up:true },
-    { label:"Nifty 50",  val:(MARKET.nifty + (tick%2)*8).toLocaleString("en-IN"),           up:tick%4!==3 },
-    { label:"FD rate",   val:`${MARKET.fd}%`,                                                up:false },
-    { label:"Inflation", val:`${MARKET.inflation}%`,                                         up:false },
-    { label:"USD/INR",   val:`₹${(83.42+(tick%3)*0.04).toFixed(2)}`,                        up:tick%3===0 },
+    { label: "Gold", val: `₹${(MARKET.gold + (tick % 3) * 12).toLocaleString("en-IN")}/10g`, up: true },
+    { label: "Nifty 50", val: (MARKET.nifty + (tick % 2) * 8).toLocaleString("en-IN"), up: tick % 4 !== 3 },
+    { label: "FD rate", val: `${MARKET.fd}%`, up: false },
+    { label: "Inflation", val: `${MARKET.inflation}%`, up: false },
+    { label: "USD/INR", val: `₹${(83.42 + (tick % 3) * 0.04).toFixed(2)}`, up: tick % 3 === 0 },
   ];
   return (
     <div style={{ background: C.surface, borderBottom: `1px solid ${C.border}`, padding: "7px 24px", display: "flex", gap: 28, alignItems: "center", fontSize: 12, overflowX: "auto" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, display: "inline-block" }}/>
+        <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.green, display: "inline-block" }} />
         <span style={{ fontSize: 11, color: C.textMuted, fontWeight: 500 }}>Live</span>
       </div>
       {items.map(it => (
@@ -55,12 +73,12 @@ function FraudModal({ scenario, onClose }) {
     return () => clearInterval(t);
   }, [scenario.level]);
 
-  
+
 
   const palette = {
     allow: { text: C.green, bg: C.greenLight, border: C.greenBorder, title: "Transaction cleared" },
-    warn:  { text: C.amber, bg: C.amberLight, border: C.amberBorder, title: "Suspicious activity" },
-    block: { text: C.red,   bg: C.redLight,   border: C.redBorder,   title: "Transaction blocked" },
+    warn: { text: C.amber, bg: C.amberLight, border: C.amberBorder, title: "Suspicious activity" },
+    block: { text: C.red, bg: C.redLight, border: C.redBorder, title: "Transaction blocked" },
   }[scenario.level];
 
   return (
@@ -80,7 +98,7 @@ function FraudModal({ scenario, onClose }) {
             {scenario.signals.map((s, i) => (
               <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: i < scenario.signals.length - 1 ? `1px solid ${C.border}` : "none" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <Dot variant={scenario.level === "allow" ? "ok" : scenario.level}/>
+                  <Dot variant={scenario.level === "allow" ? "ok" : scenario.level} />
                   <span style={{ fontSize: 13, color: C.text }}>{s.label}</span>
                 </div>
                 <span style={{ fontSize: 12, fontWeight: 500, color: palette.text }}>+{s.pts}</span>
@@ -123,18 +141,18 @@ function CommandPalette({ onClose, onNav, onRisk }) {
   const ref = useRef(null);
   useEffect(() => { ref.current?.focus(); }, []);
   const cmds = [
-    { label:"Dashboard",                      action:()=>onNav("dashboard") },
-    { label:"Goals",                          action:()=>onNav("goals") },
-    { label:"Net worth",                      action:()=>onNav("networth") },
-    { label:"Portfolio",                      action:()=>onNav("portfolio") },
-    { label:"AI coach",                       action:()=>onNav("chat") },
-    { label:"Fraud alerts",                   action:()=>onNav("alerts") },
-    { label:"Demo: allow gate",               action:()=>onRisk(FRAUD_SCENARIOS[2]) },
-    { label:"Demo: warn gate (30s timer)",    action:()=>onRisk(FRAUD_SCENARIOS[1]) },
-    { label:"Demo: block gate",               action:()=>onRisk(FRAUD_SCENARIOS[0]) },
-    { label:"Switch to Priya",                action:()=>onNav("dashboard","priya") },
-    { label:"Switch to Ramesh",               action:()=>onNav("dashboard","ramesh") },
-    { label:"Switch to Arjun",                action:()=>onNav("dashboard","arjun") },
+    { label: "Dashboard", action: () => onNav("dashboard") },
+    { label: "Goals", action: () => onNav("goals") },
+    { label: "Net worth", action: () => onNav("networth") },
+    { label: "Portfolio", action: () => onNav("portfolio") },
+    { label: "AI coach", action: () => onNav("chat") },
+    { label: "Fraud alerts", action: () => onNav("alerts") },
+    { label: "Demo: allow gate", action: () => onRisk(FRAUD_SCENARIOS[2]) },
+    { label: "Demo: warn gate (30s timer)", action: () => onRisk(FRAUD_SCENARIOS[1]) },
+    { label: "Demo: block gate", action: () => onRisk(FRAUD_SCENARIOS[0]) },
+    { label: "Switch to Priya", action: () => onNav("dashboard", "priya") },
+    { label: "Switch to Ramesh", action: () => onNav("dashboard", "ramesh") },
+    { label: "Switch to Arjun", action: () => onNav("dashboard", "arjun") },
   ];
   const filtered = cmds.filter(c => c.label.toLowerCase().includes(q.toLowerCase()));
   return (
@@ -143,13 +161,13 @@ function CommandPalette({ onClose, onNav, onRisk }) {
       <div style={{ width: 500, background: C.surface, border: `1px solid ${C.border}`, borderRadius: C.rLg, overflow: "hidden", boxShadow: "0 16px 48px rgba(0,0,0,0.10)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "12px 16px", borderBottom: `1px solid ${C.border}` }}>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <circle cx="6" cy="6" r="4.5" stroke={C.textMuted} strokeWidth="1.2"/>
-            <path d="M9.5 9.5L12 12" stroke={C.textMuted} strokeWidth="1.2" strokeLinecap="round"/>
+            <circle cx="6" cy="6" r="4.5" stroke={C.textMuted} strokeWidth="1.2" />
+            <path d="M9.5 9.5L12 12" stroke={C.textMuted} strokeWidth="1.2" strokeLinecap="round" />
           </svg>
           <input ref={ref} value={q} onChange={e => setQ(e.target.value)}
             placeholder="Search commands..."
             style={{ flex: 1, border: "none", outline: "none", fontSize: 14, color: C.text, fontFamily: "inherit", background: "transparent" }}
-            onKeyDown={e => { if (e.key==="Escape") onClose(); if (e.key==="Enter" && filtered[0]) { filtered[0].action(); onClose(); } }}/>
+            onKeyDown={e => { if (e.key === "Escape") onClose(); if (e.key === "Enter" && filtered[0]) { filtered[0].action(); onClose(); } }} />
           <span style={{ fontSize: 11, background: C.bg, padding: "2px 6px", borderRadius: 4, color: C.textMuted, border: `1px solid ${C.border}` }}>ESC</span>
         </div>
         <div style={{ maxHeight: 300, overflowY: "auto" }}>
@@ -178,13 +196,57 @@ export default function App() {
   const [pKey, setPKey] = useState(null);
   const [fraud, setFraud] = useState(null);
   const [cmd, setCmd] = useState(false);
+  const [toastError, setToastError] = useState(null);
+  const [toastSuccess, setToastSuccess] = useState(null);
+  const [showAmberBanner, setShowAmberBanner] = useState(false);
+
+  useEffect(() => {
+    const handleApiError = (e) => {
+      setToastError(e.detail || "Unable to reach server. Please check your connection.");
+    };
+    const handleApiSuccess = (e) => {
+      setToastSuccess(e.detail || "Success!");
+    };
+    window.addEventListener('swt_api_error', handleApiError);
+    window.addEventListener('swt_api_success', handleApiSuccess);
+    return () => {
+      window.removeEventListener('swt_api_error', handleApiError);
+      window.removeEventListener('swt_api_success', handleApiSuccess);
+    };
+  }, []);
+
+  useEffect(() => {
+    const checkServices = async () => {
+      try {
+        await axios.get('http://localhost:8000/api/health/all');
+        setShowAmberBanner(false);
+      } catch (err) {
+        if (!err.response) {
+          // Gateway itself is unreachable
+          setShowAmberBanner(true);
+        } else {
+          // Gateway is reachable, but returned 503 degraded status
+          setShowAmberBanner(false);
+        }
+      }
+    };
+    checkServices();
+    const interval = setInterval(checkServices, 15000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (page === "portfolio" || page === "dashboard" || page === "networth") {
+      localStorage.setItem("last_loss_view_timestamp", Date.now().toString());
+    }
+  }, [page]);
   const [language, setLanguage] = useState(
     () => localStorage.getItem("preferred_language") || "en"
   );
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem("dark_mode") === "true"
   );
-  
+
 
   const p = PERSONAS[pKey] || PERSONAS["priya"];
 
@@ -196,8 +258,8 @@ export default function App() {
 
   useEffect(() => {
     const h = (e) => {
-      if ((e.metaKey||e.ctrlKey) && e.key==="k") { e.preventDefault(); setCmd(c=>!c); }
-      if (e.key==="Escape") { setCmd(false); setFraud(null); }
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") { e.preventDefault(); setCmd(c => !c); }
+      if (e.key === "Escape") { setCmd(false); setFraud(null); }
     };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
@@ -236,78 +298,113 @@ export default function App() {
     );
 
   if (step === "register") {   // ✅ ADD HERE
-  return <Register1 onBack={() => setStep("login")} onNext={() => setStep("register2")}  />;
-  
-}
+    return <Register1 onBack={() => setStep("login")} onNext={() => setStep("register2")} />;
 
-if (step === "register2") {
-  return <Register2 onNext={() => setStep("register3")}/>;
-}
+  }
 
-if (step === "register3") {
-  return <Register3  onComplete={() => setStep("app")} />;
-}
+  if (step === "register2") {
+    return <Register2 onNext={() => setStep("register3")} />;
+  }
+
+  if (step === "register3") {
+    return <Register3 onComplete={() => setStep("app")} />;
+  }
 
   // In the main app return, replace the old layout with:
-return (
-  <div className={`dashboard-container${darkMode ? " dark" : ""}`} style={{ display: "flex", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
+  return (
+    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      {showAmberBanner && (
+        <div style={{
+          background: '#d97706',
+          color: 'white',
+          padding: '8px 24px',
+          textAlign: 'center',
+          fontSize: '13px',
+          fontWeight: '600',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+        }}>
+          ⚠️ Some services are unavailable. Demo mode active.
+        </div>
+      )}
 
-    {/* ✅ SIDEBAR (GLOBAL FOR ALL PAGES) */}
-    <Navbar
-      page={page}
-      setPage={setPage}
-      language={language}
-      onLanguageChange={setLanguage}
-      darkMode={darkMode}
-      onDarkModeToggle={toggleDark}
-    />
+      {toastError && (
+        <Toast 
+          message={toastError} 
+          type="error" 
+          onDone={() => setToastError(null)} 
+        />
+      )}
 
-    {/* ✅ MAIN CONTENT AREA */}
-    <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+      {toastSuccess && (
+        <Toast 
+          message={toastSuccess} 
+          type="success" 
+          onDone={() => setToastSuccess(null)} 
+        />
+      )}
 
-      <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
+      <div className={`dashboard-container${darkMode ? " dark" : ""}`} style={{ display: "flex", fontFamily: "'Segoe UI', Arial, sans-serif" }}>
 
-        {page === "dashboard" && (
-          <Dashboard p={p} onRisk={setFraud} language={language} />
-        )}
+      {/* ✅ SIDEBAR (GLOBAL FOR ALL PAGES) */}
+      <Navbar
+        page={page}
+        setPage={setPage}
+        language={language}
+        onLanguageChange={setLanguage}
+        darkMode={darkMode}
+        onDarkModeToggle={toggleDark}
+      />
 
-        {page === "goals" && <Goals p={p} language={language} />}
+      {/* ✅ MAIN CONTENT AREA */}
+      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
 
-        {page === "networth" && <NetWorth p={p} />}
+        <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
 
-        {page === "portfolio" && (
-          <Portfolio p={p} onRisk={setFraud} />
-        )}
+          {page === "dashboard" && (
+            <Dashboard p={p} onRisk={setFraud} language={language} />
+          )}
 
-        {page === "chat" && <Chat p={p} language={language} />}
+          {page === "goals" && <Goals p={p} language={language} />}
 
-        {page === "alerts" && (
-          <Alerts onRisk={setFraud} />
-        )}
+          {page === "networth" && <NetWorth p={p} language={language} />}
 
-      </main>
+          {page === "portfolio" && (
+            <Portfolio p={p} onRisk={setFraud} language={language} />
+          )}
+
+          {page === "chat" && <Chat p={p} language={language} />}
+
+          {page === "alerts" && (
+            <Alerts onRisk={setFraud} language={language} />
+          )}
+
+        </main>
+
+      </div>
+
+      {/* MODALS */}
+      {fraud && (
+        <FraudModal
+          scenario={fraud}
+          onClose={() => setFraud(null)}
+        />
+      )}
+
+      {cmd && (
+        <CommandPalette
+          onClose={() => setCmd(false)}
+          onNav={handleNav}
+          onRisk={(s) => {
+            setFraud(s);
+            setCmd(false);
+          }}
+        />
+      )}
 
     </div>
-
-    {/* MODALS */}
-    {fraud && (
-      <FraudModal
-        scenario={fraud}
-        onClose={() => setFraud(null)}
-      />
-    )}
-
-    {cmd && (
-      <CommandPalette
-        onClose={() => setCmd(false)}
-        onNav={handleNav}
-        onRisk={(s) => {
-          setFraud(s);
-          setCmd(false);
-        }}
-      />
-    )}
-
   </div>
-);
+  );
 }

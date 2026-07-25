@@ -234,7 +234,10 @@ function SavingsSimulator() {
 }
 
 export default function Goals({ language = 'en' }) {
- const [goals, setGoals] = useState(PILLARS);
+  const [goals, setGoals] = useState(PILLARS);
+  useEffect(() => {
+    localStorage.setItem('swt_goals', JSON.stringify(goals));
+  }, [goals]);
 const [contribution, setContribution] = useState(4500);
 const [yield_, setYield] = useState(7.2);
 const [riskIdx, setRiskIdx] = useState(1);
@@ -250,6 +253,12 @@ const [riskModal, setRiskModal] = useState({
 const [pendingAction, setPendingAction] = useState(null);
 
 const securityGate = async (actionToRun, metadata) => {
+  const userStr = localStorage.getItem('user');
+  if (userStr) {
+    const u = JSON.parse(userStr);
+      window.dispatchEvent(new CustomEvent('swt_api_error', { detail: 'Access Denied: Nominee emergency view mode is active. Goal modifications are restricted.' }));
+      return;
+  }
   try {
     const res = await axios.post(`${API_BASE}/api/action/execute`, metadata);
     setPendingAction(() => actionToRun);

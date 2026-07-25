@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { AtSign, Lock, RefreshCw } from 'lucide-react';
+import Toast from '../components/Toast';
 
 const CAPTCHA_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -20,6 +21,7 @@ const Login = ({onLogin, onRegister}) => {
   const [captchaInput, setCaptchaInput] = useState('');
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [spinning, setSpinning] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const refreshCaptcha = () => {
     setCaptcha(generateCaptcha());
@@ -33,7 +35,7 @@ const Login = ({onLogin, onRegister}) => {
   
     // 🔐 CAPTCHA check
     if (captchaInput !== captcha.code) {
-      alert("Invalid CAPTCHA ❌");
+      setErrorMsg("Invalid CAPTCHA ❌");
       return;
     }
   
@@ -55,12 +57,12 @@ const Login = ({onLogin, onRegister}) => {
       console.log("LOGIN RESPONSE:", data);
 
       if (res.status !== 200) {
-        alert(data.error || "Login failed ❌");
+        setErrorMsg(data.error || "Login failed ❌");
         return;
       }
 
       if (!data.token || !data.user) {
-        alert("Invalid server response ❌");
+        setErrorMsg("Invalid server response ❌");
         return;
       }
   
@@ -73,12 +75,19 @@ const Login = ({onLogin, onRegister}) => {
   
     } catch (err) {
       console.error(err);
-      alert("Server error ❌");
+      setErrorMsg("Server error ❌");
     }
   };
 
   return (
     <div className="login-page">
+      {errorMsg && (
+        <Toast 
+          message={errorMsg} 
+          type="error" 
+          onDone={() => setErrorMsg(null)} 
+        />
+      )}
       <div className="login-card">
         <div className="login-header">
           <span className="login-eyebrow">SECURE ACCESS</span>

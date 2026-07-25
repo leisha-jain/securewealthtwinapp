@@ -85,12 +85,4 @@ export const NUDGES = {
     { tag:"Diversify", msg:"Consider REITs for real estate exposure without illiquidity.", why:"Your real estate is 32% of NW but illiquid. Embassy REIT yields 6.2% with full liquidity." },
     { tag:"Loss review", msg:"Axis Small Cap down 12.4% — review your exit strategy.", why:"Small cap underperformance vs benchmark for 3 quarters. Consider switching to a momentum-based mid cap fund." }
   ]
-};
-
-export const CHAT_RESPONSES = {
-  home: "To reach your ₹15L home goal by Sep 2027 — 3 months early — increase your SIP by ₹3,500/month. The fastest lever is your dining spend, which is 2.4× your average. Redirect that alone and you shave 3 months off the timeline.",
-  sip: "Continue your SIPs. The market corrected 8% — that is great for SIP investors. You are buying more units at lower NAV via rupee cost averaging. Your HDFC Mid Cap SIP is auto-averaging well. Pausing now would be the worst move.",
-  risk: "Your top 3 risks right now:\n\n1. Equity overweight at 82% — target is 65%\n2. No term insurance detected in profile\n3. Emergency fund covers only 2.1 months — target is 6\n\nWant a 30-day action plan to address all three?",
-  tax: "You have ₹1,50,000 of unused 80C limit. Best options:\n\n• ELSS — 3yr lock-in, 12–15% historical returns\n• PPF — Risk-free 7.1%, 15yr horizon\n• NPS Tier II — Flexible + 80CCD deduction\n\nELSS suits your profile best. Start ₹12,500/month today.",
-  default: "Based on your profile, I'd start with your 80C tax gap — ₹46,800 in potential savings this year. Want me to build a personalised tax-saving plan?"
-};
+};

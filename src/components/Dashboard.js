@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './Dashboard.css';
 import { useCountUp } from '../utils/helpers';
-import { CHAT_RESPONSES } from '../data/personas';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
+import { t } from '../utils/languageStrings';
 import HealthScoreBadge from '../components/HealthScoreBadge';
 import {
   LayoutDashboard, Target, Landmark, PieChart as PieIcon,
@@ -150,13 +150,13 @@ function NewsTicker({ items }) {
 }
 
 // Market News section
-function MarketNews({ news }) {
+function MarketNews({ news, language }) {
   const impactColor = { positive: '#059669', negative: '#dc2626', neutral: '#d97706' };
   const tagBg = { positive: '#d1fae5', negative: '#fee2e2', neutral: '#fef3c7' };
   return (
     <div className="market-news-section">
       <h4 className="market-news-title">
-        <BookOpen size={15} /> Market News &amp; Alerts
+        <BookOpen size={15} /> {t(language, 'market_news')}
       </h4>
       <div className="market-news-list">
         {news.map((item, i) => (
@@ -177,11 +177,11 @@ function MarketNews({ news }) {
 }
 
 // Trending stocks panel
-function TrendingStocks({ stocks }) {
+function TrendingStocks({ stocks, language }) {
   return (
     <div className="trending-panel">
       <h4 className="trending-title">
-        <TrendingUp size={15} /> Trending Stocks
+        <TrendingUp size={15} /> {t(language, 'trending_stocks')}
       </h4>
       {stocks.map((s) => (
         <div key={s.symbol} className="trending-row">
@@ -194,13 +194,21 @@ function TrendingStocks({ stocks }) {
               {s.change_pct >= 0 ? <TrendingUp size={12} /> : <TrendingDown size={12} />}
               {s.change_pct > 0 ? '+' : ''}{s.change_pct}%
             </span>
-            {s.inPortfolio && <span className="portfolio-badge">In portfolio</span>}
+            {s.inPortfolio && <span className="portfolio-badge">{t(language, 'in_portfolio')}</span>}
           </div>
         </div>
       ))}
     </div>
   );
 }
+
+const getCategoryTranslation = (name, lang) => {
+  const n = name.toLowerCase();
+  if (n.includes("housing") || n.includes("equity")) return t(lang, 'housing_equity');
+  if (n.includes("lifestyle") || n.includes("tech")) return t(lang, 'lifestyle_tech');
+  if (n.includes("risk") || n.includes("management")) return t(lang, 'risk_management_cat');
+  return t(lang, 'other');
+};
 
 const Dashboard = ({ language = 'en' }) => {
   const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
@@ -212,12 +220,181 @@ const Dashboard = ({ language = 'en' }) => {
   const [chatOpen, setChatOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+  // Advanced hackathon feature states
+  const [screenSharingDetected, setScreenSharingDetected] = useState(false);
+  const [sleepPending, setSleepPending] = useState(null);
+  const [emergencyHeirMode, setEmergencyHeirMode] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+
+  const [nightLock, setNightLock] = useState({ enabled: false, start: "22:00", end: "07:00" });
+  const [nomineeInput, setNomineeInput] = useState({ name: "Sunita Mehta", phone: "+919876543210", relation: "Spouse", isEmergencyHeir: false });
+
+  // 1. Screen sharing warning logic
+  useEffect(() => {
+    if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+      setScreenSharingDetected(true);
+    }
+  }, []);
+
+  // 2. Sleep On It banner state
+  useEffect(() => {
+    const pending = localStorage.getItem('sleep_on_it_pending');
+    if (pending) {
+      setSleepPending(JSON.parse(pending));
+    }
+  }, []);
+
+  // 3. Load user configurations from backend
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        const res = await axios.get(`${API_BASE}/api/auth/profile`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.data?.user) {
+          const u = res.data.user;
+          setNightLock({
+            enabled: !!u.night_lock_enabled,
+            start: u.night_lock_start || "22:00",
+            end: u.night_lock_end || "07:00"
+          });
+          if (u.nominee) {
+            setNomineeInput(u.nominee);
+            if (u.nominee.isEmergencyHeir) {
+              setEmergencyHeirMode(true);
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("[Profile settings load] failed");
+      }
+    };
+    loadProfile();
+  }, []);
+
+  const saveNightLock = async (enabled, start, end) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`${API_BASE}/api/auth/settings/night-lock`, { enabled, start, end }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setNightLock({ enabled, start, end });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const saveNominee = async (nom) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`${API_BASE}/api/auth/settings/nominee`, nom, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setNomineeInput(nom);
+      if (nom.isEmergencyHeir) {
+        setEmergencyHeirMode(true);
+      } else {
+        setEmergencyHeirMode(false);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const [profile, setProfile] = useState({
     name: "Priya Sharma",
     score: 72,
     velocityData,
     outflowData,
   });
+
+  const [dashboardData, setDashboardData] = useState(null);
+  const [velocityPeriod, setVelocityPeriod] = useState("6M");
+
+  const getVelocityChartData = () => {
+    const txs = dashboardData?.transactions || [];
+    if (!txs || txs.length === 0) {
+      return velocityData;
+    }
+    
+    const sortedTxs = [...txs].sort((a, b) => new Date(a.date) - new Date(b.date));
+    
+    if (velocityPeriod === '1M') {
+      const lastDateStr = sortedTxs[sortedTxs.length - 1]?.date || new Date().toISOString();
+      const lastDate = new Date(lastDateStr);
+      const startDate = new Date(lastDate);
+      startDate.setDate(startDate.getDate() - 30);
+      
+      const last30DaysTxs = sortedTxs.filter(t => {
+        const d = new Date(t.date);
+        return d >= startDate && d <= lastDate;
+      });
+      
+      const weeks = [
+        { name: 'Week 1', amt: 0 },
+        { name: 'Week 2', amt: 0 },
+        { name: 'Week 3', amt: 0 },
+        { name: 'Week 4', amt: 0 }
+      ];
+      
+      last30DaysTxs.forEach(t => {
+        const d = new Date(t.date);
+        const diffDays = Math.floor((d - startDate) / (1000 * 60 * 60 * 24));
+        const weekIndex = Math.min(3, Math.floor(diffDays / 7.5));
+        weeks[weekIndex].amt += t.amount;
+      });
+      
+      return weeks;
+    } else if (velocityPeriod === '6M') {
+      const lastDateStr = sortedTxs[sortedTxs.length - 1]?.date || new Date().toISOString();
+      const lastDate = new Date(lastDateStr);
+      const months = [];
+      for (let i = 5; i >= 0; i--) {
+        const d = new Date(lastDate.getFullYear(), lastDate.getMonth() - i, 1);
+        months.push({
+          year: d.getFullYear(),
+          month: d.getMonth(),
+          name: d.toLocaleString('en-IN', { month: 'short' }),
+          amt: 0
+        });
+      }
+      
+      txs.forEach(t => {
+        const td = new Date(t.date);
+        const match = months.find(m => m.year === td.getFullYear() && m.month === td.getMonth());
+        if (match) {
+          match.amt += t.amount;
+        }
+      });
+      
+      return months.map(m => ({ name: m.name, amt: m.amt }));
+    } else {
+      const lastDateStr = sortedTxs[sortedTxs.length - 1]?.date || new Date().toISOString();
+      const lastDate = new Date(lastDateStr);
+      const months = [];
+      for (let i = 11; i >= 0; i--) {
+        const d = new Date(lastDate.getFullYear(), lastDate.getMonth() - i, 1);
+        months.push({
+          year: d.getFullYear(),
+          month: d.getMonth(),
+          name: d.toLocaleString('en-IN', { month: 'short' }),
+          amt: 0
+        });
+      }
+      
+      txs.forEach(t => {
+        const td = new Date(t.date);
+        const match = months.find(m => m.year === td.getFullYear() && m.month === td.getMonth());
+        if (match) {
+          match.amt += t.amount;
+        }
+      });
+      
+      return months.map(m => ({ name: m.name, amt: m.amt }));
+    }
+  };
 
   const [goals, setGoals] = useState([]);
   const [newGoal, setNewGoal] = useState("");
@@ -226,7 +403,15 @@ const Dashboard = ({ language = 'en' }) => {
   const [trendingStocks] = useState(MOCK_TRENDING);
   const [tickerItems] = useState(MOCK_TICKER);
   const [scoreAnimated, setScoreAnimated] = useState(0);
-  const animatedTotal = useCountUp(12480, 1200);
+  const liabilitiesList = (() => {
+    const saved = localStorage.getItem('swt_liabilities');
+    return saved ? JSON.parse(saved) : [
+      { label: "Commercial Mortgage", val: 620000 },
+      { label: "Corporate Credit", val: 110000 }
+    ];
+  })();
+  const totalOutflowVal = liabilitiesList.reduce((sum, item) => sum + item.val, 0);
+  const animatedTotal = useCountUp(totalOutflowVal, 1200);
 
   const [riskModal, setRiskModal] = useState({
     isOpen: false,
@@ -239,15 +424,6 @@ const Dashboard = ({ language = 'en' }) => {
 
   const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
-  const getLocalReply = (text) => {
-    const l = text.toLowerCase();
-    if (l.includes("home") || l.includes("goal")) return CHAT_RESPONSES.home;
-    if (l.includes("sip") || l.includes("market")) return CHAT_RESPONSES.sip;
-    if (l.includes("risk")) return CHAT_RESPONSES.risk;
-    if (l.includes("tax") || l.includes("80c")) return CHAT_RESPONSES.tax;
-    return CHAT_RESPONSES.default;
-  };
-
   const sendChat = async () => {
     if (!chatInput.trim()) return;
 
@@ -255,17 +431,59 @@ const Dashboard = ({ language = 'en' }) => {
     setChatInput('');
     setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
 
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const sessionAssets = JSON.parse(localStorage.getItem('swt_assets') || '[]');
+    const sessionLiabilities = JSON.parse(localStorage.getItem('swt_liabilities') || '[]');
+    const sessionGoals = JSON.parse(localStorage.getItem('swt_goals') || '[]');
+
+    const mergedProfile = {
+      ...user,
+      assets: sessionAssets,
+      liabilities: sessionLiabilities,
+      goals: sessionGoals,
+    };
+
+    const history = chatMessages.slice(-10).map(m => ({
+      role: m.role === 'user' ? 'user' : 'assistant',
+      content: m.text
+    }));
+
     try {
-      const res = await axios.post(`${CHAT_BASE}/api/chat`, { message: msg, language });
-      const reply = res.data.reply || res.data.response || getLocalReply(msg);
+      const token = localStorage.getItem('token');
+      const res = await axios.post(`http://localhost:8000/api/chat/message`, {
+        userId: user.userId || 'demo-user',
+        message: msg,
+        history,
+        language,
+        profile: mergedProfile,
+        user_profile: mergedProfile,
+        sessionUpdates: {
+          assets: sessionAssets,
+          liabilities: sessionLiabilities,
+          goals: sessionGoals
+        },
+        userAdditions: {
+          assets: sessionAssets,
+          liabilities: sessionLiabilities,
+          goals: sessionGoals
+        }
+      }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const reply = res.data.reply || res.data.response || "No response.";
       setChatMessages(prev => [...prev, { role: 'bot', text: reply }]);
-    } catch {
-      // Backend not running — use local keyword-matched responses
-      setChatMessages(prev => [...prev, { role: 'bot', text: getLocalReply(msg) }]);
+    } catch (err) {
+      console.warn("[Dashboard Chat API Failed]:", err.message);
+      const errMsg = `Error: ${err.response?.data?.error || err.message}`;
+      setChatMessages(prev => [...prev, { role: 'bot', text: errMsg }]);
     }
   };
 
   const securityGate = async (actionToRun, metadata) => {
+    if (emergencyHeirMode) {
+      setToast("Access Denied: Nominee emergency view mode is active. Outbound transactions and portfolio changes are restricted.");
+      return;
+    }
     try {
       const res = await axios.post(
         `${API_BASE}/api/action/execute`,
@@ -302,8 +520,12 @@ const Dashboard = ({ language = 'en' }) => {
   };
 
   const handleAddGoal = async () => {
+    if (emergencyHeirMode) {
+      setToast("Access Denied: Nominee emergency view mode is active. Adding goals is restricted.");
+      return;
+    }
     if (!newGoal.trim()) {
-      alert("Enter a goal");
+      setToast("Please enter a valid goal title.");
       return;
     }
 
@@ -350,6 +572,7 @@ const Dashboard = ({ language = 'en' }) => {
           velocityData: velocityData,
           outflowData: outflowData
         });
+        setDashboardData(res.data);
 
         const goalsRes = await axios.get(
           `${API_BASE}/api/user/${user.userId}/goals`,
@@ -416,22 +639,126 @@ const Dashboard = ({ language = 'en' }) => {
       {/* Market News Ticker */}
       <NewsTicker items={tickerItems} />
 
+      {/* ── Feature 3: Sleep On It Banner ── */}
+      {sleepPending && (
+        <div className="custom-banner sleep-banner" style={{ background: '#fffbeb', borderBottom: '1px solid #fef3c7', padding: '12px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13, color: '#92400e' }}>
+          <span>💤 <strong>Sleep On It Active</strong>: Yesterday you wanted to invest ₹{Number(sleepPending.amount || 25000).toLocaleString()} in {sleepPending.actionType || 'Axis Small Cap'}. Markets are up 0.8% since then. Still want to proceed?</span>
+          <div style={{ display: 'flex', gap: 8 }}>
+            <button style={{ padding: '4px 12px', background: '#d97706', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold' }} onClick={() => { localStorage.removeItem('sleep_on_it_pending'); setSleepPending(null); setToast('Transaction resumed!'); }}>Proceed</button>
+            <button style={{ padding: '4px 12px', background: 'white', border: '1px solid #cbd5e1', borderRadius: 4, cursor: 'pointer' }} onClick={() => { localStorage.removeItem('sleep_on_it_pending'); setSleepPending(null); }}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {/* ── Feature 7: Screen Sharing Warning Banner ── */}
+      {screenSharingDetected && (
+        <div className="custom-banner screenshare-banner" style={{ background: '#fff7ed', borderBottom: '1px solid #ffedd5', padding: '10px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: '#ea580c', fontWeight: '500' }}>
+          <span>⚠️ <strong>Screen Sharing Warning</strong>: SecureWealth never asks you to share your screen. If anyone has asked you to install AnyDesk or TeamViewer, disconnect the call immediately.</span>
+          <button onClick={() => setScreenSharingDetected(false)} style={{ background: 'none', border: 'none', color: '#ea580c', cursor: 'pointer', fontSize: 14, fontWeight: 'bold', padding: '0 4px' }} title="Dismiss warning">×</button>
+        </div>
+      )}
+
+      {/* ── Feature 12: Nominee Emergency Mode Alert ── */}
+      {emergencyHeirMode && (
+        <div className="custom-banner emergency-banner" style={{ background: '#fef2f2', borderBottom: '1px solid #fee2e2', padding: '10px 24px', fontSize: 13, color: '#dc2626', fontWeight: 'bold' }}>
+          ⚠️ <strong>Nominee emergency view active</strong>: Read-only access enabled for designated heir. Wealth actions and outbound transfers are restricted.
+        </div>
+      )}
+
       <div style={{ padding: '24px 32px', width: '100%', boxSizing: 'border-box' }}>
         <header className="top-header">
           <div className="user-profile">
             <img src="https://i.pravatar.cc/150?u=priya" alt="Priya" className="avatar" />
             <div className="user-info">
               <span className="user-name">{profile?.name || "Loading..."}</span>
-              <span className="user-status">PREMIUM MEMBER</span>
+              <span className="user-status">{emergencyHeirMode ? "NOMINEE ACCESS" : "PREMIUM MEMBER"}</span>
             </div>
           </div>
-          <div className="header-actions">
+          <div className="header-actions" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <button className="settings-btn-toggle" onClick={() => setShowSettings(!showSettings)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
+              <Settings size={20} className="header-icon" style={{ color: showSettings ? '#005f52' : '#64748b' }} />
+            </button>
             <div className="notification-bell">
               <Bell size={20} className="header-icon" />
               <span className="bell-dot"></span>
             </div>
           </div>
         </header>
+
+        {/* ── Settings Panel Card ── */}
+        {showSettings && (
+          <div className="settings-panel-card" style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: 16, padding: 24, marginBottom: 24, boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
+            <h3 style={{ fontSize: 16, fontWeight: 'bold', color: '#1e293b', marginBottom: 16 }}>Advanced Deception &amp; Security Settings</h3>
+            <div className="settings-grid" style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+              
+              {/* Night Lock Settings */}
+              <div className="settings-section" style={{ flex: 1, minWidth: 250 }}>
+                <h4 style={{ fontSize: 14, fontWeight: 'bold', color: '#0f172a', marginBottom: 8 }}>🌙 Transaction Lullaby (Night Lock)</h4>
+                <p className="setting-desc" style={{ fontSize: 12, color: '#64748b', marginBottom: 12 }}>Enforce auto-review for any transactions placed during sleep hours.</p>
+                <div className="setting-row">
+                  <label style={{ fontSize: 13, fontWeight: '600', display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <input 
+                      type="checkbox" 
+                      checked={nightLock.enabled} 
+                      onChange={(e) => saveNightLock(e.target.checked, nightLock.start, nightLock.end)} 
+                    />
+                    Enable Night Lock
+                  </label>
+                </div>
+                <div className="setting-row" style={{ marginTop: 10 }}>
+                  <label style={{ fontSize: 13 }}>Lock Hours: </label>
+                  <input 
+                    type="text" 
+                    value={nightLock.start} 
+                    onChange={(e) => saveNightLock(nightLock.enabled, e.target.value, nightLock.end)} 
+                    style={{ width: 60, padding: 4, marginLeft: 8, border: '1px solid #cbd5e1', borderRadius: 4, textAlign: 'center' }}
+                  />
+                  <span style={{ margin: '0 8px', fontSize: 13 }}>to</span>
+                  <input 
+                    type="text" 
+                    value={nightLock.end} 
+                    onChange={(e) => saveNightLock(nightLock.enabled, nightLock.start, e.target.value)} 
+                    style={{ width: 60, padding: 4, border: '1px solid #cbd5e1', borderRadius: 4, textAlign: 'center' }}
+                  />
+                </div>
+              </div>
+
+              {/* Nominee Settings */}
+              <div className="settings-section" style={{ flex: 1, minWidth: 250 }}>
+                <h4 style={{ fontSize: 14, fontWeight: 'bold', color: '#0f172a', marginBottom: 8 }}>👁️ Trusted Contact (Second Pair of Eyes)</h4>
+                <p className="setting-desc" style={{ fontSize: 12, color: '#64748b', marginBottom: 12 }}>Nominate a spouse or family member to approve high-risk wealth actions.</p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <input 
+                    type="text" 
+                    placeholder="Contact Name" 
+                    value={nomineeInput.name} 
+                    onChange={(e) => setNomineeInput({ ...nomineeInput, name: e.target.value })} 
+                    style={{ padding: 6, borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 13 }}
+                  />
+                  <input 
+                    type="text" 
+                    placeholder="Phone (+919876543210)" 
+                    value={nomineeInput.phone} 
+                    onChange={(e) => setNomineeInput({ ...nomineeInput, phone: e.target.value })} 
+                    style={{ padding: 6, borderRadius: 4, border: '1px solid #cbd5e1', fontSize: 13 }}
+                  />
+                  <label style={{ fontSize: 13, display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <input 
+                      type="checkbox" 
+                      checked={nomineeInput.isEmergencyHeir} 
+                      onChange={(e) => setNomineeInput({ ...nomineeInput, isEmergencyHeir: e.target.checked })} 
+                    />
+                    Enable Nominee Mode (Emergency Heir read-only access)
+                  </label>
+                  <button onClick={() => saveNominee(nomineeInput)} style={{ padding: '8px 12px', background: '#005f52', color: 'white', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 'bold', fontSize: 13 }}>
+                    Save Trusted Partner Settings
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
 
         {/* AI Nudge Cards */}
         <div className="nudge-strip">
@@ -445,14 +772,23 @@ const Dashboard = ({ language = 'en' }) => {
 
         <section className="hero-section">
           <div className="hero-text">
-            <h1>Your wealth <em>intelligence</em> <br /> overview.</h1>
+            <h1>
+              {language === 'hi' ? <>आपकी संपत्ति <em>बुद्धिमत्ता</em> <br /> का अवलोकन।</> :
+               language === 'ta' ? <>உங்கள் செல்வ <em>நுண்ணறிவு</em> <br /> கண்ணோட்டம்.</> :
+               language === 'te' ? <>మీ సంపద <em>మేధస్సు</em> <br /> అవలోకనం.</> :
+               language === 'bn' ? <>আপনার সম্পদ <em>বুদ্ধিমত্তার</em> <br /> সংক্ষিপ্ত বিবরণ।</> :
+               language === 'mr' ? <>तुमचा संपत्ती <em>बुद्धिमत्ता</em> <br /> आढावा.</> :
+               language === 'kn' ? <>ನಿಮ್ಮ ಸಂಪತ್ತು <em>ಬುದ್ಧಿವಂತಿಕೆಯ</em> <br /> ಅವಲೋಕನ.</> :
+               language === 'gu' ? <>તમારી સંપત્તિ <em>બુદ્ધિની</em> <br /> ઝાંખી.</> :
+               <>Your wealth <em>intelligence</em> <br /> overview.</>}
+            </h1>
             <p>Institutional-grade analysis shows a 4.2% efficiency gain in your portfolio allocation compared to last quarter.</p>
           </div>
 
           <div className="health-score-card">
             <HealthScoreBadge score={scoreAnimated} />
             <div className="score-details-right">
-              <span className="label-tiny">HEALTH SCORE</span>
+              <span className="label-tiny">{t(language, 'health_score')}</span>
               <div className="score-trend">
                 <TrendingUp size={14} /> +5.2% from Sept
               </div>
@@ -467,18 +803,18 @@ const Dashboard = ({ language = 'en' }) => {
               <div className="chart-card velocity-chart">
                 <div className="chart-header">
                   <div>
-                    <h3>Savings Velocity</h3>
-                    <p>Cumulative liquid growth over 12 months</p>
+                    <h3>{t(language, 'savings_velocity')}</h3>
+                    <p>{t(language, 'cumulative_growth')}</p>
                   </div>
                   <div className="time-filters">
-                    <span>1M</span>
-                    <span className="active">6M</span>
-                    <span>1Y</span>
+                    <span className={velocityPeriod === "1M" ? "active" : ""} onClick={() => setVelocityPeriod("1M")} style={{ cursor: 'pointer' }}>1M</span>
+                    <span className={velocityPeriod === "6M" ? "active" : ""} onClick={() => setVelocityPeriod("6M")} style={{ cursor: 'pointer' }}>6M</span>
+                    <span className={velocityPeriod === "1Y" ? "active" : ""} onClick={() => setVelocityPeriod("1Y")} style={{ cursor: 'pointer' }}>1Y</span>
                   </div>
                 </div>
                 <div className="chart-container">
                   <ResponsiveContainer width="100%" height={250}>
-                    <BarChart data={profile?.velocityData || velocityData}>
+                    <BarChart data={getVelocityChartData()}>
                       <defs>
                         <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="0%" stopColor="#14b8a6" stopOpacity={0.9} />
@@ -494,7 +830,7 @@ const Dashboard = ({ language = 'en' }) => {
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#999' }} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val / 1000}k`} />
                       <Tooltip cursor={{ fill: 'rgba(0,95,82,0.05)' }} />
                       <Bar dataKey="amt" radius={[6, 6, 0, 0]}>
-                        {(profile?.velocityData || velocityData).map((entry, index) => (
+                        {getVelocityChartData().map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.isCurrent ? 'url(#barGradientActive)' : 'url(#barGradient)'} />
                         ))}
                       </Bar>
@@ -506,8 +842,8 @@ const Dashboard = ({ language = 'en' }) => {
               {/* Capital Outflow Donut Chart */}
               <div className="chart-card outflow-chart">
                 <div className="chart-header">
-                  <h3>Capital Outflow</h3>
-                  <p>Allocation by priority sector</p>
+                  <h3>{t(language, 'capital_outflow')}</h3>
+                  <p>{t(language, 'allocation_priority')}</p>
                 </div>
                 <div className="donut-wrapper">
                   <ResponsiveContainer width="100%" height={200}>
@@ -520,15 +856,15 @@ const Dashboard = ({ language = 'en' }) => {
                     </PieChart>
                   </ResponsiveContainer>
                   <div className="donut-center">
-                    <span className="total-label">TOTAL</span>
+                    <span className="total-label">{t(language, 'total')}</span>
                     <span className="total-amount">₹{animatedTotal.toLocaleString('en-IN')}</span>
                   </div>
                 </div>
                 <div className="legend">
-                  {outflowData.slice(0, 3).map((item) => (
+                  {(profile?.outflowData || outflowData).slice(0, 4).map((item) => (
                     <div className="legend-item" key={item.name}>
                       <span className="dot" style={{ backgroundColor: item.color }}></span>
-                      <span className="name">{item.name}</span>
+                      <span className="name">{getCategoryTranslation(item.name, language)}</span>
                       <span className="value">{item.value}%</span>
                     </div>
                   ))}
@@ -536,7 +872,7 @@ const Dashboard = ({ language = 'en' }) => {
               </div>
             </div>
 
-            <MarketNews news={MOCK_NEWS} />
+            <MarketNews news={MOCK_NEWS} language={language} />
 
             <div className="insights-grid">
               <div className="insight-card">
@@ -640,7 +976,7 @@ const Dashboard = ({ language = 'en' }) => {
           </div>
 
           {/* Trending Stocks Side Panel */}
-          <TrendingStocks stocks={trendingStocks} />
+          <TrendingStocks stocks={trendingStocks} language={language} />
         </div>
       </div>
 

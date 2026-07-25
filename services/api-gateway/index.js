@@ -85,6 +85,9 @@ app.get('/health', (req, res) => {
 
 // ── Health Check Dashboard Aggregator ─────────────────────────────
 app.get('/api/health/all', async (req, res) => {
+  // Disable caching to prevent 304 responses, guaranteeing CORS headers are always parsed
+  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+
   const check = async (url) => {
     if (!url) return 'DOWN';
     try {
@@ -151,6 +154,26 @@ app.get('/api/admin/logs', verifyToken, (req, res) => {
     res.json(allLogs);
   } catch (err) {
     res.status(500).json({ error: 'Failed to retrieve logs', detail: err.message });
+  }
+});
+
+// Honeypot decoy endpoint proxy (Zero Trust attacker traps)
+app.all('/api/admin/users', async (req, res) => {
+  try {
+    const fraudUrl = process.env.FRAUD_ENGINE_URL || 'http://localhost:8002';
+    const response = await axios({
+      method: req.method,
+      url: `${fraudUrl}/api/admin/users`,
+      headers: {
+        'X-Internal-Token': process.env.INTERNAL_SECRET || 'swt-2026',
+        'Content-Type': 'application/json'
+      },
+      data: req.body,
+      validateStatus: () => true
+    });
+    return res.status(response.status).json(response.data);
+  } catch (err) {
+    return res.status(500).json({ error: 'Gateway honeypot proxy failed', detail: err.message });
   }
 });
 

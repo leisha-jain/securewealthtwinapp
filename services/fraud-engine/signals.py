@@ -215,6 +215,74 @@ def signal_geographic_anomaly(payload: dict, history: dict) -> dict:
 
 
 # ─────────────────────────────────────────────────────────────────
+# SIGNAL 11 — Salary Day Window
+# Score: +10 (and dynamic modifier applied in risk_scorer)
+# Logic: Checks if the transaction date falls within a 48-hour window
+#        after the user's typical recurring monthly salary credit date.
+# ─────────────────────────────────────────────────────────────────
+def signal_payday_window(payload: dict, history: dict) -> dict:
+    action_ts = payload.get("action_timestamp")
+    payday    = history.get("typical_payday", None)
+    triggered = False
+    if action_ts and payday:
+        try:
+            dt = datetime.fromisoformat(action_ts)
+            today = dt.day
+            # Checked for 48h (days 0, 1, 2 after payday)
+            triggered = (0 <= today - payday <= 2) or (today == 1 and payday == 31)
+        except Exception:
+            triggered = False
+
+    return {
+        "signal":    "payday_window",
+        "triggered": triggered,
+        "score":     10 if triggered else 0,
+        "reason":    "Action within 48h of salary credit — elevated risk window"
+                     if triggered else "Outside of salary credit window",
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
+# SIGNAL 12 — Seasonal Fraud Calendar
+# Score: 0 (applies a score multiplier modifier dynamically in risk_scorer)
+# Logic: Evaluates transaction date against historically active fraud
+#        seasons in India: Diwali shopping, Year End, Tax Deadline rush.
+# ─────────────────────────────────────────────────────────────────
+def signal_seasonal_calendar(payload: dict, history: dict) -> dict:
+    action_ts = payload.get("action_timestamp")
+    triggered = False
+    season_name = ""
+    modifier = 1.0
+    if action_ts:
+        try:
+            dt = datetime.fromisoformat(action_ts)
+            month_day = f"{dt.month:02d}-{dt.day:02d}"
+            if "10-15" <= month_day <= "11-05":
+                triggered = True
+                season_name = "Diwali Festival Shopping Season"
+                modifier = 1.3
+            elif "03-01" <= month_day <= "03-31":
+                triggered = True
+                season_name = "Tax-Saving Scheme Deadline Rush"
+                modifier = 1.2
+            elif "12-20" <= month_day or month_day <= "01-05":
+                triggered = True
+                season_name = "Year-End Holidays & Travel"
+                modifier = 1.15
+        except Exception:
+            pass
+
+    return {
+        "signal":    "seasonal_calendar",
+        "triggered": triggered,
+        "score":     0,
+        "modifier":  modifier,
+        "reason":    f"Action takes place during the {season_name} — elevated fraud period"
+                     if triggered else "Action timing has normal seasonal risk",
+    }
+
+
+# ─────────────────────────────────────────────────────────────────
 # MASTER LIST — every signal the engine evaluates
 # To add a new signal: write the function above, add it here.
 #
@@ -233,4 +301,6 @@ ALL_SIGNALS = [
     signal_night_large_txn,
     signal_velocity_abuse,    # Signal 9
     signal_geographic_anomaly, # Signal 10
+    signal_payday_window,     # Signal 11
+    signal_seasonal_calendar, # Signal 12
 ]

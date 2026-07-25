@@ -14,7 +14,8 @@ from signals     import (signal_new_device, signal_fast_action,
                           signal_amount_anomaly, signal_otp_retry,
                           signal_first_investment, signal_retry_loop,
                           signal_night_large_txn, signal_velocity_abuse,
-                          signal_geographic_anomaly)
+                          signal_geographic_anomaly, signal_payday_window,
+                          signal_seasonal_calendar)
 from honeypot    import signal_honeypot, detect_fake_endpoint
 from risk_scorer import compute_risk_score
 from user_store  import get_user_history
@@ -170,6 +171,37 @@ check("fires when device changed mid-session", r["triggered"] is True)
 check("score is 20",                           r["score"] == 20)
 r = signal_geographic_anomaly({}, {"device_changed": False})
 check("does NOT fire when device consistent",  r["triggered"] is False)
+print()
+print("── Signal 11: Salary Payday Window ──")
+r = signal_payday_window(
+    {"action_timestamp": "2026-04-02T10:00:00"},
+    {"typical_payday": 1}
+)
+check("fires within 48h of payday", r["triggered"] is True)
+check("score is 10", r["score"] == 10)
+
+r = signal_payday_window(
+    {"action_timestamp": "2026-04-10T10:00:00"},
+    {"typical_payday": 1}
+)
+check("does NOT fire outside window", r["triggered"] is False)
+
+print()
+print("── Signal 12: Seasonal Calendar ──")
+r = signal_seasonal_calendar(
+    {"action_timestamp": "2026-10-20T10:00:00"},
+    {}
+)
+check("fires during Diwali", r["triggered"] is True)
+check("modifier is 1.3", r["modifier"] == 1.3)
+
+r = signal_seasonal_calendar(
+    {"action_timestamp": "2026-06-20T10:00:00"},
+    {}
+)
+check("does NOT fire off-season", r["triggered"] is False)
+
+print()
 
 
 # ── Full Scenario Tests ───────────────────────────────────────────

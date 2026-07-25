@@ -16,15 +16,29 @@ router.get('/:id/profile', verifyToken, async (req, res) => {
   const user = db.users[userId];
   if (!user) return res.status(404).json({ error: 'User not found' });
 
+  let personaData = {};
+  if (user.persona) {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const personaPath = path.resolve(__dirname, '../../../data/personas', `${user.persona}.json`);
+      if (fs.existsSync(personaPath)) {
+        personaData = JSON.parse(fs.readFileSync(personaPath, 'utf-8'));
+      }
+    } catch (e) {
+      console.warn('[Profile Helper] Failed to read persona file:', e.message);
+    }
+  }
+
   try {
     const response = await axios.get(`${WEALTH_URL}/users/${userId}`, {
       headers: proxyHeaders(req),
       timeout: 3000
     });
-    return res.json(response.data);
+    return res.json({ ...response.data, ...user, personaData });
   } catch (err) {
     console.warn(`[User] Wealth Engine unreachable — returning DB info for user ${userId}`);
-    return res.json({ ...user, _stub: false });
+    return res.json({ ...user, personaData, _stub: false });
   }
 });
 
@@ -35,36 +49,41 @@ router.get('/:id/dashboard', verifyToken, async (req, res) => {
   const user = db.users[userId];
   if (!user) return res.status(404).json({ error: 'User not found' });
 
+  let netWorth = 1250000;
+  let totalAssets = 1850000;
+  let totalExpense = 93600;
+  let savingsRate = user.savings_rate * 100 || 22;
+  let transactions = [];
+  let portfolio = {};
+  let personaData = {};
+
+  if (user.persona) {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const personaPath = path.resolve(__dirname, '../../../data/personas', `${user.persona}.json`);
+      if (fs.existsSync(personaPath)) {
+        personaData = JSON.parse(fs.readFileSync(personaPath, 'utf-8'));
+        netWorth = personaData.financial_profile?.net_worth || netWorth;
+        totalAssets = personaData.financial_profile?.total_assets || totalAssets;
+        totalExpense = personaData.financial_profile?.total_expenses || totalExpense;
+        transactions = personaData.transactions || [];
+        portfolio = personaData.portfolio || {};
+      }
+    } catch (e) {
+      console.warn('[Dashboard Helper] Failed to read persona file:', e.message);
+    }
+  }
+
   try {
     const response = await axios.get(`${WEALTH_URL}/dashboard/${userId}`, {
       headers: proxyHeaders(req),
       timeout: 3000
     });
-    return res.json(response.data);
+    return res.json({ ...response.data, transactions, portfolio, personaData });
   } catch (err) {
     console.warn(`[User] Wealth Engine unreachable — returning consolidated dashboard`);
     
-    let netWorth = 1250000;
-    let totalAssets = 1850000;
-    let totalExpense = 93600;
-    let savingsRate = user.savings_rate * 100 || 22;
-
-    if (user.persona) {
-      try {
-        const fs = require('fs');
-        const path = require('path');
-        const personaPath = path.resolve(__dirname, '../../../../data/personas', `${user.persona}.json`);
-        if (fs.existsSync(personaPath)) {
-          const pData = JSON.parse(fs.readFileSync(personaPath, 'utf-8'));
-          netWorth = pData.financial_profile?.net_worth || netWorth;
-          totalAssets = pData.financial_profile?.total_assets || totalAssets;
-          totalExpense = pData.financial_profile?.total_expenses || totalExpense;
-        }
-      } catch (e) {
-        console.warn('[Dashboard Helper] Failed to read persona file:', e.message);
-      }
-    }
-
     return res.json({
       user: user,
       net_worth: netWorth,
@@ -74,7 +93,10 @@ router.get('/:id/dashboard', verifyToken, async (req, res) => {
         total_expense: totalExpense,
         savings_rate: savingsRate,
       },
-      goals: db.goals[userId] || []
+      goals: db.goals[userId] || [],
+      transactions: transactions,
+      portfolio: portfolio,
+      personaData: personaData
     });
   }
 });
@@ -105,7 +127,7 @@ router.get('/:id/assets', verifyToken, async (req, res) => {
       try {
         const fs = require('fs');
         const path = require('path');
-        const personaPath = path.resolve(__dirname, '../../../../data/personas', `${user.persona}.json`);
+        const personaPath = path.resolve(__dirname, '../../../data/personas', `${user.persona}.json`);
         if (fs.existsSync(personaPath)) {
           const pData = JSON.parse(fs.readFileSync(personaPath, 'utf-8'));
           if (pData.portfolio) {

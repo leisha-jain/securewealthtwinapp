@@ -7,15 +7,19 @@ import os, json, requests
 from typing import Optional
 
 load_dotenv()
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
-if not OPENROUTER_API_KEY:
-    print("\n" + "="*80)
-    print("[WARNING] OPENROUTER_API_KEY is not configured in the environment (.env file).")
-    print("The chat service will run, but it will fallback to keyword-based local responses.")
-    print("To enable full Llama 3 AI capabilities, get an API key from https://openrouter.ai/")
-    print("="*80 + "\n")
-MODEL = "meta-llama/llama-3.3-70b-instruct"
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+
+if GROQ_API_KEY:
+    LLM_PROVIDER = "GROQ"
+    API_KEY = GROQ_API_KEY
+    MODEL = "llama-3.3-70b-versatile"
+    URL = "https://api.groq.com/openai/v1/chat/completions"
+else:
+    LLM_PROVIDER = "OPENROUTER"
+    API_KEY = OPENROUTER_API_KEY
+    MODEL = "meta-llama/llama-3.3-70b-instruct"
+    URL = "https://openrouter.ai/api/v1/chat/completions"
 
 app = FastAPI(title="SecureWealth Twin - Chat Service")
 
@@ -142,11 +146,14 @@ Goals: {', '.join(goals) if goals else 'Not specified'}
 """
 
 def call_llm(system_prompt: str, user_prompt: str, max_tokens: int = 200):
+    if not API_KEY:
+        print("[LLM] No API key configured. Returning fallback.")
+        return None
     try:
         response = requests.post(
-            OPENROUTER_URL,
+            URL,
             headers={
-                "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                "Authorization": f"Bearer {API_KEY}",
                 "Content-Type": "application/json"
             },
             json={
@@ -179,12 +186,35 @@ def health():
     return {"status": "ok", "service": "chat-service"}
 
 
+SCAM_PHRASES = [
+    "account will be blocked", "rbi notice", "safe account",
+    "transfer immediately", "customs clearance", "police case filed",
+    "your kyc expired", "cyber crime", "ed notice", "income tax raid",
+    "block in 2 hours", "kyc update required", "anydesk", "teamviewer",
+    "transfer to safe"
+]
+
+
 @app.post("/api/chat")
-def chat(request: ChatRequest):
-    lang = request.language or "en"
+def chat(request: ChatRequest, req: Request):
+    hdr_lang = req.headers.get("accept-language") or "en"
+    if "-" in hdr_lang:
+        hdr_lang = hdr_lang.split("-")[0]
+    hdr_lang = hdr_lang.strip().lower()
+
+    lang = hdr_lang or request.language or "en"
     lang_prefix = LANG_PREFIXES.get(lang, "")
     profile = request.profile or UserProfile()
     context = build_user_context(profile)
+
+    # ── Feature 2: Scammer Script Detector ─────────────────────────
+    msg_lower = request.message.lower()
+    if any(phrase in msg_lower for phrase in SCAM_PHRASES):
+        return {
+            "response": "⚠️ WARNING: This language matches known fraud scripts used by scammers. Real banks never ask you to transfer to a 'safe account' or download remote access apps. Please hang up immediately and call your bank's official toll-free number: 1800-XXX-XXXX.",
+            "reasoning": "Scam script phrase match.",
+            "is_scam_warning": True
+        }
 
     # Fraud alert urgency flag
     fraud_prefix = ""
@@ -219,9 +249,14 @@ STRICT RULES:
 
 
 @app.post("/api/chat/nudges")
-def nudges(request: NudgeRequest):
+def nudges(request: NudgeRequest, req: Request):
     """Generate 3 proactive AI nudges for the dashboard."""
-    lang = request.language or "en"
+    hdr_lang = req.headers.get("accept-language") or "en"
+    if "-" in hdr_lang:
+        hdr_lang = hdr_lang.split("-")[0]
+    hdr_lang = hdr_lang.strip().lower()
+
+    lang = hdr_lang or request.language or "en"
     lang_prefix = LANG_PREFIXES.get(lang, "")
 
     NUDGE_PROMPT = f"""{lang_prefix}
@@ -251,7 +286,15 @@ Example output: ["Gold up 13% — consider booking Rs.20,000 profit.", "You have
 
 
 @app.post("/api/explain")
-def explain(data: ExplainRequest):
+def explain(data: ExplainRequest, req: Request):
+    hdr_lang = req.headers.get("accept-language") or "en"
+    if "-" in hdr_lang:
+        hdr_lang = hdr_lang.split("-")[0]
+    hdr_lang = hdr_lang.strip().lower()
+
+    lang = hdr_lang or "en"
+    lang_prefix = LANG_PREFIXES.get(lang, "")
+
     drivers_text = "\n".join(
         f"- {d}" if isinstance(d, str)
         else f"- {d.get('label', 'Factor')}: {d.get('value', '')}"
@@ -264,7 +307,7 @@ def explain(data: ExplainRequest):
         if p else "Not provided"
     )
 
-    system = "You are a financial explainer. Convert data-driven recommendations into plain English. Be concise, specific, and jargon-free."
+    system = f"{lang_prefix}\nYou are a financial explainer. Convert data-driven recommendations into plain language. Be concise, specific, and jargon-free. Respond in the same language as the request Accept-Language header if non-English."
 
     prompt = f"""Explain this financial recommendation for an Indian banking user.
 
@@ -302,8 +345,13 @@ Full: <2-3 sentences explaining why this matters and what to do>"""
 
 
 @app.post("/api/starter-prompts")
-def starter_prompts(req: StarterPromptsRequest):
-    lang = req.language or "en"
+def starter_prompts(req: StarterPromptsRequest, request_obj: Request):
+    hdr_lang = request_obj.headers.get("accept-language") or "en"
+    if "-" in hdr_lang:
+        hdr_lang = hdr_lang.split("-")[0]
+    hdr_lang = hdr_lang.strip().lower()
+
+    lang = hdr_lang or req.language or "en"
     prompts = STARTER_PROMPTS.get(lang, STARTER_PROMPTS["en"])
     return {"prompts": prompts}
 

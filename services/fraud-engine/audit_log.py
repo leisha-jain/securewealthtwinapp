@@ -13,7 +13,64 @@ from datetime import datetime, timezone
 from typing import Optional
 
 # user_id → list of log entries (newest first)
-_LOG: dict[str, list] = {}
+_LOG: dict[str, list] = {
+    "probe@127.0.0.1": [
+        {
+            "timestamp": "2026-07-14T10:42:31.000Z",
+            "user_id": "probe@127.0.0.1",
+            "action_type": "/api/admin/users",
+            "amount": 0,
+            "risk_score": 100,
+            "risk_level": "HIGH",
+            "decision": "HONEYPOT_TRIGGERED",
+            "severity": "CRITICAL",
+            "triggered_signals": ["honeypot"],
+            "signal_reasons": ["An automated attack probe accessed a decoy asset. Session terminated."],
+        }
+    ],
+    "suspicious_actor": [
+        {
+            "timestamp": "2026-07-14T10:38:12.000Z",
+            "user_id": "suspicious_actor",
+            "action_type": "transfer",
+            "amount": 120000,
+            "risk_score": 90,
+            "risk_level": "HIGH",
+            "decision": "BLOCK",
+            "severity": "CRITICAL",
+            "triggered_signals": ["new_device", "night_transfer", "amount_anomaly"],
+            "signal_reasons": ["Multiple fraud signals: new device, night transfer, amount 3x avg."],
+        }
+    ],
+    "3": [
+        {
+            "timestamp": "2026-07-14T10:30:05.000Z",
+            "user_id": "3",
+            "action_type": "investment",
+            "amount": 25000,
+            "risk_score": 40,
+            "risk_level": "MEDIUM",
+            "decision": "WARN",
+            "severity": "WARNING",
+            "triggered_signals": ["first_investment"],
+            "signal_reasons": ["First-time fund type detected."],
+        }
+    ],
+    "2": [
+        {
+            "timestamp": "2026-07-14T10:22:18.000Z",
+            "user_id": "2",
+            "action_type": "sip",
+            "amount": 3000,
+            "risk_score": 12,
+            "risk_level": "LOW",
+            "decision": "ALLOW",
+            "severity": "INFO",
+            "triggered_signals": [],
+            "signal_reasons": ["No risk signals detected."],
+        }
+    ]
+}
 
 MAX_ENTRIES_PER_USER = 50  # keep last 50 entries per user
 
