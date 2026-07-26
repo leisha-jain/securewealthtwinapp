@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import "./OTP.css";
+import { Capacitor } from '@capacitor/core';
 
 const OTP_LENGTH = 6;
 const COUNTDOWN_SECONDS = 29;
@@ -91,7 +92,7 @@ export default function OTP({ onVerify }) {
       const userId = user.userId;
       const code = values.join("");
 
-      const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000";
+      const API_URL = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
       const res = await fetch(`${API_URL}/api/auth/verify-otp`, {
         method: "POST",
         headers: {

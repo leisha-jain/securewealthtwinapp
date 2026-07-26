@@ -5,6 +5,7 @@ import { useCountUp } from '../utils/helpers';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
 import { t } from '../utils/languageStrings';
+import { Capacitor } from '@capacitor/core';
 import HealthScoreBadge from '../components/HealthScoreBadge';
 import {
   LayoutDashboard, Target, Landmark, PieChart as PieIcon,
@@ -211,7 +212,7 @@ const getCategoryTranslation = (name, lang) => {
 };
 
 const Dashboard = ({ language = 'en' }) => {
-  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
+  const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
   const CHAT_BASE = process.env.REACT_APP_CHAT_URL || "http://localhost:8003";
 
   const [chatInput, setChatInput] = useState('');
@@ -450,7 +451,7 @@ const Dashboard = ({ language = 'en' }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.post(`http://localhost:8000/api/chat/message`, {
+      const res = await axios.post(`${API_BASE}/api/chat/message`, {
         userId: user.userId || 'demo-user',
         message: msg,
         history,

@@ -16,6 +16,9 @@ import Register2 from "./pages/Register2";
 import Register3 from "./pages/Register3";
 import axios from 'axios';
 import { Dot } from "./utils/helpers";
+import { Capacitor } from '@capacitor/core';
+
+const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 // Configure global axios interceptor for emotional context and last action caching
 axios.interceptors.request.use((config) => {
@@ -218,7 +221,7 @@ export default function App() {
   useEffect(() => {
     const checkServices = async () => {
       try {
-        await axios.get('http://localhost:8000/api/health/all');
+        await axios.get(`${API_BASE}/api/health/all`);
         setShowAmberBanner(false);
       } catch (err) {
         if (!err.response) {
@@ -359,9 +362,9 @@ export default function App() {
       />
 
       {/* ✅ MAIN CONTENT AREA */}
-      <div style={{ flex: 1, minWidth: 0, overflow: 'hidden' }}>
+      <div className="main-page-content" style={{ flex: 1, minWidth: 0, overflowX: "hidden", maxWidth: "100%" }}>
 
-        <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease" }}>
+        <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease", overflowX: "hidden" }}>
 
           {page === "dashboard" && (
             <Dashboard p={p} onRisk={setFraud} language={language} />

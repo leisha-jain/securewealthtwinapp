@@ -223,3 +223,11 @@
 .banner-content h2 { font-size: 28px; margin-bottom: 15px; color: var(--text-dark); }
 .banner-content p { max-width: 500px; color: var(--text-light); margin-bottom: 20px; }
 .text-link { color: var(--teal); font-weight: 700; text-decoration: none; }
+@media (max-width: 768px) {
+  .portfolio-container, .portfolio-page { padding: 12px 14px !important; padding-bottom: 80px !important; }
+  .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .portfolio-card { padding: 16px !important; border-radius: 12px !important; }
+  h1, h2 { font-size: 20px !important; }
+  table { font-size: 12px; }
+  th, td { padding: 8px 6px !important; }
+}

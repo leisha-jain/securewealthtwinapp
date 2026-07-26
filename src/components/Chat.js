@@ -14,6 +14,9 @@ const FALLBACK_TIPS = [
 
 const FALLBACK_MSG = "Our AI advisor is temporarily unavailable. Here are general tips based on your profile:";
 
+import { Capacitor } from '@capacitor/core';
+const GATEWAY_URL = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
+
 export default function Chat({ p, language = "en" }) {
   const firstName = p?.name?.split(" ")[0] || "there";
   const [msgs, setMsgs] = useState([
@@ -67,7 +70,7 @@ export default function Chat({ p, language = "en" }) {
 
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.post('http://localhost:8000/api/chat/message', {
+        const res = await axios.post(`${GATEWAY_URL}/api/chat/message`, {
           userId: user.userId || 'demo-user',
           message: text,
           history,

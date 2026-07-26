@@ -1,6 +1,7 @@
 import axios from "axios";
+import { Capacitor } from '@capacitor/core';
 
-const API = process.env.REACT_APP_API_URL || "http://localhost:8000";
+const API = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 /* ─────────────────────────────────────────────
    AXIOS INSTANCE

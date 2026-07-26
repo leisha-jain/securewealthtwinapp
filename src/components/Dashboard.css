@@ -1160,22 +1160,107 @@ button:hover { transition: transform 0.15s, box-shadow 0.15s; }
 }
 
 /* ================================
+   RESPONSIVE - TABLET
+   ================================ */
+@media (max-width: 1024px) {
+  .main-content { padding: 24px 20px; }
+  .insights-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ================================
    RESPONSIVE - MOBILE
    ================================ */
 @media (max-width: 768px) {
-  .main-content { padding: 16px; padding-bottom: 80px; }
-  .hero-text h1 { font-size: 28px; }
-  .charts-grid { grid-template-columns: 1fr; }
-  .insights-grid { grid-template-columns: 1fr; }
-  .dashboard-main-grid { grid-template-columns: 1fr; }
-  .trending-panel { position: static; }
-  .hero-section { flex-direction: column; gap: 24px; align-items: flex-start; }
-  .nudge-strip { flex-direction: column; }
-}
+  /* Layout */
+  .app-container { display: block; width: 100%; }
+  .main-content {
+    padding: 12px 14px;
+    padding-bottom: 80px;
+    width: 100%;
+    overflow-x: hidden;
+  }
 
-@media (max-width: 1024px) {
-  .main-content { padding: 24px 28px; }
-  .insights-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Header */
+  .top-header { flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+  .user-name { font-size: 15px; }
+  .user-status { font-size: 10px; }
+  .avatar { width: 36px; height: 36px; }
+
+  /* Hero section */
+  .hero-section {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .hero-text h1 { font-size: 20px; line-height: 1.3; }
+  .hero-text p  { font-size: 12px; }
+  .health-score-card { width: 100%; justify-content: flex-start; gap: 16px; }
+
+  /* Nudge strip */
+  .nudge-strip { flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .nudge-chip  { font-size: 12px; padding: 10px 12px; }
+
+  /* Charts */
+  .dashboard-main-grid {
+    flex-direction: column !important;
+    gap: 16px;
+  }
+  .charts-and-insights { width: 100%; min-width: 0; }
+  .charts-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+  .chart-card { padding: 16px; }
+  .chart-container { height: 200px !important; }
+
+  /* Donut chart */
+  .donut-wrapper { position: relative; }
+  .donut-center { font-size: 11px; }
+  .total-amount { font-size: 14px !important; }
+
+  /* Insights */
+  .insights-grid { grid-template-columns: 1fr; gap: 12px; }
+  .insight-card { padding: 16px; }
+
+  /* Trending panel */
+  .trending-panel {
+    position: static !important;
+    width: 100%;
+    margin-top: 0;
+  }
+
+  /* Ticker */
+  .ticker-wrap { font-size: 11px; padding: 6px 12px; }
+
+  /* Floating chat — full screen on mobile */
+  .chat-popup {
+    width: 100vw !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 80vh;
+  }
+  .chat-popup.open { height: 70vh; }
+  .chat-popup.fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    bottom: 0 !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+  }
+  .chat-toggle-btn {
+    bottom: 76px !important;
+    right: 16px !important;
+    width: 52px !important;
+    height: 52px !important;
+  }
+
+  /* Score badge */
+  .health-score-badge svg { width: 80px; height: 80px; }
+  .score-number { font-size: 22px !important; }
 }
 
 /* ── MARKET NEWS ─────────────────────────────────────────────── */

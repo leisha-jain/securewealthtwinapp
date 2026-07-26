@@ -306,3 +306,10 @@ input:checked + .slider:before { transform: translateX(20px); }
   border-color: #fecaca;
 }
 .trigger-btn.honeypot:hover { background: #fee2e2; }
+@media (max-width: 768px) {
+  .alerts-container, .alerts-page { padding: 12px 14px !important; padding-bottom: 80px !important; }
+  .alerts-grid { grid-template-columns: 1fr !important; }
+  .filter-buttons { flex-wrap: wrap; gap: 6px; }
+  .alert-row, .honeypot-row { flex-wrap: wrap; gap: 6px; font-size: 12px; }
+  h1, h2 { font-size: 20px !important; }
+}

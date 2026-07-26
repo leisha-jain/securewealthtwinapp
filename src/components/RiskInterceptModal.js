@@ -3,6 +3,9 @@ import { ShieldCheck, AlertTriangle, ShieldAlert, Clock, Phone, ArrowRight, Eye,
 import axios from 'axios';
 import './RiskInterceptModal.css';
 import { t } from '../utils/languageStrings';
+import { Capacitor } from '@capacitor/core';
+
+const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 const HUMAN_MESSAGES = {
   "Action from an unrecognised device": "We noticed this is your first time performing a transaction on this device. We are verifying it's really you.",
@@ -95,7 +98,7 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
     if (trustedState.active && trustedState.status === 'pending') {
       interval = setInterval(async () => {
         try {
-          const res = await axios.get(`http://localhost:8000/api/auth/pending-approvals/${trustedState.token}`);
+          const res = await axios.get(`${API_BASE}/api/auth/pending-approvals/${trustedState.token}`);
           if (res.data.status === 'approved') {
             setTrustedState(prev => ({ ...prev, status: 'approved' }));
             clearInterval(interval);
@@ -123,7 +126,7 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8000/api/auth/sleep-on-it', { action: lastAction }, {
+      await axios.post(`${API_BASE}/api/auth/sleep-on-it`, { action: lastAction }, {
         headers: { Authorization: `Bearer ${token}` }
       });
     } catch (e) {
@@ -138,7 +141,7 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
     const lastAction = JSON.parse(localStorage.getItem('last_action_payload') || '{}');
     try {
       const token = localStorage.getItem('token');
-      const profileRes = await axios.get('http://localhost:8000/api/auth/profile', {
+      const profileRes = await axios.get(`${API_BASE}/api/auth/profile`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const nominee = profileRes.data?.user?.nominee;
@@ -147,7 +150,7 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
         return;
       }
 
-      const res = await axios.post('http://localhost:8000/api/auth/ask-trusted', {
+      const res = await axios.post(`${API_BASE}/api/auth/ask-trusted`, {
         amount: lastAction.amount || 25000,
         action_type: lastAction.actionType || "Investment Action",
         target: lastAction.target || nominee.name
@@ -356,7 +359,7 @@ const BlockScreen = ({ message, onCancel, lang, onAllow, riskScore }) => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        "http://localhost:8000/api/chat/explain",
+        `${API_BASE}/api/chat/explain`,
         {
           recommended_action: message,
           top_drivers: [message]

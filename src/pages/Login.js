@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './Login.css';
 import { AtSign, Lock, RefreshCw } from 'lucide-react';
 import Toast from '../components/Toast';
+import { Capacitor } from '@capacitor/core';
+
+const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 const CAPTCHA_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
@@ -40,7 +43,7 @@ const Login = ({onLogin, onRegister}) => {
     }
   
     try {
-      const res = await fetch("http://localhost:8000/api/auth/login", {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

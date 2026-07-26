@@ -674,3 +674,13 @@ body {
 .sim-legend-item { display: flex; align-items: center; gap: 6px; }
 .sim-legend-item.base  { color: #9ca3af; }
 .sim-legend-item.boost { color: var(--primary-teal); font-weight: 600; }
+
+@media (max-width: 768px) {
+  .goals-container, .goals-page { padding: 12px 14px; padding-bottom: 80px; }
+  .goals-grid, .goal-cards-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .goal-card { padding: 16px; border-radius: 12px; }
+  .savings-simulator { padding: 16px; border-radius: 12px; }
+  .sim-sliders { grid-template-columns: 1fr !important; }
+  h1, h2 { font-size: 20px !important; }
+  h3 { font-size: 16px !important; }
+}

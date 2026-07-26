@@ -6,7 +6,8 @@ import './Portfolio.css';
 
 
 
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+import { Capacitor } from '@capacitor/core';
+const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 const DICT = {
   en: {
     title: "Portfolio Strategy",

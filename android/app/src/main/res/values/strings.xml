@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SecureWealthTwin</string>
+    <string name="title_activity_main">SecureWealthTwin</string>
+    <string name="package_name">com.securewealthtwin.app</string>
+    <string name="custom_url_scheme">com.securewealthtwin.app</string>
+</resources>

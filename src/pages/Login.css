@@ -321,3 +321,33 @@ body {
     font-size: 24px;
   }
 }
+
+/* ── MOBILE IMPROVEMENTS ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 16px;
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+  .login-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .login-title { font-size: 22px; }
+  .login-subtitle { font-size: 13px; }
+  .login-input {
+    font-size: 16px !important; /* prevents iOS zoom */
+    padding: 13px 14px;
+    height: 48px;
+  }
+  .login-btn {
+    height: 50px;
+    font-size: 15px;
+  }
+  .captcha-display {
+    flex-wrap: wrap;
+  }
+}

@@ -265,3 +265,9 @@
   font-size: 13px;
   color: #6b7280;
 }
+@media (max-width: 768px) {
+  .otp-container { padding: 20px 16px; padding-top: 40px; }
+  .otp-card { padding: 28px 20px; border-radius: 16px; width: 100%; max-width: 100%; }
+  .otp-input { font-size: 16px !important; height: 48px; }
+  .otp-btn { height: 50px; font-size: 15px; }
+}
