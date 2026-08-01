@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Uses the app-wide Inter font, loaded once in public/index.html */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,8 +7,8 @@
 }
 
 :root {
-  --teal: #006D5B;
-  --primary-teal: #006D5B;
+  --teal: #005f52;
+  --primary-teal: #005f52;
   --secondary-teal: #14b8a6;
   --bg: #f3f7f6;
   --white: #ffffff;
@@ -16,53 +16,6 @@
   --text-light: #64748b;
   --text-muted: #64748b;
   --border: #e2e8f0;
-}
-
-.app-container {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  background-color: var(--bg);
-  font-family: 'Inter', sans-serif;
-}
-
-/* ── Sidebar ── */
-.sidebar {
-  width: 240px;
-  background: var(--white);
-  padding: 24px 0;
-  border-right: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 20px;
-  padding: 0 24px 30px;
-  color: var(--text-dark);
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 24px;
-  color: var(--text-light);
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.nav-item:hover {
-  background: #f8fafc;
-  color: var(--teal);
-}
-
-.nav-item.active {
-  color: var(--teal);
-  background: #f0fdfa;
-  border-right: 3px solid var(--teal);
 }
 
 /* ── Main Area ── */
@@ -188,7 +141,7 @@
 
 .bar-fill.active {
   opacity: 1 !important;
-  background: #006D5B !important;
+  background: #005f52 !important;
 }
 
 .bar-label {
@@ -444,6 +397,7 @@
 @media (max-width: 768px) {
   .networth-container, .networth-page { padding: 12px 14px !important; padding-bottom: 80px !important; }
   .networth-grid, .assets-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .charts-grid, .dashboard-grid { grid-template-columns: 1fr !important; gap: 12px; }
   .networth-card { padding: 16px !important; border-radius: 12px !important; }
   h1, h2 { font-size: 20px !important; }
 }

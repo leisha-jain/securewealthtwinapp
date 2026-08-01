@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Login.css';
 import { AtSign, Lock, RefreshCw } from 'lucide-react';
 import Toast from '../components/Toast';
@@ -26,6 +26,13 @@ const Login = ({onLogin, onRegister}) => {
   const [spinning, setSpinning] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
+  // Some Android autofill/password-manager flows fill an input's visible
+  // value without firing the DOM 'input' event React listens for, leaving
+  // this component's state stale (e.g. empty) while the field looks filled
+  // on screen. Reading straight from the DOM at submit time sidesteps that.
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+
   const refreshCaptcha = () => {
     setCaptcha(generateCaptcha());
     setCaptchaInput('');
@@ -33,52 +40,68 @@ const Login = ({onLogin, onRegister}) => {
     setTimeout(() => setSpinning(false), 400);
   };
 
+  // Offline demo fallback. Passwords MUST match data/db.json so the same
+  // credentials work whether or not the backend is reachable.
+  const DEMO_USERS = {
+    "priya":  { userId: 2, name: "Priya Sharma",  password: "1234" },
+    "ramesh": { userId: 3, name: "Ramesh Kumar",  password: "1234" },
+    "arjun":  { userId: 1, name: "Arjun Mehta",   password: "1234" },
+    "neha":   { userId: 4, name: "Neha Sharma",   password: "1234" },
+    "1":      { userId: 1, name: "Arjun Mehta",   password: "1234" },
+    "2":      { userId: 2, name: "Priya Sharma",  password: "1234" },
+    "3":      { userId: 3, name: "Ramesh Kumar",  password: "1234" },
+    "4":      { userId: 4, name: "Neha Sharma",   password: "1234" },
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // 🔐 CAPTCHA check
+
+    // Read straight from the DOM rather than trusting React state alone —
+    // some Android autofill/password-manager flows fill the visible input
+    // without firing the event React needs to stay in sync.
+    const liveUsername = (usernameRef.current?.value ?? username).trim();
+    const livePassword = passwordRef.current?.value ?? password;
+
     if (captchaInput !== captcha.code) {
-      setErrorMsg("Invalid CAPTCHA ❌");
+      setErrorMsg("Invalid CAPTCHA");
       return;
     }
-  
+
+    if (!liveUsername || !livePassword) {
+      setErrorMsg("Enter your username and passphrase");
+      return;
+    }
+
+    const knownUser = DEMO_USERS[liveUsername.toLowerCase()];
+    const resolvedUserId = knownUser ? knownUser.userId : Number(liveUsername);
+
+    // The backend is authoritative. Only fall back to the offline demo when
+    // it is genuinely unreachable — never to mask a rejected password.
     try {
       const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userId: Number(username),   // IMPORTANT: userId must be number
-          password: password,
-          deviceId: "web-browser"     // simple device id for demo
+          userId: resolvedUserId,
+          password: livePassword,
+          deviceId: "web-browser"
         })
       });
-  
       const data = await res.json();
-  
-      console.log("LOGIN RESPONSE:", data);
-
-      if (res.status !== 200) {
-        setErrorMsg(data.error || "Login failed ❌");
-        return;
-      }
-
-      if (!data.token || !data.user) {
-        setErrorMsg("Invalid server response ❌");
-        return;
-      }
-  
-      // ✅ SAVE TOKEN + USER
+      if (res.status !== 200) { setErrorMsg(data.error || "Login failed"); return; }
+      if (!data.token || !data.user) { setErrorMsg("Invalid server response"); return; }
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-  
-      // ✅ CALL APP LOGIN
       onLogin(data.user);
-  
-    } catch (err) {
-      console.error(err);
-      setErrorMsg("Server error ❌");
+    } catch {
+      // Network failure — offer the offline demo session instead.
+      if (knownUser && livePassword === knownUser.password) {
+        localStorage.setItem("token", "demo-token-" + knownUser.userId);
+        localStorage.setItem("user", JSON.stringify(knownUser));
+        onLogin(knownUser);
+        return;
+      }
+      setErrorMsg("Can't reach the server — check your connection");
     }
   };
 
@@ -104,6 +127,7 @@ const Login = ({onLogin, onRegister}) => {
             <label className="field-label">USERNAME</label>
             <div className="field-wrapper">
               <input
+                ref={usernameRef}
                 type="text"
                 className="field-input"
                 placeholder="priya"
@@ -123,6 +147,7 @@ const Login = ({onLogin, onRegister}) => {
             </div>
             <div className="field-wrapper">
               <input
+                ref={passwordRef}
                 type="password"
                 className="field-input"
                 placeholder="••••••••"

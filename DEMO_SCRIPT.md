@@ -16,7 +16,7 @@
 
 **Do:**
 1. Go to `localhost:3000`
-2. Enter username: `priya`, password: `123` → click Login
+2. Enter username: `priya`, password: `1234` → click Login
 3. OTP screen appears → click Verify
 4. Consent modal appears → click **"I Agree"**
 5. Land on Dashboard

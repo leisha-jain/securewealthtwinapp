@@ -1,15 +1,13 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from dotenv import load_dotenv
-import os
-import requests
-import json
-import re
+import os, requests, json, re, random, time
 from fastapi.middleware.cors import CORSMiddleware
+from typing import Optional
 
 # ------------------ CONFIG ------------------
-USE_AI=True
-DEBUG = True
+USE_AI = True
+DEBUG  = True
 
 # ------------------ LOAD ENV ------------------
 load_dotenv()
@@ -19,6 +17,18 @@ app = FastAPI()
 api_key = os.getenv("OPENROUTER_API_KEY")
 print("API KEY:", api_key)
 
+# ------------------ IN-MEMORY STORES ------------------
+# Demo users — in production these come from a real DB
+DEMO_USERS = {
+    1: {"userId": 1, "name": "Arjun Mehta",  "password": "demo123", "phone": "+91 98765 43210"},
+    2: {"userId": 2, "name": "Priya Sharma", "password": "demo123", "phone": "+91 98765 43211"},
+    3: {"userId": 3, "name": "Ramesh Gupta", "password": "demo123", "phone": "+91 98765 43212"},
+}
+# username aliases
+USERNAME_MAP = {"priya": 2, "arjun": 1, "ramesh": 3}
+
+# OTP store: {userId: {"code": "123456", "expires": timestamp}}
+OTP_STORE = {}
 
 # ------------------ MODELS ------------------
 class UserProfile(BaseModel):
@@ -34,14 +44,85 @@ class ChatRequest(BaseModel):
 class ExplainRequest(BaseModel):
     recommendation: str
 
+class LoginRequest(BaseModel):
+    userId: Optional[int] = None
+    username: Optional[str] = None
+    password: str
+    deviceId: Optional[str] = "web"
+
+class OTPRequest(BaseModel):
+    userId: int
+    code: str
+
 # ------------------ CORS ------------------
+_CORS_ORIGINS = [o.strip() for o in os.getenv(
+    "CORS_ORIGINS", "http://localhost:3000,http://localhost:8100"
+).split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_CORS_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ------------------ AUTH ROUTES ------------------
+@app.post("/api/auth/login")
+def login(req: LoginRequest):
+    # Resolve userId from username string or numeric id
+    uid = req.userId
+    if not uid and req.username:
+        uid = USERNAME_MAP.get(req.username.lower())
+    if not uid:
+        # try parsing username as number
+        try:
+            uid = int(req.username)
+        except Exception:
+            pass
+
+    user = DEMO_USERS.get(uid)
+    if not user:
+        return {"error": "User not found"}, 404
+
+    if req.password != user["password"]:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=401, detail="Invalid password")
+
+    # Generate OTP
+    otp_code = str(random.randint(100000, 999999))
+    OTP_STORE[uid] = {"code": otp_code, "expires": time.time() + 300}
+    print(f"[OTP] User {uid} ({user['name']}): {otp_code}")  # shown in terminal
+
+    return {
+        "token": f"demo-token-{uid}",
+        "user": {"userId": uid, "name": user["name"]},
+        "otp_sent": True,
+        "otp_hint": otp_code,   # shown in response for demo purposes
+        "message": f"OTP sent to {user['phone']}"
+    }
+
+@app.post("/api/auth/verify-otp")
+def verify_otp(req: OTPRequest):
+    stored = OTP_STORE.get(req.userId)
+    if not stored:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="No OTP found. Please login again.")
+
+    if time.time() > stored["expires"]:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="OTP expired. Please login again.")
+
+    if req.code != stored["code"]:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=401, detail="Invalid OTP")
+
+    del OTP_STORE[req.userId]  # one-time use
+    return {"success": True, "message": "OTP verified"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok", "service": "wealth-engine"}
 
 # ------------------ ROUTES ------------------
 @app.get("/")

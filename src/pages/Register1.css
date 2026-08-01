@@ -1,5 +1,5 @@
 :root {
-  --teal: #006D5B;
+  --teal: #005f52;
   --bg-auth: #f3f7f6;
   --white: #ffffff;
   --text-dark: #1e293b;
@@ -9,6 +9,9 @@
 
 .register-page {
   min-height: 100vh;
+  /* --vh is a real pixel value updated by JS (src/index.js); both 100vh and
+     100dvh stay fixed on many Android WebViews and leave a keyboard gap. */
+  min-height: calc(var(--vh, 1vh) * 100);
   background-color: var(--bg-auth);
   display: flex;
   flex-direction: column;
@@ -202,4 +205,15 @@
 
 .btn-back:hover {
   color: var(--text-dark);
+}
+
+@media (max-width: 768px) {
+  .register-page { padding: 24px 16px; }
+  .onboarding-steps { gap: 8px; margin-bottom: 28px; }
+  .step { width: auto; }
+  .step-divider { width: 24px; margin-bottom: 22px; }
+  .card-content { padding: 28px 20px; }
+  .auth-title { font-size: 24px; }
+  .auth-subtitle { font-size: 13px; margin-bottom: 24px; }
+  .input-wrapper input { font-size: 16px; padding: 14px 16px; padding-right: 44px; }
 }

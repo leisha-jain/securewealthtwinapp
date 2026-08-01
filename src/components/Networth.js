@@ -234,9 +234,16 @@ const DICT = {
   }
 };
 
-const NetWorth = ({ language = 'en' }) => {
+const NAME_TO_USER_ID = { arjun: 1, priya: 2, ramesh: 3, neha: 4 };
+
+const NetWorth = ({ p, language = 'en' }) => {
   const getStr = (key) => DICT[language]?.[key] || DICT['en']?.[key] || key;
+  const userId = NAME_TO_USER_ID[p?.name?.split(' ')[0]?.toLowerCase()] ||
+    JSON.parse(localStorage.getItem('user') || '{}').userId || 1;
   const [profile, setProfile] = useState(null);
+  const [linkedAccounts, setLinkedAccounts] = useState([]);
+  const [aggregatorStatus, setAggregatorStatus] = useState('loading'); // loading | ok | unavailable
+  const linkedAccountsTotal = linkedAccounts.reduce((sum, a) => sum + (a.balance || 0), 0);
   const [loading, setLoading] = useState(true);
   const [trajectoryPeriod, setTrajectoryPeriod] = useState("1Y");
   const [notification, setNotification] = useState(null);
@@ -248,8 +255,8 @@ const NetWorth = ({ language = 'en' }) => {
     const saved = localStorage.getItem('swt_assets');
     return saved ? JSON.parse(saved) : [
       { label: "Institutional Real Estate", sub: "Tier-1 Portfolio", val: 2800000, trend: "+4.2%" },
-      { label: "Equities & Indices", sub: "Vanguard All-World", val: 840000, trend: "+12.8%" },
-      { label: "Fixed Income", sub: "Treasury Bonds", val: 410000, trend: "0.0%" }
+      { label: "Equities & Indices", sub: "Nifty 50 Index Fund", val: 840000, trend: "+12.8%" },
+      { label: "Fixed Income", sub: "G-Sec & Corporate Bonds", val: 410000, trend: "0.0%" }
     ];
   });
 
@@ -261,7 +268,7 @@ const NetWorth = ({ language = 'en' }) => {
     ];
   });
 
-  const totalAssets = assets.reduce((sum, item) => sum + item.val, 0);
+  const totalAssets = assets.reduce((sum, item) => sum + item.val, 0) + linkedAccountsTotal;
   const totalLiabilities = liabilities.reduce((sum, item) => sum + item.val, 0);
   const netWorth = totalAssets - totalLiabilities;
   const ratio = totalLiabilities > 0 ? (totalAssets / totalLiabilities).toFixed(2) : "N/A";
@@ -313,11 +320,25 @@ const NetWorth = ({ language = 'en' }) => {
 
   useEffect(() => {
     setLoading(true);
-    axios.get(`${API_BASE}/api/user/1/profile`)
+    axios.get(`${API_BASE}/api/user/${userId}/profile`)
       .then(res => setProfile(res.data))
       .catch(() => setProfile(null))
       .finally(() => setLoading(false));
-  }, []);
+  }, [userId]);
+
+  // Account Aggregator — pulls linked bank accounts from other institutions
+  // so net worth reflects the full financial picture, not just this app's data.
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    axios.get(`${API_BASE}/api/user/${userId}/aggregator`, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    })
+      .then(res => {
+        setLinkedAccounts(res.data?.linked_accounts || []);
+        setAggregatorStatus('ok');
+      })
+      .catch(() => setAggregatorStatus('unavailable'));
+  }, [userId]);
 
   const [riskModal, setRiskModal] = useState({
     isOpen: false, decision: null, riskScore: 0, message: ""
@@ -473,6 +494,34 @@ const NetWorth = ({ language = 'en' }) => {
                   <AssetRow key={i} label={a.label} sub={a.sub} val={`₹ ${a.val.toLocaleString('en-IN')}`} trend={a.trend}/>
                 ))}
               </div>
+
+              <div style={{ marginTop: 20, paddingTop: 16, borderTop: '1px solid #e5e7eb' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#374151' }}>Linked Accounts (Account Aggregator)</span>
+                  {linkedAccountsTotal > 0 && (
+                    <span style={{ fontSize: 12, color: '#059669', fontWeight: 500 }}>₹ {linkedAccountsTotal.toLocaleString('en-IN')}</span>
+                  )}
+                </div>
+                {aggregatorStatus === 'loading' && (
+                  <p style={{ fontSize: 12, color: '#9ca3af' }}>Fetching accounts from linked banks…</p>
+                )}
+                {aggregatorStatus === 'unavailable' && (
+                  <p style={{ fontSize: 12, color: '#9ca3af' }}>Account Aggregator is currently unreachable. Showing only self-registered assets.</p>
+                )}
+                {aggregatorStatus === 'ok' && linkedAccounts.length === 0 && (
+                  <p style={{ fontSize: 12, color: '#9ca3af' }}>No external bank accounts linked yet.</p>
+                )}
+                {aggregatorStatus === 'ok' && linkedAccounts.map((acc, i) => (
+                  <AssetRow
+                    key={i}
+                    label={acc.bank}
+                    sub={`${acc.type} · ${acc.account}`}
+                    val={`₹ ${(acc.balance || 0).toLocaleString('en-IN')}`}
+                    trend=""
+                  />
+                ))}
+              </div>
+
               <button className="add-btn-placeholder" onClick={handleAddAsset}>
                 <Plus size={16}/> {getStr('add_asset')}
               </button>

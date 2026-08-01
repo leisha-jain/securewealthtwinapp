@@ -1,5 +1,5 @@
 :root {
-  --teal: #006D5B;
+  --teal: #005f52;
   --bg: #f3f7f6;
   --white: #ffffff;
   --text-dark: #1e293b;
@@ -106,7 +106,7 @@
 }
 
 .bar-fill {
-  background: #006D5B;
+  background: #005f52;
   border-radius: 4px;
   transition: height 0.3s ease;
   
@@ -114,7 +114,7 @@
 
 .bar-fill.active {
   opacity: 1 !important;
-  background: #006D5B !important;
+  background: #005f52 !important;
 }
 
 .bar-label {
@@ -212,9 +212,11 @@
 
 /* Institutional Banner */
 .institutional-banner {
-  background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
-              url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000');
-  background-size: cover;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(0,95,82,0.10), transparent 55%),
+    radial-gradient(circle at 0% 100%, rgba(0,95,82,0.06), transparent 50%),
+    #f7faf9;
+  border: 1px solid #e7efed;
   border-radius: 16px;
   padding: 60px 40px;
   margin-top: 40px;
@@ -225,9 +227,25 @@
 .text-link { color: var(--teal); font-weight: 700; text-decoration: none; }
 @media (max-width: 768px) {
   .portfolio-container, .portfolio-page { padding: 12px 14px !important; padding-bottom: 80px !important; }
-  .portfolio-grid { grid-template-columns: 1fr !important; gap: 12px; }
+  .portfolio-grid, .dashboard-grid-alt { grid-template-columns: 1fr !important; gap: 12px; }
   .portfolio-card { padding: 16px !important; border-radius: 12px !important; }
   h1, h2 { font-size: 20px !important; }
   table { font-size: 12px; }
   th, td { padding: 8px 6px !important; }
+
+  /* Core Holdings header + search */
+  .card-header-flex { padding: 16px !important; flex-wrap: wrap; gap: 10px; }
+  .card-header-flex .search-box { width: 100%; }
+  .card-header-flex .search-box input { width: 100%; box-sizing: border-box; }
+
+  /* Core Holdings table -> stacked rows */
+  .table-header-row { display: none; }
+  .table-data-row {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    padding: 14px 16px !important;
+  }
+  .fund-cell { flex: 1 1 100%; }
+  .type-cell, .val-cell, .return-cell, .status-cell { font-size: 13px; }
 }

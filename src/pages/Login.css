@@ -25,6 +25,10 @@ body {
 /* PAGE WRAPPER */
 .login-page {
   min-height: 100vh;
+  /* --vh is a real pixel value updated by JS (src/index.js), shrinking with
+     the on-screen keyboard. Needed because both 100vh and 100dvh stay fixed
+     on many Android WebViews and leave a gap between the form and keyboard. */
+  min-height: calc(var(--vh, 1vh) * 100);
   display: flex;
   align-items: center;
   justify-content: center;

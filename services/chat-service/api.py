@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 from typing import Optional, List
 import os
 import json
+import httpx
 from groq import Groq
 from dotenv import load_dotenv
 
@@ -13,14 +14,48 @@ load_dotenv(dotenv_path)
 
 app = FastAPI()
 
+_CORS_ORIGINS = [o.strip() for o in os.getenv(
+    "CORS_ORIGINS", "http://localhost:3000,http://localhost:8100"
+).split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_CORS_ORIGINS,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "meta-llama/llama-3.1-8b-instruct:free")
+HAS_LLM = bool(GROQ_API_KEY or OPENROUTER_API_KEY)
+
+
+def call_llm(messages, max_tokens, temperature):
+    """Calls Groq if configured, else OpenRouter (OpenAI-compatible API), else raises."""
+    if GROQ_API_KEY:
+        client = Groq(api_key=GROQ_API_KEY)
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=messages,
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+        return response.choices[0].message.content
+
+    resp = httpx.post(
+        "https://openrouter.ai/api/v1/chat/completions",
+        headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
+        json={
+            "model": OPENROUTER_MODEL,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "temperature": temperature,
+        },
+        timeout=30,
+    )
+    resp.raise_for_status()
+    return resp.json()["choices"][0]["message"]["content"]
 
 LANGUAGE_PREFIXES = {
     "hi": "हिंदी में जवाब दें। संक्षिप्त और स्पष्ट रहें।\n\n",
@@ -72,12 +107,10 @@ def health():
 
 @app.post("/api/chat")
 async def chat(req: ChatRequest):
-    if not GROQ_API_KEY:
-        return {"reply": "AI coach is not configured. Please set GROQ_API_KEY in your .env file."}
+    if not HAS_LLM:
+        return {"reply": "AI coach is not configured. Please set GROQ_API_KEY or OPENROUTER_API_KEY in your .env file."}
 
     try:
-        client = Groq(api_key=GROQ_API_KEY)
-
         # Parse profile details dynamically
         profile = req.user_profile or {}
         
@@ -173,21 +206,15 @@ async def chat(req: ChatRequest):
         # Append the new user message
         messages.append({"role": "user", "content": req.message})
 
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=messages,
-            max_tokens=400,
-            temperature=0.7,
-        )
-
-        return {"reply": response.choices[0].message.content}
+        reply = call_llm(messages, max_tokens=400, temperature=0.7)
+        return {"reply": reply}
 
     except Exception as e:
         return {"reply": f"AI coach encountered an error: {str(e)}"}
 
 @app.post("/api/chat/nudges")
 async def nudges(req: NudgeRequest):
-    if not GROQ_API_KEY:
+    if not HAS_LLM:
         return {"nudges": [
             "Set up an SIP to start investing regularly.",
             "Review your 80C tax-saving options before March 31.",
@@ -195,20 +222,16 @@ async def nudges(req: NudgeRequest):
         ]}
 
     try:
-        client = Groq(api_key=GROQ_API_KEY)
         profile_str = str(req.user_profile)[:600] if req.user_profile else ""
 
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+        text = call_llm(
             messages=[
                 {"role": "system", "content": "You are a financial advisor. Generate exactly 3 short actionable financial nudges for this user. Each nudge must be under 15 words. Return only a JSON array of 3 strings. No other text. No markdown. Example: [\"Nudge one here.\", \"Nudge two here.\", \"Nudge three here.\"]"},
                 {"role": "user", "content": f"User profile: {profile_str}"}
             ],
             max_tokens=150,
             temperature=0.7,
-        )
-
-        text = response.choices[0].message.content.strip()
+        ).strip()
         nudge_list = json.loads(text)
         return {"nudges": nudge_list}
 

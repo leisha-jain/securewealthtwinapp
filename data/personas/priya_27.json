@@ -18,7 +18,7 @@
     "total_portfolio_value": 380000,
     "monthly_sip_amount": 15000,
     "num_goals": 3,
-    "debt_to_income_ratio": 0.0,
+    "debt_to_income_ratio": 0,
     "emergency_fund_months": 4,
     "years_to_retirement": 33,
     "net_worth": 520000
@@ -28,21 +28,21 @@
       {
         "symbol": "TCS",
         "units": 5,
-        "buy_price": 3450.0,
+        "buy_price": 3450,
         "current_price": 3820.1,
         "value": 19100.5
       },
       {
         "symbol": "HDFCBANK",
         "units": 8,
-        "buy_price": 1520.0,
+        "buy_price": 1520,
         "current_price": 1648.35,
         "value": 13186.8
       },
       {
         "symbol": "INFY",
         "units": 12,
-        "buy_price": 1380.0,
+        "buy_price": 1380,
         "current_price": 1412.6,
         "value": 16951.2
       }
@@ -69,10 +69,10 @@
       {
         "name": "ICICI Pru Balanced Advantage",
         "folio": "ICB-2024-0543",
-        "units": 560.0,
+        "units": 560,
         "nav": 42.1,
         "invested": 20000,
-        "current_value": 23576.0,
+        "current_value": 23576,
         "type": "hybrid"
       }
     ],
@@ -83,7 +83,7 @@
         "units": 150,
         "buy_price": 48.3,
         "current_price": 57.84,
-        "value": 8676.0
+        "value": 8676
       }
     ],
     "fd": [
@@ -100,31 +100,11 @@
   },
   "goals": [
     {
-      "goal_id": "g1",
-      "name": "Buy a Car",
-      "goal_amount": 800000,
-      "goal_saved": 160000,
-      "target_date": "2028-12-31",
-      "monthly_contribution": 15000,
-      "priority": "high"
-    },
-    {
-      "goal_id": "g2",
-      "name": "International Vacation",
-      "goal_amount": 200000,
-      "goal_saved": 80000,
-      "target_date": "2026-12-31",
-      "monthly_contribution": 8000,
-      "priority": "medium"
-    },
-    {
-      "goal_id": "g3",
-      "name": "Emergency Fund (6 months)",
-      "goal_amount": 570000,
-      "goal_saved": 380000,
-      "target_date": "2027-03-31",
-      "monthly_contribution": 5000,
-      "priority": "high"
+      "id": 1785591934205,
+      "title": "Buy a Car",
+      "targetAmount": 100000,
+      "deadline": "2026-12-31",
+      "progress": 0
     }
   ],
   "bank_accounts": [
@@ -592,7 +572,7 @@
       "txn_id": "TXN-PRI-202504-0036",
       "date": "2025-04-28",
       "category": "health",
-      "amount": 176.0,
+      "amount": 176,
       "type": "debit",
       "description": "Lab Test - Thyrocare",
       "month": 4,
@@ -2632,7 +2612,7 @@
       "txn_id": "TXN-PRI-202510-0003",
       "date": "2025-10-12",
       "category": "groceries",
-      "amount": 1183.0,
+      "amount": 1183,
       "type": "debit",
       "description": "Reliance Fresh",
       "month": 10,
@@ -2642,7 +2622,7 @@
       "txn_id": "TXN-PRI-202510-0022",
       "date": "2025-10-13",
       "category": "transport",
-      "amount": 1494.0,
+      "amount": 1494,
       "type": "debit",
       "description": "FastTag Recharge",
       "month": 10,
@@ -3142,7 +3122,7 @@
       "txn_id": "TXN-PRI-202511-0012",
       "date": "2025-11-29",
       "category": "shopping",
-      "amount": 1664.0,
+      "amount": 1664,
       "type": "debit",
       "description": "Meesho Order",
       "month": 11,

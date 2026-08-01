@@ -20,12 +20,15 @@ body, html, #root {
   padding: 0;
   width: 100%;
   min-height: 100vh;
+  /* --vh is a real pixel value updated by JS (src/index.js); both 100vh and
+     100dvh stay fixed on many Android WebViews and leave a keyboard gap. */
+  min-height: calc(var(--vh, 1vh) * 100);
   overflow-x: hidden;
 }
 
 @keyframes fadeInPage {
   from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: none; }
 }
 
 button { transition: transform 0.15s ease, box-shadow 0.15s ease; }

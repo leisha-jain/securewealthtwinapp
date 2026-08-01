@@ -1,5 +1,5 @@
 :root {
-  --teal: #006D5B;
+  --teal: #005f52;
   --bg: #f3f7f6;
   --white: #ffffff;
   --text-dark: #1e293b;
@@ -307,9 +307,45 @@ input:checked + .slider:before { transform: translateX(20px); }
 }
 .trigger-btn.honeypot:hover { background: #fee2e2; }
 @media (max-width: 768px) {
-  .alerts-container, .alerts-page { padding: 12px 14px !important; padding-bottom: 80px !important; }
-  .alerts-grid { grid-template-columns: 1fr !important; }
-  .filter-buttons { flex-wrap: wrap; gap: 6px; }
-  .alert-row, .honeypot-row { flex-wrap: wrap; gap: 6px; font-size: 12px; }
   h1, h2 { font-size: 20px !important; }
+
+  /* Page header: title + live-simulation toggle */
+  .fraud-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* Signal weights / audit log cards */
+  .content-card { padding: 16px !important; }
+  .signal-row { gap: 12px; }
+  .signal-left { min-width: 0; }
+  .signal-label { font-size: 13px; }
+
+  /* Audit log header + its filter chips */
+  .audit-log-header {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .filter-buttons { flex-wrap: wrap; gap: 6px; }
+
+  /* Log entries */
+  .eval-row, .honeypot-row-top {
+    flex-wrap: wrap;
+    gap: 6px 10px;
+  }
+  .eval-desc-block { flex: 1 1 100%; }
+  .eval-right { gap: 10px; }
+  .eval-desc, .honeypot-desc { font-size: 12px; }
+
+  /* Demo triggers: 4 buttons in one row -> 2x2 grid */
+  .trigger-buttons {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .trigger-btn { flex: none; padding: 12px 8px; font-size: 13px; }
+  .info-box { font-size: 12px; padding: 14px 16px; }
 }

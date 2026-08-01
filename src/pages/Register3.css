@@ -1,5 +1,5 @@
 :root {
-  --teal: #006D5B;
+  --teal: #005f52;
   --teal-light: #e6f1f0;
   --bg-light: #f8fafc;
   --text-dark: #1e293b;
@@ -128,15 +128,13 @@
 
 /* Safety Banner */
 .safety-banner-card {
-  background: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1000');
-  background-size: cover;
+  background: linear-gradient(135deg, #0b3b32 0%, #005f52 55%, #0f6b5c 100%);
   border-radius: 12px;
   position: relative;
   overflow: hidden;
 }
 
 .banner-overlay {
-  background: rgba(0,0,0,0.5);
   height: 100%;
   padding: 40px;
   color: white;
@@ -196,7 +194,13 @@
 
 .calculator-footer-card { margin-top: 60px; background: #f8fafc; border-radius: 12px; display: flex; overflow: hidden; }
 .calc-info { flex: 1; padding: 40px; }
-.calc-visual { flex: 1; background: url('https://images.unsplash.com/photo-1611974714658-058e1c7440ba?auto=format&fit=crop&q=80&w=1000'); background-size: cover; position: relative; }
+.calc-visual {
+  flex: 1;
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.10), transparent 45%),
+    linear-gradient(135deg, #004a40 0%, #005f52 60%, #0f6b5c 100%);
+}
 .visual-content { background: rgba(255,255,255,0.9); position: absolute; inset: 20px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .visual-content h2 { font-size: 32px; color: var(--teal); margin: 0; }
 .visual-content span { font-size: 10px; font-weight: 800; color: var(--text-light); }
@@ -205,3 +209,18 @@
 .page-nav-footer { border-top: 1px solid var(--border); padding: 30px 40px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
 .btn-back { background: none; border: none; color: var(--text-dark); font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; }
 .btn-review { background: var(--teal); color: white; border: none; padding: 18px 36px; border-radius: 10px; font-weight: 700; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+
+@media (max-width: 768px) {
+  .registration-section { padding: 32px 16px !important; }
+  .section-title { font-size: 24px !important; }
+  .asset-grid { grid-template-columns: 1fr !important; }
+  .asset-form-row { grid-template-columns: 1fr !important; }
+  .input-box.full { grid-column: span 1 !important; }
+  .liability-container { grid-template-columns: 1fr !important; gap: 20px; }
+  .goals-grid { grid-template-columns: 1fr !important; }
+  .calculator-footer-card { flex-direction: column !important; }
+  .calc-visual { min-height: 180px; }
+  .calc-info { padding: 24px !important; }
+  .banner-overlay { padding: 20px !important; }
+  .page-nav-footer { padding: 20px 16px !important; flex-wrap: wrap; gap: 12px; }
+}

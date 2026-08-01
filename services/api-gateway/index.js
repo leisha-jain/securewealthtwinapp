@@ -18,12 +18,17 @@ const authRouter = require('./routes/auth');
 const wealthRouter = require('./routes/wealth');
 const fraudRouter = require('./routes/fraud');
 const chatRouter = require('./routes/chat');
+const newsRouter = require('./routes/news');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 // ── Middleware ────────────────────────────────────────────────────
-app.use(cors());
+const corsOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000,http://localhost:8100')
+  .split(',')
+  .map((o) => o.trim())
+  .filter(Boolean);
+app.use(cors({ origin: corsOrigins, credentials: true }));
 app.use(express.json());
 
 // ── General Rate Limiter ──────────────────────────────────────────
@@ -185,6 +190,7 @@ app.use('/api/market',    wealthRouter);
 app.use('/api/action',    fraudRouter);
 app.use('/api/risk',      fraudRouter);
 app.use('/api/chat',      chatRouter);
+app.use('/api/news',      newsRouter);
 
 // ── 404 Handler ───────────────────────────────────────────────────
 app.use((req, res) => {

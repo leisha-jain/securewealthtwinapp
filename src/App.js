@@ -9,6 +9,7 @@ import NetWorth from "./components/Networth";
 import Portfolio from "./components/Portfolio";
 import Chat from "./components/Chat";
 import Alerts from "./components/Alerts";
+import ConsentModal from "./components/ConsentModal";
 import Login from "./pages/Login";
 import OTP from "./pages/OTP";
 import Register1 from "./pages/Register1";
@@ -17,6 +18,7 @@ import Register3 from "./pages/Register3";
 import axios from 'axios';
 import { Dot } from "./utils/helpers";
 import { Capacitor } from '@capacitor/core';
+import { AlertTriangle } from 'lucide-react';
 
 const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
@@ -202,6 +204,20 @@ export default function App() {
   const [toastError, setToastError] = useState(null);
   const [toastSuccess, setToastSuccess] = useState(null);
   const [showAmberBanner, setShowAmberBanner] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(
+    () => localStorage.getItem("swt_consent_accepted") === "true"
+  );
+  const [disclaimerText, setDisclaimerText] = useState(
+    "Simulation Only — Not real financial advice"
+  );
+
+  useEffect(() => {
+    axios.get(`${API_BASE}/api/chat/compliance`, { timeout: 5000 })
+      .then(res => {
+        if (res.data?.simulation_banner) setDisclaimerText(res.data.simulation_banner);
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     const handleApiError = (e) => {
@@ -218,18 +234,30 @@ export default function App() {
     };
   }, []);
 
+  const [connDebug, setConnDebug] = useState(null);
+
   useEffect(() => {
     const checkServices = async () => {
       try {
         await axios.get(`${API_BASE}/api/health/all`);
         setShowAmberBanner(false);
+        setConnDebug(null);
       } catch (err) {
         if (!err.response) {
           // Gateway itself is unreachable
           setShowAmberBanner(true);
+          setConnDebug({
+            url: `${API_BASE}/api/health/all`,
+            errName: err.name,
+            errMessage: err.message,
+            errCode: err.code,
+            platform: Capacitor.getPlatform(),
+            isNative: Capacitor.isNativePlatform(),
+          });
         } else {
           // Gateway is reachable, but returned 503 degraded status
           setShowAmberBanner(false);
+          setConnDebug(null);
         }
       }
     };
@@ -316,20 +344,44 @@ export default function App() {
   // In the main app return, replace the old layout with:
   return (
     <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+      {!consentGiven && (
+        <ConsentModal onAccept={() => setConsentGiven(true)} />
+      )}
+
+      <div style={{
+        background: C.bg, borderBottom: `1px solid ${C.border}`,
+        padding: "4px 24px", fontSize: 11, color: C.textFaint,
+        textAlign: "center", fontWeight: 500,
+      }}>
+        {disclaimerText}
+      </div>
+
       {showAmberBanner && (
         <div style={{
           background: '#d97706',
           color: 'white',
           padding: '8px 24px',
-          textAlign: 'center',
           fontSize: '13px',
           fontWeight: '600',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
         }}>
-          ⚠️ Some services are unavailable. Demo mode active.
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <AlertTriangle size={14} style={{ flexShrink: 0 }} /> Some services are unavailable. Demo mode active.
+          </div>
+          {connDebug && (
+            <div style={{
+              marginTop: 6, fontSize: 11, fontWeight: 400, fontFamily: 'monospace',
+              background: 'rgba(0,0,0,0.15)', borderRadius: 6, padding: '6px 10px',
+              wordBreak: 'break-all', textAlign: 'left',
+            }}>
+              url: {connDebug.url}<br />
+              platform: {connDebug.platform} (native: {String(connDebug.isNative)})<br />
+              error: {connDebug.errName} — {connDebug.errMessage} {connDebug.errCode ? `(${connDebug.errCode})` : ''}
+            </div>
+          )}
         </div>
       )}
 
@@ -367,7 +419,17 @@ export default function App() {
         <main key={page} style={{ background: darkMode ? "#0f172a" : "#f0f7f3", minHeight: "100vh", animation: "fadeInPage 0.3s ease", overflowX: "hidden" }}>
 
           {page === "dashboard" && (
-            <Dashboard p={p} onRisk={setFraud} language={language} />
+            <Dashboard
+              p={p}
+              onRisk={setFraud}
+              language={language}
+              onLanguageChange={setLanguage}
+              onLogout={() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                setStep("login");
+              }}
+            />
           )}
 
           {page === "goals" && <Goals p={p} language={language} />}

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import './Dashboard.css';
-import { useCountUp } from '../utils/helpers';
+import { useCountUp, fmt } from '../utils/helpers';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
-import { t } from '../utils/languageStrings';
+import { t, LANGUAGES } from '../utils/languageStrings';
 import { Capacitor } from '@capacitor/core';
 import HealthScoreBadge from '../components/HealthScoreBadge';
 import {
   LayoutDashboard, Target, Landmark, PieChart as PieIcon,
   AlertTriangle, Settings, LifeBuoy, Moon, Sun, Bell,
   ChevronRight, Zap, TrendingUp, TrendingDown, BookOpen, Bot, X, Maximize2, Minimize2,
-  CheckCircle
+  CheckCircle, Clock, ShieldAlert, LogOut, Globe, Plus
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -108,6 +108,18 @@ const MOCK_NUDGES = [
   'You overspent ₹3,200 on dining this month — review budget.',
 ];
 
+// Shown when the AI service is unreachable or has no LLM key configured.
+const CHAT_FALLBACK_TIPS = [
+  'Build an emergency fund covering 6 months of expenses before increasing market exposure.',
+  'You still have unused 80C headroom — ELSS, PPF, or NPS can reduce your taxable income before March 31.',
+  'Step up your SIP by about 10% each year so your contributions keep pace with inflation.',
+  'Rebalance once a year: trim whatever has run up and top up whatever has lagged your target mix.',
+];
+
+const chatFallbackReply = () =>
+  "I can't reach the live advisor right now, so here's a general tip based on your profile:\n\n" +
+  CHAT_FALLBACK_TIPS[Math.floor(Math.random() * CHAT_FALLBACK_TIPS.length)];
+
 // Skeleton loading card
 function SkeletonCard() {
   return (
@@ -165,7 +177,9 @@ function MarketNews({ news, language }) {
             <div className="news-category-badge">{item.category}</div>
             <div className="news-body">
               <p className="news-headline">{item.headline}</p>
-              <span className="news-time">{item.time}</span>
+              <span className="news-time">
+                {item.time}{item.source ? ` · ${item.source}` : ''}
+              </span>
             </div>
             <span className="news-tag" style={{ background: tagBg[item.impact], color: impactColor[item.impact] }}>
               {item.tag}
@@ -211,7 +225,7 @@ const getCategoryTranslation = (name, lang) => {
   return t(lang, 'other');
 };
 
-const Dashboard = ({ language = 'en' }) => {
+const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
   const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
   const CHAT_BASE = process.env.REACT_APP_CHAT_URL || "http://localhost:8003";
 
@@ -226,9 +240,26 @@ const Dashboard = ({ language = 'en' }) => {
   const [sleepPending, setSleepPending] = useState(null);
   const [emergencyHeirMode, setEmergencyHeirMode] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const currentLang = LANGUAGES.find((l) => l.code === language) || LANGUAGES[0];
 
   const [nightLock, setNightLock] = useState({ enabled: false, start: "22:00", end: "07:00" });
   const [nomineeInput, setNomineeInput] = useState({ name: "Sunita Mehta", phone: "+919876543210", relation: "Spouse", isEmergencyHeir: false });
+
+  // Live market news — falls back to the static MOCK_NEWS below if the
+  // backend isn't configured with a news API key or is unreachable.
+  const [liveNews, setLiveNews] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    axios.get(`${API_BASE}/api/news`, { timeout: 8000 })
+      .then((res) => {
+        if (!cancelled && Array.isArray(res.data?.articles) && res.data.articles.length > 0) {
+          setLiveNews(res.data.articles);
+        }
+      })
+      .catch(() => { /* stay on the static fallback */ });
+    return () => { cancelled = true; };
+  }, [API_BASE]);
 
   // 1. Screen sharing warning logic
   useEffect(() => {
@@ -314,12 +345,38 @@ const Dashboard = ({ language = 'en' }) => {
   const [dashboardData, setDashboardData] = useState(null);
   const [velocityPeriod, setVelocityPeriod] = useState("6M");
 
+  // Used only when there's no live transaction data (e.g. the offline demo
+  // session). Without this, switching 1M/6M/1Y always showed the same fixed
+  // 8-month chart since the tabs only filtered real transactions.
+  const getStaticVelocityFallback = () => {
+    if (velocityPeriod === '1M') {
+      const total = velocityData[velocityData.length - 1].amt;
+      const weights = [0.20, 0.24, 0.26, 0.30];
+      return weights.map((w, i) => ({
+        name: `Week ${i + 1}`,
+        amt: Math.round(total * w),
+        isCurrent: i === weights.length - 1,
+      }));
+    }
+    if (velocityPeriod === '1Y') {
+      const earlierMonths = [
+        { name: 'Sep', amt: 42000 },
+        { name: 'Oct', amt: 48000 },
+        { name: 'Nov', amt: 51000 },
+        { name: 'Dec', amt: 47000 },
+      ];
+      return [...earlierMonths, ...velocityData];
+    }
+    // 6M (default)
+    return velocityData.slice(-6);
+  };
+
   const getVelocityChartData = () => {
     const txs = dashboardData?.transactions || [];
     if (!txs || txs.length === 0) {
-      return velocityData;
+      return getStaticVelocityFallback();
     }
-    
+
     const sortedTxs = [...txs].sort((a, b) => new Date(a.date) - new Date(b.date));
     
     if (velocityPeriod === '1M') {
@@ -344,9 +401,12 @@ const Dashboard = ({ language = 'en' }) => {
         const d = new Date(t.date);
         const diffDays = Math.floor((d - startDate) / (1000 * 60 * 60 * 24));
         const weekIndex = Math.min(3, Math.floor(diffDays / 7.5));
-        weeks[weekIndex].amt += t.amount;
+        // Net savings = income in minus spending out, not every transaction
+        // summed together (that counted grocery/dining spend as "savings").
+        weeks[weekIndex].amt += t.type === 'credit' ? t.amount : -t.amount;
       });
-      
+      weeks.forEach(w => { w.amt = Math.max(0, Math.round(w.amt)); });
+
       return weeks;
     } else if (velocityPeriod === '6M') {
       const lastDateStr = sortedTxs[sortedTxs.length - 1]?.date || new Date().toISOString();
@@ -366,11 +426,13 @@ const Dashboard = ({ language = 'en' }) => {
         const td = new Date(t.date);
         const match = months.find(m => m.year === td.getFullYear() && m.month === td.getMonth());
         if (match) {
-          match.amt += t.amount;
+          // Net savings = income in minus spending out, not every transaction
+          // summed together (that counted grocery/dining spend as "savings").
+          match.amt += t.type === 'credit' ? t.amount : -t.amount;
         }
       });
-      
-      return months.map(m => ({ name: m.name, amt: m.amt }));
+
+      return months.map(m => ({ name: m.name, amt: Math.max(0, Math.round(m.amt)) }));
     } else {
       const lastDateStr = sortedTxs[sortedTxs.length - 1]?.date || new Date().toISOString();
       const lastDate = new Date(lastDateStr);
@@ -384,16 +446,16 @@ const Dashboard = ({ language = 'en' }) => {
           amt: 0
         });
       }
-      
+
       txs.forEach(t => {
         const td = new Date(t.date);
         const match = months.find(m => m.year === td.getFullYear() && m.month === td.getMonth());
         if (match) {
-          match.amt += t.amount;
+          match.amt += t.type === 'credit' ? t.amount : -t.amount;
         }
       });
-      
-      return months.map(m => ({ name: m.name, amt: m.amt }));
+
+      return months.map(m => ({ name: m.name, amt: Math.max(0, Math.round(m.amt)) }));
     }
   };
 
@@ -471,12 +533,26 @@ const Dashboard = ({ language = 'en' }) => {
       }, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      const reply = res.data.reply || res.data.response || "No response.";
-      setChatMessages(prev => [...prev, { role: 'bot', text: reply }]);
+      const reply = res.data.reply || res.data.response || "";
+      // Service reachable but no LLM key configured — show useful guidance
+      // instead of leaking the raw setup instruction to the user.
+      const text = (!reply || /not configured|GROQ_API_KEY/i.test(reply))
+        ? chatFallbackReply()
+        : reply;
+      setChatMessages(prev => [...prev, { role: 'bot', text }]);
     } catch (err) {
       console.warn("[Dashboard Chat API Failed]:", err.message);
-      const errMsg = `Error: ${err.response?.data?.error || err.message}`;
-      setChatMessages(prev => [...prev, { role: 'bot', text: errMsg }]);
+      if (err.response?.status === 401 || err.response?.status === 403) {
+        // Not a connectivity problem — the session token itself is invalid
+        // (e.g. a leftover offline-demo session from before the backend was
+        // reachable). Retrying won't help; the user needs to log back in.
+        setChatMessages(prev => [...prev, {
+          role: 'bot',
+          text: "Your session has expired. Please log out and log back in to continue chatting.",
+        }]);
+        return;
+      }
+      setChatMessages(prev => [...prev, { role: 'bot', text: chatFallbackReply() }]);
     }
   };
 
@@ -619,7 +695,7 @@ const Dashboard = ({ language = 'en' }) => {
       <div className="app-container">
         <main className="main-content">
           <div className="skeleton-header" />
-          <div className="charts-grid">
+          <div className="dashboard-charts-grid">
             <SkeletonCard />
             <SkeletonCard />
           </div>
@@ -643,7 +719,7 @@ const Dashboard = ({ language = 'en' }) => {
       {/* ── Feature 3: Sleep On It Banner ── */}
       {sleepPending && (
         <div className="custom-banner sleep-banner" style={{ background: '#fffbeb', borderBottom: '1px solid #fef3c7', padding: '12px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 13, color: '#92400e' }}>
-          <span>💤 <strong>Sleep On It Active</strong>: Yesterday you wanted to invest ₹{Number(sleepPending.amount || 25000).toLocaleString()} in {sleepPending.actionType || 'Axis Small Cap'}. Markets are up 0.8% since then. Still want to proceed?</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Clock size={15} style={{ flexShrink: 0 }} /> <strong>Sleep On It Active</strong>: Yesterday you wanted to invest ₹{Number(sleepPending.amount || 25000).toLocaleString()} in {sleepPending.actionType || 'Axis Small Cap'}. Markets are up 0.8% since then. Still want to proceed?</span>
           <div style={{ display: 'flex', gap: 8 }}>
             <button style={{ padding: '4px 12px', background: '#d97706', color: 'white', border: 'none', borderRadius: 4, cursor: 'pointer', fontWeight: 'bold' }} onClick={() => { localStorage.removeItem('sleep_on_it_pending'); setSleepPending(null); setToast('Transaction resumed!'); }}>Proceed</button>
             <button style={{ padding: '4px 12px', background: 'white', border: '1px solid #cbd5e1', borderRadius: 4, cursor: 'pointer' }} onClick={() => { localStorage.removeItem('sleep_on_it_pending'); setSleepPending(null); }}>Cancel</button>
@@ -654,15 +730,15 @@ const Dashboard = ({ language = 'en' }) => {
       {/* ── Feature 7: Screen Sharing Warning Banner ── */}
       {screenSharingDetected && (
         <div className="custom-banner screenshare-banner" style={{ background: '#fff7ed', borderBottom: '1px solid #ffedd5', padding: '10px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 12, color: '#ea580c', fontWeight: '500' }}>
-          <span>⚠️ <strong>Screen Sharing Warning</strong>: SecureWealth never asks you to share your screen. If anyone has asked you to install AnyDesk or TeamViewer, disconnect the call immediately.</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}><AlertTriangle size={14} style={{ flexShrink: 0 }} /> <strong>Screen Sharing Warning</strong>: SecureWealth never asks you to share your screen. If anyone has asked you to install AnyDesk or TeamViewer, disconnect the call immediately.</span>
           <button onClick={() => setScreenSharingDetected(false)} style={{ background: 'none', border: 'none', color: '#ea580c', cursor: 'pointer', fontSize: 14, fontWeight: 'bold', padding: '0 4px' }} title="Dismiss warning">×</button>
         </div>
       )}
 
       {/* ── Feature 12: Nominee Emergency Mode Alert ── */}
       {emergencyHeirMode && (
-        <div className="custom-banner emergency-banner" style={{ background: '#fef2f2', borderBottom: '1px solid #fee2e2', padding: '10px 24px', fontSize: 13, color: '#dc2626', fontWeight: 'bold' }}>
-          ⚠️ <strong>Nominee emergency view active</strong>: Read-only access enabled for designated heir. Wealth actions and outbound transfers are restricted.
+        <div className="custom-banner emergency-banner" style={{ background: '#fef2f2', borderBottom: '1px solid #fee2e2', padding: '10px 24px', fontSize: 13, color: '#dc2626', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 6 }}>
+          <ShieldAlert size={15} style={{ flexShrink: 0 }} /> <strong>Nominee emergency view active</strong>: Read-only access enabled for designated heir. Wealth actions and outbound transfers are restricted.
         </div>
       )}
 
@@ -675,7 +751,48 @@ const Dashboard = ({ language = 'en' }) => {
               <span className="user-status">{emergencyHeirMode ? "NOMINEE ACCESS" : "PREMIUM MEMBER"}</span>
             </div>
           </div>
-          <div className="header-actions" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <div className="header-actions" style={{ display: 'flex', gap: 12, alignItems: 'center', position: 'relative' }}>
+            {onLanguageChange && (
+              <div style={{ position: 'relative' }}>
+                <button
+                  className="lang-btn-toggle"
+                  onClick={() => setLangOpen((o) => !o)}
+                  title="Language"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center', gap: 4 }}
+                >
+                  <Globe size={20} className="header-icon" style={{ color: langOpen ? '#005f52' : '#64748b' }} />
+                  <span style={{ fontSize: 14 }}>{currentLang.flag}</span>
+                </button>
+                {langOpen && (
+                  <div style={{
+                    position: 'absolute', top: '130%', right: 0, background: 'white',
+                    border: '1px solid #e5e7eb', borderRadius: 10, boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+                    zIndex: 200, minWidth: 160, overflow: 'hidden',
+                  }}>
+                    {LANGUAGES.map((l) => (
+                      <button
+                        key={l.code}
+                        onClick={() => {
+                          onLanguageChange(l.code);
+                          localStorage.setItem("preferred_language", l.code);
+                          setLangOpen(false);
+                        }}
+                        style={{
+                          display: 'flex', alignItems: 'center', gap: 10, width: '100%',
+                          padding: '9px 14px', background: l.code === language ? '#f0fdfa' : 'none',
+                          color: l.code === language ? '#005f52' : '#374151',
+                          fontWeight: l.code === language ? 600 : 400,
+                          border: 'none', cursor: 'pointer', fontSize: 13, textAlign: 'left',
+                        }}
+                      >
+                        <span>{l.flag}</span>
+                        <span>{l.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             <button className="settings-btn-toggle" onClick={() => setShowSettings(!showSettings)} style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none' }}>
               <Settings size={20} className="header-icon" style={{ color: showSettings ? '#005f52' : '#64748b' }} />
             </button>
@@ -683,6 +800,16 @@ const Dashboard = ({ language = 'en' }) => {
               <Bell size={20} className="header-icon" />
               <span className="bell-dot"></span>
             </div>
+            {onLogout && (
+              <button
+                className="logout-btn-toggle"
+                onClick={onLogout}
+                title="Log out"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', outline: 'none', display: 'flex', alignItems: 'center' }}
+              >
+                <LogOut size={20} className="header-icon" style={{ color: '#64748b' }} />
+              </button>
+            )}
           </div>
         </header>
 
@@ -799,7 +926,7 @@ const Dashboard = ({ language = 'en' }) => {
 
         <div className="dashboard-main-grid">
           <div className="charts-and-insights">
-            <div className="charts-grid">
+            <div className="dashboard-charts-grid">
               {/* Savings Velocity Bar Chart */}
               <div className="chart-card velocity-chart">
                 <div className="chart-header">
@@ -814,7 +941,7 @@ const Dashboard = ({ language = 'en' }) => {
                   </div>
                 </div>
                 <div className="chart-container">
-                  <ResponsiveContainer width="100%" height={250}>
+                  <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={getVelocityChartData()}>
                       <defs>
                         <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
@@ -829,7 +956,12 @@ const Dashboard = ({ language = 'en' }) => {
                       <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
                       <XAxis dataKey="name" hide />
                       <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#999' }} ticks={[0, 50000, 100000, 150000]} tickFormatter={(val) => `${val / 1000}k`} />
-                      <Tooltip cursor={{ fill: 'rgba(0,95,82,0.05)' }} />
+                      <Tooltip
+                        cursor={{ fill: 'rgba(0,95,82,0.05)' }}
+                        formatter={(value) => [`₹${Number(value).toLocaleString('en-IN')}`, 'Savings']}
+                        labelFormatter={(label) => label}
+                        contentStyle={{ borderRadius: 10, border: '1px solid #e5e7eb', fontSize: 12 }}
+                      />
                       <Bar dataKey="amt" radius={[6, 6, 0, 0]}>
                         {getVelocityChartData().map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.isCurrent ? 'url(#barGradientActive)' : 'url(#barGradient)'} />
@@ -843,8 +975,10 @@ const Dashboard = ({ language = 'en' }) => {
               {/* Capital Outflow Donut Chart */}
               <div className="chart-card outflow-chart">
                 <div className="chart-header">
-                  <h3>{t(language, 'capital_outflow')}</h3>
-                  <p>{t(language, 'allocation_priority')}</p>
+                  <div>
+                    <h3>{t(language, 'capital_outflow')}</h3>
+                    <p>{t(language, 'allocation_priority')}</p>
+                  </div>
                 </div>
                 <div className="donut-wrapper">
                   <ResponsiveContainer width="100%" height={200}>
@@ -873,14 +1007,14 @@ const Dashboard = ({ language = 'en' }) => {
               </div>
             </div>
 
-            <MarketNews news={MOCK_NEWS} language={language} />
+            <MarketNews news={liveNews || MOCK_NEWS} language={language} />
 
             <div className="insights-grid">
               <div className="insight-card">
                 <div className="insight-icon tip"><Zap size={18} /></div>
                 <span className="insight-tag">OPTIMIZATION TIP</span>
                 <h4>Emergency Buffer Alert</h4>
-                <p>Based on your recent outflow, we recommend moving $1,200 to your High-Yield Ledger to maintain 6-month liquidity.</p>
+                <p>Based on your recent outflow, we recommend moving ₹1,20,000 to your high-yield savings account to maintain a 6-month buffer.</p>
                 <ExplainCard recommendationId="opt_emergency_buffer_001" />
                 <button
                   className="insight-link-btn"
@@ -898,6 +1032,7 @@ const Dashboard = ({ language = 'en' }) => {
                 <span className="insight-tag">INVESTMENT STRATEGY</span>
                 <h4>Sector Rotation Imminent</h4>
                 <p>Tech allocation is hitting resistance levels. Historical twins are pivoting 4% to Emerging Markets this week.</p>
+                <ExplainCard recommendationId="strategy_sector_rotation_001" />
                 <button
                   className="insight-link-btn"
                   onClick={() => securityGate(
@@ -914,6 +1049,7 @@ const Dashboard = ({ language = 'en' }) => {
                 <span className="insight-tag">TAX INTELLIGENCE</span>
                 <h4>Harvesting Opportunity</h4>
                 <p>You have ₹42,205 in unrealized losses that could offset Q4 capital gains if liquidated before October 31st.</p>
+                <ExplainCard recommendationId="tax_harvest_001" />
                 <button
                   className="insight-link-btn"
                   onClick={() => securityGate(
@@ -927,51 +1063,40 @@ const Dashboard = ({ language = 'en' }) => {
             </div>
 
             {/* ───────────── GOALS SECTION ───────────── */}
-            <div className="insight-card">
+            <div className="insight-card goals-section-card">
               <h3>Your Goals</h3>
 
-              {/* Input Row */}
-              <div style={{ display: "flex", gap: 8, marginBottom: 10 }}>
+              <div className="goal-add-row">
                 <input
+                  className="goal-add-input"
                   value={newGoal}
                   onChange={(e) => setNewGoal(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleAddGoal()}
                   placeholder="Add a goal (e.g. Buy House)"
-                  style={{
-                    flex: 1,
-                    padding: 8,
-                    borderRadius: 6,
-                    border: "1px solid #ccc"
-                  }}
                 />
-                <button
-                  onClick={handleAddGoal}
-                  style={{
-                    padding: "8px 12px",
-                    background: "#005f52",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 6,
-                    cursor: "pointer"
-                  }}
-                >
-                  Add
+                <button className="goal-add-btn" onClick={handleAddGoal}>
+                  <Plus size={16} /> Add
                 </button>
               </div>
 
-              {/* Empty State */}
               {goals.length === 0 && (
-                <p style={{ color: "#888" }}>No goals yet</p>
+                <div className="goal-empty-state">
+                  <Target size={22} />
+                  <p>No goals yet — add one above to start tracking it.</p>
+                </div>
               )}
 
-              {/* Goals List */}
-              {goals.map(goal => (
-                <div key={goal.id} style={{ marginBottom: 10 }}>
-                  <strong>{goal.title}</strong>
-                  <div style={{ fontSize: 12, color: "#666" }}>
-                    ₹{goal.targetAmount}
+              <div className="goal-list">
+                {goals.map(goal => (
+                  <div key={goal.id} className="goal-list-item">
+                    <div className="goal-list-icon"><Target size={16} /></div>
+                    <div className="goal-list-body">
+                      <span className="goal-list-title">{goal.title}</span>
+                      <span className="goal-list-amount">{fmt(Number(goal.targetAmount) || 0)}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
           </div>

@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 import { C, Card } from "../utils/helpers";
+import { Capacitor } from '@capacitor/core';
+import { AlertTriangle } from 'lucide-react';
 
 const API_BASE = process.env.REACT_APP_CHAT_URL || process.env.REACT_APP_API_URL || "http://localhost:8003";
 const DEMO_MODE = process.env.REACT_APP_DEMO_MODE === "true";
@@ -14,7 +16,6 @@ const FALLBACK_TIPS = [
 
 const FALLBACK_MSG = "Our AI advisor is temporarily unavailable. Here are general tips based on your profile:";
 
-import { Capacitor } from '@capacitor/core';
 const GATEWAY_URL = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 export default function Chat({ p, language = "en" }) {
@@ -91,15 +92,33 @@ export default function Chat({ p, language = "en" }) {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTyping(false);
-        const reply = res.data.reply || res.data.response || "No response.";
+        const reply = res.data.reply || res.data.response || "";
+        // Service reachable but no LLM key configured — fall back rather than
+        // surfacing the raw setup instruction to the user.
+        if (!reply || /not configured|GROQ_API_KEY/i.test(reply)) {
+          setApiDown(true);
+          const tip = FALLBACK_TIPS[Math.floor(Math.random() * FALLBACK_TIPS.length)];
+          setMsgs((m) => [...m, { role: "ai", text: `${FALLBACK_MSG}\n\n${tip}` }]);
+          return;
+        }
         setMsgs((m) => [...m, { role: "ai", text: reply }]);
         speak(reply);
       } catch (err) {
         console.warn("[Chat API Failed]:", err.message);
         setTyping(false);
-        const errMsg = `Error: ${err.response?.data?.error || err.message}`;
-        setMsgs((m) => [...m, { role: "ai", text: errMsg }]);
-        speak(errMsg);
+        if (err.response?.status === 401 || err.response?.status === 403) {
+          // Not a connectivity problem — the session token itself is invalid.
+          // Retrying won't help; the user needs to log back in.
+          setMsgs((m) => [...m, {
+            role: "ai",
+            text: "Your session has expired. Please log out and log back in to continue chatting.",
+          }]);
+          return;
+        }
+        setApiDown(true);
+        const tip = FALLBACK_TIPS[Math.floor(Math.random() * FALLBACK_TIPS.length)];
+        const fallbackReply = `${FALLBACK_MSG}\n\n${tip}`;
+        setMsgs((m) => [...m, { role: "ai", text: fallbackReply }]);
       }
     },
     [language, msgs]
@@ -144,7 +163,7 @@ export default function Chat({ p, language = "en" }) {
           padding: "10px 14px", marginBottom: 14, fontSize: 13, color: "#92400e",
           display: "flex", alignItems: "center", gap: 8,
         }}>
-          ⚠️ AI service offline — showing general tips. Connect the backend to enable live AI.
+          <AlertTriangle size={14} style={{ flexShrink: 0 }} /> AI service offline — showing general tips. Connect the backend to enable live AI.
         </div>
       )}
 

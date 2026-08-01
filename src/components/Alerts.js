@@ -89,6 +89,37 @@ export default function Alerts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
+  // ✅ LIVE AUDIT LOG (falls back to the demo mock list above if unreachable)
+  const [liveEntries, setLiveEntries] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fraudAPI.getGlobalRiskHistory()
+      .then((res) => {
+        if (cancelled) return;
+        const rows = res.data?.entries || [];
+        const mapped = rows.map((e, i) => {
+          const status =
+            e.decision === 'HONEYPOT_TRIGGERED' ? 'honeypot' :
+            e.decision === 'BLOCK' ? 'block' :
+            e.decision === 'WARN' ? 'warn' : 'allow';
+          return {
+            id: `live-${i}-${e.timestamp}`,
+            desc: `${e.action_type} ₹${(e.amount || 0).toLocaleString('en-IN')} · ${e.user_id}`,
+            score: e.risk_score,
+            status,
+            decision: e.decision,
+            time: e.timestamp ? new Date(e.timestamp).toLocaleTimeString('en-IN', { hour12: false }) : '',
+            tooltip: (e.signal_reasons || []).join('; ') || 'No risk signals detected.',
+            type: status === 'honeypot' ? 'honeypot' : status === 'allow' ? 'normal' : 'security',
+          };
+        });
+        if (mapped.length) setLiveEntries(mapped);
+      })
+      .catch(() => { /* keep the mock demo entries as fallback */ });
+    return () => { cancelled = true; };
+  }, []);
+
   // ✅ AUTO SIMULATION
   useEffect(() => {
     if (!isSimulating) return;
@@ -138,11 +169,11 @@ export default function Alerts() {
       // Suggestions
       let extraMessage = "";
       if (res.data.decision === "ALLOW") {
-        extraMessage = "\n\n💡 Suggestion: Consider investing in ELSS for tax savings.";
+        extraMessage = "\n\nSuggestion: Consider investing in ELSS for tax savings.";
       } else if (res.data.decision === "WARN") {
-        extraMessage = "\n\n⚠️ Suggestion: Try a smaller amount or verify your device.";
+        extraMessage = "\n\nSuggestion: Try a smaller amount or verify your device.";
       } else if (res.data.decision === "BLOCK") {
-        extraMessage = "\n\n🚫 Suggestion: Please verify your identity before proceeding.";
+        extraMessage = "\n\nSuggestion: Please verify your identity before proceeding.";
       }
 
       setModalData({
@@ -161,8 +192,9 @@ export default function Alerts() {
     }
   };
 
-  const honeypotEntries = ALL_EVALUATIONS.filter((e) => e.type === 'honeypot');
-  const otherEntries = ALL_EVALUATIONS.filter((e) => e.type !== 'honeypot');
+  const entries = liveEntries && liveEntries.length ? liveEntries : ALL_EVALUATIONS;
+  const honeypotEntries = entries.filter((e) => e.type === 'honeypot');
+  const otherEntries = entries.filter((e) => e.type !== 'honeypot');
 
   const filteredEntries = [
     ...honeypotEntries,

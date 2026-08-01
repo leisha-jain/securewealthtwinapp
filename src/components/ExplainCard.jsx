@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { ChevronDown, ChevronUp, Info, Activity } from 'lucide-react';
+import { Capacitor } from '@capacitor/core';
 import './ExplainCard.css';
+
+const API_BASE = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
 
 export default function ExplainCard({ recommendationId }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,18 +16,21 @@ export default function ExplainCard({ recommendationId }) {
     if (!isOpen && !data) {
       setLoading(true);
       try {
-        const res = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/recommend/explain?id=${recommendationId}`
+        const token = localStorage.getItem('token');
+        const res = await axios.post(
+          `${API_BASE}/api/recommend/explain`,
+          { recommendationId },
+          { headers: token ? { Authorization: `Bearer ${token}` } : {} }
         );
-        setData(res.data); // Expected: { explanation_text, top_drivers: [{label, weight}] }
+        setData(res.data); // { explanation_text, top_drivers: [{label, weight}] }
       } catch (err) {
-        // Fallback for demo if API isn't ready
+        // Fallback for demo if the live explain service isn't reachable
         setData({
-          explanation_text: "Our architectural model recommends this based on your 22-year time horizon and current liquid buffer efficiency.",
+          explanation_text: "Our model recommends this based on your recent income, savings rate, and spending pattern.",
           top_drivers: [
-            { label: "Time Horizon", weight: 95 },
-            { label: "Risk Tolerance", weight: 72 },
-            { label: "Market Volatility", weight: 40 }
+            { label: "Savings rate", weight: 80 },
+            { label: "Spending pattern", weight: 55 },
+            { label: "Tax utilization", weight: 40 }
           ]
         });
       } finally {

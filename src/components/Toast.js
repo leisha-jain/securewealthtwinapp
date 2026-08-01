@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { AlertTriangle, CheckCircle2 } from 'lucide-react';
 
 export default function Toast({ message, type = 'success', onDone }) {
   useEffect(() => {
@@ -30,7 +31,7 @@ export default function Toast({ message, type = 'success', onDone }) {
 
   return (
     <div style={{ ...baseStyle, ...bgStyle }}>
-      <span>{type === 'error' ? '⚠️' : '✅'}</span>
+      {type === 'error' ? <AlertTriangle size={18} /> : <CheckCircle2 size={18} />}
       <span>{message}</span>
     </div>
   );

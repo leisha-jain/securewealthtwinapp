@@ -188,10 +188,14 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
             <p className="pulse-text">💬 Sent approval request link via SMS. Verification pending...</p>
           )}
           {trustedState.status === 'approved' && (
-            <p style={{ color: '#1e4620', fontWeight: 'bold' }}>✔️ Approved by {trustedState.nomineeName}! Proceeding...</p>
+            <p style={{ color: '#1e4620', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <CheckCircle size={16} /> Approved by {trustedState.nomineeName}. Proceeding...
+            </p>
           )}
           {trustedState.status === 'rejected' && (
-            <p style={{ color: '#7a2020', fontWeight: 'bold' }}>❌ Rejected by {trustedState.nomineeName}. Transaction blocked.</p>
+            <p style={{ color: '#7a2020', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 6 }}>
+              <ShieldAlert size={16} /> Rejected by {trustedState.nomineeName}. Transaction blocked.
+            </p>
           )}
         </div>
         {trustedState.status === 'rejected' && (
@@ -236,11 +240,11 @@ const WarnScreen = ({ riskScore, message, onAllow, onCancel, lang }) => {
         </button>
 
         <div style={{ display: 'flex', gap: 8, width: '100%', marginBottom: 8 }}>
-          <button className="btn-secondary" onClick={handleSleepOnIt} style={{ flex: 1 }}>
-            💤 Sleep On It
+          <button className="btn-secondary" onClick={handleSleepOnIt} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <Clock size={15} /> Sleep On It
           </button>
-          <button className="btn-secondary" onClick={handleAskTrusted} style={{ flex: 1 }}>
-            👁️ Ask Trusted
+          <button className="btn-secondary" onClick={handleAskTrusted} style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+            <Eye size={15} /> Ask Trusted
           </button>
         </div>
 

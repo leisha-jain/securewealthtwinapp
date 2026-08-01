@@ -33,12 +33,12 @@ const Register3 = ({onComplete}) => {
             <div className="asset-form-row">
               <div className="input-box">
                 <label>INSTITUTION NAME</label>
-                <input type="text" placeholder="e.g. Global Trust Bank" />
+                <input type="text" placeholder="e.g. HDFC Bank" />
               </div>
               <div className="input-box">
                 <label>CURRENT BALANCE</label>
                 <div className="currency-input">
-                  <span>$</span>
+                  <span>₹</span>
                   <input type="text" placeholder="0.00" />
                 </div>
               </div>
@@ -81,7 +81,7 @@ const Register3 = ({onComplete}) => {
               <div className="input-box">
                 <label>MARKET VALUE</label>
                 <div className="currency-input">
-                  <span>$</span>
+                  <span>₹</span>
                   <input type="text" placeholder="0.00" />
                 </div>
               </div>
@@ -101,7 +101,7 @@ const Register3 = ({onComplete}) => {
             <div className="filled-asset-item">
               <div>
                 <strong>Model X Plaid</strong>
-                <p>Estimated Value: $85,000</p>
+                <p>Estimated Value: ₹8,50,000</p>
               </div>
               <button className="delete-btn"><Trash2 size={16} /></button>
             </div>
@@ -125,7 +125,7 @@ const Register3 = ({onComplete}) => {
               <div className="asset-form-row">
                 <div className="input-box">
                   <label>ESTIMATED VALUE</label>
-                  <div className="currency-input"><span>$</span><input type="text" placeholder="0.00" /></div>
+                  <div className="currency-input"><span>₹</span><input type="text" placeholder="0.00" /></div>
                 </div>
                 <div className="input-box">
                   <label>OWNERSHIP %</label>
@@ -161,13 +161,13 @@ const Register3 = ({onComplete}) => {
                 </div>
                 <div className="input-box">
                   <label>LENDER NAME</label>
-                  <input type="text" placeholder="e.g. Chase Bank" />
+                  <input type="text" placeholder="e.g. SBI Home Loans" />
                 </div>
               </div>
               <div className="asset-form-row">
                 <div className="input-box">
                   <label>OUTSTANDING AMOUNT</label>
-                  <div className="currency-input"><span>$</span><input type="text" placeholder="0.00" /></div>
+                  <div className="currency-input"><span>₹</span><input type="text" placeholder="0.00" /></div>
                 </div>
                 <div className="input-box">
                   <label>INTEREST RATE (P.A.)</label>
@@ -203,7 +203,7 @@ const Register3 = ({onComplete}) => {
               <div className="analysis-stats">
                 <div className="stat-box">
                   <span>TOTAL LIABILITIES</span>
-                  <strong>$425,000</strong>
+                  <strong>₹42,50,000</strong>
                 </div>
                 <div className="stat-box">
                   <span>AVG. INTEREST</span>
@@ -234,7 +234,7 @@ const Register3 = ({onComplete}) => {
               <p>{goal.desc}</p>
               <div className="input-box">
                 <label>TARGET AMOUNT</label>
-                <div className="currency-input-white"><span>$</span><input type="text" placeholder="250,000" /></div>
+                <div className="currency-input-white"><span>₹</span><input type="text" placeholder="250,000" /></div>
               </div>
               <div className="input-box">
                 <label>TARGET DATE</label>

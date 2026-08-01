@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { AlertTriangle } from 'lucide-react';
 import RiskInterceptModal from '../components/RiskInterceptModal';
 import Toast from './Toast';
 import './Portfolio.css';
@@ -130,13 +131,13 @@ const Portfolio = ({ language = 'en' }) => {
   ]);
 
   const [holdings, setHoldings] = useState([
-    { id: 'GS', name: 'Global Sustain Equities', code: 'GSSE-882-LQ', type: 'Equity ESG', value: '₹842,000.00', return: '+18.2%', status: 'OPTIMIZED', statusClass: 'blue' },
-    { id: 'TR', name: 'T.Rowe Price Growth', code: 'TRPG-612-BL', type: 'Growth Tech', value: '₹512,450.00', return: '+24.5%', status: 'OVERWEIGHT', statusClass: 'orange' },
-    { id: 'VB', name: 'Vanguard Bond Mkt', code: 'VBMX-001-FI', type: 'Fixed Income', value: '₹320,100.00', return: '-2.1%', status: 'STABLE', statusClass: 'gray' },
-    { id: 'PL', name: 'Private Liquidity Pool', code: 'LP-ALPH-99', type: 'Alternative', value: '₹808,350.00', return: '+9.4%', status: 'OPTIMIZED', statusClass: 'blue' },
+    { id: 'HD', name: 'HDFC Flexi Cap Fund', code: 'INF179K01YV8', type: 'Equity · Flexi Cap', value: '₹8,42,000', return: '+18.2%', status: 'OPTIMIZED', statusClass: 'blue' },
+    { id: 'SB', name: 'SBI Bluechip Fund', code: 'INF200K01QX4', type: 'Equity · Large Cap', value: '₹5,12,450', return: '+24.5%', status: 'OVERWEIGHT', statusClass: 'orange' },
+    { id: 'IC', name: 'ICICI Pru Corporate Bond', code: 'INF109K01Z48', type: 'Debt · Corporate', value: '₹3,20,100', return: '-2.1%', status: 'STABLE', statusClass: 'gray' },
+    { id: 'AX', name: 'Axis ELSS Tax Saver', code: 'INF846K01CH7', type: 'Equity · ELSS', value: '₹8,08,350', return: '+9.4%', status: 'OPTIMIZED', statusClass: 'blue' },
   ]);
 
-  const [totalAssets, setTotalAssets] = useState('₹24,482,900.00');
+  const [totalAssets, setTotalAssets] = useState('₹2,44,82,900');
   const [loading, setLoading] = useState(true);
 
   // Risk modal state
@@ -243,7 +244,7 @@ const Portfolio = ({ language = 'en' }) => {
 
         <div className="content-card rebalance-card">
           <div className="rebalance-header">
-            <span className="warn-icon">⚠️</span>
+            <span className="warn-icon"><AlertTriangle size={16} /></span>
             <span className="warn-title">REBALANCING SUGGESTION</span>
           </div>
           <p className="warn-text">

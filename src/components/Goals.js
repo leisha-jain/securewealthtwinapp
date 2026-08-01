@@ -156,6 +156,8 @@ function SavingsSimulator() {
 
   const [sipBoost, setSipBoost] = useState(0);
   const [annualReturn, setAnnualReturn] = useState(8);
+  const [serverMonths, setServerMonths] = useState(null);
+  const [serverStatus, setServerStatus] = useState('idle'); // idle | loading | ok | unavailable
 
   const totalSip = BASE_SIP + sipBoost;
   const dataBase = buildProjectionData(GOAL_AMOUNT, GOAL_SAVED, BASE_SIP, annualReturn);
@@ -164,6 +166,29 @@ function SavingsSimulator() {
   const baseMonths = dataBase.length - 1;
   const newMonths  = dataNew.length - 1;
   const saved      = baseMonths - newMonths;
+
+  // Cross-check the client-side projection against the wealth-engine's
+  // own goal-projection model, so the number shown isn't purely client math.
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const handle = setTimeout(() => {
+      setServerStatus('loading');
+      axios.post(`${API_BASE}/api/recommend/goal-projection`, {
+        current_savings: GOAL_SAVED,
+        monthly_contribution: totalSip,
+        goal_amount: GOAL_AMOUNT,
+        expected_return_pct: annualReturn,
+        months_remaining: 120,
+      }, { headers: token ? { Authorization: `Bearer ${token}` } : {} })
+        .then(res => {
+          const months = res.data?.projected_months;
+          setServerMonths(months != null && months >= 0 ? months : null);
+          setServerStatus(months != null && months >= 0 ? 'ok' : 'unavailable');
+        })
+        .catch(() => setServerStatus('unavailable'));
+    }, 400); // debounce while dragging the slider
+    return () => clearTimeout(handle);
+  }, [totalSip, annualReturn]);
 
   const maxMonths = Math.max(dataBase.length, dataNew.length);
   const merged = Array.from({ length: maxMonths }, (_, i) => ({
@@ -229,6 +254,12 @@ function SavingsSimulator() {
         {sipBoost > 0 && (
           <span className="sim-legend-item boost">─ Boosted SIP (₹{totalSip.toLocaleString('en-IN')}/mo) → {newMonths} months</span>
         )}
+      </div>
+
+      <div style={{ marginTop: 10, fontSize: 11, color: '#9ca3af' }}>
+        {serverStatus === 'loading' && 'Cross-checking with wealth-engine model…'}
+        {serverStatus === 'ok' && `Wealth-engine model agrees: ~${serverMonths} months at this contribution rate.`}
+        {serverStatus === 'unavailable' && 'Wealth-engine cross-check unavailable — showing client-side estimate only.'}
       </div>
     </div>
   );

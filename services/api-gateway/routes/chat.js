@@ -151,4 +151,26 @@ router.post('/explain', verifyToken, async (req, res) => {
   }
 });
 
+// ✅ COMPLIANCE / CONSENT DISCLOSURE (no auth — static disclosure text)
+router.get('/compliance', async (req, res) => {
+  try {
+    const response = await axios.get(`${CHAT_URL}/api/compliance`, { timeout: 5000 });
+    return res.json(response.data);
+  } catch (err) {
+    console.warn('[Chat] Compliance endpoint unreachable — returning fallback');
+    return res.json({
+      disclaimer: 'For simulation purposes only. This is not financial advice.',
+      simulation_banner: 'Simulation Only - Not real financial advice',
+      consent_required: true,
+      consent_text: 'We use your financial data to provide personalised insights. No data is stored or shared.',
+      data_usage_toggles: [
+        { label: 'Use transaction data for analysis', default: true, required: true },
+        { label: 'Use profile for personalised recommendations', default: true, required: true },
+        { label: 'Anonymous analytics to improve the product', default: false, required: false },
+      ],
+      privacy_summary: 'All data is processed securely and used only within this app session. Not stored, not shared.',
+    });
+  }
+});
+
 module.exports = router;

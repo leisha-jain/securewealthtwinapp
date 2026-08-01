@@ -5,6 +5,7 @@ const { proxyHeaders } = require('../utils/proxy');
 const router = express.Router();
 
 const WEALTH_URL = process.env.WEALTH_ENGINE_URL || 'http://localhost:8001';
+const AGGREGATOR_URL = process.env.AGGREGATOR_URL || 'http://localhost:8004';
 
 // ── Load Persistent DB utilities ──
 const { readDb, writeDb, updatePersonaFile } = require('../utils/db');
@@ -158,6 +159,31 @@ router.get('/:id/assets', verifyToken, async (req, res) => {
   }
 });
 
+// ── ACCOUNT AGGREGATOR (linked bank accounts + full net worth picture) ──
+router.get('/:id/aggregator', verifyToken, async (req, res) => {
+  const userId = Number(req.params.id);
+  const db = readDb();
+  const user = db.users[userId];
+  if (!user || !user.persona) return res.status(404).json({ error: 'No linked persona for this user' });
+
+  try {
+    const response = await axios.get(`${AGGREGATOR_URL}/api/aggregator/profile/${user.persona}`, {
+      headers: proxyHeaders(req),
+      timeout: 4000,
+    });
+    // Strip the honeypot decoy account before it ever reaches the client —
+    // it exists only to bait fraud probes, never to be summed into net worth.
+    const data = response.data;
+    if (data.linked_accounts) {
+      data.linked_accounts = data.linked_accounts.filter(a => !a._honeypot);
+    }
+    return res.json(data);
+  } catch (err) {
+    console.warn(`[Aggregator] Mock AA unreachable for user ${userId}:`, err.message);
+    return res.status(502).json({ error: 'Account Aggregator unreachable', linked_accounts: [] });
+  }
+});
+
 // ── GOALS ──
 router.get('/:id/goals', verifyToken, (req, res) => {
   const userId = Number(req.params.id);
@@ -189,6 +215,68 @@ router.post('/:id/goals', verifyToken, (req, res) => {
   }
 
   return res.json(newGoal);
+});
+
+// ── RECOMMEND / EXPLAIN (wealth-insight explainability) ──
+router.post('/explain', verifyToken, async (req, res) => {
+  const userId = req.user.userId;
+  const { recommendationId } = req.body;
+  const db = readDb();
+  const user = db.users[userId];
+
+  let income = user?.monthly_income || 80000;
+  let savingsRate = user?.savings_rate ?? 0.2;
+  let expensesPattern = 'stable';
+  let taxUsage = 0.5;
+
+  if (user?.persona) {
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const personaPath = path.resolve(__dirname, '../../../data/personas', `${user.persona}.json`);
+      if (fs.existsSync(personaPath)) {
+        const personaData = JSON.parse(fs.readFileSync(personaPath, 'utf-8'));
+        const fp = personaData.financial_profile || {};
+        income = fp.monthly_income || income;
+        taxUsage = fp.tax_usage ?? taxUsage;
+        expensesPattern = fp.expenses_pattern || expensesPattern;
+      }
+    } catch (e) {
+      console.warn('[Explain] Failed to read persona file:', e.message);
+    }
+  }
+
+  const profile = {
+    user_id: String(userId),
+    income,
+    savings_rate: savingsRate,
+    expenses_pattern: expensesPattern,
+    tax_usage: taxUsage,
+  };
+
+  try {
+    const response = await axios.post(`${WEALTH_URL}/api/recommend/explain`, profile, {
+      headers: proxyHeaders(req),
+      timeout: 5000,
+    });
+    const drivers = (response.data.top_drivers || []).map((label, i) => ({
+      label,
+      weight: Math.max(30, 90 - i * 20),
+    }));
+    return res.json({
+      explanation_text: response.data.explanation_text,
+      top_drivers: drivers.length ? drivers : [{ label: 'Stable financial profile', weight: 60 }],
+      spending_anomalies: response.data.spending_anomalies || [],
+      recommendationId,
+    });
+  } catch (err) {
+    console.warn('[Explain] Wealth Engine unreachable:', err.message);
+    return res.status(502).json({
+      error: 'Explanation service unavailable',
+      explanation_text: 'Unable to compute a live explanation right now — this recommendation is based on your recent income, savings rate, and spending pattern.',
+      top_drivers: [],
+    });
+  }
 });
 
 // ── RECOMMEND / MARKET-AWARE ──

@@ -1,5 +1,5 @@
 :root {
-  --teal: #006D5B;
+  --teal: #005f52;
   --bg-auth: #f3f7f6;
   --white: #ffffff;
   --text-dark: #1e293b;
@@ -127,4 +127,10 @@
 .dark .styled-input {
   background-color: #1e293b;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .identity-card { padding: 12px; }
+  .form-row { grid-template-columns: 1fr !important; gap: 16px; margin-bottom: 16px; }
+  .styled-input { padding: 14px 16px; font-size: 15px; }
 }

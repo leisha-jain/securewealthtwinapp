@@ -176,6 +176,7 @@
   .sidebar-logo { display: none; }
   .sidebar-nav { display: none; }
   .lang-selector-wrap { display: none; }
+  .dark-mode-toggle-wrap { display: none; }
   .mobile-bottom-nav {
     display: flex;
     width: 100%;

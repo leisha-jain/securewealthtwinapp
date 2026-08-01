@@ -87,20 +87,27 @@ export default function OTP({ onVerify }) {
     if (!isComplete || status === "verifying") return;
     setStatus("verifying");
 
+    const code = values.join("");
+
+    // Offline demo session: no server-issued OTP exists to verify against,
+    // so accept any complete code rather than dead-ending the login.
+    const isDemoSession = (localStorage.getItem("token") || "").startsWith("demo-token-");
+    if (isDemoSession) {
+      setStatus("success");
+      clearInterval(timerRef.current);
+      setTimeout(() => onVerify?.(), 900);
+      return;
+    }
+
     try {
       const user = JSON.parse(localStorage.getItem("user") || "{}");
       const userId = user.userId;
-      const code = values.join("");
-
       const API_URL = process.env.REACT_APP_API_URL || (Capacitor.isNativePlatform() ? "http://10.0.2.2:8000" : "http://localhost:8000");
       const res = await fetch(`${API_URL}/api/auth/verify-otp`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, code })
       });
-
       const data = await res.json();
       if (res.status === 200 && data.success) {
         setStatus("success");

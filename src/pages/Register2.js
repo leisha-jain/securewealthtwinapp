@@ -96,7 +96,7 @@ const Registration2 = ({onNext}) => {
 
           <div className="form-footer">
             
-            <button type="submit" className="btn-continue-teal" onClick={onNext}>
+            <button type="button" className="btn-continue-teal" onClick={onNext}>
               Continue <ArrowRight size={18} />
             </button>
           </div>
