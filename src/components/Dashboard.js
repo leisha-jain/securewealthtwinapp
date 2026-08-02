@@ -4,14 +4,14 @@ import './Dashboard.css';
 import { useCountUp, fmt } from '../utils/helpers';
 import ExplainCard from '../components/ExplainCard';
 import RiskInterceptModal from "../components/RiskInterceptModal";
-import { t, LANGUAGES } from '../utils/languageStrings';
+import { t, LANGUAGES, SPEECH_LOCALES } from '../utils/languageStrings';
 import { Capacitor } from '@capacitor/core';
 import HealthScoreBadge from '../components/HealthScoreBadge';
 import {
   LayoutDashboard, Target, Landmark, PieChart as PieIcon,
   AlertTriangle, Settings, LifeBuoy, Moon, Sun, Bell,
   ChevronRight, Zap, TrendingUp, TrendingDown, BookOpen, Bot, X, Maximize2, Minimize2,
-  CheckCircle, Clock, ShieldAlert, LogOut, Globe, Plus
+  CheckCircle, Clock, ShieldAlert, LogOut, Globe, Plus, Mic, Volume2, VolumeX
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -234,6 +234,49 @@ const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
   const [loading, setLoading] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceReplyEnabled, setVoiceReplyEnabled] = useState(
+    () => localStorage.getItem("swt_voice_reply") !== "false" // on by default
+  );
+
+  const toggleVoiceReply = () => {
+    setVoiceReplyEnabled((v) => {
+      const next = !v;
+      localStorage.setItem("swt_voice_reply", String(next));
+      if (!next) window.speechSynthesis?.cancel();
+      return next;
+    });
+  };
+
+  const speakReply = (text) => {
+    if (!voiceReplyEnabled || !window.speechSynthesis) return;
+    const s = new SpeechSynthesisUtterance(text);
+    s.lang = SPEECH_LOCALES[language] || "en-IN";
+    s.rate = 1;
+    s.pitch = 1;
+    window.speechSynthesis.speak(s);
+  };
+
+  const startListeningChat = () => {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) {
+      window.dispatchEvent(new CustomEvent('swt_api_error', { detail: 'Speech Recognition not supported in this browser.' }));
+      return;
+    }
+    if (isListening) return;
+    const r = new SR();
+    r.lang = SPEECH_LOCALES[language] || "en-IN";
+    r.interimResults = false;
+    setIsListening(true);
+    r.start();
+    r.onresult = (e) => {
+      const transcript = e.results[0][0].transcript;
+      setChatInput(transcript);
+      setTimeout(() => sendChat(transcript), 0);
+    };
+    r.onerror = () => setIsListening(false);
+    r.onend = () => setIsListening(false);
+  };
 
   // Advanced hackathon feature states
   const [screenSharingDetected, setScreenSharingDetected] = useState(false);
@@ -487,10 +530,10 @@ const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
 
   const toggleFullScreen = () => setIsFullScreen(!isFullScreen);
 
-  const sendChat = async () => {
-    if (!chatInput.trim()) return;
+  const sendChat = async (overrideText) => {
+    const msg = (overrideText ?? chatInput).trim();
+    if (!msg) return;
 
-    const msg = chatInput;
     setChatInput('');
     setChatMessages(prev => [...prev, { role: 'user', text: msg }]);
 
@@ -540,6 +583,7 @@ const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
         ? chatFallbackReply()
         : reply;
       setChatMessages(prev => [...prev, { role: 'bot', text }]);
+      speakReply(text);
     } catch (err) {
       console.warn("[Dashboard Chat API Failed]:", err.message);
       if (err.response?.status === 401 || err.response?.status === 403) {
@@ -1117,6 +1161,13 @@ const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
             </div>
           </div>
           <div className="chat-header-actions">
+            <button
+              className="chat-action-btn"
+              onClick={toggleVoiceReply}
+              title={voiceReplyEnabled ? "Voice replies: on — click to mute" : "Voice replies: off — click to enable"}
+            >
+              {voiceReplyEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+            </button>
             <button className="chat-action-btn" onClick={toggleFullScreen} title="Toggle Fullscreen">
               {isFullScreen ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
             </button>
@@ -1143,7 +1194,20 @@ const Dashboard = ({ language = 'en', onLanguageChange, onLogout }) => {
             onChange={e => setChatInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && sendChat()}
           />
-          <button className="chat-send-btn" onClick={sendChat}>
+          <button
+            onClick={startListeningChat}
+            title={isListening ? "Listening…" : "Speak your question"}
+            style={{
+              width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
+              background: isListening ? '#fee2e2' : '#f9fbfb',
+              border: `1px solid ${isListening ? '#ef4444' : '#eef2f2'}`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: isListening ? 'default' : 'pointer',
+            }}
+          >
+            <Mic size={16} color={isListening ? '#ef4444' : '#5b6b6b'} />
+          </button>
+          <button className="chat-send-btn" onClick={() => sendChat()}>
             <ChevronRight size={18} />
           </button>
         </div>

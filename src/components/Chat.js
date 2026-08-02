@@ -3,6 +3,7 @@ import axios from "axios";
 import { C, Card } from "../utils/helpers";
 import { Capacitor } from '@capacitor/core';
 import { AlertTriangle } from 'lucide-react';
+import { SPEECH_LOCALES } from '../utils/languageStrings';
 
 const API_BASE = process.env.REACT_APP_CHAT_URL || process.env.REACT_APP_API_URL || "http://localhost:8003";
 const DEMO_MODE = process.env.REACT_APP_DEMO_MODE === "true";
@@ -29,15 +30,29 @@ export default function Chat({ p, language = "en" }) {
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [apiDown, setApiDown] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceReplyEnabled, setVoiceReplyEnabled] = useState(
+    () => localStorage.getItem("swt_voice_reply") !== "false" // on by default
+  );
   const endRef = useRef();
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [msgs, typing]);
 
+  const toggleVoiceReply = () => {
+    setVoiceReplyEnabled((v) => {
+      const next = !v;
+      localStorage.setItem("swt_voice_reply", String(next));
+      if (!next) window.speechSynthesis.cancel();
+      return next;
+    });
+  };
+
   const speak = (text) => {
+    if (!voiceReplyEnabled || !window.speechSynthesis) return;
     const s = new SpeechSynthesisUtterance(text);
-    s.lang = "en-IN";
+    s.lang = SPEECH_LOCALES[language] || "en-IN";
     s.rate = 1;
     s.pitch = 1;
     window.speechSynthesis.speak(s);
@@ -130,14 +145,19 @@ export default function Chat({ p, language = "en" }) {
       window.dispatchEvent(new CustomEvent('swt_api_error', { detail: 'Speech Recognition not supported in this browser.' }));
       return;
     }
+    if (isListening) return;
     const r = new SR();
-    r.lang = "en-IN";
+    r.lang = SPEECH_LOCALES[language] || "en-IN";
+    r.interimResults = false;
+    setIsListening(true);
     r.start();
     r.onresult = (e) => {
       const t = e.results[0][0].transcript;
       setInput(t);
       send(t);
     };
+    r.onerror = () => setIsListening(false);
+    r.onend = () => setIsListening(false);
   };
 
   const starters = [
@@ -149,11 +169,26 @@ export default function Chat({ p, language = "en" }) {
 
   return (
     <div>
-      <div style={{ marginBottom: 16 }}>
-        <h2 style={{ fontSize: 20, fontWeight: 600, color: C.text, letterSpacing: "-0.3px" }}>
-          AI wealth coach
-        </h2>
-        <p style={{ fontSize: 13, color: C.textMuted, marginTop: 3 }}>SecureWealth advisor</p>
+      <div style={{ marginBottom: 16, display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+        <div>
+          <h2 style={{ fontSize: 20, fontWeight: 600, color: C.text, letterSpacing: "-0.3px" }}>
+            AI wealth coach
+          </h2>
+          <p style={{ fontSize: 13, color: C.textMuted, marginTop: 3 }}>SecureWealth advisor</p>
+        </div>
+        <button
+          onClick={toggleVoiceReply}
+          title={voiceReplyEnabled ? "Voice replies: on — click to mute" : "Voice replies: off — click to enable"}
+          style={{
+            display: "flex", alignItems: "center", gap: 6, padding: "6px 10px",
+            borderRadius: C.r, border: `1px solid ${C.border}`,
+            background: voiceReplyEnabled ? C.bg : "transparent",
+            color: voiceReplyEnabled ? C.text : C.textFaint,
+            fontSize: 12, cursor: "pointer", fontFamily: "inherit", flexShrink: 0,
+          }}
+        >
+          {voiceReplyEnabled ? "🔊 Voice replies on" : "🔇 Voice replies off"}
+        </button>
       </div>
 
       {/* API down warning banner */}
@@ -254,16 +289,20 @@ export default function Chat({ p, language = "en" }) {
           />
           <button
             onClick={startListening}
+            title={isListening ? "Listening…" : "Speak your question"}
             style={{
-              width: 38, height: 38, borderRadius: C.r, background: C.bg,
-              border: `1px solid ${C.border}`, cursor: "pointer",
+              width: 38, height: 38, borderRadius: C.r,
+              background: isListening ? "#fee2e2" : C.bg,
+              border: `1px solid ${isListening ? "#ef4444" : C.border}`,
+              cursor: isListening ? "default" : "pointer",
               display: "flex", alignItems: "center", justifyContent: "center",
+              animation: isListening ? "pulse 1s infinite" : "none",
             }}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <rect x="4.5" y="1" width="5" height="7" rx="2.5" stroke={C.textSub} strokeWidth="1.2" />
-              <path d="M2 7a5 5 0 0010 0" stroke={C.textSub} strokeWidth="1.2" strokeLinecap="round" />
-              <line x1="7" y1="12" x2="7" y2="14" stroke={C.textSub} strokeWidth="1.2" strokeLinecap="round" />
+              <rect x="4.5" y="1" width="5" height="7" rx="2.5" stroke={isListening ? "#ef4444" : C.textSub} strokeWidth="1.2" />
+              <path d="M2 7a5 5 0 0010 0" stroke={isListening ? "#ef4444" : C.textSub} strokeWidth="1.2" strokeLinecap="round" />
+              <line x1="7" y1="12" x2="7" y2="14" stroke={isListening ? "#ef4444" : C.textSub} strokeWidth="1.2" strokeLinecap="round" />
             </svg>
           </button>
           <button
